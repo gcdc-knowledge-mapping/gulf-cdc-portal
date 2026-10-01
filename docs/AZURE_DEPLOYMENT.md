@@ -137,6 +137,6 @@ On `https://sghorgsa.sharepoint.com/sites/GCDCPortal`:
 ## Contacts
 
 - Business owner / content: Faris Aldammas — Knowledge Management, TCB
-- Repository: `bindammas10-glitch/gulf-cdc-portal` (branch `main`)
+- Repository: `gcdc-knowledge-mapping/gulf-cdc-portal` (branch `main`)
 - Data source of truth: `data/*.xlsx`; regenerate the site data with
   `python3 scripts/generate_data.py`
