@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GCDC · GCC Network — design view</title>
+  <meta name="description" content="Design view for adding the CEO, PCN, Country Liaison Officers and Working Group to the Knowledge Mapping Page, kept separate from the internal staff mapping." />
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="preview.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="dv-bar">
+    <div class="dv-bar__inner">
+      <span class="dv-bar__tag">Design view</span>
+      <span><b>Proposal:</b> add the GCC network as a second scope beside the internal staff mapping — not as another tab inside it.</span>
+    </div>
+  </div>
+
+  <div class="utilbar">
+    <div class="utilbar__inner">
+      <div class="scope" id="scope" role="group" aria-label="Choose which population to view">
+        <button class="scope__btn" data-scope="internal">
+          <span class="scope__dot" aria-hidden="true"></span>Inside Gulf CDC
+        </button>
+        <button class="scope__btn scope__btn--net is-active" data-scope="network" aria-pressed="true">
+          <span class="scope__dot" aria-hidden="true"></span>GCC Network
+        </button>
+      </div>
+      <form class="site-search" id="siteSearchForm" role="search" style="margin-left:auto">
+        <span class="site-search__icon" aria-hidden="true">⌕</span>
+        <input type="search" id="siteSearch" placeholder="Search the network…" aria-label="Search the network" />
+      </form>
+    </div>
+  </div>
+
+  <header class="topbar topbar--net" id="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="../index.html" aria-label="GCDC — Gulf Center for Disease Prevention and Control · home">
+        <img class="brand__logo" src="../assets/img/gcdc-logo-lockup.png" alt="GCDC — Gulf Center for Disease Prevention and Control" />
+        <span class="brand__tag" id="brandTag">Knowledge Mapping Page</span>
+      </a>
+
+      <nav class="tabs" id="tabs" aria-label="Network sections">
+        <button class="tab is-active" data-view="overview">Overview</button>
+        <button class="tab" data-view="directory">Experts</button>
+        <button class="tab" data-view="states">Member States</button>
+        <button class="tab" data-view="gaps">Regional Gaps</button>
+        <button class="tab" data-view="bridge">Gulf CDC ↔ Network</button>
+        <button class="tab" data-view="mapping">Map</button>
+      </nav>
+
+      <button class="theme-toggle" id="themeToggle" title="Toggle light / dark" aria-label="Toggle light or dark theme">
+        <span class="theme-toggle__icon" aria-hidden="true">◐</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="main">
+    <section id="view-overview" class="view"></section>
+    <section id="view-directory" class="view" hidden></section>
+    <section id="view-states" class="view" hidden></section>
+    <section id="view-gaps" class="view" hidden></section>
+    <section id="view-bridge" class="view" hidden></section>
+    <section id="view-mapping" class="view" hidden></section>
+  </main>
+
+  <footer class="footer">
+    <span>GCDC · Gulf Center for Disease Prevention &amp; Control</span>
+    <span class="footer__meta">Copyright © 2026. Gulf CDC Portal. All rights reserved.</span>
+  </footer>
+
+  <div id="live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="network-data.js"></script>
+  <script src="preview.js"></script>
+</body>
+</html>

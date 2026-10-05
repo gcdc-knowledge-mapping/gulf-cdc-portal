@@ -1,0 +1,18 @@
+[
+  {
+    "key": "CEO",
+    "label": "CEO / Executive"
+  },
+  {
+    "key": "PCN",
+    "label": "Permanent Contact Network"
+  },
+  {
+    "key": "CLO",
+    "label": "Country Liaison Officers"
+  },
+  {
+    "key": "WG",
+    "label": "Working Group"
+  }
+]

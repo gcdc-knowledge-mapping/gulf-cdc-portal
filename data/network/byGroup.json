@@ -1,0 +1,27 @@
+[
+  {
+    "key": "CEO",
+    "label": "CEO / Executive",
+    "people": 0
+  },
+  {
+    "key": "PCN",
+    "label": "Permanent Contact Network",
+    "people": 0
+  },
+  {
+    "key": "CLO",
+    "label": "Country Liaison Officers",
+    "people": 0
+  },
+  {
+    "key": "WG",
+    "label": "Working Group",
+    "people": 0
+  },
+  {
+    "key": "",
+    "label": "Unassigned",
+    "people": 55
+  }
+]

@@ -1,0 +1,1274 @@
+[
+  {
+    "level": 0,
+    "label": "GCC Public Health Expertise Network (PCN · Liaison Officers · Working Groups)",
+    "type": "ROOT",
+    "note": "55 experts · 6 Member States"
+  },
+  {
+    "level": 1,
+    "label": "Epidemiology & Surveillance",
+    "type": "Domain (Tier 1)",
+    "note": "Core tags in domain: 20"
+  },
+  {
+    "level": 2,
+    "label": "Field Epidemiology",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 1"
+  },
+  {
+    "level": 3,
+    "label": "Outbreak Investigation",
+    "type": "Core Expertise (Tier 3)",
+    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+  },
+  {
+    "level": 4,
+    "label": "Dr. Afaf Merza Mohamed (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 2,
+    "label": "Disease Surveillance",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 12"
+  },
+  {
+    "level": 3,
+    "label": "Surveillance Systems Design",
+    "type": "Core Expertise (Tier 3)",
+    "note": "8 holder(s) · 5 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Dr. Fatma Husaain Alloghani (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Mariam Alameeri (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Nada Hassan AlMarzooqi (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Robin Sudandiradas (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Ebrahim Matar (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Meshal Alqahtani (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Rajaa Redha Alsalloom (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Ruquiah Al Shehi (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Epidemic Intelligence",
+    "type": "Core Expertise (Tier 3)",
+    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+  },
+  {
+    "level": 4,
+    "label": "Ruquiah Al Shehi (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Surveillance Reporting & Analytics",
+    "type": "Core Expertise (Tier 3)",
+    "note": "3 holder(s) · 3 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Ebrahim Matar (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Norah Alkanhal (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Suad Jama (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 2,
+    "label": "Biostatistics & Population Health",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 7"
+  },
+  {
+    "level": 3,
+    "label": "Biostatistics",
+    "type": "Core Expertise (Tier 3)",
+    "note": "5 holder(s) · 4 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Amani Albasmi (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Ebrahim Matar (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Meshal Alqahtani (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Nourah M A S Sh Alsheridah (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Suad Jama (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Burden of Disease Analysis",
+    "type": "Core Expertise (Tier 3)",
+    "note": "2 holder(s) · 1 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Amani Albasmi (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Hanan M Almajed (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 1,
+    "label": "Public Health Emergency & Health Security",
+    "type": "Domain (Tier 1)",
+    "note": "Core tags in domain: 18"
+  },
+  {
+    "level": 2,
+    "label": "Preparedness & Planning",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 17"
+  },
+  {
+    "level": 3,
+    "label": "Emergency Preparedness Planning",
+    "type": "Core Expertise (Tier 3)",
+    "note": "12 holder(s) · 4 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Abdallah Alqayoodhi (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Amjad Ghanem Zaed Ghanem (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Fatma Husaain Alloghani (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Ghada ALZayani (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Nada Hassan AlMarzooqi (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Faryal Khamis (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Fatma Alattar (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Manaf Alqahtani (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Ruquiah Al Shehi (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Saeed Mahdi Algarni (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Yasir Almuzaini (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Yasser Bakhsh (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Risk Assessment (Rapid Risk Assessment)",
+    "type": "Core Expertise (Tier 3)",
+    "note": "5 holder(s) · 4 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Amjad Ghanem Zaed Ghanem (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Devendra Bansal (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Fatma Alattar (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Rajaa Redha Alsalloom (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Yasser Bakhsh (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 2,
+    "label": "Response & Operations",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 1"
+  },
+  {
+    "level": 3,
+    "label": "PHEOC / Emergency Operations Centers",
+    "type": "Core Expertise (Tier 3)",
+    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+  },
+  {
+    "level": 4,
+    "label": "Mohammad Behbehani (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 1,
+    "label": "Communicable & Non-Communicable Diseases",
+    "type": "Domain (Tier 1)",
+    "note": "Core tags in domain: 29"
+  },
+  {
+    "level": 2,
+    "label": "Communicable Diseases",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 19"
+  },
+  {
+    "level": 3,
+    "label": "Infectious Disease Epidemiology",
+    "type": "Core Expertise (Tier 3)",
+    "note": "14 holder(s) · 6 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Abdallah Alqayoodhi (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Adel Salman Alsayyad (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Basma Al Saffar (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Afaf Merza Mohamed (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Devendra Bansal (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Ghada ALZayani (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Mariam Alameeri (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Robin Sudandiradas (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Faryal Khamis (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Hanan M Almajed (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Khalid Musallam Khalfan Al-Suleimani (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Manaf Alqahtani (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Rajaa Redha Alsalloom (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Saeed Mahdi Algarni (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Infection Prevention & Control",
+    "type": "Core Expertise (Tier 3)",
+    "note": "3 holder(s) · 3 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Abdallah Alqayoodhi (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Manaf Alqahtani (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Najiba M Abdulrazzaq (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Infection & Immunity",
+    "type": "Core Expertise (Tier 3)",
+    "note": "2 holder(s) · 1 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Adel Salman Alsayyad (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Basma Al Saffar (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 2,
+    "label": "Non-Communicable Diseases",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 8"
+  },
+  {
+    "level": 3,
+    "label": "NCD Prevention & Control",
+    "type": "Core Expertise (Tier 3)",
+    "note": "8 holder(s) · 5 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Buthaina Abdulla Bin Belaila (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Ameera Ali AL-Nooh (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Huda Obaid ALAbdouli (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Esraa Ibrahim Al Abbadi (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Hanan Alburno (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Imen Sohaibani (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Mohammed Adeeb Shahin (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Najla AbdulAmir Al Lawati (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 2,
+    "label": "Injuries & Special Populations",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 2"
+  },
+  {
+    "level": 3,
+    "label": "Road Traffic & Injury Prevention",
+    "type": "Core Expertise (Tier 3)",
+    "note": "2 holder(s) · 2 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Saif Al Ramadhani (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Yasir Almuzaini (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 1,
+    "label": "Health Policy, Systems & Strategy",
+    "type": "Domain (Tier 1)",
+    "note": "Core tags in domain: 18"
+  },
+  {
+    "level": 2,
+    "label": "Policy & Guidelines",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 7"
+  },
+  {
+    "level": 3,
+    "label": "Policy Drafting & Analysis",
+    "type": "Core Expertise (Tier 3)",
+    "note": "7 holder(s) · 4 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Aymen Alzehr (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Buthaina Abdulla Bin Belaila (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Nada Hassan AlMarzooqi (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Fatma AlMatrooshi (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Hanan Alburno (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Hend Ali Al-Tamimi (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Saif Al Ramadhani (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 2,
+    "label": "Health Systems",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 3"
+  },
+  {
+    "level": 3,
+    "label": "Health Systems Research",
+    "type": "Core Expertise (Tier 3)",
+    "note": "2 holder(s) · 2 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Aymen Alzehr (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Alya Zaid Harbi (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Health Economics & Financing",
+    "type": "Core Expertise (Tier 3)",
+    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+  },
+  {
+    "level": 4,
+    "label": "Aymen Alzehr (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 2,
+    "label": "Strategic Planning",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 8"
+  },
+  {
+    "level": 3,
+    "label": "Strategic Planning & Priority Setting",
+    "type": "Core Expertise (Tier 3)",
+    "note": "6 holder(s) · 3 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Dr. Alia Albinali (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Esraa Ibrahim Al Abbadi (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Hanan Alburno (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Mariam Abdalla AlOwais (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Mohammed Adeeb Shahin (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Mubarkah Jaber Alkarbi (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Performance Management (KPIs / OKRs)",
+    "type": "Core Expertise (Tier 3)",
+    "note": "2 holder(s) · 2 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Mariam Abdalla AlOwais (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Mohammed Adeeb Shahin (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 1,
+    "label": "Health Promotion, Education & Workforce",
+    "type": "Domain (Tier 1)",
+    "note": "Core tags in domain: 14"
+  },
+  {
+    "level": 2,
+    "label": "Health Promotion",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 9"
+  },
+  {
+    "level": 3,
+    "label": "Health Promotion Strategy",
+    "type": "Core Expertise (Tier 3)",
+    "note": "7 holder(s) · 4 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Abeer Khaled Albahouh (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Buthaina Abdulla Bin Belaila (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Alia Albinali (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Fatema Al Mutawa (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Fatma AlMatrooshi (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Hend Ali Al-Tamimi (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Salah Abdulla Alyafei (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Behavior Change Theory & Campaigns",
+    "type": "Core Expertise (Tier 3)",
+    "note": "2 holder(s) · 2 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Abeer Khaled Albahouh (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Fatema Al Mutawa (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 2,
+    "label": "Workforce Development",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 1"
+  },
+  {
+    "level": 3,
+    "label": "Competency Framework Design",
+    "type": "Core Expertise (Tier 3)",
+    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+  },
+  {
+    "level": 4,
+    "label": "Muhannad Sulaiman Aloraini (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 2,
+    "label": "Training & Education",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 4"
+  },
+  {
+    "level": 3,
+    "label": "Curriculum & Instructional Design",
+    "type": "Core Expertise (Tier 3)",
+    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+  },
+  {
+    "level": 4,
+    "label": "Muhannad Sulaiman Aloraini (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Training Delivery & Facilitation",
+    "type": "Core Expertise (Tier 3)",
+    "note": "3 holder(s) · 3 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Dr. Fatema Al Mutawa (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Imen Sohaibani (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Najiba M Abdulrazzaq (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 1,
+    "label": "Data, Digital Health & Health Informatics",
+    "type": "Domain (Tier 1)",
+    "note": "Core tags in domain: 13"
+  },
+  {
+    "level": 2,
+    "label": "Data Governance & Quality",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 1"
+  },
+  {
+    "level": 3,
+    "label": "Data Governance",
+    "type": "Core Expertise (Tier 3)",
+    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+  },
+  {
+    "level": 4,
+    "label": "Mubarkah Jaber Alkarbi (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 2,
+    "label": "Data Analytics & BI",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 4"
+  },
+  {
+    "level": 3,
+    "label": "Data Analysis (Quantitative)",
+    "type": "Core Expertise (Tier 3)",
+    "note": "3 holder(s) · 3 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Dr. Alya Zaid Harbi (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Robin Sudandiradas (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Sulaiman Nasser Said Alrawahi (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Data Engineering & Automation",
+    "type": "Core Expertise (Tier 3)",
+    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+  },
+  {
+    "level": 4,
+    "label": "Nourah M A S Sh Alsheridah (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 2,
+    "label": "Health Informatics",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 8"
+  },
+  {
+    "level": 3,
+    "label": "Public Health Informatics",
+    "type": "Core Expertise (Tier 3)",
+    "note": "2 holder(s) · 2 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Dr. Alya Zaid Harbi (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Muhannad Sulaiman Aloraini (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Registry Development (Cancer, RTI, etc.)",
+    "type": "Core Expertise (Tier 3)",
+    "note": "6 holder(s) · 4 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Amani Albasmi (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Mariam Alameeri (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Esraa Ibrahim Al Abbadi (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Najla AbdulAmir Al Lawati (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Nourah M A S Sh Alsheridah (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Suad Jama (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 1,
+    "label": "Research & Scientific Practice",
+    "type": "Domain (Tier 1)",
+    "note": "Core tags in domain: 15"
+  },
+  {
+    "level": 2,
+    "label": "Clinical Research",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 4"
+  },
+  {
+    "level": 3,
+    "label": "Clinical Research / Clinical Trials",
+    "type": "Core Expertise (Tier 3)",
+    "note": "2 holder(s) · 2 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Faryal Khamis (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Huda Youssef Ghareeb (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Ethical Review & Compliance",
+    "type": "Core Expertise (Tier 3)",
+    "note": "2 holder(s) · 2 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Huda Youssef Ghareeb (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Rehab Alaswad (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 2,
+    "label": "Research Methodology",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 5"
+  },
+  {
+    "level": 3,
+    "label": "Research Methodology Development",
+    "type": "Core Expertise (Tier 3)",
+    "note": "4 holder(s) · 3 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Abeer Khaled Albahouh (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Adel Salman Alsayyad (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Afaf Merza Mohamed (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Yasir Almuzaini (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Survey Design & Validation",
+    "type": "Core Expertise (Tier 3)",
+    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+  },
+  {
+    "level": 4,
+    "label": "Norah Alkanhal (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 2,
+    "label": "Scientific Communication",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 6"
+  },
+  {
+    "level": 3,
+    "label": "Scientific Writing & Publications",
+    "type": "Core Expertise (Tier 3)",
+    "note": "2 holder(s) · 2 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Meshal Alqahtani (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Najla AbdulAmir Al Lawati (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Research Governance",
+    "type": "Core Expertise (Tier 3)",
+    "note": "4 holder(s) · 3 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Amany Dahir (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Huda Youssef Ghareeb (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Khaloud Ahmed Al-Turki (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Mubarkah Jaber Alkarbi (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 1,
+    "label": "Quality, Governance & Project Management",
+    "type": "Domain (Tier 1)",
+    "note": "Core tags in domain: 5"
+  },
+  {
+    "level": 2,
+    "label": "Quality & Patient Safety",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 1"
+  },
+  {
+    "level": 3,
+    "label": "Patient Safety",
+    "type": "Core Expertise (Tier 3)",
+    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+  },
+  {
+    "level": 4,
+    "label": "Mohammad Behbehani (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 2,
+    "label": "Governance & Compliance",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 2"
+  },
+  {
+    "level": 3,
+    "label": "Governance, Risk & Compliance (GRC)",
+    "type": "Core Expertise (Tier 3)",
+    "note": "2 holder(s) · 2 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Khaloud Ahmed Al-Turki (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Mariam Abdalla AlOwais (AE)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 2,
+    "label": "Project & Program Management",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 2"
+  },
+  {
+    "level": 3,
+    "label": "Project Management (PMP/CAPM)",
+    "type": "Core Expertise (Tier 3)",
+    "note": "2 holder(s) · 1 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Norah Alkanhal (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Rehab Alaswad (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 1,
+    "label": "Clinical & Specialized Practice",
+    "type": "Domain (Tier 1)",
+    "note": "Core tags in domain: 3"
+  },
+  {
+    "level": 2,
+    "label": "Laboratory & Diagnostics",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 3"
+  },
+  {
+    "level": 3,
+    "label": "Medical Laboratory",
+    "type": "Core Expertise (Tier 3)",
+    "note": "3 holder(s) · 2 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Amjad Ghanem Zaed Ghanem (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Devendra Bansal (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Mashael Al-Badr (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 1,
+    "label": "Cross-Cutting Professional Skills",
+    "type": "Domain (Tier 1)",
+    "note": "Core tags in domain: 1"
+  },
+  {
+    "level": 2,
+    "label": "Leadership & Strategy",
+    "type": "Sub-Domain (Tier 2)",
+    "note": "Core tags: 1"
+  },
+  {
+    "level": 3,
+    "label": "Leadership",
+    "type": "Core Expertise (Tier 3)",
+    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+  },
+  {
+    "level": 4,
+    "label": "Mohammad Behbehani (KW)",
+    "type": "Holder",
+    "note": ""
+  }
+]
