@@ -15,7 +15,7 @@
   <div class="dv-bar">
     <div class="dv-bar__inner">
       <span class="dv-bar__tag">Design view</span>
-      <span><b>Proposal:</b> add the GCC network as a second scope beside the internal staff mapping — not as another tab inside it.</span>
+      <span><b>Not deployed.</b> The GCC network as a second scope beside the internal staff mapping — switch back with <b>Internal GCDC</b>.</span>
     </div>
   </div>
 
@@ -23,7 +23,7 @@
     <div class="utilbar__inner">
       <div class="scope" id="scope" role="group" aria-label="Choose which population to view">
         <button class="scope__btn" data-scope="internal">
-          <span class="scope__dot" aria-hidden="true"></span>Inside Gulf CDC
+          <span class="scope__dot" aria-hidden="true"></span>Internal GCDC
         </button>
         <button class="scope__btn scope__btn--net is-active" data-scope="network" aria-pressed="true">
           <span class="scope__dot" aria-hidden="true"></span>GCC Network
@@ -44,12 +44,13 @@
       </a>
 
       <nav class="tabs" id="tabs" aria-label="Network sections">
-        <button class="tab is-active" data-view="overview">Overview</button>
+        <button class="tab is-active" data-view="home">Home</button>
+        <button class="tab" data-view="overview">Overview</button>
+        <button class="tab" data-view="core">Core Expertise</button>
         <button class="tab" data-view="directory">Experts</button>
         <button class="tab" data-view="states">Member States</button>
-        <button class="tab" data-view="gaps">Regional Gaps</button>
-        <button class="tab" data-view="bridge">Gulf CDC ↔ Network</button>
-        <button class="tab" data-view="mapping">Map</button>
+        <button class="tab" data-view="bridge">GCDC ↔ Network</button>
+        <button class="tab" data-view="mapping">Mapping</button>
       </nav>
 
       <button class="theme-toggle" id="themeToggle" title="Toggle light / dark" aria-label="Toggle light or dark theme">
@@ -59,10 +60,11 @@
   </header>
 
   <main id="main" class="main">
-    <section id="view-overview" class="view"></section>
+    <section id="view-home" class="view"></section>
+    <section id="view-overview" class="view" hidden></section>
+    <section id="view-core" class="view" hidden></section>
     <section id="view-directory" class="view" hidden></section>
     <section id="view-states" class="view" hidden></section>
-    <section id="view-gaps" class="view" hidden></section>
     <section id="view-bridge" class="view" hidden></section>
     <section id="view-mapping" class="view" hidden></section>
   </main>

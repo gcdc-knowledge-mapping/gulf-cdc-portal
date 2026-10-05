@@ -32,11 +32,11 @@ Instead the portal gets a **scope switcher** above the navigation:
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│  ● Inside Gulf CDC        ● GCC Network                      │  ← scope
+│  ● Internal GCDC          ● GCC Network                      │  ← scope
 ├──────────────────────────────────────────────────────────────┤
 │  GCDC   Knowledge Mapping Page                               │
-│  Overview · Experts · Member States · Regional Gaps ·        │  ← scope's own tabs
-│  Gulf CDC ↔ Network · Map                                    │
+│  Home · Overview · Core Expertise · Experts ·                │  ← scope's own tabs
+│  Member States · GCDC ↔ Network · Mapping                    │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -59,22 +59,35 @@ nothing is renamed, and no existing link breaks.
    `assets/js/data.js` is untouched. The two people lists are never concatenated
    anywhere in the code.
 
-## 3. The six network sections
+## 3. The seven network sections
+
+The structure mirrors the internal scope section for section, so moving between
+the two scopes feels like the same portal rather than two products.
 
 | Section | Source sheet | What it shows |
 |---|---|---|
+| **Home** | 00_README | Same hero and layout as the internal Home, with a *GCC Network* badge: 55 experts, 6 Member States (with flags), 10 domains |
 | **Overview** | 00_README, 01_Taxonomy | Headline indicators, coverage donut, experts by Member State, coverage by domain |
+| **Core Expertise** | 02_Master_Dataset | Sortable table of name, Member State (flag) and core expertise — the network twin of the internal Core Expertise page. CSV export included |
 | **Experts** | 02_Master_Dataset | 55 cards — name, position, entity, Member State, core areas, profile level. **No email addresses.** |
-| **Member States** | 04_MemberState_Coverage | Heatmap of expertise × 6 states; exposes single-state concentration |
-| **Regional Gaps** | 06_Knowledge_Gaps | Status per area with the workbook's strategic recommendation |
-| **Gulf CDC ↔ Network** | joins 03 with the internal matrix | The bridge — see below |
-| **Map** | 08_Mapping_Hierarchy | The 212-node tree, same interaction as the internal Mapping section |
+| **Member States** | 04_MemberState_Coverage | Heatmap of expertise × 6 states, columns ordered United Arab Emirates · Bahrain · Saudi Arabia · Oman · Qatar · Kuwait |
+| **GCDC ↔ Network** | joins 03 with the internal matrix | The bridge — see below |
+| **Mapping** | 08_Mapping_Hierarchy | The 212-node interactive tree, same geometry, controls and behaviour as the internal Mapping section |
 
-Two sheets are deliberately **left out of the public view**: `07_Engagement_Plan`
-(who to approach, in what priority) and `09_Coding_Log` (verbatim survey answers
-plus confidence flags). Both are internal working material about named foreign
-officials. They belong behind the Entra ID sign-in, in the admin-only area, once
-Azure is live.
+Three sheets are deliberately **left out of the public view**: `06_Knowledge_Gaps`
+(the Regional Gaps page was removed on review), `07_Engagement_Plan` (who to
+approach, in what priority) and `09_Coding_Log` (verbatim survey answers plus
+confidence flags). The latter two are internal working material about named
+foreign officials and belong behind the Entra ID sign-in once Azure is live.
+
+### Member State flags
+
+The six flags are simplified SVGs drawn in-repo (`preview/flags/`), so the page
+still makes no external requests and the CSP is unchanged. They are
+approximations at 30×20px, not official renderings — the Saudi flag in
+particular represents the shahada as an abstract band rather than imitating
+letterforms. The full country name always appears with the flag, so nothing
+depends on recognising the image.
 
 ## 4. The payoff: the Gulf CDC ↔ Network bridge
 
@@ -97,26 +110,25 @@ The 16 include **Surveillance Systems Design** (Gulf CDC 1 → network 8),
 target, and it is the argument that turns the knowledge map from a report into a
 plan.
 
-## 5. The one thing the data cannot answer yet
+## 5. Constituencies: one network, no sub-categories
 
-**The workbook has no column saying who is CEO, PCN, CLO or Working Group.**
+The original plan was to split the network four ways — CEO, PCN, Country Liaison
+Officers, Working Group. That has been dropped on review:
 
-Every sheet treats the 55 as one undifferentiated network. `Track` only
-distinguishes Managerial (40) from Professional (15), and `Position Level` gives
-job seniority, not constituency. I checked all twelve sheets.
+- **The whole population is presented as one "GCC Network."** The workbook carries
+  no constituency column in any of its twelve sheets (`Track` only separates
+  Managerial from Professional, and `Position Level` gives job seniority), so the
+  split could not be derived from the data, and the analysis does not depend on
+  it. The group filter and its four chips have been removed.
+- **The CEO belongs to the internal scope, not the network.** This needed no data
+  change: no Gulf CDC person appears among the 55 respondents — there is no name
+  overlap with the internal 30, and no Gulf CDC affiliation anywhere in the
+  workbook. The internal dataset already carries a **CEO office** department
+  (Waleed Al Nadabi, Executive Director; Sarah Alsaleh, Senior Specialist).
 
-So the group filter is built and visible in the design view, but its four chips
-render in a dashed "pending" state. To switch them on, either:
-
-- **Preferred** — add a **`Network Group`** column to `02_Master_Dataset` with the
-  values `CEO`, `PCN`, `CLO`, `WG`, and I regenerate; or
-- send me a name → group list, and I store it as a correction layer
-  (`NETWORK_GROUP` in `scripts/generate_network_data.py`), exactly how the
-  `NAME_FIX` and `DEPT_FIX` corrections already work for the internal data.
-
-Once present, the groups become a filter across every network section, a badge on
-each expert card, and a "Coverage by group" chart mirroring the internal
-"Coverage by department".
+If the constituencies are ever needed, `scripts/generate_network_data.py` still
+carries the `NETWORK_GROUP` correction layer, and a `Network Group` column in
+`02_Master_Dataset` would populate it.
 
 ## 6. Before this goes live
 
@@ -133,12 +145,13 @@ feedback in the meantime.
 
 ## 7. If approved
 
-1. Add the `Network Group` column (or send the roster) so the four groups light up.
-2. Fold `preview/` into the main app: scope switcher in `index.html`, network
-   views into `assets/js/app.js`, `preview.css` into `assets/css/styles.css`.
-3. Render the network map with the same interactive SVG tree as the internal one,
-   in teal.
-4. Put Engagement Plan and Coding Log behind `allowedRoles` in
+1. Fold `preview/` into the main app: scope switcher in `index.html`, network
+   views into `assets/js/app.js`, `preview.css` into `assets/css/styles.css`,
+   flags into `assets/img/flags/`.
+2. Put Engagement Plan and Coding Log behind `allowedRoles` in
    `staticwebapp.config.json`.
-5. Regenerate with `python3 scripts/generate_network_data.py` whenever the
+3. Regenerate with `python3 scripts/generate_network_data.py` whenever the
    workbook changes.
+
+The design view is **not deployed**. The live `/preview/` URL still serves the
+earlier version until this is merged.

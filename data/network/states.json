@@ -1,26 +1,38 @@
 [
   {
+    "name": "UAE",
+    "label": "United Arab Emirates",
+    "code": "AE",
+    "flag": "ae.svg"
+  },
+  {
     "name": "Bahrain",
-    "code": "BH"
-  },
-  {
-    "name": "Kuwait",
-    "code": "KW"
-  },
-  {
-    "name": "Oman",
-    "code": "OM"
-  },
-  {
-    "name": "Qatar",
-    "code": "QA"
+    "label": "Bahrain",
+    "code": "BH",
+    "flag": "bh.svg"
   },
   {
     "name": "Saudi Arabia",
-    "code": "SA"
+    "label": "Saudi Arabia",
+    "code": "SA",
+    "flag": "sa.svg"
   },
   {
-    "name": "UAE",
-    "code": "AE"
+    "name": "Oman",
+    "label": "Oman",
+    "code": "OM",
+    "flag": "om.svg"
+  },
+  {
+    "name": "Qatar",
+    "label": "Qatar",
+    "code": "QA",
+    "flag": "qa.svg"
+  },
+  {
+    "name": "Kuwait",
+    "label": "Kuwait",
+    "code": "KW",
+    "flag": "kw.svg"
   }
 ]
