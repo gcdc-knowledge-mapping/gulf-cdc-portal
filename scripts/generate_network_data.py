@@ -32,6 +32,8 @@ ROOT = os.path.dirname(HERE)
 SRC = os.path.join(
     ROOT, "data", "GulfCDC_KnowledgeMapping_Network_MasterAnalysis_v3_CoreTaxonomy.xlsx"
 )
+# Raw survey export — the only source of the network members' email addresses.
+SURVEY = os.path.join(ROOT, "data", "Knowledge_Mapping_Survey_GCDC_Network.xlsx")
 INTERNAL_MATRIX = os.path.join(ROOT, "data", "expertise_matrix.json")
 OUT_JS = os.path.join(ROOT, "assets", "js", "network-data.js")
 OUT_DIR = os.path.join(ROOT, "data", "network")
@@ -126,8 +128,37 @@ def status_of(holders):
     return "Adequate", "good"
 
 
+def emails_by_id():
+    """Respondent ID -> official email, from the raw survey export.
+
+    The survey keeps its original numbering (1-57, including the two excluded
+    test submissions), and so does the master dataset, so the join is on ID
+    rather than on name. Returns {} when the survey file is absent, which lets
+    the generator still run from the analysis workbook alone.
+    """
+    if not os.path.exists(SURVEY):
+        print(f"note: {os.path.basename(SURVEY)} not found — emails omitted")
+        return {}
+    ws = openpyxl.load_workbook(SURVEY, data_only=True)["Sheet1"]
+    rows = list(ws.iter_rows(values_only=True))
+    hdr = [clean(h) for h in rows[0]]
+    try:
+        i_id, i_mail = hdr.index("ID"), hdr.index("Official email")
+    except ValueError:
+        print("note: survey file has no ID / Official email column — emails omitted")
+        return {}
+    out = {}
+    for r in rows[1:]:
+        rid = num(r[i_id], -1)
+        mail = clean(r[i_mail])
+        if rid >= 0 and mail:
+            out[rid] = mail
+    return out
+
+
 def main():
     wb = openpyxl.load_workbook(SRC, data_only=True)
+    mails = emails_by_id()
 
     # ---- people -----------------------------------------------------------
     _, master = table(wb["02_Master_Dataset"])
@@ -156,6 +187,7 @@ def main():
                 "profile": clean(r.get("Profile Level")),
                 "index": num(r.get("Expertise Index (1-125)")),
                 "confidence": clean(r.get("Coding Confidence")),
+                "email": mails.get(num(r.get("ID")), ""),
                 "group": NETWORK_GROUP.get(norm(name), ""),
             }
         )
@@ -354,6 +386,7 @@ def main():
 
     meta = {
         "people": len(people),
+        "withEmail": sum(1 for p in people if p["email"]),
         "states": len({p["state"] for p in people if p["state"]}),
         "tags": sum(len(p["areas"]) for p in people),
         "areas": len(taxonomy),
@@ -415,7 +448,7 @@ def main():
         json.dump(engagement, fh, ensure_ascii=False, indent=2)
 
     print(f"people={meta['people']} states={meta['states']} areas={meta['areas']} "
-          f"covered={meta['covered']} bridge={len(bridge)} grouped={meta['grouped']}")
+          f"covered={meta['covered']} bridge={len(bridge)} emails={meta['withEmail']}")
     print(f"wrote {OUT_JS}")
 
 
