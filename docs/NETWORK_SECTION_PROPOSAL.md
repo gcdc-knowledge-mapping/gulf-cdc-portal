@@ -36,7 +36,7 @@ Instead the portal gets a **scope switcher** above the navigation:
 ├──────────────────────────────────────────────────────────────┤
 │  GCDC   Knowledge Mapping Page                               │
 │  Home · Overview · Core Expertise · Experts ·                │  ← scope's own tabs
-│  Member States · GCDC ↔ Network · Mapping                    │
+│  Member States · Mapping                                     │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -59,7 +59,7 @@ nothing is renamed, and no existing link breaks.
    `assets/js/data.js` is untouched. The two people lists are never concatenated
    anywhere in the code.
 
-## 3. The seven network sections
+## 3. The six network sections
 
 The structure mirrors the internal scope section for section, so moving between
 the two scopes feels like the same portal rather than two products.
@@ -71,8 +71,7 @@ the two scopes feels like the same portal rather than two products.
 | **Core Expertise** | 02_Master_Dataset | Sortable table of name, Member State (flag) and core expertise — the network twin of the internal Core Expertise page. CSV export included |
 | **Experts** | 02_Master_Dataset | 55 cards — name, position, entity, Member State, core areas, profile level. **No email addresses.** |
 | **Member States** | 04_MemberState_Coverage | Heatmap of expertise × 6 states, columns ordered United Arab Emirates · Bahrain · Saudi Arabia · Oman · Qatar · Kuwait |
-| **GCDC ↔ Network** | joins 03 with the internal matrix | The bridge — see below |
-| **Mapping** | 08_Mapping_Hierarchy | The 212-node interactive tree, same geometry, controls and behaviour as the internal Mapping section |
+| **Mapping** | 08_Mapping_Hierarchy | The 212-node interactive tree, same geometry, controls and behaviour as the internal Mapping section, with each holder's Member State shown as a flag |
 
 Three sheets are deliberately **left out of the public view**: `06_Knowledge_Gaps`
 (the Regional Gaps page was removed on review), `07_Engagement_Plan` (who to
@@ -89,10 +88,12 @@ particular represents the shahada as an abstract band rather than imitating
 letterforms. The full country name always appears with the flag, so nothing
 depends on recognising the image.
 
-## 4. The payoff: the Gulf CDC ↔ Network bridge
+## 4. The Gulf CDC ↔ Network comparison
 
-This is the section worth building the rest for, and the only place the two
-populations appear together — in separate columns, never merged.
+The two populations share the 57-area taxonomy, so their counts join directly.
+The comparison was built as a view and then removed from the navigation on
+review; it is still generated to `data/network/bridge.json` and can be brought
+back at any time.
 
 Running the join today:
 
