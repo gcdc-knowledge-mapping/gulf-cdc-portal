@@ -3,3 +3,11 @@ node_modules/
 *.log
 .vscode/
 .idea/
+
+# GCC Network source workbook and the derived engagement plan.
+# They carry verbatim survey answers and approach priorities for 55 named
+# officials of six foreign health authorities. Keep them out of the public
+# repository until it is private (see docs/AZURE_DEPLOYMENT.md step 5); place
+# the workbook in data/ locally to run scripts/generate_network_data.py.
+data/GulfCDC_KnowledgeMapping_Network_MasterAnalysis_v3_CoreTaxonomy.xlsx
+data/network/engagement.json

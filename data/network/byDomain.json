@@ -1,0 +1,92 @@
+[
+  {
+    "domain": "Epidemiology & Surveillance",
+    "areas": 6,
+    "covered": 6,
+    "good": 3,
+    "warn": 1,
+    "serious": 2,
+    "critical": 0
+  },
+  {
+    "domain": "Research & Scientific Practice",
+    "areas": 7,
+    "covered": 6,
+    "good": 2,
+    "warn": 3,
+    "serious": 1,
+    "critical": 1
+  },
+  {
+    "domain": "Communicable & Non-Communicable Diseases",
+    "areas": 5,
+    "covered": 5,
+    "good": 3,
+    "warn": 2,
+    "serious": 0,
+    "critical": 0
+  },
+  {
+    "domain": "Health Policy, Systems & Strategy",
+    "areas": 7,
+    "covered": 5,
+    "good": 2,
+    "warn": 2,
+    "serious": 1,
+    "critical": 2
+  },
+  {
+    "domain": "Health Promotion, Education & Workforce",
+    "areas": 7,
+    "covered": 5,
+    "good": 2,
+    "warn": 1,
+    "serious": 2,
+    "critical": 2
+  },
+  {
+    "domain": "Data, Digital Health & Health Informatics",
+    "areas": 8,
+    "covered": 5,
+    "good": 2,
+    "warn": 1,
+    "serious": 2,
+    "critical": 3
+  },
+  {
+    "domain": "Public Health Emergency & Health Security",
+    "areas": 5,
+    "covered": 3,
+    "good": 2,
+    "warn": 0,
+    "serious": 1,
+    "critical": 2
+  },
+  {
+    "domain": "Quality, Governance & Project Management",
+    "areas": 6,
+    "covered": 3,
+    "good": 0,
+    "warn": 2,
+    "serious": 1,
+    "critical": 3
+  },
+  {
+    "domain": "Clinical & Specialized Practice",
+    "areas": 4,
+    "covered": 1,
+    "good": 1,
+    "warn": 0,
+    "serious": 0,
+    "critical": 3
+  },
+  {
+    "domain": "Cross-Cutting Professional Skills",
+    "areas": 2,
+    "covered": 1,
+    "good": 0,
+    "warn": 0,
+    "serious": 1,
+    "critical": 1
+  }
+]

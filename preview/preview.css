@@ -1,0 +1,271 @@
+/* ===========================================================================
+   GCC Network space — design view (prototype).
+   Loaded on top of assets/css/styles.css. Only additions live here, so the
+   internal portal keeps its exact look and nothing below leaks into it.
+   =========================================================================== */
+
+:root {
+  /* Network accent — GCDC deep teal. Deliberately NOT the navy/cyan used by
+     the internal space, and NOT one of the reserved status colours. */
+  --net: #046F8A;
+  --net-ink: #03566b;
+  --net-soft: #e2f0f4;
+  --net-line: #9fcbd8;
+}
+
+:root[data-theme="dark"] {
+  --net: #3f9fc0;
+  --net-ink: #bfe6f2;
+  --net-soft: #0d2f3b;
+  --net-line: #2a5f73;
+}
+
+/* --- design-view framing (prototype only — not part of the proposal) ----- */
+.dv-bar {
+  background: #0b2030;
+  color: #cfe3ee;
+  font-size: 12.5px;
+  border-bottom: 1px solid rgba(255, 255, 255, .12);
+}
+.dv-bar__inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 9px 20px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.dv-bar b { color: #fff; }
+.dv-bar__tag {
+  background: var(--net);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  font-size: 10.5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+/* --- scope switcher: the primary separation control ---------------------- */
+.scope {
+  display: inline-flex;
+  background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+}
+.scope__btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, .78);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 15px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+.scope__btn:hover { color: #fff; background: rgba(255, 255, 255, .12); }
+.scope__btn.is-active { background: #fff; color: var(--brand); }
+.scope__btn.is-active.scope__btn--net { background: var(--net); color: #fff; }
+.scope__dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: currentColor; opacity: .75; flex-shrink: 0;
+}
+
+/* network scope recolours the chrome accent so the space is unmistakable */
+.topbar--net { border-bottom: 3px solid var(--net); }
+.topbar--net .tab.is-active { border-bottom-color: var(--net); }
+
+/* --- persistent context banner ------------------------------------------ */
+.ctx {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--net-soft);
+  border: 1px solid var(--net-line);
+  border-left: 4px solid var(--net);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 18px;
+}
+.ctx__icon {
+  width: 34px; height: 34px; flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--net);
+  color: #fff;
+  display: grid; place-items: center;
+  font-size: 17px;
+}
+.ctx__title { font-weight: 700; font-size: 14px; color: var(--net-ink); }
+.ctx__body { font-size: 13px; color: var(--ink-2); margin-top: 3px; }
+
+/* --- group filter chips (CEO / PCN / CLO / Working Group) ---------------- */
+.groupbar {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.groupchip {
+  appearance: none;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 7px 14px;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.groupchip:hover { border-color: var(--net); color: var(--net-ink); }
+.groupchip.is-active { background: var(--net); border-color: var(--net); color: #fff; }
+.groupchip__n {
+  font-size: 11.5px; font-weight: 700;
+  background: var(--surface-2); color: var(--ink-2);
+  border-radius: 999px; padding: 1px 8px;
+}
+.groupchip.is-active .groupchip__n { background: rgba(255, 255, 255, .25); color: #fff; }
+.groupchip.is-pending { opacity: .62; border-style: dashed; }
+
+/* --- KPI tint for the network space ------------------------------------- */
+.kpi--net::before { background: var(--net); }
+.kpi--net .kpi__value { color: var(--net-ink); }
+:root[data-theme="dark"] .kpi--net .kpi__value { color: var(--net); }
+
+/* --- member-state chips -------------------------------------------------- */
+.flagchip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11.5px; font-weight: 700;
+  background: var(--net-soft); color: var(--net-ink);
+  border: 1px solid var(--net-line);
+  border-radius: 999px; padding: 2px 9px;
+  white-space: nowrap;
+}
+.flagchip__code {
+  font-size: 10px; letter-spacing: .5px;
+  background: var(--net); color: #fff;
+  border-radius: 3px; padding: 0 4px;
+}
+
+/* --- expert cards (network directory) ------------------------------------ */
+.net-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+}
+.netcard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--net);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 11px;
+  box-shadow: var(--shadow);
+}
+.netcard__hd { display: flex; gap: 12px; align-items: flex-start; }
+.netcard__avatar {
+  width: 42px; height: 42px; flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--net-soft);
+  color: var(--net-ink);
+  border: 1px solid var(--net-line);
+  display: grid; place-items: center;
+  font-weight: 800; font-size: 14px;
+}
+.netcard__id { min-width: 0; flex: 1; }
+.netcard__name { font-weight: 700; font-size: 15px; color: var(--ink); }
+.netcard__role { font-size: 12.5px; color: var(--ink-muted); margin-top: 2px; }
+.netcard__tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.netcard__areas { display: flex; flex-wrap: wrap; gap: 5px; }
+.netcard__foot {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 10px; font-size: 12px; color: var(--ink-muted);
+  border-top: 1px dashed var(--border); padding-top: 10px;
+}
+.netcard__idx { font-weight: 700; color: var(--net-ink); font-variant-numeric: tabular-nums; }
+:root[data-theme="dark"] .netcard__idx { color: var(--net); }
+
+/* --- heatmap -------------------------------------------------------------- */
+.heat { width: 100%; border-collapse: collapse; font-size: 13px; }
+.heat th, .heat td { padding: 7px 10px; border-bottom: 1px solid var(--border); }
+.heat thead th {
+  font-size: 11px; text-transform: uppercase; letter-spacing: .5px;
+  color: var(--ink-muted); text-align: center; white-space: nowrap;
+}
+.heat thead th:first-child { text-align: left; }
+/* styles.css already defines a .heat with centred cells — override explicitly. */
+.heat td.area { text-align: left; color: var(--ink); font-weight: 600; }
+.heat td.cell { text-align: center; font-variant-numeric: tabular-nums; font-weight: 700; }
+.heat .h0 { color: var(--ink-muted); opacity: .45; }
+.heat .h1 { background: rgba(4, 111, 138, .12); color: var(--net-ink); }
+.heat .h2 { background: rgba(4, 111, 138, .26); color: var(--net-ink); }
+.heat .h3 { background: rgba(4, 111, 138, .44); color: #fff; }
+:root[data-theme="dark"] .heat .h1 { background: rgba(63, 159, 192, .18); color: var(--net-ink); }
+:root[data-theme="dark"] .heat .h2 { background: rgba(63, 159, 192, .34); color: #eaf7fb; }
+:root[data-theme="dark"] .heat .h3 { background: rgba(63, 159, 192, .55); color: #fff; }
+
+/* --- bridge table (the only place internal + network meet) --------------- */
+.bridge-note {
+  background: linear-gradient(90deg, var(--brand-soft), var(--net-soft));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.bridge-note b { color: var(--ink); }
+.side {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: .4px;
+  text-transform: uppercase; border-radius: 4px; padding: 2px 7px;
+}
+.side--int { background: var(--brand-soft); color: var(--brand); }
+.side--net { background: var(--net-soft); color: var(--net-ink); }
+.cmp { display: flex; align-items: center; gap: 10px; }
+.cmp__n {
+  min-width: 26px; text-align: center;
+  font-weight: 800; font-variant-numeric: tabular-nums;
+}
+.cmp__bar { height: 7px; border-radius: 4px; flex: 1; min-width: 40px; background: var(--surface-2); overflow: hidden; }
+.cmp__fill { height: 100%; border-radius: 4px; display: block; }
+.cmp__fill--int { background: var(--brand); }
+.cmp__fill--net { background: var(--net); }
+
+/* --- tree preview --------------------------------------------------------- */
+.tree { font-size: 13.5px; }
+.tree__row { display: flex; gap: 10px; align-items: baseline; padding: 4px 0; }
+.tree__l1 { font-weight: 800; color: var(--net-ink); }
+.tree__l2 { font-weight: 700; color: var(--ink); }
+.tree__l3 { color: var(--ink); }
+.tree__l4 { color: var(--ink-2); font-size: 13px; }
+.tree__note { font-size: 11.5px; color: var(--ink-muted); }
+
+/* --- layout helpers ------------------------------------------------------- */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.scroll-y { max-height: 460px; overflow-y: auto; }
+.filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+.filters select, .filters input[type="search"] {
+  font: inherit; font-size: 13px;
+  padding: 8px 11px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--ink);
+}
+.filters input[type="search"] { min-width: 220px; }
+.count-note { font-size: 12.5px; color: var(--ink-muted); margin-left: auto; }
+
+@media (max-width: 900px) {
+  .grid-2, .grid-4 { grid-template-columns: 1fr; }
+  .count-note { margin-left: 0; width: 100%; }
+}

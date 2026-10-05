@@ -1,0 +1,515 @@
+[
+  {
+    "domain": "Epidemiology & Surveillance",
+    "sub": "Field Epidemiology",
+    "area": "Outbreak Investigation",
+    "holders": 1,
+    "states": 1,
+    "status": "Sole expert",
+    "cls": "serious"
+  },
+  {
+    "domain": "Epidemiology & Surveillance",
+    "sub": "Disease Surveillance",
+    "area": "Surveillance Systems Design",
+    "holders": 8,
+    "states": 5,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Epidemiology & Surveillance",
+    "sub": "Disease Surveillance",
+    "area": "Epidemic Intelligence",
+    "holders": 1,
+    "states": 1,
+    "status": "Sole expert",
+    "cls": "serious"
+  },
+  {
+    "domain": "Epidemiology & Surveillance",
+    "sub": "Disease Surveillance",
+    "area": "Surveillance Reporting & Analytics",
+    "holders": 3,
+    "states": 3,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Epidemiology & Surveillance",
+    "sub": "Biostatistics & Population Health",
+    "area": "Biostatistics",
+    "holders": 5,
+    "states": 4,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Epidemiology & Surveillance",
+    "sub": "Biostatistics & Population Health",
+    "area": "Burden of Disease Analysis",
+    "holders": 2,
+    "states": 1,
+    "status": "Thin",
+    "cls": "warn"
+  },
+  {
+    "domain": "Public Health Emergency & Health Security",
+    "sub": "Preparedness & Planning",
+    "area": "Emergency Preparedness Planning",
+    "holders": 12,
+    "states": 4,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Public Health Emergency & Health Security",
+    "sub": "Preparedness & Planning",
+    "area": "Risk Assessment (Rapid Risk Assessment)",
+    "holders": 5,
+    "states": 4,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Public Health Emergency & Health Security",
+    "sub": "Response & Operations",
+    "area": "PHEOC / Emergency Operations Centers",
+    "holders": 1,
+    "states": 1,
+    "status": "Sole expert",
+    "cls": "serious"
+  },
+  {
+    "domain": "Public Health Emergency & Health Security",
+    "sub": "Response & Operations",
+    "area": "Disaster Medicine & Management",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  },
+  {
+    "domain": "Public Health Emergency & Health Security",
+    "sub": "Health Security",
+    "area": "Strategic Stockpile Management",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  },
+  {
+    "domain": "Communicable & Non-Communicable Diseases",
+    "sub": "Communicable Diseases",
+    "area": "Infectious Disease Epidemiology",
+    "holders": 14,
+    "states": 6,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Communicable & Non-Communicable Diseases",
+    "sub": "Communicable Diseases",
+    "area": "Infection Prevention & Control",
+    "holders": 3,
+    "states": 3,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Communicable & Non-Communicable Diseases",
+    "sub": "Communicable Diseases",
+    "area": "Infection & Immunity",
+    "holders": 2,
+    "states": 1,
+    "status": "Thin",
+    "cls": "warn"
+  },
+  {
+    "domain": "Communicable & Non-Communicable Diseases",
+    "sub": "Non-Communicable Diseases",
+    "area": "NCD Prevention & Control",
+    "holders": 8,
+    "states": 5,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Communicable & Non-Communicable Diseases",
+    "sub": "Injuries & Special Populations",
+    "area": "Road Traffic & Injury Prevention",
+    "holders": 2,
+    "states": 2,
+    "status": "Thin",
+    "cls": "warn"
+  },
+  {
+    "domain": "Health Policy, Systems & Strategy",
+    "sub": "Policy & Guidelines",
+    "area": "Policy Drafting & Analysis",
+    "holders": 7,
+    "states": 4,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Health Policy, Systems & Strategy",
+    "sub": "Policy & Guidelines",
+    "area": "Policy Brief & White Paper Writing",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  },
+  {
+    "domain": "Health Policy, Systems & Strategy",
+    "sub": "Health Systems",
+    "area": "Health Systems Research",
+    "holders": 2,
+    "states": 2,
+    "status": "Thin",
+    "cls": "warn"
+  },
+  {
+    "domain": "Health Policy, Systems & Strategy",
+    "sub": "Health Systems",
+    "area": "Health Economics & Financing",
+    "holders": 1,
+    "states": 1,
+    "status": "Sole expert",
+    "cls": "serious"
+  },
+  {
+    "domain": "Health Policy, Systems & Strategy",
+    "sub": "Health Systems",
+    "area": "Value-Based Healthcare (VBHC)",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  },
+  {
+    "domain": "Health Policy, Systems & Strategy",
+    "sub": "Strategic Planning",
+    "area": "Strategic Planning & Priority Setting",
+    "holders": 6,
+    "states": 3,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Health Policy, Systems & Strategy",
+    "sub": "Strategic Planning",
+    "area": "Performance Management (KPIs / OKRs)",
+    "holders": 2,
+    "states": 2,
+    "status": "Thin",
+    "cls": "warn"
+  },
+  {
+    "domain": "Health Promotion, Education & Workforce",
+    "sub": "Health Promotion",
+    "area": "Health Promotion Strategy",
+    "holders": 7,
+    "states": 4,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Health Promotion, Education & Workforce",
+    "sub": "Health Promotion",
+    "area": "Behavior Change Theory & Campaigns",
+    "holders": 2,
+    "states": 2,
+    "status": "Thin",
+    "cls": "warn"
+  },
+  {
+    "domain": "Health Promotion, Education & Workforce",
+    "sub": "Workforce Development",
+    "area": "Competency Framework Design",
+    "holders": 1,
+    "states": 1,
+    "status": "Sole expert",
+    "cls": "serious"
+  },
+  {
+    "domain": "Health Promotion, Education & Workforce",
+    "sub": "Workforce Development",
+    "area": "Continuing Professional Development (CPD)",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  },
+  {
+    "domain": "Health Promotion, Education & Workforce",
+    "sub": "Training & Education",
+    "area": "Curriculum & Instructional Design",
+    "holders": 1,
+    "states": 1,
+    "status": "Sole expert",
+    "cls": "serious"
+  },
+  {
+    "domain": "Health Promotion, Education & Workforce",
+    "sub": "Training & Education",
+    "area": "Training Delivery & Facilitation",
+    "holders": 3,
+    "states": 3,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Health Promotion, Education & Workforce",
+    "sub": "Training & Education",
+    "area": "Digital Learning (LMS / LXP)",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  },
+  {
+    "domain": "Data, Digital Health & Health Informatics",
+    "sub": "Data Governance & Quality",
+    "area": "Data Governance",
+    "holders": 1,
+    "states": 1,
+    "status": "Sole expert",
+    "cls": "serious"
+  },
+  {
+    "domain": "Data, Digital Health & Health Informatics",
+    "sub": "Data Analytics & BI",
+    "area": "Data Analysis (Quantitative)",
+    "holders": 3,
+    "states": 3,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Data, Digital Health & Health Informatics",
+    "sub": "Data Analytics & BI",
+    "area": "Dashboard & BI Development",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  },
+  {
+    "domain": "Data, Digital Health & Health Informatics",
+    "sub": "Data Analytics & BI",
+    "area": "Data Engineering & Automation",
+    "holders": 1,
+    "states": 1,
+    "status": "Sole expert",
+    "cls": "serious"
+  },
+  {
+    "domain": "Data, Digital Health & Health Informatics",
+    "sub": "Health Informatics",
+    "area": "Public Health Informatics",
+    "holders": 2,
+    "states": 2,
+    "status": "Thin",
+    "cls": "warn"
+  },
+  {
+    "domain": "Data, Digital Health & Health Informatics",
+    "sub": "Health Informatics",
+    "area": "Registry Development (Cancer, RTI, etc.)",
+    "holders": 6,
+    "states": 4,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Data, Digital Health & Health Informatics",
+    "sub": "Digital Health",
+    "area": "Usability Testing & Health System Design",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  },
+  {
+    "domain": "Data, Digital Health & Health Informatics",
+    "sub": "Digital Health",
+    "area": "AI in Health",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  },
+  {
+    "domain": "Research & Scientific Practice",
+    "sub": "Clinical Research",
+    "area": "Clinical Research / Clinical Trials",
+    "holders": 2,
+    "states": 2,
+    "status": "Thin",
+    "cls": "warn"
+  },
+  {
+    "domain": "Research & Scientific Practice",
+    "sub": "Clinical Research",
+    "area": "Ethical Review & Compliance",
+    "holders": 2,
+    "states": 2,
+    "status": "Thin",
+    "cls": "warn"
+  },
+  {
+    "domain": "Research & Scientific Practice",
+    "sub": "Research Methodology",
+    "area": "Research Methodology Development",
+    "holders": 4,
+    "states": 3,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Research & Scientific Practice",
+    "sub": "Research Methodology",
+    "area": "Survey Design & Validation",
+    "holders": 1,
+    "states": 1,
+    "status": "Sole expert",
+    "cls": "serious"
+  },
+  {
+    "domain": "Research & Scientific Practice",
+    "sub": "Research Methodology",
+    "area": "Indicators Development & Measurement",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  },
+  {
+    "domain": "Research & Scientific Practice",
+    "sub": "Scientific Communication",
+    "area": "Scientific Writing & Publications",
+    "holders": 2,
+    "states": 2,
+    "status": "Thin",
+    "cls": "warn"
+  },
+  {
+    "domain": "Research & Scientific Practice",
+    "sub": "Scientific Communication",
+    "area": "Research Governance",
+    "holders": 4,
+    "states": 3,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Quality, Governance & Project Management",
+    "sub": "Quality & Patient Safety",
+    "area": "Patient Safety",
+    "holders": 1,
+    "states": 1,
+    "status": "Sole expert",
+    "cls": "serious"
+  },
+  {
+    "domain": "Quality, Governance & Project Management",
+    "sub": "Governance & Compliance",
+    "area": "Governance, Risk & Compliance (GRC)",
+    "holders": 2,
+    "states": 2,
+    "status": "Thin",
+    "cls": "warn"
+  },
+  {
+    "domain": "Quality, Governance & Project Management",
+    "sub": "Governance & Compliance",
+    "area": "Casemix Funding & Classification",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  },
+  {
+    "domain": "Quality, Governance & Project Management",
+    "sub": "Project & Program Management",
+    "area": "Project Management (PMP/CAPM)",
+    "holders": 2,
+    "states": 1,
+    "status": "Thin",
+    "cls": "warn"
+  },
+  {
+    "domain": "Quality, Governance & Project Management",
+    "sub": "Project & Program Management",
+    "area": "Program Evaluation",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  },
+  {
+    "domain": "Quality, Governance & Project Management",
+    "sub": "Project & Program Management",
+    "area": "Change Management",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  },
+  {
+    "domain": "Clinical & Specialized Practice",
+    "sub": "Clinical Disciplines",
+    "area": "Clinical Nutrition",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  },
+  {
+    "domain": "Clinical & Specialized Practice",
+    "sub": "Clinical Disciplines",
+    "area": "Emergency Medical Services / Paramedic",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  },
+  {
+    "domain": "Clinical & Specialized Practice",
+    "sub": "Laboratory & Diagnostics",
+    "area": "Medical Laboratory",
+    "holders": 3,
+    "states": 2,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Clinical & Specialized Practice",
+    "sub": "Specialized Areas",
+    "area": "Toxicology",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  },
+  {
+    "domain": "Cross-Cutting Professional Skills",
+    "sub": "Leadership & Strategy",
+    "area": "Leadership",
+    "holders": 1,
+    "states": 1,
+    "status": "Sole expert",
+    "cls": "serious"
+  },
+  {
+    "domain": "Cross-Cutting Professional Skills",
+    "sub": "Communication & Engagement",
+    "area": "Stakeholder Engagement",
+    "holders": 0,
+    "states": 0,
+    "status": "No core expert",
+    "cls": "critical"
+  }
+]

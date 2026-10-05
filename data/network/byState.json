@@ -1,0 +1,44 @@
+[
+  {
+    "state": "Qatar",
+    "code": "QA",
+    "people": 11,
+    "tags": 24,
+    "areas": 14
+  },
+  {
+    "state": "UAE",
+    "code": "AE",
+    "people": 11,
+    "tags": 27,
+    "areas": 18
+  },
+  {
+    "state": "Bahrain",
+    "code": "BH",
+    "people": 10,
+    "tags": 26,
+    "areas": 15
+  },
+  {
+    "state": "Saudi Arabia",
+    "code": "SA",
+    "people": 10,
+    "tags": 26,
+    "areas": 22
+  },
+  {
+    "state": "Oman",
+    "code": "OM",
+    "people": 7,
+    "tags": 16,
+    "areas": 12
+  },
+  {
+    "state": "Kuwait",
+    "code": "KW",
+    "people": 6,
+    "tags": 17,
+    "areas": 14
+  }
+]
