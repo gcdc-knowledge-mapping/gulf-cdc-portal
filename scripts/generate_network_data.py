@@ -375,7 +375,6 @@ def main():
         "taxonomy": taxonomy,
         "coverage": coverage,
         "tree": tree,
-        "bridge": bridge,
         "byState": by_state,
         "byDomain": by_domain,
         "byGroup": by_group,
@@ -405,7 +404,7 @@ def main():
 
     # Derived tables kept as JSON for reference but not bundled into the page:
     # no view reads them, so they stay out of the shipped JavaScript.
-    for name, value in (("gaps", gaps), ("skills", skills), ("byGroup", by_group)):
+    for name, value in (("gaps", gaps), ("skills", skills), ("byGroup", by_group), ("bridge", bridge)):
         with open(os.path.join(OUT_DIR, f"{name}.json"), "w", encoding="utf-8") as fh:
             json.dump(value, fh, ensure_ascii=False, indent=2)
 

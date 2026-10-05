@@ -1,6 +1,6 @@
 /* ===========================================================================
-   GCC Network space — design view (prototype).
-   Mirrors the conventions of assets/js/app.js: one IIFE, delegated handlers
+   GCC Network scope — the regional counterpart to assets/js/app.js.
+   Mirrors its conventions: one IIFE, delegated handlers
    assigned with el.onclick (never addEventListener — views re-render), and no
    inline event handlers so the production CSP stays satisfied.
    =========================================================================== */
@@ -11,7 +11,6 @@
   var PEOPLE = D.people || [];
   var TAX = D.taxonomy || [];
   var COV = D.coverage || [];
-  var BRIDGE = D.bridge || [];
   var FLAT = D.tree || [];
   var STATES = D.states || [];
   var M = D.meta || {};
@@ -84,12 +83,20 @@
         '"></span>' + esc(i.label) + ' <b style="color:var(--ink)">' + i.value + "</b></span>";
     }).join("") + "</div>";
   }
+  // Ranked horizontal bars. An item with `action` becomes keyboard-operable,
+  // matching the internal Overview.
   function rankedBars(items, max) {
     return '<div class="bars">' + items.map(function (it) {
-      return '<div class="bar-row"><span class="bar-row__label" title="' + esc(it.label) + '">' +
-        (it.icon || "") + esc(it.label) +
-        '</span><span class="bar-row__track"><span class="bar-row__fill" style="width:' +
-        ((it.value / max) * 100) + "%;background:" + it.color + '"></span></span>' +
+      var act = it.action
+        ? ' role="button" tabindex="0" data-action="' + esc(it.action) +
+          '" title="' + esc(it.actionHint || "Show details") + '"'
+        : "";
+      return '<div class="bar-row' + (it.action ? " is-clickable" : "") + '"' + act + ">" +
+        '<span class="bar-row__label" title="' + esc(it.label) + '">' +
+        (it.icon || "") + esc(it.label) + "</span>" +
+        '<span class="bar-row__track"><span class="bar-row__fill" style="width:' +
+        ((it.value / max) * 100) + "%;background:" + it.color + '"' +
+        (it.tip ? ' data-tip="' + esc(it.tip) + '"' : "") + "></span></span>" +
         '<span class="bar-row__val">' + it.value + "</span></div>";
     }).join("") + "</div>";
   }
@@ -97,31 +104,81 @@
   var NET = "var(--net)";
   var CLS_COLOR = { good: "var(--st-good)", warn: "var(--st-warn)", serious: "var(--st-serious)", critical: "var(--st-critical)" };
 
-  function kpi(value, label, note) {
-    return '<div class="card kpi kpi--net"><div class="kpi__value">' + esc(String(value)) + "</div>" +
+  /* ------------------------------------------------------- shared UI bits */
+  function kpi(value, label, note, accent, action, hint) {
+    var tag = action ? "button" : "div";
+    var attrs = action
+      ? ' type="button" data-action="' + esc(action) + '" title="' + esc(hint || "") + '"'
+      : "";
+    return "<" + tag + ' class="card kpi' + (action ? " is-clickable" : "") +
+      '" style="--kpi-accent:' + (accent || "var(--net)") + '"' + attrs + ">" +
+      '<div class="kpi__value">' + esc(String(value)) + "</div>" +
       '<div class="kpi__label">' + esc(label) + "</div>" +
-      (note ? '<div class="kpi__note">' + esc(note) + "</div>" : "") + "</div>";
+      (note ? '<div class="kpi__note">' + esc(note) + "</div>" : "") +
+      (action ? '<span class="kpi__go" aria-hidden="true">→</span>' : "") +
+      "</" + tag + ">";
   }
   function card(title, sub, body) {
     return '<div class="card"><div class="card__hd"><div class="card__title">' + esc(title) + "</div>" +
       (sub ? '<div class="card__sub">' + esc(sub) + "</div>" : "") + "</div>" + body + "</div>";
   }
-
-  function ctx(title, body) {
-    return '<div class="ctx"><div class="ctx__icon" aria-hidden="true">◍</div><div>' +
-      '<div class="ctx__title">' + esc(title) + "</div>" +
-      '<div class="ctx__body">' + body + "</div></div></div>";
+  function head(title, lead) {
+    return '<div class="view__head"><h1>' + esc(title) + "</h1><p>" + lead + "</p></div>";
+  }
+  // Active-filter chips — each individually removable, as on the internal side.
+  function filterChips(items) {
+    var on = items.filter(function (i) { return i.value; });
+    if (!on.length) return "";
+    return '<div class="chips"><span class="chips__lbl">Filtered by</span>' +
+      on.map(function (i) {
+        return '<button type="button" class="chip" data-clear="' + esc(i.clear) +
+          '" aria-label="Remove filter ' + esc(i.label) + ': ' + esc(i.value) + '">' +
+          esc(i.label) + ": <b>" + esc(i.value) + '</b> <span aria-hidden="true">✕</span></button>';
+      }).join("") +
+      (on.length > 1 ? '<button type="button" class="chip chip--all" data-clear="all">Clear all</button>' : "") +
+      "</div>";
+  }
+  var toastTimer = null;
+  function toast(msg) {
+    var t = $("#toast");
+    if (!t) {
+      t = document.createElement("div");
+      t.id = "toast"; t.className = "toast";
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    t.classList.add("is-on");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove("is-on"); }, 2200);
+    announce(msg);
+  }
+  function emptyState(msg) {
+    return '<div class="empty"><div class="empty__icon" aria-hidden="true">🔍</div>' +
+      "<p><b>" + esc(msg) + "</b></p>" +
+      '<p class="muted">Try a different search term or Member State.</p>' +
+      '<button type="button" class="btn" data-clear="all">Clear all filters</button></div>';
   }
 
-  var NETWORK_CTX = ctx(
-    "GCC Network — external to Gulf CDC",
-    "These <b>55 experts</b> were nominated by the <b>six GCC Member States</b>. They are " +
-    "<b>not Gulf CDC staff</b> and do not appear in the internal Contacts or Core Expertise " +
-    "sections. Both populations are coded against the same 57-area Core Expertise Taxonomy, " +
-    "which is what makes the <b>GCDC ↔ Network</b> comparison possible."
-  );
+  var EXTERNAL_NOTE =
+    "These experts were nominated by the six GCC Member States. They are " +
+    "<b>not Gulf CDC staff</b> and do not appear in the internal Contacts or Core Expertise sections.";
 
-  var state = { q: "", st: "", track: "", domain: "", sort: "name", dir: 1, coreQ: "", coreSt: "" };
+  var state = {
+    q: "", st: "", track: "",          // Experts
+    coreQ: "", coreSt: "",             // Core Expertise
+    domain: "",                        // Member States
+    sort: "name", dir: 1
+  };
+
+  function stateLabel(name) {
+    return (STATE_BY_NAME[name] || {}).label || name;
+  }
+
+  // Jump to another view with filters pre-applied (mirrors app.js jumpTo).
+  function jumpTo(view, patch) {
+    Object.keys(patch || {}).forEach(function (k) { state[k] = patch[k]; });
+    go(view);
+  }
 
   /* -------------------------------------------------------------- views */
   var VIEWS = {};
@@ -136,28 +193,29 @@
       '<div class="hero__scope">GCC Network</div>' +
       "</div></div>" +
 
-      '<div class="grid-2" style="margin-top:26px">' +
+      '<div class="grid grid--2" style="margin-top:26px">' +
       card("About the GCC Network", "",
         '<p style="color:var(--ink-2)">The regional layer of the Knowledge Mapping initiative. It maps the ' +
-        'specialised health expertise held across the Permanent Contact Network, Country Liaison Officers and ' +
-        'Working Group members nominated by the six GCC Member States, and classifies it within the same ' +
-        'unified public health framework used inside the Center — so regional and internal expertise can be ' +
+        "specialised health expertise held across the Permanent Contact Network, Country Liaison Officers and " +
+        "Working Group members nominated by the six GCC Member States, and classifies it within the same " +
+        "unified public health framework used inside the Center — so regional and internal expertise can be " +
         "read together rather than side by side.</p>") +
       card("Purpose", "",
         '<p style="color:var(--ink-2)">To identify where public health expertise sits across the GCC, connect ' +
-        'the Center to the right regional expert at the right time, and show where the network can strengthen ' +
-        'the areas in which Gulf CDC has only one expert or none. This turns the knowledge map into a basis for ' +
+        "the Center to the right regional expert at the right time, and show where the network can strengthen " +
+        "the areas in which Gulf CDC has only one expert or none. This turns the knowledge map into a basis for " +
         "mentoring, secondments and GCC Communities of Practice.</p>") +
       "</div>" +
 
       '<div class="home-stats">' +
       '<div class="card home-stat"><div class="home-stat__num">' + M.people + "</div>" +
         '<div class="home-stat__label">Network experts</div>' +
-        '<div class="home-stat__note">PCN, Liaison Officers and Working Group members</div></div>' +
+        '<div class="home-stat__note">PCN, CLOs, Working Group members</div></div>' +
       '<div class="card home-stat"><div class="home-stat__num">' + M.states + "</div>" +
         '<div class="home-stat__label">Member States</div>' +
         '<div class="home-stat__flags">' + STATES.map(function (s) {
-          return '<img class="flag" src="' + FLAG_DIR + esc(s.flag) + '" width="26" alt="' + esc(s.label) + '" title="' + esc(s.label) + '" />';
+          return '<img class="flag" src="' + FLAG_DIR + esc(s.flag) + '" width="26" alt="' +
+            esc(s.label) + '" title="' + esc(s.label) + '" />';
         }).join("") + "</div></div>" +
       '<div class="card home-stat"><div class="home-stat__num">' + (D.byDomain || []).length + "</div>" +
         '<div class="home-stat__label">Domains of experience</div>' +
@@ -172,41 +230,69 @@
       { label: "Sole expert (1)", value: M.sole, color: CLS_COLOR.serious },
       { label: "No core holder (0)", value: M.noCore, color: CLS_COLOR.critical }
     ];
+    var fragile = Math.round(((M.sole + M.thin) / M.areas) * 100);
+
     // Member State bars follow the requested column order, not a ranking.
     var byState = STATES.map(function (s) {
-      var row = (D.byState || []).filter(function (b) { return b.state === s.name; })[0] || { people: 0 };
-      return { label: s.label, value: row.people, color: NET, icon: flagImg(s.name, 20) };
+      var row = (D.byState || []).filter(function (b) { return b.state === s.name; })[0] || { people: 0, areas: 0 };
+      return {
+        label: s.label, value: row.people, color: NET, icon: flagImg(s.name, 20),
+        action: "state:" + s.name,
+        actionHint: "Show " + s.label + " experts",
+        tip: row.areas + " core areas covered"
+      };
     });
     var stateMax = Math.max.apply(null, byState.map(function (s) { return s.value; })) || 1;
     var domMax = Math.max.apply(null, (D.byDomain || []).map(function (d) { return d.areas; })) || 1;
 
-    return NETWORK_CTX +
-      '<div class="grid-4">' +
-        kpi(M.people, "Network experts", "across 6 Member States") +
-        kpi(M.states, "Member States", "United Arab Emirates · Bahrain · Saudi Arabia · Oman · Qatar · Kuwait") +
-        kpi(M.covered + " / " + M.areas, "Taxonomy areas covered", M.tags + " core expertise tags") +
-        kpi(M.external, "Externally consulted", "advise WHO / Member States / partners") +
+    return head("Knowledge Mapping — GCC Network",
+      "A live picture of where public health expertise sits across the GCC Permanent Contact Network, " +
+      "Country Liaison Officers and Working Group members: <b>" + M.people + " experts</b> across <b>" +
+      M.states + " Member States</b>, mapped to " + (D.byDomain || []).length + " domains and " +
+      M.areas + " core expertise areas. " + EXTERNAL_NOTE) +
+
+      '<div class="grid grid--kpi">' +
+        kpi(M.people, "Network experts", M.states + " Member States", "var(--net)", "view:directory", "Open the expert directory") +
+        kpi(M.covered + " / " + M.areas, "Taxonomy areas covered", M.tags + " core expertise tags", "var(--accent)", "view:states", "See coverage by Member State") +
+        kpi(M.sole, "Sole regional expert", "Only one holder in the network", "var(--st-serious)", "view:states", "See where the network is thin") +
+        kpi(M.external, "Externally consulted", "advise WHO / Member States / partners", "var(--st-good)", "view:directory", "Show externally consulted experts") +
       "</div>" +
 
-      '<div class="grid-2" style="margin-top:16px">' +
-        card("Regional expertise coverage", "How the 57 core areas are held across the network",
-          '<div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">' +
-          donut(segs, { centerNum: M.areas, centerLbl: "areas", aria: "Network coverage by status" }) +
-          "<div>" + legend(segs) +
-          '<dl class="deflist" style="margin-top:12px">' +
-          "<dt>Adequate</dt><dd>3 or more experts hold the area — safe to anchor a GCC Community of Practice.</dd>" +
-          "<dt>Thin</dt><dd>Only 2 holders region-wide — one departure makes it a sole-expert area.</dd>" +
-          "<dt>Sole expert</dt><dd>A single person in the whole network holds it — a regional single point of failure.</dd>" +
-          "<dt>No core holder</dt><dd>Nobody in the network claims it as core — source externally or target the next wave.</dd>" +
-          "</dl></div></div>") +
-        card("Experts by Member State", "Where the network's depth sits", rankedBars(byState, stateMax)) +
+      '<div class="grid grid--2" style="margin-top:16px">' +
+        '<div class="card"><div class="card__hd"><div class="card__title">Expertise coverage</div>' +
+        '<div class="card__sub">How many of the ' + M.areas + " areas are resilient vs. fragile across the network</div></div>" +
+        '<div class="donut-wrap">' +
+        donut(segs, { centerNum: M.areas, centerLbl: "areas", aria: "Network coverage by status" }) +
+        '<div style="flex:1;min-width:150px">' + legend(segs) +
+        '<p class="card__sub" style="margin-top:12px">' + fragile +
+        "% of the taxonomy rests on one or two people across the whole region.</p></div></div>" +
+        '<dl class="deflist">' +
+        '<div><dt><span class="legend__swatch" style="background:var(--st-good)"></span> Adequate</dt>' +
+        "<dd>Three or more experts across the GCC hold the area as core expertise — deep enough to anchor a regional Community of Practice.</dd></div>" +
+        '<div><dt><span class="legend__swatch" style="background:var(--st-warn)"></span> Thin</dt>' +
+        "<dd>Exactly two holders region-wide. Workable today, but one departure leaves a single regional expert.</dd></div>" +
+        '<div><dt><span class="legend__swatch" style="background:var(--st-serious)"></span> Sole expert</dt>' +
+        "<dd>One person in the entire network holds this area. The region depends on a single individual — the highest continuity risk.</dd></div>" +
+        '<div><dt><span class="legend__swatch" style="background:var(--st-critical)"></span> No core holder</dt>' +
+        "<dd>Nobody in the network claims this area as core expertise. It must be sourced outside the GCC or targeted in the next survey wave.</dd></div>" +
+        "</dl></div>" +
+
+        '<div class="card"><div class="card__hd"><div class="card__title">Experts by Member State</div>' +
+        '<div class="card__sub">Where the network\'s depth sits — click a bar to open that country\'s experts</div></div>' +
+        rankedBars(byState, stateMax) + "</div>" +
       "</div>" +
 
       '<div class="card" style="margin-top:16px">' +
         '<div class="card__hd"><div class="card__title">Coverage by domain</div>' +
         '<div class="card__sub">Areas held by at least one network expert, out of all areas in the domain</div></div>' +
         rankedBars((D.byDomain || []).map(function (d) {
-          return { label: d.domain, value: d.covered, color: d.covered === d.areas ? CLS_COLOR.good : NET };
+          return {
+            label: d.domain, value: d.covered,
+            color: d.covered === d.areas ? CLS_COLOR.good : NET,
+            tip: d.covered + " of " + d.areas + " areas covered",
+            action: "domain:" + d.domain,
+            actionHint: "Show " + d.domain + " in Member States"
+          };
         }), domMax) +
       "</div>";
   };
@@ -233,35 +319,52 @@
     var arrow = function (key) {
       return state.sort === key ? (state.dir === 1 ? " ▲" : " ▼") : "";
     };
+    var sortAttr = function (key) {
+      return state.sort === key ? (state.dir === 1 ? "ascending" : "descending") : "none";
+    };
 
-    return NETWORK_CTX +
-      '<div class="filters">' +
-        '<input type="search" id="coreQ" placeholder="Search name or expertise…" aria-label="Search core expertise" value="' + esc(state.coreQ) + '" />' +
-        '<select id="coreState" aria-label="Filter by Member State"><option value="">All Member States</option>' +
-          STATES.map(function (s) {
-            return '<option value="' + esc(s.name) + '"' + (state.coreSt === s.name ? " selected" : "") + ">" + esc(s.label) + "</option>";
-          }).join("") + "</select>" +
-        '<button type="button" class="btn" id="coreCsv">Export CSV</button>' +
-        '<span class="count-note">' + list.length + " of " + PEOPLE.length + " experts</span>" +
+    return head("Core Expertise",
+      "Every network expert and the areas they hold at <em>core</em> expertise level, with the Member State " +
+      "they represent. Filter by country, or search by name or expertise. " + EXTERNAL_NOTE) +
+
+      '<div class="toolbar">' +
+        '<div class="field field--search"><span class="field__icon" aria-hidden="true">⌕</span>' +
+        '<input type="search" id="coreQ" data-view-search placeholder="Search name or expertise…  (press /)" ' +
+        'aria-label="Search core expertise" value="' + esc(state.coreQ) + '"></div>' +
+        '<div class="field"><select id="coreState" aria-label="Filter by Member State">' +
+        '<option value="">All Member States</option>' +
+        STATES.map(function (s) {
+          return '<option value="' + esc(s.name) + '"' + (state.coreSt === s.name ? " selected" : "") + ">" + esc(s.label) + "</option>";
+        }).join("") + "</select></div>" +
+        '<button type="button" class="btn btn--ghost" id="coreCsv" title="Download the filtered list as CSV">⭳ Export CSV</button>' +
+        '<span class="count" role="status">' + list.length + " of " + PEOPLE.length + " experts</span>" +
       "</div>" +
-      '<div class="card"><table class="data data--stack"><thead><tr>' +
-        '<th data-sort="name" aria-sort="' + (state.sort === "name" ? (state.dir === 1 ? "ascending" : "descending") : "none") + '">Name<span class="arrow">' + arrow("name") + "</span></th>" +
-        '<th data-sort="state" aria-sort="' + (state.sort === "state" ? (state.dir === 1 ? "ascending" : "descending") : "none") + '">Member State<span class="arrow">' + arrow("state") + "</span></th>" +
-        '<th class="no-sort">Core expertise</th></tr></thead><tbody>' +
-      list.map(function (p) {
-        return '<tr><td data-label="Name"><b>' + esc(p.name) + "</b>" +
-          '<div style="font-size:12px;color:var(--ink-muted)">' + esc(p.level) + "</div></td>" +
-          '<td data-label="Member State">' + flagChip(p.state) + "</td>" +
-          '<td data-label="Core expertise"><div class="netcard__areas">' +
-          (p.areas.length
-            ? p.areas.map(function (a) { return '<span class="tag-chip">' + esc(a) + "</span>"; }).join("")
-            : '<span class="muted">—</span>') +
-          "</div></td></tr>";
-      }).join("") + "</tbody></table>" +
-      (list.length ? "" : '<div class="empty"><p><b>No expert matches these filters.</b></p></div>') +
-      "</div>";
+      filterChips([
+        { label: "Search", value: state.coreQ, clear: "coreQ" },
+        { label: "Member State", value: state.coreSt ? stateLabel(state.coreSt) : "", clear: "coreSt" }
+      ]) +
+      (list.length
+        ? '<div class="table-wrap"><table class="data data--stack"><thead><tr>' +
+          '<th data-sort="name" aria-sort="' + sortAttr("name") + '">Name<span class="arrow">' + arrow("name") + "</span></th>" +
+          '<th data-sort="state" aria-sort="' + sortAttr("state") + '">Member State<span class="arrow">' + arrow("state") + "</span></th>" +
+          '<th class="no-sort">Core expertise</th></tr></thead><tbody>' +
+          list.map(function (p) {
+            return '<tr><td data-label="Name"><b>' + esc(p.name) + "</b>" +
+              '<div style="font-size:12px;color:var(--ink-muted)">' + esc(p.level) + "</div></td>" +
+              '<td data-label="Member State">' + flagChip(p.state) + "</td>" +
+              '<td data-label="Core expertise"><div class="netcard__areas">' +
+              (p.areas.length
+                ? p.areas.map(function (a) {
+                    return '<button type="button" class="tag-chip is-clickable" data-area="' + esc(a) +
+                      '" title="Find this area in the expertise map">' + esc(a) + "</button>";
+                  }).join("")
+                : '<span class="muted">—</span>') +
+              "</div></td></tr>";
+          }).join("") + "</tbody></table></div>"
+        : emptyState("No expert matches these filters."));
   };
 
+  /* --------------------------------------------------------- Experts */
   VIEWS.directory = function () {
     var list = PEOPLE.filter(function (p) {
       if (state.st && p.state !== state.st) return false;
@@ -273,42 +376,58 @@
       return true;
     });
 
-    return NETWORK_CTX +
-      '<div class="filters">' +
-        '<input type="search" id="dirQ" placeholder="Search name, entity or expertise…" aria-label="Search the directory" value="' + esc(state.q) + '" />' +
-        '<select id="dirState" aria-label="Filter by Member State"><option value="">All Member States</option>' +
-          STATES.map(function (s) {
-            return '<option value="' + esc(s.name) + '"' + (state.st === s.name ? " selected" : "") + ">" + esc(s.label) + "</option>";
-          }).join("") + "</select>" +
-        '<select id="dirTrack" aria-label="Filter by track"><option value="">All tracks</option>' +
-          ["Managerial", "Professional"].map(function (v) {
-            return '<option value="' + v + '"' + (state.track === v ? " selected" : "") + ">" + v + "</option>";
-          }).join("") + "</select>" +
-        '<span class="count-note">' + list.length + " of " + PEOPLE.length + " experts</span>" +
+    return head("Experts",
+      "A profile for every expert in the network: position, institution, Member State and the areas they hold " +
+      "at core expertise level. " + EXTERNAL_NOTE +
+      " Gulf CDC does not hold contact details for them — approaches go through the Member State focal point.") +
+
+      '<div class="toolbar">' +
+        '<div class="field field--search"><span class="field__icon" aria-hidden="true">⌕</span>' +
+        '<input type="search" id="dirQ" data-view-search placeholder="Search name, institution or expertise…  (press /)" ' +
+        'aria-label="Search the directory" value="' + esc(state.q) + '"></div>' +
+        '<div class="field"><select id="dirState" aria-label="Filter by Member State">' +
+        '<option value="">All Member States</option>' +
+        STATES.map(function (s) {
+          return '<option value="' + esc(s.name) + '"' + (state.st === s.name ? " selected" : "") + ">" + esc(s.label) + "</option>";
+        }).join("") + "</select></div>" +
+        '<div class="field"><select id="dirTrack" aria-label="Filter by track">' +
+        '<option value="">All tracks</option>' +
+        ["Managerial", "Professional"].map(function (v) {
+          return '<option value="' + v + '"' + (state.track === v ? " selected" : "") + ">" + v + "</option>";
+        }).join("") + "</select></div>" +
+        '<button type="button" class="btn btn--ghost" id="dirCsv" title="Download the filtered list as CSV">⭳ Export CSV</button>' +
+        '<span class="count" role="status">' + list.length + " of " + PEOPLE.length + " experts</span>" +
       "</div>" +
-      '<div class="net-grid">' + list.map(function (p) {
-        var st = STATE_BY_NAME[p.state] || {};
-        return '<article class="netcard">' +
-          '<div class="netcard__hd"><div class="netcard__avatar" aria-hidden="true">' + esc(initials(p.name)) + "</div>" +
-          '<div class="netcard__id"><div class="netcard__name">' + esc(p.name) + "</div>" +
-          '<div class="netcard__role">' + esc(p.level) + " · " + esc(p.entity) + "</div></div>" +
-          '<div class="netcard__flag">' +
-            '<img class="flag flag--lg" src="' + FLAG_DIR + esc(st.flag || "") + '" width="34" alt="" />' +
-            '<span class="netcard__country">' + esc(st.label || p.state) + "</span>" +
-          "</div></div>" +
-          '<div class="netcard__tags">' +
-            '<span class="pill pill--neutral"><span class="pill__dot"></span>' + esc(p.track) + "</span>" +
-            (p.external ? pill("good", "Externally consulted") : "") +
-            (p.soleAreas > 0 ? pill("serious", p.soleAreas + " sole-expert area" + (p.soleAreas > 1 ? "s" : "")) : "") +
-          "</div>" +
-          '<div class="netcard__areas">' + p.areas.map(function (a) {
-            return '<span class="tag-chip">' + esc(a) + "</span>";
-          }).join("") + "</div>" +
-          '<div class="netcard__foot"><span>' + esc(p.profile) + " profile</span>" +
-          '<span class="netcard__idx">Index ' + p.index + "</span></div>" +
-        "</article>";
-      }).join("") + "</div>" +
-      (list.length ? "" : '<p class="card" style="margin-top:14px">No expert matches these filters.</p>');
+      filterChips([
+        { label: "Search", value: state.q, clear: "q" },
+        { label: "Member State", value: state.st ? stateLabel(state.st) : "", clear: "st" },
+        { label: "Track", value: state.track, clear: "track" }
+      ]) +
+      (list.length
+        ? '<div class="net-grid">' + list.map(function (p) {
+            var st = STATE_BY_NAME[p.state] || {};
+            return '<article class="netcard">' +
+              '<div class="netcard__hd"><div class="netcard__avatar" aria-hidden="true">' + esc(initials(p.name)) + "</div>" +
+              '<div class="netcard__id"><div class="netcard__name">' + esc(p.name) + "</div>" +
+              '<div class="netcard__role">' + esc(p.level) + " · " + esc(p.entity) + "</div></div>" +
+              '<div class="netcard__flag">' +
+                '<img class="flag flag--lg" src="' + FLAG_DIR + esc(st.flag || "") + '" width="34" alt="" />' +
+                '<span class="netcard__country">' + esc(st.label || p.state) + "</span>" +
+              "</div></div>" +
+              '<div class="netcard__tags">' +
+                '<span class="pill pill--neutral"><span class="pill__dot"></span>' + esc(p.track) + "</span>" +
+                (p.external ? pill("good", "Externally consulted") : "") +
+                (p.soleAreas > 0 ? pill("serious", p.soleAreas + " sole-expert area" + (p.soleAreas > 1 ? "s" : "")) : "") +
+              "</div>" +
+              '<div class="netcard__areas">' + p.areas.map(function (a) {
+                return '<button type="button" class="tag-chip is-clickable" data-area="' + esc(a) +
+                  '" title="Find this area in the expertise map">' + esc(a) + "</button>";
+              }).join("") + "</div>" +
+              '<div class="netcard__foot"><span>' + esc(p.profile) + " profile</span>" +
+              '<span class="netcard__idx">Index ' + p.index + "</span></div>" +
+            "</article>";
+          }).join("") + "</div>"
+        : emptyState("No expert matches these filters."));
   };
 
   VIEWS.states = function () {
@@ -316,75 +435,42 @@
     var domains = [];
     COV.forEach(function (c) { if (domains.indexOf(c.domain) === -1) domains.push(c.domain); });
 
-    var head = "<tr><th>Core expertise area</th>" + STATES.map(function (s) {
+    var thead = "<tr><th>Core expertise area</th>" + STATES.map(function (s) {
       return '<th><span class="heat__state">' +
         '<img class="flag flag--lg" src="' + FLAG_DIR + esc(s.flag) + '" width="30" alt="" />' +
         '<span class="heat__name">' + esc(s.label) + "</span></span></th>";
     }).join("") + "<th>Total</th><th>States</th></tr>";
 
-    var body = rows.map(function (c) {
+    var tbody = rows.map(function (c) {
       return '<tr><td class="area">' + esc(c.area) + "</td>" + STATES.map(function (s) {
         var n = c.by[s.name] || 0;
         var h = n === 0 ? "h0" : n === 1 ? "h1" : n === 2 ? "h2" : "h3";
-        return '<td class="cell ' + h + '" title="' + esc(s.label) + ": " + n + ' holder' + (n === 1 ? "" : "s") + '">' +
-          (n || "·") + "</td>";
+        return '<td class="cell ' + h + '" title="' + esc(s.label) + ": " + n +
+          " holder" + (n === 1 ? "" : "s") + '">' + (n || "·") + "</td>";
       }).join("") + '<td class="cell"><b>' + c.total + "</b></td>" +
         '<td class="cell">' + c.states + "</td></tr>";
     }).join("");
 
-    return NETWORK_CTX +
-      '<div class="filters"><select id="stDomain" aria-label="Filter by domain"><option value="">All domains</option>' +
+    return head("Member States",
+      "Which Member State holds each area of core expertise. A darker cell means more holders in that country; " +
+      "a row covered by a single state is a regional concentration risk, and an empty row has no holder anywhere " +
+      "in the network.") +
+
+      '<div class="toolbar">' +
+        '<div class="field"><select id="stDomain" aria-label="Filter by domain">' +
+        '<option value="">All domains</option>' +
         domains.map(function (d) {
           return '<option value="' + esc(d) + '"' + (state.domain === d ? " selected" : "") + ">" + esc(d) + "</option>";
-        }).join("") + "</select>" +
-        '<span class="count-note">Darker cell = more holders in that Member State. A row covered by one state only is a regional concentration risk.</span></div>' +
-      '<div class="card"><div class="scroll-y"><table class="heat"><thead>' + head + "</thead><tbody>" + body + "</tbody></table></div></div>";
-  };
-
-  VIEWS.bridge = function () {
-    var covers = BRIDGE.filter(function (b) { return b.verdict === "Network covers the gap"; });
-    var both = BRIDGE.filter(function (b) { return b.verdict === "Gap on both sides"; });
-    var order = { "Network covers the gap": 0, "One regional holder only": 1, "Gap on both sides": 2, "Internal only": 3, "Covered both sides": 4 };
-    var rows = BRIDGE.slice().sort(function (a, b) {
-      return (order[a.verdict] - order[b.verdict]) || (b.network - a.network) || a.area.localeCompare(b.area);
-    });
-    var maxN = Math.max.apply(null, BRIDGE.map(function (b) { return Math.max(b.internal, b.network); })) || 1;
-
-    return '<div class="bridge-note">This is the <b>only</b> view where the two populations appear together, and they stay in ' +
-      "separate columns. Both are coded against the same 57-area taxonomy, so the counts are directly comparable. " +
-      "<b>" + covers.length + " areas</b> where Gulf CDC has one expert or none are covered by two or more experts in the " +
-      "network — these are the ready-made mentoring, secondment and Community-of-Practice targets. " +
-      "<b>" + both.length + " areas</b> are thin on both sides and need external sourcing." +
+        }).join("") + "</select></div>" +
+        '<button type="button" class="btn btn--ghost" id="stCsv" title="Download this table as CSV">⭳ Export CSV</button>' +
+        '<span class="count" role="status">' + rows.length + " of " + COV.length + " areas</span>" +
       "</div>" +
-
-      '<div class="grid-4" style="margin-bottom:16px">' +
-        kpi(covers.length, "Gaps the network can close", "internal ≤1 holder, network ≥2") +
-        kpi(BRIDGE.filter(function (b) { return b.verdict === "One regional holder only"; }).length,
-            "One regional holder only", "fragile on both sides") +
-        kpi(both.length, "Gaps on both sides", "source outside the GCC") +
-        kpi(BRIDGE.filter(function (b) { return b.verdict === "Covered both sides"; }).length,
-            "Strong on both sides", "anchor joint programmes here") +
-      "</div>" +
-
-      '<div class="card"><div class="scroll-y"><table class="data"><thead><tr>' +
-        '<th class="no-sort">Core expertise area</th>' +
-        '<th class="no-sort"><span class="side side--int">Internal GCDC</span></th>' +
-        '<th class="no-sort"><span class="side side--net">GCC Network</span></th>' +
-        '<th class="no-sort">Read</th></tr></thead><tbody>' +
-      rows.map(function (b) {
-        return "<tr><td><b>" + esc(b.area) + '</b><div style="font-size:12px;color:var(--ink-muted)">' +
-          esc(b.domain) + "</div></td>" +
-          '<td><div class="cmp"><span class="cmp__n">' + b.internal + '</span><span class="cmp__bar">' +
-            '<span class="cmp__fill cmp__fill--int" style="width:' + ((b.internal / maxN) * 100) + '%"></span></span></div></td>' +
-          '<td><div class="cmp"><span class="cmp__n">' + b.network + '</span><span class="cmp__bar">' +
-            '<span class="cmp__fill cmp__fill--net" style="width:' + ((b.network / maxN) * 100) + '%"></span></span></div></td>' +
-          "<td>" + pill(b.verdictCls, b.verdict) + "</td></tr>";
-      }).join("") + "</tbody></table></div></div>";
+      filterChips([{ label: "Domain", value: state.domain, clear: "domain" }]) +
+      (rows.length
+        ? '<div class="card"><div class="scroll-y"><table class="heat"><thead>' + thead +
+          "</thead><tbody>" + tbody + "</tbody></table></div></div>"
+        : emptyState("No area matches this filter."));
   };
-
-  /* ------------------------------------------------- Mapping (tree) */
-  // Rebuilt as a nested tree from the workbook's own indented hierarchy, then
-  // drawn with the same geometry and CSS as the internal Mapping section.
   var MAP_TREE = (function () {
     var root = null, stack = [], di = -1, colors = {};
     FLAT.forEach(function (n, i) {
@@ -428,11 +514,13 @@
   }
 
   VIEWS.mapping = function () {
-    return '<div class="view__head"><h1>Network Expertise Mapping</h1>' +
-      "<p>The GCC network hierarchy as an interactive tree — Network → Domain → Sub-domain → Core expertise → " +
-      "Holder (Member State). Click a node to expand or collapse its branch; drag to pan and scroll to zoom.</p></div>" +
+    return head("Expertise Mapping",
+      "The full GCC network hierarchy as an interactive tree — Network → Domain → Sub-domain → Core expertise → " +
+      "Holder, with each holder's Member State shown as a flag. Click a node to expand or collapse its branch; " +
+      "drag to pan and scroll to zoom. Clicking a person opens them in Core Expertise.") +
       '<div class="toolbar">' +
-      '<div class="field"><input type="search" id="mapq" placeholder="Search the tree…" aria-label="Search mapping tree" value="' + esc(mapState.q) + '"></div>' +
+      '<div class="field field--search"><span class="field__icon" aria-hidden="true">⌕</span>' +
+      '<input type="search" id="mapq" data-view-search placeholder="Search the tree…  (press /)" aria-label="Search mapping tree" value="' + esc(mapState.q) + '"></div>' +
       '<button class="btn" id="mapExpand">Expand all</button>' +
       '<button class="btn" id="mapCollapse">Collapse all</button>' +
       '<button class="btn" id="mapReset">Reset view</button>' +
@@ -626,6 +714,15 @@
     document.body.appendChild(a); a.click();
     document.body.removeChild(a);
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+    toast("Downloaded " + filename);
+  }
+
+  function peopleRows(list) {
+    var rows = [["Name", "Position", "Institution", "Member State", "Track", "Core expertise"]];
+    list.forEach(function (p) {
+      rows.push([p.name, p.level, p.entity, stateLabel(p.state), p.track, p.areas.join("; ")]);
+    });
+    return rows;
   }
 
   /* --------------------------------------------------------------- router */
@@ -644,8 +741,17 @@
     el.innerHTML = VIEWS[name]();
     current = name;
     bind(el, name);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (location.hash !== "#" + name) history.replaceState(null, "", "#" + name);
+    window.scrollTo({ top: 0, behavior: "auto" });
     announce(name + " loaded");
+  }
+
+  // Keep the caret where it was after a re-render triggered by typing.
+  function keepFocus(id) {
+    setTimeout(function () {
+      var n = $(id);
+      if (n) { n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
+    }, 0);
   }
 
   // Handlers are assigned, never added — go() re-renders and addEventListener
@@ -653,28 +759,60 @@
   function bind(el, name) {
     if (name === "mapping") { bindMapping(); return; }
 
-    var keepFocus = function (id) {
-      setTimeout(function () {
-        var n = $(id);
-        if (n) { n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
-      }, 0);
-    };
-
     var q = $("#dirQ", el);
     if (q) q.oninput = function () { state.q = q.value; go(current); keepFocus("#dirQ"); };
     var st = $("#dirState", el);
     if (st) st.onchange = function () { state.st = st.value; go(current); };
     var tr = $("#dirTrack", el);
     if (tr) tr.onchange = function () { state.track = tr.value; go(current); };
-    var dm = $("#stDomain", el);
-    if (dm) dm.onchange = function () { state.domain = dm.value; go(current); };
 
     var cq = $("#coreQ", el);
     if (cq) cq.oninput = function () { state.coreQ = cq.value; go(current); keepFocus("#coreQ"); };
     var cs = $("#coreState", el);
     if (cs) cs.onchange = function () { state.coreSt = cs.value; go(current); };
 
+    var dm = $("#stDomain", el);
+    if (dm) dm.onchange = function () { state.domain = dm.value; go(current); };
+
+    // Ranked bars are role="button", so they must answer Enter and Space too.
+    el.onkeydown = function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var row = e.target.closest('.bar-row[data-action]');
+      if (!row) return;
+      e.preventDefault();
+      row.click();
+    };
+
     el.onclick = function (e) {
+      // KPI tiles and ranked bars carry an action: "view:x", "state:x", "domain:x"
+      var act = e.target.closest("[data-action]");
+      if (act) {
+        var a = act.getAttribute("data-action");
+        var kind = a.slice(0, a.indexOf(":"));
+        var val = a.slice(a.indexOf(":") + 1);
+        if (kind === "view") return jumpTo(val, {});
+        if (kind === "state") return jumpTo("directory", { st: val, q: "", track: "" });
+        if (kind === "domain") return jumpTo("states", { domain: val });
+        return;
+      }
+
+      // Removable filter chips
+      var clear = e.target.closest("[data-clear]");
+      if (clear) {
+        var what = clear.getAttribute("data-clear");
+        if (what === "all") { state.q = ""; state.st = ""; state.track = ""; state.coreQ = ""; state.coreSt = ""; state.domain = ""; }
+        else state[what] = "";
+        return go(current);
+      }
+
+      // An expertise chip finds that area in the map
+      var area = e.target.closest("[data-area]");
+      if (area) {
+        mapState.q = area.getAttribute("data-area");
+        return go("mapping");
+      }
+
+      // Sortable table headers
       var th = e.target.closest("th[data-sort]");
       if (th) {
         var key = th.getAttribute("data-sort");
@@ -682,12 +820,37 @@
         else { state.sort = key; state.dir = 1; }
         return go(current);
       }
+
       if (e.target.closest("#coreCsv")) {
-        var rows = [["Name", "Position", "Member State", "Core expertise"]];
-        PEOPLE.forEach(function (p) {
-          rows.push([p.name, p.level, (STATE_BY_NAME[p.state] || {}).label || p.state, p.areas.join("; ")]);
+        var coreList = PEOPLE.filter(function (p) {
+          if (state.coreSt && p.state !== state.coreSt) return false;
+          if (state.coreQ) {
+            var hay = (p.name + " " + p.state + " " + p.areas.join(" ")).toLowerCase();
+            if (hay.indexOf(state.coreQ.toLowerCase()) === -1) return false;
+          }
+          return true;
         });
-        downloadCsv("gcc-network-core-expertise.csv", rows);
+        return downloadCsv("gcc-network-core-expertise.csv", peopleRows(coreList));
+      }
+      if (e.target.closest("#dirCsv")) {
+        var dirList = PEOPLE.filter(function (p) {
+          if (state.st && p.state !== state.st) return false;
+          if (state.track && p.track !== state.track) return false;
+          if (state.q) {
+            var hay = (p.name + " " + p.state + " " + p.level + " " + p.entity + " " + p.areas.join(" ")).toLowerCase();
+            if (hay.indexOf(state.q.toLowerCase()) === -1) return false;
+          }
+          return true;
+        });
+        return downloadCsv("gcc-network-experts.csv", peopleRows(dirList));
+      }
+      if (e.target.closest("#stCsv")) {
+        var head1 = ["Domain", "Core expertise area"].concat(STATES.map(function (s) { return s.label; }), ["Total", "States covering"]);
+        var rows = [head1];
+        COV.filter(function (c) { return !state.domain || c.domain === state.domain; }).forEach(function (c) {
+          rows.push([c.domain, c.area].concat(STATES.map(function (s) { return c.by[s.name] || 0; }), [c.total, c.states]));
+        });
+        return downloadCsv("gcc-network-member-state-coverage.csv", rows);
       }
     };
   }
@@ -697,11 +860,9 @@
     var t = e.target.closest(".tab");
     if (t) go(t.getAttribute("data-view"));
   };
-
-  $("#scope").onclick = function (e) {
-    var b = e.target.closest("[data-scope]");
-    if (b && b.getAttribute("data-scope") === "internal") window.location.href = "../index.html";
-  };
+  window.addEventListener("hashchange", function () {
+    go(location.hash.replace("#", ""));
+  });
 
   var themeToggle = $("#themeToggle");
   if (themeToggle) {
@@ -710,21 +871,63 @@
       var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
       root.setAttribute("data-theme", next);
       try { localStorage.setItem("gcdc-theme", next); } catch (err) { void err; }
+      go(current); // re-render so SVG colours pick up the new tokens
     };
   }
   try {
     var saved = localStorage.getItem("gcdc-theme");
     if (saved) document.documentElement.setAttribute("data-theme", saved);
+    else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)
+      document.documentElement.setAttribute("data-theme", "dark");
   } catch (err) { void err; }
 
+  // "/" focuses the current view's search box; Escape clears it.
+  document.addEventListener("keydown", function (e) {
+    var tag = (document.activeElement && document.activeElement.tagName) || "";
+    var typing = /^(INPUT|TEXTAREA|SELECT)$/.test(tag);
+    if (e.key === "/" && !typing && !e.metaKey && !e.ctrlKey) {
+      var box = $(".view:not([hidden]) [data-view-search]") || $("#siteSearch");
+      if (box) { e.preventDefault(); box.focus(); box.select(); }
+      return;
+    }
+    if (e.key === "Escape" && typing) {
+      var cur = document.activeElement;
+      if (cur.value) {
+        cur.value = "";
+        cur.dispatchEvent(new Event("input", { bubbles: true }));
+      } else {
+        cur.blur();
+      }
+    }
+  });
+
+  // Back-to-top button appears once the page is scrolled
+  var toTop = document.createElement("button");
+  toTop.type = "button";
+  toTop.id = "toTop";
+  toTop.className = "to-top";
+  toTop.title = "Back to top";
+  toTop.setAttribute("aria-label", "Back to top");
+  toTop.innerHTML = '<span aria-hidden="true">↑</span>';
+  toTop.onclick = function () { window.scrollTo({ top: 0, behavior: "smooth" }); };
+  document.body.appendChild(toTop);
+  var onScroll = function () { toTop.classList.toggle("is-on", window.scrollY > 400); };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
   var form = $("#siteSearchForm");
-  if (form) {
-    form.addEventListener("submit", function (e) {
+  if (form) form.addEventListener("submit", function (e) { e.preventDefault(); });
+  var siteSearch = $("#siteSearch");
+  if (siteSearch) {
+    siteSearch.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter") return;
       e.preventDefault();
-      state.coreQ = $("#siteSearch").value;
+      state.coreQ = siteSearch.value.trim();
+      state.coreSt = "";
       go("core");
     });
   }
 
-  go("home");
+  /* ------------------------------------------------------------------ boot */
+  go(location.hash.replace("#", "") || "home");
 })();

@@ -223,6 +223,9 @@
 }
 
 @media (max-width: 700px) {
+  /* styles.css stretches .field but not the select inside it. */
+  .toolbar .field select { width: 100%; min-width: 0; }
+
   /* Stacked rows: expertise chips must wrap inside the card, not extend it. */
   .netcard__areas { max-width: 100%; }
   .netcard__areas .tag-chip { white-space: normal; max-width: 100%; }
