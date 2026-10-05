@@ -1,7 +1,7 @@
 # Adding the GCC Network (CEO · PCN · CLOs · Working Group)
 
-**Status:** proposal + working design view — nothing in the live portal has changed.
-**Design view:** `/preview/` — click through it, then tell me what to change.
+**Status:** approved and live.
+**GCC Network scope:** `/network/` — reachable from the scope switcher on every page.
 **Source:** `data/GulfCDC_KnowledgeMapping_Network_MasterAnalysis_v3_CoreTaxonomy.xlsx`
 
 ---
@@ -82,7 +82,7 @@ foreign officials and belong behind the Entra ID sign-in once Azure is live.
 
 ### Member State flags
 
-The six flags are simplified SVGs drawn in-repo (`preview/flags/`), so the page
+The six flags are simplified SVGs drawn in-repo (`assets/img/flags/`), so the page
 still makes no external requests and the CSP is unchanged. They are
 approximations at 30×20px, not official renderings — the Saudi flag in
 particular represents the shahada as an abstract band rather than imitating
@@ -139,19 +139,26 @@ materially — these are not Gulf CDC's people to publish.
 
 Recommendation: **finish the Azure/Entra migration before the network space is
 merged into the live portal** (`docs/AZURE_DEPLOYMENT.md`, blocked only on IT:
-deployment token, app registration, DNS). The design view under `/preview/`
-carries no email addresses and no engagement plan, so it is safe to circulate for
-feedback in the meantime.
+deployment token, app registration, DNS). The network scope carries no email
+addresses and no engagement plan, which limits the exposure, but it does not
+remove it.
 
-## 7. If approved
+## 7. How it is wired
 
-1. Fold `preview/` into the main app: scope switcher in `index.html`, network
-   views into `assets/js/app.js`, `preview.css` into `assets/css/styles.css`,
-   flags into `assets/img/flags/`.
-2. Put Engagement Plan and Coding Log behind `allowedRoles` in
-   `staticwebapp.config.json`.
-3. Regenerate with `python3 scripts/generate_network_data.py` whenever the
-   workbook changes.
+The network scope is a second page rather than a mode inside the single-page
+app, which keeps `assets/js/app.js` and the internal views completely untouched:
 
-The design view is **not deployed**. The live `/preview/` URL still serves the
-earlier version until this is merged.
+| File | Role |
+|---|---|
+| `network/index.html` | The GCC Network page and its seven tabs |
+| `assets/js/network.js` | All network views, including the mapping tree |
+| `assets/js/network-data.js` | `window.GCDC_NETWORK`, generated from the workbook |
+| `assets/css/network.css` | Network-only styling, on top of `styles.css` |
+| `assets/img/flags/` | The six Member State flags |
+
+The scope switcher markup sits in the utility bar of both pages, and its styling
+lives in `styles.css` because both need it.
+
+**Still outstanding:** put Engagement Plan and Coding Log behind `allowedRoles`
+in `staticwebapp.config.json`, and regenerate with
+`python3 scripts/generate_network_data.py` whenever the workbook changes.

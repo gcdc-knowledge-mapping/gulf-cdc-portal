@@ -1,84 +1,8 @@
 /* ===========================================================================
-   GCC Network space — design view (prototype).
-   Loaded on top of assets/css/styles.css. Only additions live here, so the
-   internal portal keeps its exact look and nothing below leaks into it.
+   GCC Network scope — loaded only by network/index.html, on top of styles.css.
+   Shared tokens and the scope switcher live in styles.css because the internal
+   page needs them too; everything here is specific to the network views.
    =========================================================================== */
-
-:root {
-  /* Network accent — GCDC deep teal. Deliberately NOT the navy/cyan used by
-     the internal space, and NOT one of the reserved status colours. */
-  --net: #046F8A;
-  --net-ink: #03566b;
-  --net-soft: #e2f0f4;
-  --net-line: #9fcbd8;
-}
-
-:root[data-theme="dark"] {
-  --net: #3f9fc0;
-  --net-ink: #bfe6f2;
-  --net-soft: #0d2f3b;
-  --net-line: #2a5f73;
-}
-
-/* --- design-view framing (prototype only — not part of the proposal) ----- */
-.dv-bar {
-  background: #0b2030;
-  color: #cfe3ee;
-  font-size: 12.5px;
-  border-bottom: 1px solid rgba(255, 255, 255, .12);
-}
-.dv-bar__inner {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 9px 20px;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.dv-bar b { color: #fff; }
-.dv-bar__tag {
-  background: var(--net);
-  color: #fff;
-  font-weight: 700;
-  letter-spacing: .4px;
-  text-transform: uppercase;
-  font-size: 10.5px;
-  padding: 3px 9px;
-  border-radius: 999px;
-}
-
-/* --- scope switcher: the primary separation control ---------------------- */
-.scope {
-  display: inline-flex;
-  background: rgba(255, 255, 255, .1);
-  border: 1px solid rgba(255, 255, 255, .22);
-  border-radius: 999px;
-  padding: 3px;
-  gap: 2px;
-}
-.scope__btn {
-  appearance: none;
-  border: 0;
-  background: transparent;
-  color: rgba(255, 255, 255, .78);
-  font: inherit;
-  font-size: 12.5px;
-  font-weight: 600;
-  padding: 6px 15px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  white-space: nowrap;
-}
-.scope__btn:hover { color: #fff; background: rgba(255, 255, 255, .12); }
-.scope__btn.is-active { background: #fff; color: var(--brand); }
-.scope__btn.is-active.scope__btn--net { background: var(--net); color: #fff; }
-.scope__dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: currentColor; opacity: .75; flex-shrink: 0;
-}
 
 /* network scope recolours the chrome accent so the space is unmistakable */
 .topbar--net { border-bottom: 3px solid var(--net); }
@@ -185,6 +109,17 @@
   box-shadow: var(--shadow);
 }
 .netcard__hd { display: flex; gap: 12px; align-items: flex-start; }
+/* Member State flag, top-right of each expert profile */
+.netcard__flag {
+  margin-left: auto; flex-shrink: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  max-width: 92px;
+}
+.netcard__country {
+  font-size: 10.5px; font-weight: 700; line-height: 1.2;
+  color: var(--net-ink); text-align: center;
+}
+:root[data-theme="dark"] .netcard__country { color: var(--net); }
 .netcard__avatar {
   width: 42px; height: 42px; flex-shrink: 0;
   border-radius: 50%;
@@ -258,6 +193,13 @@
 
 /* --- mapping tree: identical geometry to the internal map, teal root ------ */
 .map-svg--net .map-node--t0 rect { fill: var(--net); }
+/* Member State flag on each holder node */
+.map-flag {
+  outline: 1px solid rgba(0, 0, 0, .25);
+  outline-offset: -1px;
+  pointer-events: none;
+}
+:root[data-theme="dark"] .map-flag { outline-color: rgba(255, 255, 255, .34); }
 
 /* --- layout helpers ------------------------------------------------------- */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
@@ -281,14 +223,6 @@
 }
 
 @media (max-width: 700px) {
-  /* The scope switcher makes the utility bar wider than the internal site's,
-     so it wraps instead of forcing the page sideways. */
-  .utilbar__inner { flex-wrap: wrap; gap: 8px; }
-  .utilbar__inner .site-search { margin-left: 0 !important; flex: 1 1 100%; }
-  .utilbar__inner .site-search input { width: 100%; min-width: 0; }
-  .scope { width: 100%; justify-content: center; }
-  .scope__btn { flex: 1 1 0; justify-content: center; padding: 7px 10px; }
-
   /* Stacked rows: expertise chips must wrap inside the card, not extend it. */
   .netcard__areas { max-width: 100%; }
   .netcard__areas .tag-chip { white-space: normal; max-width: 100%; }

@@ -12,8 +12,16 @@
   <a class="skip-link" href="#main">Skip to content</a>
 
   <div class="utilbar">
-    <div class="utilbar__inner utilbar__inner--end">
-      <form class="site-search" id="siteSearchForm" role="search">
+    <div class="utilbar__inner">
+      <div class="scope" id="scope" role="group" aria-label="Choose which population to view">
+        <a class="scope__btn is-active" href="#home" data-scope="internal" aria-current="page">
+          <span class="scope__dot" aria-hidden="true"></span>Internal GCDC
+        </a>
+        <a class="scope__btn scope__btn--net" href="network/">
+          <span class="scope__dot" aria-hidden="true"></span>GCC Network
+        </a>
+      </div>
+      <form class="site-search" id="siteSearchForm" role="search" style="margin-left:auto">
         <span class="site-search__icon" aria-hidden="true">⌕</span>
         <input type="search" id="siteSearch" placeholder="Search this portal…" aria-label="Search this portal" />
       </form>

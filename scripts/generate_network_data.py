@@ -6,7 +6,7 @@ Source of truth:
     data/GulfCDC_KnowledgeMapping_Network_MasterAnalysis_v3_CoreTaxonomy.xlsx
 
 Writes:
-    preview/network-data.js   (window.GCDC_NETWORK — embedded so file:// works)
+    assets/js/network-data.js (window.GCDC_NETWORK — embedded so file:// works)
     data/network/*.json       (same payload, one file per table)
 
 The network population (PCN, Country Liaison Officers, Working Group members,
@@ -33,7 +33,7 @@ SRC = os.path.join(
     ROOT, "data", "GulfCDC_KnowledgeMapping_Network_MasterAnalysis_v3_CoreTaxonomy.xlsx"
 )
 INTERNAL_MATRIX = os.path.join(ROOT, "data", "expertise_matrix.json")
-OUT_JS = os.path.join(ROOT, "preview", "network-data.js")
+OUT_JS = os.path.join(ROOT, "assets", "js", "network-data.js")
 OUT_DIR = os.path.join(ROOT, "data", "network")
 
 # --- correction layers (same pattern as generate_data.py) --------------------
