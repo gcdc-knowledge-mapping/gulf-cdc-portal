@@ -1,17 +1,17 @@
 [
   {
-    "state": "Qatar",
-    "code": "QA",
-    "people": 11,
-    "tags": 24,
-    "areas": 14
-  },
-  {
     "state": "UAE",
     "code": "AE",
     "people": 11,
     "tags": 27,
     "areas": 18
+  },
+  {
+    "state": "Qatar",
+    "code": "QA",
+    "people": 11,
+    "tags": 24,
+    "areas": 14
   },
   {
     "state": "Bahrain",

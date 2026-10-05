@@ -58,7 +58,20 @@ STATE_CODE = {
     "UAE": "AE",
 }
 
-STATES = list(STATE_CODE.keys())
+# Display order requested for the Member State columns, left to right.
+STATE_ORDER = ["UAE", "Bahrain", "Saudi Arabia", "Oman", "Qatar", "Kuwait"]
+
+# Full names as they should appear in the column headers.
+STATE_LABEL = {
+    "UAE": "United Arab Emirates",
+    "Bahrain": "Bahrain",
+    "Saudi Arabia": "Saudi Arabia",
+    "Oman": "Oman",
+    "Qatar": "Qatar",
+    "Kuwait": "Kuwait",
+}
+
+STATES = STATE_ORDER
 
 
 def clean(v):
@@ -355,20 +368,26 @@ def main():
         "grouped": sum(1 for p in people if p["group"]),
     }
 
+    # Only what a view actually reads is bundled into the published JS.
     payload = {
         "meta": meta,
-        "groups": [{"key": k, "label": l} for k, l in GROUPS],
         "people": people,
         "taxonomy": taxonomy,
         "coverage": coverage,
-        "gaps": gaps,
-        "skills": skills,
         "tree": tree,
         "bridge": bridge,
         "byState": by_state,
         "byDomain": by_domain,
         "byGroup": by_group,
-        "states": [{"name": s, "code": STATE_CODE[s]} for s in STATES],
+        "states": [
+            {
+                "name": s,
+                "label": STATE_LABEL[s],
+                "code": STATE_CODE[s],
+                "flag": STATE_CODE[s].lower() + ".svg",
+            }
+            for s in STATE_ORDER
+        ],
     }
 
     os.makedirs(os.path.dirname(OUT_JS), exist_ok=True)
@@ -382,6 +401,12 @@ def main():
 
     for key, value in payload.items():
         with open(os.path.join(OUT_DIR, f"{key}.json"), "w", encoding="utf-8") as fh:
+            json.dump(value, fh, ensure_ascii=False, indent=2)
+
+    # Derived tables kept as JSON for reference but not bundled into the page:
+    # no view reads them, so they stay out of the shipped JavaScript.
+    for name, value in (("gaps", gaps), ("skills", skills), ("byGroup", by_group)):
+        with open(os.path.join(OUT_DIR, f"{name}.json"), "w", encoding="utf-8") as fh:
             json.dump(value, fh, ensure_ascii=False, indent=2)
 
     # The engagement plan names who to approach and in what order. It is written
