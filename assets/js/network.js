@@ -35,15 +35,20 @@
     return ((parts[0] || "")[0] || "") + ((parts[parts.length - 1] || "")[0] || "");
   }
 
+  var FLAG_DIR = "../assets/img/flags/";
+
   var STATE_BY_NAME = {};
   STATES.forEach(function (s) { STATE_BY_NAME[s.name] = s; });
+  // Holder labels in the tree end with a Member State code, e.g. "… (BH)".
+  var STATE_BY_CODE = {};
+  STATES.forEach(function (s) { STATE_BY_CODE[s.code] = s; });
 
   // Flag + label. The country name always travels with the flag, so meaning is
   // never carried by the image alone.
   function flagImg(stateName, size) {
     var s = STATE_BY_NAME[stateName];
     if (!s) return "";
-    return '<img class="flag" src="flags/' + esc(s.flag) + '" width="' + (size || 22) +
+    return '<img class="flag" src="' + FLAG_DIR + esc(s.flag) + '" width="' + (size || 22) +
       '" alt="" />';
   }
   function flagChip(stateName) {
@@ -152,7 +157,7 @@
       '<div class="card home-stat"><div class="home-stat__num">' + M.states + "</div>" +
         '<div class="home-stat__label">Member States</div>' +
         '<div class="home-stat__flags">' + STATES.map(function (s) {
-          return '<img class="flag" src="flags/' + esc(s.flag) + '" width="26" alt="' + esc(s.label) + '" title="' + esc(s.label) + '" />';
+          return '<img class="flag" src="' + FLAG_DIR + esc(s.flag) + '" width="26" alt="' + esc(s.label) + '" title="' + esc(s.label) + '" />';
         }).join("") + "</div></div>" +
       '<div class="card home-stat"><div class="home-stat__num">' + (D.byDomain || []).length + "</div>" +
         '<div class="home-stat__label">Domains of experience</div>' +
@@ -282,11 +287,16 @@
         '<span class="count-note">' + list.length + " of " + PEOPLE.length + " experts</span>" +
       "</div>" +
       '<div class="net-grid">' + list.map(function (p) {
+        var st = STATE_BY_NAME[p.state] || {};
         return '<article class="netcard">' +
           '<div class="netcard__hd"><div class="netcard__avatar" aria-hidden="true">' + esc(initials(p.name)) + "</div>" +
           '<div class="netcard__id"><div class="netcard__name">' + esc(p.name) + "</div>" +
-          '<div class="netcard__role">' + esc(p.level) + " · " + esc(p.entity) + "</div></div></div>" +
-          '<div class="netcard__tags">' + flagChip(p.state) +
+          '<div class="netcard__role">' + esc(p.level) + " · " + esc(p.entity) + "</div></div>" +
+          '<div class="netcard__flag">' +
+            '<img class="flag flag--lg" src="' + FLAG_DIR + esc(st.flag || "") + '" width="34" alt="" />' +
+            '<span class="netcard__country">' + esc(st.label || p.state) + "</span>" +
+          "</div></div>" +
+          '<div class="netcard__tags">' +
             '<span class="pill pill--neutral"><span class="pill__dot"></span>' + esc(p.track) + "</span>" +
             (p.external ? pill("good", "Externally consulted") : "") +
             (p.soleAreas > 0 ? pill("serious", p.soleAreas + " sole-expert area" + (p.soleAreas > 1 ? "s" : "")) : "") +
@@ -308,7 +318,7 @@
 
     var head = "<tr><th>Core expertise area</th>" + STATES.map(function (s) {
       return '<th><span class="heat__state">' +
-        '<img class="flag flag--lg" src="flags/' + esc(s.flag) + '" width="30" alt="" />' +
+        '<img class="flag flag--lg" src="' + FLAG_DIR + esc(s.flag) + '" width="30" alt="" />' +
         '<span class="heat__name">' + esc(s.label) + "</span></span></th>";
     }).join("") + "<th>Total</th><th>States</th></tr>";
 
@@ -496,23 +506,37 @@
         var badge = expandable && !open
           ? (n.tier <= 2 ? " · " + n.nExp + "▸" : " · " + n.nHold + "▸") : "";
         var arrow = expandable ? (open ? "▾ " : "▸ ") : "";
+        var isPerson = n.tier === 4;
+        // Holder labels carry the Member State as a code, e.g. "Name (BH)".
+        // Show it as a flag on the node instead, and keep the code out of the
+        // text so the name has room.
+        var codeMatch = isPerson ? /\(([A-Z]{2})\)\s*$/.exec(n.label) : null;
+        var hState = codeMatch ? STATE_BY_CODE[codeMatch[1]] : null;
+        var person = isPerson ? n.label.replace(/\s*\([^)]*\)\s*$/, "") : "";
+        var textX = hState ? 36 : 11;
         // Average glyph width per tier — tiers 0-2 render bold (and tier 0 at
         // 14px), so a single estimate would overflow their rects.
         var charW = n.tier === 0 ? 8.0 : n.tier === 1 ? 8.3 : n.tier === 2 ? 7.1 : 6.6;
-        var budget = Math.floor((w - 22) / charW) - badge.length - arrow.length;
-        var label = n.label.length > budget ? n.label.slice(0, budget - 1) + "…" : n.label;
-        var isPerson = n.tier === 4;
-        var person = isPerson ? n.label.replace(/\s*\([^)]*\)\s*$/, "") : "";
+        var raw = isPerson && hState ? person : n.label;
+        var budget = Math.floor((w - textX - 11) / charW) - badge.length - arrow.length;
+        var label = raw.length > budget ? raw.slice(0, budget - 1) + "…" : raw;
         var cls = "map-node map-node--t" + n.tier + (expandable ? " is-toggle" : "") +
           (isPerson ? " is-person" : "") + (hit ? " is-hit" : "");
         var style = n.tier === 1 ? "fill:" + n.color :
                     n.tier === 2 ? "stroke:" + n.color :
                     n.tier === 4 ? "fill:color-mix(in srgb, " + n.color + " 14%, var(--surface))" : "";
+        var title = esc(n.label) + (expandable
+          ? " — " + n.nExp + " area" + (n.nExp !== 1 ? "s" : "") + ", " + n.nHold + " holder" + (n.nHold !== 1 ? "s" : "")
+          : isPerson ? (hState ? " — " + esc(hState.label) + " · open in Core Expertise" : " — open in Core Expertise") : "");
         return '<g class="' + cls + '" transform="translate(' + o.x + "," + o.y + ')" data-id="' + n.id + '"' +
           (expandable ? ' data-toggle="1"' : "") + (isPerson ? ' data-person="' + esc(person) + '"' : "") + ">" +
-          "<title>" + esc(n.label) + (expandable ? " — " + n.nExp + " area" + (n.nExp !== 1 ? "s" : "") + ", " + n.nHold + " holder" + (n.nHold !== 1 ? "s" : "") : isPerson ? " — open in Core Expertise" : "") + "</title>" +
+          "<title>" + title + "</title>" +
           '<rect width="' + w + '" height="' + NODE_H + '" rx="' + (n.tier === 4 ? 13 : 7) + '" style="' + style + '"/>' +
-          '<text x="11" y="' + (NODE_H / 2 + 4) + '">' + esc(arrow + label) +
+          (hState
+            ? '<image class="map-flag" href="' + FLAG_DIR + esc(hState.flag) +
+              '" x="9" y="' + ((NODE_H - 13) / 2) + '" width="20" height="13" preserveAspectRatio="xMidYMid meet"/>'
+            : "") +
+          '<text x="' + textX + '" y="' + (NODE_H / 2 + 4) + '">' + esc(arrow + label) +
           (badge ? '<tspan class="map-badge">' + esc(badge) + "</tspan>" : "") + "</text></g>";
       }).join("");
 

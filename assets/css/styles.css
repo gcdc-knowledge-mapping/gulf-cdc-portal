@@ -728,3 +728,68 @@ mark.hl {
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; scroll-behavior: auto !important; transition: none !important; }
 }
+
+
+/* ===========================================================================
+   Scope switcher — shared by the internal portal and the GCC Network pages.
+   =========================================================================== */
+
+:root {
+  /* Network accent — GCDC deep teal. Deliberately NOT the navy/cyan used by
+     the internal space, and NOT one of the reserved status colours. */
+  --net: #046F8A;
+  --net-ink: #03566b;
+  --net-soft: #e2f0f4;
+  --net-line: #9fcbd8;
+}
+
+:root[data-theme="dark"] {
+  --net: #3f9fc0;
+  --net-ink: #bfe6f2;
+  --net-soft: #0d2f3b;
+  --net-line: #2a5f73;
+}
+
+/* --- scope switcher: the primary separation control ---------------------- */
+.scope {
+  display: inline-flex;
+  background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+}
+.scope__btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, .78);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 15px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+.scope__btn:hover { color: #fff; background: rgba(255, 255, 255, .12); text-decoration: none; }
+.scope__btn.is-active { background: #fff; color: var(--brand); }
+.scope__btn.is-active.scope__btn--net { background: var(--net); color: #fff; }
+.scope__dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: currentColor; opacity: .75; flex-shrink: 0;
+}
+/* The internal page renders the two halves as links, the network page as
+   buttons — both must look identical. */
+a.scope__btn { text-decoration: none; cursor: pointer; }
+
+@media (max-width: 700px) {
+  .utilbar__inner { flex-wrap: wrap; gap: 8px; }
+  .utilbar__inner .site-search { margin-left: 0 !important; flex: 1 1 100%; }
+  .utilbar__inner .site-search input { width: 100%; min-width: 0; }
+  .scope { width: 100%; justify-content: center; }
+  .scope__btn { flex: 1 1 0; justify-content: center; padding: 7px 10px; }
+}
+
