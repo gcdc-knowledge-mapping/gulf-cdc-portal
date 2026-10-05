@@ -370,20 +370,19 @@
       if (state.st && p.state !== state.st) return false;
       if (state.track && p.track !== state.track) return false;
       if (state.q) {
-        var hay = (p.name + " " + p.state + " " + p.level + " " + p.entity + " " + p.areas.join(" ")).toLowerCase();
+        var hay = (p.name + " " + p.state + " " + p.level + " " + p.entity + " " + p.email + " " + p.areas.join(" ")).toLowerCase();
         if (hay.indexOf(state.q.toLowerCase()) === -1) return false;
       }
       return true;
     });
 
     return head("Experts",
-      "A profile for every expert in the network: position, institution, Member State and the areas they hold " +
-      "at core expertise level. " + EXTERNAL_NOTE +
-      " Gulf CDC does not hold contact details for them — approaches go through the Member State focal point.") +
+      "A profile for every expert in the network: position, institution, Member State, work email and the areas " +
+      "they hold at core expertise level. " + EXTERNAL_NOTE) +
 
       '<div class="toolbar">' +
         '<div class="field field--search"><span class="field__icon" aria-hidden="true">⌕</span>' +
-        '<input type="search" id="dirQ" data-view-search placeholder="Search name, institution or expertise…  (press /)" ' +
+        '<input type="search" id="dirQ" data-view-search placeholder="Search name, institution, email or expertise…  (press /)" ' +
         'aria-label="Search the directory" value="' + esc(state.q) + '"></div>' +
         '<div class="field"><select id="dirState" aria-label="Filter by Member State">' +
         '<option value="">All Member States</option>' +
@@ -423,6 +422,15 @@
                 return '<button type="button" class="tag-chip is-clickable" data-area="' + esc(a) +
                   '" title="Find this area in the expertise map">' + esc(a) + "</button>";
               }).join("") + "</div>" +
+              '<div class="contact__actions">' +
+                (p.email
+                  ? '<a class="contact__email" href="mailto:' + esc(p.email) + '" title="Send an email">' +
+                    '<span aria-hidden="true">✉</span> <span>' + esc(p.email) + "</span></a>" +
+                    '<button type="button" class="icon-btn" data-copy="' + esc(p.email) +
+                    '" title="Copy email address" aria-label="Copy ' + esc(p.email) + '">⧉</button>'
+                  : '<span class="contact__email" style="pointer-events:none">' +
+                    '<span aria-hidden="true">✉</span> <span>—</span></span>') +
+              "</div>" +
               '<div class="netcard__foot"><span>' + esc(p.profile) + " profile</span>" +
               '<span class="netcard__idx">Index ' + p.index + "</span></div>" +
             "</article>";
@@ -718,11 +726,24 @@
   }
 
   function peopleRows(list) {
-    var rows = [["Name", "Position", "Institution", "Member State", "Track", "Core expertise"]];
+    var rows = [["Name", "Position", "Institution", "Member State", "Track", "Email", "Core expertise"]];
     list.forEach(function (p) {
-      rows.push([p.name, p.level, p.entity, stateLabel(p.state), p.track, p.areas.join("; ")]);
+      rows.push([p.name, p.level, p.entity, stateLabel(p.state), p.track, p.email, p.areas.join("; ")]);
     });
     return rows;
+  }
+
+  // Clipboard API is unavailable over plain HTTP and in older browsers.
+  function legacyCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch (err) { void err; }
+    ta.remove();
   }
 
   /* --------------------------------------------------------------- router */
@@ -784,6 +805,17 @@
     };
 
     el.onclick = function (e) {
+      // Copy an email address, with a fallback for insecure contexts.
+      var copy = e.target.closest("[data-copy]");
+      if (copy) {
+        var addr = copy.getAttribute("data-copy");
+        var ok = function () { toast("Copied " + addr); };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(addr).then(ok, function () { legacyCopy(addr); ok(); });
+        } else { legacyCopy(addr); ok(); }
+        return;
+      }
+
       // KPI tiles and ranked bars carry an action: "view:x", "state:x", "domain:x"
       var act = e.target.closest("[data-action]");
       if (act) {
@@ -837,7 +869,7 @@
           if (state.st && p.state !== state.st) return false;
           if (state.track && p.track !== state.track) return false;
           if (state.q) {
-            var hay = (p.name + " " + p.state + " " + p.level + " " + p.entity + " " + p.areas.join(" ")).toLowerCase();
+            var hay = (p.name + " " + p.state + " " + p.level + " " + p.entity + " " + p.email + " " + p.areas.join(" ")).toLowerCase();
             if (hay.indexOf(state.q.toLowerCase()) === -1) return false;
           }
           return true;
