@@ -84,6 +84,20 @@
     "states": 1
   },
   {
+    "domain": "Epidemiology & Surveillance",
+    "area": "Disease Modelling & Forecasting",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 1,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 2,
+    "states": 2
+  },
+  {
     "domain": "Public Health Emergency & Health Security",
     "area": "Emergency Preparedness Planning",
     "by": {
@@ -154,6 +168,20 @@
     "states": 0
   },
   {
+    "domain": "Public Health Emergency & Health Security",
+    "area": "Simulation Exercises (SimEx)",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1
+  },
+  {
     "domain": "Communicable & Non-Communicable Diseases",
     "area": "Infectious Disease Epidemiology",
     "by": {
@@ -221,6 +249,20 @@
       "Kuwait": 0
     },
     "total": 2,
+    "states": 2
+  },
+  {
+    "domain": "Communicable & Non-Communicable Diseases",
+    "area": "Cancer Epidemiology & Screening",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 1,
+      "Kuwait": 3
+    },
+    "total": 4,
     "states": 2
   },
   {
@@ -418,6 +460,20 @@
     },
     "total": 0,
     "states": 0
+  },
+  {
+    "domain": "Health Promotion, Education & Workforce",
+    "area": "Public Health Nutrition",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1
   },
   {
     "domain": "Data, Digital Health & Health Informatics",
@@ -768,6 +824,20 @@
     },
     "total": 0,
     "states": 0
+  },
+  {
+    "domain": "Clinical & Specialized Practice",
+    "area": "Public Health Microbiology & Genomics",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 2,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 2,
+      "Kuwait": 0
+    },
+    "total": 5,
+    "states": 3
   },
   {
     "domain": "Cross-Cutting Professional Skills",

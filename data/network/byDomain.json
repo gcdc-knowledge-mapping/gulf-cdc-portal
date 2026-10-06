@@ -1,12 +1,30 @@
 [
   {
     "domain": "Epidemiology & Surveillance",
-    "areas": 6,
-    "covered": 6,
+    "areas": 7,
+    "covered": 7,
     "good": 3,
-    "warn": 1,
+    "warn": 2,
     "serious": 2,
     "critical": 0
+  },
+  {
+    "domain": "Communicable & Non-Communicable Diseases",
+    "areas": 6,
+    "covered": 6,
+    "good": 4,
+    "warn": 2,
+    "serious": 0,
+    "critical": 0
+  },
+  {
+    "domain": "Health Promotion, Education & Workforce",
+    "areas": 8,
+    "covered": 6,
+    "good": 2,
+    "warn": 1,
+    "serious": 3,
+    "critical": 2
   },
   {
     "domain": "Research & Scientific Practice",
@@ -18,30 +36,12 @@
     "critical": 1
   },
   {
-    "domain": "Communicable & Non-Communicable Diseases",
-    "areas": 5,
-    "covered": 5,
-    "good": 3,
-    "warn": 2,
-    "serious": 0,
-    "critical": 0
-  },
-  {
     "domain": "Health Policy, Systems & Strategy",
     "areas": 7,
     "covered": 5,
     "good": 2,
     "warn": 2,
     "serious": 1,
-    "critical": 2
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "areas": 7,
-    "covered": 5,
-    "good": 2,
-    "warn": 1,
-    "serious": 2,
     "critical": 2
   },
   {
@@ -55,11 +55,11 @@
   },
   {
     "domain": "Public Health Emergency & Health Security",
-    "areas": 5,
-    "covered": 3,
+    "areas": 6,
+    "covered": 4,
     "good": 2,
     "warn": 0,
-    "serious": 1,
+    "serious": 2,
     "critical": 2
   },
   {
@@ -73,9 +73,9 @@
   },
   {
     "domain": "Clinical & Specialized Practice",
-    "areas": 4,
-    "covered": 1,
-    "good": 1,
+    "areas": 5,
+    "covered": 2,
+    "good": 2,
     "warn": 0,
     "serious": 0,
     "critical": 3

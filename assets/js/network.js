@@ -194,17 +194,17 @@
       "</div></div>" +
 
       '<div class="grid grid--2" style="margin-top:26px">' +
-      card("About the GCC Network", "",
-        '<p style="color:var(--ink-2)">The regional layer of the Knowledge Mapping initiative. It maps the ' +
-        "specialised health expertise held across the Permanent Contact Network, Country Liaison Officers and " +
-        "Working Group members nominated by the six GCC Member States, and classifies it within the same " +
-        "unified public health framework used inside the Center — so regional and internal expertise can be " +
-        "read together rather than side by side.</p>") +
+      card("About Knowledge Mapping", "",
+        '<p style="color:var(--ink-2)">An institutional initiative to develop a comprehensive map of health ' +
+        "expertise across the Center and GCC countries. It identifies and documents employees’ specialized " +
+        "knowledge and skills, classifies them within a unified public health framework, and serves as a " +
+        "reference for determining areas of expertise, proficiency levels, and their distribution across " +
+        "departments.</p>") +
       card("Purpose", "",
-        '<p style="color:var(--ink-2)">To identify where public health expertise sits across the GCC, connect ' +
-        "the Center to the right regional expert at the right time, and show where the network can strengthen " +
-        "the areas in which Gulf CDC has only one expert or none. This turns the knowledge map into a basis for " +
-        "mentoring, secondments and GCC Communities of Practice.</p>") +
+        '<p style="color:var(--ink-2)">To identify, document, and connect knowledge and expertise across the ' +
+        "organization, ensuring access to the right knowledge at the right time. This supports informed " +
+        "decision-making, ensures business continuity, maximizes the use of institutional expertise, and " +
+        "reduces the risk of knowledge loss.</p>") +
       "</div>" +
 
       '<div class="home-stats">' +

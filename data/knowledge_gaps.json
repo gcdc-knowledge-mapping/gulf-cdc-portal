@@ -60,6 +60,16 @@
     "in_taxonomy": true
   },
   {
+    "domain": "Epidemiology & Surveillance",
+    "subdomain": "Biostatistics & Population Health",
+    "expertise": "Disease Modelling & Forecasting",
+    "holders_n": 2,
+    "status": "🟡 Thin Coverage",
+    "sole_holder": "(nobody)",
+    "recommendation": "Only two core holders — build redundancy and document SOPs.",
+    "in_taxonomy": true
+  },
+  {
     "domain": "Public Health Emergency & Health Security",
     "subdomain": "Preparedness & Planning",
     "expertise": "Emergency Preparedness Planning",
@@ -77,6 +87,16 @@
     "status": "🟠 Single Core Expert (SPOF)",
     "sole_holder": "Dr Mahim Al Balushi (PHPP, Strategic)",
     "recommendation": "One person is the sole core expert. Capture knowledge, cross-train a successor, document SOPs.",
+    "in_taxonomy": true
+  },
+  {
+    "domain": "Public Health Emergency & Health Security",
+    "subdomain": "Preparedness & Planning",
+    "expertise": "Simulation Exercises (SimEx)",
+    "holders_n": 2,
+    "status": "🟡 Thin Coverage",
+    "sole_holder": "(nobody)",
+    "recommendation": "Only two core holders — build redundancy and document SOPs.",
     "in_taxonomy": true
   },
   {
@@ -147,6 +167,16 @@
     "status": "🟡 Thin Coverage",
     "sole_holder": "",
     "recommendation": "Only two core holders — build redundancy and document SOPs.",
+    "in_taxonomy": true
+  },
+  {
+    "domain": "Communicable & Non-Communicable Diseases",
+    "subdomain": "Non-Communicable Diseases",
+    "expertise": "Cancer Epidemiology & Screening",
+    "holders_n": 1,
+    "status": "🟠 Single Core Expert (SPOF)",
+    "sole_holder": "Said Alghafri (TCB)",
+    "recommendation": "Single core expert — capture knowledge and identify a successor.",
     "in_taxonomy": true
   },
   {
@@ -247,6 +277,16 @@
     "status": "🟠 Single Core Expert (SPOF)",
     "sole_holder": "Reem Alotaibi (PHPP, Practitioner)",
     "recommendation": "One person is the sole core expert. Capture knowledge, cross-train a successor, document SOPs.",
+    "in_taxonomy": true
+  },
+  {
+    "domain": "Health Promotion, Education & Workforce",
+    "subdomain": "Health Promotion",
+    "expertise": "Public Health Nutrition",
+    "holders_n": 1,
+    "status": "🟠 Single Core Expert (SPOF)",
+    "sole_holder": "(nobody)",
+    "recommendation": "Not part of the active taxonomy. Consider recruitment, external partnership, or targeted development if strategically needed.",
     "in_taxonomy": true
   },
   {

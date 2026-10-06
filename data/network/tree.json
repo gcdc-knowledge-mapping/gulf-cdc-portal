@@ -186,6 +186,24 @@
     "note": ""
   },
   {
+    "level": 3,
+    "label": "Disease Modelling & Forecasting",
+    "type": "Core Expertise (Tier 3)",
+    "note": "2 holder(s) · 2 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Ebrahim Matar (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Saeed Mahdi Algarni (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
     "level": 1,
     "label": "Public Health Emergency & Health Security",
     "type": "Domain (Tier 1)",
@@ -308,6 +326,18 @@
   {
     "level": 4,
     "label": "Yasser Bakhsh (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Simulation Exercises (SimEx)",
+    "type": "Core Expertise (Tier 3)",
+    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+  },
+  {
+    "level": 4,
+    "label": "Fatma Alattar (AE)",
     "type": "Holder",
     "note": ""
   },
@@ -530,6 +560,36 @@
   {
     "level": 4,
     "label": "Najla AbdulAmir Al Lawati (OM)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Cancer Epidemiology & Screening",
+    "type": "Core Expertise (Tier 3)",
+    "note": "4 holder(s) · 2 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Amani Albasmi (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Esraa Ibrahim Al Abbadi (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Hanan M Almajed (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Nourah M A S Sh Alsheridah (KW)",
     "type": "Holder",
     "note": ""
   },
@@ -794,6 +854,18 @@
   {
     "level": 4,
     "label": "Dr. Fatema Al Mutawa (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Public Health Nutrition",
+    "type": "Core Expertise (Tier 3)",
+    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+  },
+  {
+    "level": 4,
+    "label": "Fatma AlMatrooshi (AE)",
     "type": "Holder",
     "note": ""
   },
@@ -1244,6 +1316,42 @@
   {
     "level": 4,
     "label": "Dr. Mashael Al-Badr (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Public Health Microbiology & Genomics",
+    "type": "Core Expertise (Tier 3)",
+    "note": "5 holder(s) · 3 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Amjad Ghanem Zaed Ghanem (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Devendra Bansal (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Dr. Mashael Al-Badr (QA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Manaf Alqahtani (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Muhannad Sulaiman Aloraini (SA)",
     "type": "Holder",
     "note": ""
   },
