@@ -223,13 +223,14 @@
   };
 
   VIEWS.overview = function () {
+    // Areas with no holder are left out: a zero reflects who answered the
+    // survey, not an absence of the expertise across the GCC.
     var segs = [
       { label: "Adequate (3+ holders)", value: M.adequate, color: CLS_COLOR.good },
       { label: "Thin (2 holders)", value: M.thin, color: CLS_COLOR.warn },
-      { label: "Sole expert (1)", value: M.sole, color: CLS_COLOR.serious },
-      { label: "No core holder (0)", value: M.noCore, color: CLS_COLOR.critical }
+      { label: "Sole expert (1)", value: M.sole, color: CLS_COLOR.serious }
     ];
-    var fragile = Math.round(((M.sole + M.thin) / M.areas) * 100);
+    var fragile = Math.round(((M.sole + M.thin) / M.covered) * 100);
 
     // Member State bars follow the requested column order, not a ranking.
     var byState = STATES.map(function (s) {
@@ -259,12 +260,12 @@
 
       '<div class="grid grid--2" style="margin-top:16px">' +
         '<div class="card"><div class="card__hd"><div class="card__title">Expertise coverage</div>' +
-        '<div class="card__sub">How many of the ' + M.areas + " areas are resilient vs. fragile across the network</div></div>" +
+        '<div class="card__sub">How many of the ' + M.covered + " areas the network holds are resilient vs. fragile</div></div>" +
         '<div class="donut-wrap">' +
-        donut(segs, { centerNum: M.areas, centerLbl: "areas", aria: "Network coverage by status" }) +
+        donut(segs, { centerNum: M.covered, centerLbl: "areas held", aria: "Network coverage by status" }) +
         '<div style="flex:1;min-width:150px">' + legend(segs) +
         '<p class="card__sub" style="margin-top:12px">' + fragile +
-        "% of the taxonomy rests on one or two people across the whole region.</p></div></div>" +
+        "% of the areas the network holds rest on one or two people across the whole region.</p></div></div>" +
         '<dl class="deflist">' +
         '<div><dt><span class="legend__swatch" style="background:var(--st-good)"></span> Adequate</dt>' +
         "<dd>Three or more experts across the GCC hold the area as core expertise — deep enough to anchor a regional Community of Practice.</dd></div>" +
@@ -272,8 +273,6 @@
         "<dd>Exactly two holders region-wide. Workable today, but one departure leaves a single regional expert.</dd></div>" +
         '<div><dt><span class="legend__swatch" style="background:var(--st-serious)"></span> Sole expert</dt>' +
         "<dd>One person in the entire network holds this area. The region depends on a single individual — the highest continuity risk.</dd></div>" +
-        '<div><dt><span class="legend__swatch" style="background:var(--st-critical)"></span> No core holder</dt>' +
-        "<dd>Nobody in the network claims this area as core expertise. It must be sourced outside the GCC or targeted in the next survey wave.</dd></div>" +
         "</dl></div>" +
 
         '<div class="card"><div class="card__hd"><div class="card__title">Experts by Member State</div>' +
