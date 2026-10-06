@@ -30,6 +30,12 @@ window.GCDC_DATA = {
     },
     {
       "domain": "Epidemiology & Surveillance",
+      "subdomain": "Disease Surveillance",
+      "expertise": "Disease Modelling & Forecasting",
+      "path": "Epidemiology & Surveillance > Disease Surveillance > Disease Modelling & Forecasting"
+    },
+    {
+      "domain": "Epidemiology & Surveillance",
       "subdomain": "Biostatistics & Population Health",
       "expertise": "Biostatistics",
       "path": "Epidemiology & Surveillance > Biostatistics & Population Health > Biostatistics"
@@ -39,12 +45,6 @@ window.GCDC_DATA = {
       "subdomain": "Biostatistics & Population Health",
       "expertise": "Burden of Disease Analysis",
       "path": "Epidemiology & Surveillance > Biostatistics & Population Health > Burden of Disease Analysis"
-    },
-    {
-      "domain": "Epidemiology & Surveillance",
-      "subdomain": "Biostatistics & Population Health",
-      "expertise": "Disease Modelling & Forecasting",
-      "path": "Epidemiology & Surveillance > Biostatistics & Population Health > Disease Modelling & Forecasting"
     },
     {
       "domain": "Public Health Emergency & Health Security",
@@ -60,12 +60,6 @@ window.GCDC_DATA = {
     },
     {
       "domain": "Public Health Emergency & Health Security",
-      "subdomain": "Preparedness & Planning",
-      "expertise": "Simulation Exercises (SimEx)",
-      "path": "Public Health Emergency & Health Security > Preparedness & Planning > Simulation Exercises (SimEx)"
-    },
-    {
-      "domain": "Public Health Emergency & Health Security",
       "subdomain": "Response & Operations",
       "expertise": "PHEOC / Emergency Operations Centers",
       "path": "Public Health Emergency & Health Security > Response & Operations > PHEOC / Emergency Operations Centers"
@@ -75,6 +69,12 @@ window.GCDC_DATA = {
       "subdomain": "Response & Operations",
       "expertise": "Disaster Medicine & Management",
       "path": "Public Health Emergency & Health Security > Response & Operations > Disaster Medicine & Management"
+    },
+    {
+      "domain": "Public Health Emergency & Health Security",
+      "subdomain": "Response & Operations",
+      "expertise": "Simulation Exercises (SimEx)",
+      "path": "Public Health Emergency & Health Security > Response & Operations > Simulation Exercises (SimEx)"
     },
     {
       "domain": "Communicable & Non-Communicable Diseases",
@@ -402,6 +402,16 @@ window.GCDC_DATA = {
     },
     {
       "domain": "Epidemiology & Surveillance",
+      "subdomain": "Disease Surveillance",
+      "expertise": "Disease Modelling & Forecasting",
+      "holders_n": 2,
+      "holders": [
+        "Turki Almalki (PHI)",
+        "Bushra Alghamdi (PHI)"
+      ]
+    },
+    {
+      "domain": "Epidemiology & Surveillance",
       "subdomain": "Biostatistics & Population Health",
       "expertise": "Biostatistics",
       "holders_n": 1,
@@ -416,16 +426,6 @@ window.GCDC_DATA = {
       "holders_n": 1,
       "holders": [
         "Raghad AlHumud (PHPP)"
-      ]
-    },
-    {
-      "domain": "Epidemiology & Surveillance",
-      "subdomain": "Biostatistics & Population Health",
-      "expertise": "Disease Modelling & Forecasting",
-      "holders_n": 2,
-      "holders": [
-        "Turki Almalki (PHI)",
-        "Bushra Alghamdi (PHI)"
       ]
     },
     {
@@ -450,16 +450,6 @@ window.GCDC_DATA = {
     },
     {
       "domain": "Public Health Emergency & Health Security",
-      "subdomain": "Preparedness & Planning",
-      "expertise": "Simulation Exercises (SimEx)",
-      "holders_n": 2,
-      "holders": [
-        "Abdullatif Bin Khunayn (PHE)",
-        "Hamad Alsaab (PHE)"
-      ]
-    },
-    {
-      "domain": "Public Health Emergency & Health Security",
       "subdomain": "Response & Operations",
       "expertise": "PHEOC / Emergency Operations Centers",
       "holders_n": 1,
@@ -474,6 +464,16 @@ window.GCDC_DATA = {
       "holders_n": 2,
       "holders": [
         "Abdullah Fahad Alnowaiser (PHE)",
+        "Hamad Alsaab (PHE)"
+      ]
+    },
+    {
+      "domain": "Public Health Emergency & Health Security",
+      "subdomain": "Response & Operations",
+      "expertise": "Simulation Exercises (SimEx)",
+      "holders_n": 2,
+      "holders": [
+        "Abdullatif Bin Khunayn (PHE)",
         "Hamad Alsaab (PHE)"
       ]
     },
@@ -979,6 +979,16 @@ window.GCDC_DATA = {
     },
     {
       "domain": "Epidemiology & Surveillance",
+      "subdomain": "Disease Surveillance",
+      "expertise": "Disease Modelling & Forecasting",
+      "holders_n": 2,
+      "status": "🟡 Thin Coverage",
+      "sole_holder": "(nobody)",
+      "recommendation": "Only two core holders — build redundancy and document SOPs.",
+      "in_taxonomy": true
+    },
+    {
+      "domain": "Epidemiology & Surveillance",
       "subdomain": "Biostatistics & Population Health",
       "expertise": "Biostatistics",
       "holders_n": 1,
@@ -995,16 +1005,6 @@ window.GCDC_DATA = {
       "status": "🟠 Single Core Expert (SPOF)",
       "sole_holder": "Raghad AlHumud (PHPP, Advanced)",
       "recommendation": "One person is the sole core expert. Capture knowledge, cross-train a successor, document SOPs.",
-      "in_taxonomy": true
-    },
-    {
-      "domain": "Epidemiology & Surveillance",
-      "subdomain": "Biostatistics & Population Health",
-      "expertise": "Disease Modelling & Forecasting",
-      "holders_n": 2,
-      "status": "🟡 Thin Coverage",
-      "sole_holder": "(nobody)",
-      "recommendation": "Only two core holders — build redundancy and document SOPs.",
       "in_taxonomy": true
     },
     {
@@ -1029,16 +1029,6 @@ window.GCDC_DATA = {
     },
     {
       "domain": "Public Health Emergency & Health Security",
-      "subdomain": "Preparedness & Planning",
-      "expertise": "Simulation Exercises (SimEx)",
-      "holders_n": 2,
-      "status": "🟡 Thin Coverage",
-      "sole_holder": "(nobody)",
-      "recommendation": "Only two core holders — build redundancy and document SOPs.",
-      "in_taxonomy": true
-    },
-    {
-      "domain": "Public Health Emergency & Health Security",
       "subdomain": "Response & Operations",
       "expertise": "PHEOC / Emergency Operations Centers",
       "holders_n": 1,
@@ -1054,6 +1044,16 @@ window.GCDC_DATA = {
       "holders_n": 2,
       "status": "🟡 Thin Coverage",
       "sole_holder": "",
+      "recommendation": "Only two core holders — build redundancy and document SOPs.",
+      "in_taxonomy": true
+    },
+    {
+      "domain": "Public Health Emergency & Health Security",
+      "subdomain": "Response & Operations",
+      "expertise": "Simulation Exercises (SimEx)",
+      "holders_n": 2,
+      "status": "🟡 Thin Coverage",
+      "sole_holder": "(nobody)",
       "recommendation": "Only two core holders — build redundancy and document SOPs.",
       "in_taxonomy": true
     },
@@ -1549,16 +1549,6 @@ window.GCDC_DATA = {
     },
     {
       "domain": "Epidemiology & Surveillance",
-      "subdomain": "Disease Surveillance",
-      "expertise": "Disease Modelling & Forecasting",
-      "holders_n": 0,
-      "status": "🔴 No Core Expert",
-      "sole_holder": "(nobody)",
-      "recommendation": "Not part of the active taxonomy. Consider recruitment, external partnership, or targeted development if strategically needed.",
-      "in_taxonomy": false
-    },
-    {
-      "domain": "Epidemiology & Surveillance",
       "subdomain": "Biostatistics & Population Health",
       "expertise": "Population Health",
       "holders_n": 0,
@@ -1581,16 +1571,6 @@ window.GCDC_DATA = {
       "domain": "Public Health Emergency & Health Security",
       "subdomain": "Response & Operations",
       "expertise": "Incident Management Systems (IMS)",
-      "holders_n": 0,
-      "status": "🔴 No Core Expert",
-      "sole_holder": "(nobody)",
-      "recommendation": "Not part of the active taxonomy. Consider recruitment, external partnership, or targeted development if strategically needed.",
-      "in_taxonomy": false
-    },
-    {
-      "domain": "Public Health Emergency & Health Security",
-      "subdomain": "Response & Operations",
-      "expertise": "Simulation Exercises (SimEx)",
       "holders_n": 0,
       "status": "🔴 No Core Expert",
       "sole_holder": "(nobody)",
@@ -1691,16 +1671,6 @@ window.GCDC_DATA = {
       "domain": "Health Policy, Systems & Strategy",
       "subdomain": "Strategic Planning",
       "expertise": "Healthcare Transformation",
-      "holders_n": 0,
-      "status": "🔴 No Core Expert",
-      "sole_holder": "(nobody)",
-      "recommendation": "Not part of the active taxonomy. Consider recruitment, external partnership, or targeted development if strategically needed.",
-      "in_taxonomy": false
-    },
-    {
-      "domain": "Health Promotion, Education & Workforce",
-      "subdomain": "Health Promotion",
-      "expertise": "Public Health Nutrition",
       "holders_n": 0,
       "status": "🔴 No Core Expert",
       "sole_holder": "(nobody)",

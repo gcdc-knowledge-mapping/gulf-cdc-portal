@@ -41,6 +41,16 @@
   },
   {
     "domain": "Epidemiology & Surveillance",
+    "subdomain": "Disease Surveillance",
+    "expertise": "Disease Modelling & Forecasting",
+    "holders_n": 2,
+    "status": "🟡 Thin Coverage",
+    "sole_holder": "(nobody)",
+    "recommendation": "Only two core holders — build redundancy and document SOPs.",
+    "in_taxonomy": true
+  },
+  {
+    "domain": "Epidemiology & Surveillance",
     "subdomain": "Biostatistics & Population Health",
     "expertise": "Biostatistics",
     "holders_n": 1,
@@ -57,16 +67,6 @@
     "status": "🟠 Single Core Expert (SPOF)",
     "sole_holder": "Raghad AlHumud (PHPP, Advanced)",
     "recommendation": "One person is the sole core expert. Capture knowledge, cross-train a successor, document SOPs.",
-    "in_taxonomy": true
-  },
-  {
-    "domain": "Epidemiology & Surveillance",
-    "subdomain": "Biostatistics & Population Health",
-    "expertise": "Disease Modelling & Forecasting",
-    "holders_n": 2,
-    "status": "🟡 Thin Coverage",
-    "sole_holder": "(nobody)",
-    "recommendation": "Only two core holders — build redundancy and document SOPs.",
     "in_taxonomy": true
   },
   {
@@ -91,16 +91,6 @@
   },
   {
     "domain": "Public Health Emergency & Health Security",
-    "subdomain": "Preparedness & Planning",
-    "expertise": "Simulation Exercises (SimEx)",
-    "holders_n": 2,
-    "status": "🟡 Thin Coverage",
-    "sole_holder": "(nobody)",
-    "recommendation": "Only two core holders — build redundancy and document SOPs.",
-    "in_taxonomy": true
-  },
-  {
-    "domain": "Public Health Emergency & Health Security",
     "subdomain": "Response & Operations",
     "expertise": "PHEOC / Emergency Operations Centers",
     "holders_n": 1,
@@ -116,6 +106,16 @@
     "holders_n": 2,
     "status": "🟡 Thin Coverage",
     "sole_holder": "",
+    "recommendation": "Only two core holders — build redundancy and document SOPs.",
+    "in_taxonomy": true
+  },
+  {
+    "domain": "Public Health Emergency & Health Security",
+    "subdomain": "Response & Operations",
+    "expertise": "Simulation Exercises (SimEx)",
+    "holders_n": 2,
+    "status": "🟡 Thin Coverage",
+    "sole_holder": "(nobody)",
     "recommendation": "Only two core holders — build redundancy and document SOPs.",
     "in_taxonomy": true
   },
@@ -611,16 +611,6 @@
   },
   {
     "domain": "Epidemiology & Surveillance",
-    "subdomain": "Disease Surveillance",
-    "expertise": "Disease Modelling & Forecasting",
-    "holders_n": 0,
-    "status": "🔴 No Core Expert",
-    "sole_holder": "(nobody)",
-    "recommendation": "Not part of the active taxonomy. Consider recruitment, external partnership, or targeted development if strategically needed.",
-    "in_taxonomy": false
-  },
-  {
-    "domain": "Epidemiology & Surveillance",
     "subdomain": "Biostatistics & Population Health",
     "expertise": "Population Health",
     "holders_n": 0,
@@ -643,16 +633,6 @@
     "domain": "Public Health Emergency & Health Security",
     "subdomain": "Response & Operations",
     "expertise": "Incident Management Systems (IMS)",
-    "holders_n": 0,
-    "status": "🔴 No Core Expert",
-    "sole_holder": "(nobody)",
-    "recommendation": "Not part of the active taxonomy. Consider recruitment, external partnership, or targeted development if strategically needed.",
-    "in_taxonomy": false
-  },
-  {
-    "domain": "Public Health Emergency & Health Security",
-    "subdomain": "Response & Operations",
-    "expertise": "Simulation Exercises (SimEx)",
     "holders_n": 0,
     "status": "🔴 No Core Expert",
     "sole_holder": "(nobody)",
@@ -753,16 +733,6 @@
     "domain": "Health Policy, Systems & Strategy",
     "subdomain": "Strategic Planning",
     "expertise": "Healthcare Transformation",
-    "holders_n": 0,
-    "status": "🔴 No Core Expert",
-    "sole_holder": "(nobody)",
-    "recommendation": "Not part of the active taxonomy. Consider recruitment, external partnership, or targeted development if strategically needed.",
-    "in_taxonomy": false
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "subdomain": "Health Promotion",
-    "expertise": "Public Health Nutrition",
     "holders_n": 0,
     "status": "🔴 No Core Expert",
     "sole_holder": "(nobody)",
