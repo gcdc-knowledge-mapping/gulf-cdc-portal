@@ -36,6 +36,12 @@
     "path": "Epidemiology & Surveillance > Biostatistics & Population Health > Burden of Disease Analysis"
   },
   {
+    "domain": "Epidemiology & Surveillance",
+    "subdomain": "Biostatistics & Population Health",
+    "expertise": "Disease Modelling & Forecasting",
+    "path": "Epidemiology & Surveillance > Biostatistics & Population Health > Disease Modelling & Forecasting"
+  },
+  {
     "domain": "Public Health Emergency & Health Security",
     "subdomain": "Preparedness & Planning",
     "expertise": "Emergency Preparedness Planning",
@@ -46,6 +52,12 @@
     "subdomain": "Preparedness & Planning",
     "expertise": "Risk Assessment (Rapid Risk Assessment)",
     "path": "Public Health Emergency & Health Security > Preparedness & Planning > Risk Assessment (Rapid Risk Assessment)"
+  },
+  {
+    "domain": "Public Health Emergency & Health Security",
+    "subdomain": "Preparedness & Planning",
+    "expertise": "Simulation Exercises (SimEx)",
+    "path": "Public Health Emergency & Health Security > Preparedness & Planning > Simulation Exercises (SimEx)"
   },
   {
     "domain": "Public Health Emergency & Health Security",
@@ -88,6 +100,12 @@
     "subdomain": "Non-Communicable Diseases",
     "expertise": "NCD Prevention & Control",
     "path": "Communicable & Non-Communicable Diseases > Non-Communicable Diseases > NCD Prevention & Control"
+  },
+  {
+    "domain": "Communicable & Non-Communicable Diseases",
+    "subdomain": "Non-Communicable Diseases",
+    "expertise": "Cancer Epidemiology & Screening",
+    "path": "Communicable & Non-Communicable Diseases > Non-Communicable Diseases > Cancer Epidemiology & Screening"
   },
   {
     "domain": "Communicable & Non-Communicable Diseases",
@@ -148,6 +166,12 @@
     "subdomain": "Health Promotion",
     "expertise": "Behavior Change Theory & Campaigns",
     "path": "Health Promotion, Education & Workforce > Health Promotion > Behavior Change Theory & Campaigns"
+  },
+  {
+    "domain": "Health Promotion, Education & Workforce",
+    "subdomain": "Health Promotion",
+    "expertise": "Public Health Nutrition",
+    "path": "Health Promotion, Education & Workforce > Health Promotion > Public Health Nutrition"
   },
   {
     "domain": "Health Promotion, Education & Workforce",

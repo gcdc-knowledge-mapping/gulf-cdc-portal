@@ -58,6 +58,16 @@
     ]
   },
   {
+    "domain": "Epidemiology & Surveillance",
+    "subdomain": "Biostatistics & Population Health",
+    "expertise": "Disease Modelling & Forecasting",
+    "holders_n": 2,
+    "holders": [
+      "Turki Almalki (PHI)",
+      "Bushra Alghamdi (PHI)"
+    ]
+  },
+  {
     "domain": "Public Health Emergency & Health Security",
     "subdomain": "Preparedness & Planning",
     "expertise": "Emergency Preparedness Planning",
@@ -75,6 +85,16 @@
     "holders_n": 1,
     "holders": [
       "Mahim Al Balushi (PHPP)"
+    ]
+  },
+  {
+    "domain": "Public Health Emergency & Health Security",
+    "subdomain": "Preparedness & Planning",
+    "expertise": "Simulation Exercises (SimEx)",
+    "holders_n": 2,
+    "holders": [
+      "Abdullatif Bin Khunayn (PHE)",
+      "Hamad Alsaab (PHE)"
     ]
   },
   {
@@ -143,6 +163,15 @@
     "holders": [
       "Nada Alnaji (PHPP)",
       "Haya Alzeer (PHPP)"
+    ]
+  },
+  {
+    "domain": "Communicable & Non-Communicable Diseases",
+    "subdomain": "Non-Communicable Diseases",
+    "expertise": "Cancer Epidemiology & Screening",
+    "holders_n": 1,
+    "holders": [
+      "Said Alghafri (TCB)"
     ]
   },
   {
@@ -241,6 +270,15 @@
     "holders_n": 1,
     "holders": [
       "Reem Alotaibi (PHPP)"
+    ]
+  },
+  {
+    "domain": "Health Promotion, Education & Workforce",
+    "subdomain": "Health Promotion",
+    "expertise": "Public Health Nutrition",
+    "holders_n": 1,
+    "holders": [
+      "Haya Alzeer (PHPP)"
     ]
   },
   {

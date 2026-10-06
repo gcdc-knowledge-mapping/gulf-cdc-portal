@@ -54,6 +54,15 @@
     "cls": "warn"
   },
   {
+    "domain": "Epidemiology & Surveillance",
+    "sub": "Biostatistics & Population Health",
+    "area": "Disease Modelling & Forecasting",
+    "holders": 2,
+    "states": 2,
+    "status": "Thin",
+    "cls": "warn"
+  },
+  {
     "domain": "Public Health Emergency & Health Security",
     "sub": "Preparedness & Planning",
     "area": "Emergency Preparedness Planning",
@@ -70,6 +79,15 @@
     "states": 4,
     "status": "Adequate",
     "cls": "good"
+  },
+  {
+    "domain": "Public Health Emergency & Health Security",
+    "sub": "Preparedness & Planning",
+    "area": "Simulation Exercises (SimEx)",
+    "holders": 1,
+    "states": 1,
+    "status": "Sole expert",
+    "cls": "serious"
   },
   {
     "domain": "Public Health Emergency & Health Security",
@@ -131,6 +149,15 @@
     "area": "NCD Prevention & Control",
     "holders": 8,
     "states": 5,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Communicable & Non-Communicable Diseases",
+    "sub": "Non-Communicable Diseases",
+    "area": "Cancer Epidemiology & Screening",
+    "holders": 4,
+    "states": 2,
     "status": "Adequate",
     "cls": "good"
   },
@@ -223,6 +250,15 @@
     "states": 2,
     "status": "Thin",
     "cls": "warn"
+  },
+  {
+    "domain": "Health Promotion, Education & Workforce",
+    "sub": "Health Promotion",
+    "area": "Public Health Nutrition",
+    "holders": 1,
+    "states": 1,
+    "status": "Sole expert",
+    "cls": "serious"
   },
   {
     "domain": "Health Promotion, Education & Workforce",
@@ -482,6 +518,15 @@
     "area": "Medical Laboratory",
     "holders": 3,
     "states": 2,
+    "status": "Adequate",
+    "cls": "good"
+  },
+  {
+    "domain": "Clinical & Specialized Practice",
+    "sub": "Laboratory & Diagnostics",
+    "area": "Public Health Microbiology & Genomics",
+    "holders": 5,
+    "states": 3,
     "status": "Adequate",
     "cls": "good"
   },

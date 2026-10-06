@@ -48,6 +48,18 @@
     "verdictCls": "good"
   },
   {
+    "domain": "Communicable & Non-Communicable Diseases",
+    "area": "Cancer Epidemiology & Screening",
+    "internal": 1,
+    "internalStatus": "Sole expert",
+    "internalCls": "serious",
+    "network": 4,
+    "networkStatus": "Adequate",
+    "networkCls": "good",
+    "verdict": "Network covers the gap",
+    "verdictCls": "good"
+  },
+  {
     "domain": "Quality, Governance & Project Management",
     "area": "Casemix Funding & Classification",
     "internal": 1,
@@ -202,6 +214,18 @@
     "networkCls": "critical",
     "verdict": "Internal only",
     "verdictCls": "neutral"
+  },
+  {
+    "domain": "Epidemiology & Surveillance",
+    "area": "Disease Modelling & Forecasting",
+    "internal": 2,
+    "internalStatus": "Thin",
+    "internalCls": "warn",
+    "network": 2,
+    "networkStatus": "Thin",
+    "networkCls": "warn",
+    "verdict": "Covered both sides",
+    "verdictCls": "good"
   },
   {
     "domain": "Clinical & Specialized Practice",
@@ -492,6 +516,30 @@
     "verdictCls": "good"
   },
   {
+    "domain": "Clinical & Specialized Practice",
+    "area": "Public Health Microbiology & Genomics",
+    "internal": 0,
+    "internalStatus": "No core expert",
+    "internalCls": "critical",
+    "network": 5,
+    "networkStatus": "Adequate",
+    "networkCls": "good",
+    "verdict": "Network covers the gap",
+    "verdictCls": "good"
+  },
+  {
+    "domain": "Health Promotion, Education & Workforce",
+    "area": "Public Health Nutrition",
+    "internal": 1,
+    "internalStatus": "Sole expert",
+    "internalCls": "serious",
+    "network": 1,
+    "networkStatus": "Sole expert",
+    "networkCls": "serious",
+    "verdict": "One regional holder only",
+    "verdictCls": "warn"
+  },
+  {
     "domain": "Data, Digital Health & Health Informatics",
     "area": "Registry Development (Cancer, RTI, etc.)",
     "internal": 1,
@@ -561,6 +609,18 @@
     "networkStatus": "Thin",
     "networkCls": "warn",
     "verdict": "Network covers the gap",
+    "verdictCls": "good"
+  },
+  {
+    "domain": "Public Health Emergency & Health Security",
+    "area": "Simulation Exercises (SimEx)",
+    "internal": 2,
+    "internalStatus": "Thin",
+    "internalCls": "warn",
+    "network": 1,
+    "networkStatus": "Sole expert",
+    "networkCls": "serious",
+    "verdict": "Covered both sides",
     "verdictCls": "good"
   },
   {

@@ -3,29 +3,29 @@
     "state": "UAE",
     "code": "AE",
     "people": 11,
-    "tags": 27,
-    "areas": 18
+    "tags": 29,
+    "areas": 20
   },
   {
     "state": "Qatar",
     "code": "QA",
     "people": 11,
-    "tags": 24,
-    "areas": 14
+    "tags": 27,
+    "areas": 16
   },
   {
     "state": "Bahrain",
     "code": "BH",
     "people": 10,
-    "tags": 26,
-    "areas": 15
+    "tags": 29,
+    "areas": 17
   },
   {
     "state": "Saudi Arabia",
     "code": "SA",
     "people": 10,
-    "tags": 26,
-    "areas": 22
+    "tags": 28,
+    "areas": 24
   },
   {
     "state": "Oman",
@@ -38,7 +38,7 @@
     "state": "Kuwait",
     "code": "KW",
     "people": 6,
-    "tags": 17,
-    "areas": 14
+    "tags": 20,
+    "areas": 15
   }
 ]

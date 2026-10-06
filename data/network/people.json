@@ -12,7 +12,8 @@
     "areas": [
       "Infectious Disease Epidemiology",
       "Infection Prevention & Control",
-      "Emergency Preparedness Planning"
+      "Emergency Preparedness Planning",
+      "Public Health Microbiology & Genomics"
     ],
     "soleAreas": 0,
     "external": true,
@@ -212,7 +213,8 @@
     "years": "6–10 years",
     "background": "Laboratory / Biomedical sciences",
     "areas": [
-      "Medical Laboratory"
+      "Medical Laboratory",
+      "Public Health Microbiology & Genomics"
     ],
     "soleAreas": 0,
     "external": false,
@@ -347,7 +349,8 @@
     "background": "Medicine",
     "areas": [
       "Infectious Disease Epidemiology",
-      "Emergency Preparedness Planning"
+      "Emergency Preparedness Planning",
+      "Disease Modelling & Forecasting"
     ],
     "soleAreas": 0,
     "external": true,
@@ -369,7 +372,8 @@
     "background": "Nutrition & Dietetics; Public Health / Epidemiology",
     "areas": [
       "Health Promotion Strategy",
-      "Policy Drafting & Analysis"
+      "Policy Drafting & Analysis",
+      "Public Health Nutrition"
     ],
     "soleAreas": 0,
     "external": false,
@@ -458,7 +462,8 @@
     "background": "Medicine",
     "areas": [
       "Emergency Preparedness Planning",
-      "Risk Assessment (Rapid Risk Assessment)"
+      "Risk Assessment (Rapid Risk Assessment)",
+      "Simulation Exercises (SimEx)"
     ],
     "soleAreas": 0,
     "external": true,
@@ -504,7 +509,8 @@
     "areas": [
       "Infectious Disease Epidemiology",
       "Medical Laboratory",
-      "Risk Assessment (Rapid Risk Assessment)"
+      "Risk Assessment (Rapid Risk Assessment)",
+      "Public Health Microbiology & Genomics"
     ],
     "soleAreas": 0,
     "external": true,
@@ -705,7 +711,8 @@
     "areas": [
       "Medical Laboratory",
       "Risk Assessment (Rapid Risk Assessment)",
-      "Emergency Preparedness Planning"
+      "Emergency Preparedness Planning",
+      "Public Health Microbiology & Genomics"
     ],
     "soleAreas": 0,
     "external": true,
@@ -750,7 +757,8 @@
     "areas": [
       "Burden of Disease Analysis",
       "Biostatistics",
-      "Registry Development (Cancer, RTI, etc.)"
+      "Registry Development (Cancer, RTI, etc.)",
+      "Cancer Epidemiology & Screening"
     ],
     "soleAreas": 0,
     "external": true,
@@ -773,7 +781,8 @@
     "areas": [
       "Registry Development (Cancer, RTI, etc.)",
       "Data Engineering & Automation",
-      "Biostatistics"
+      "Biostatistics",
+      "Cancer Epidemiology & Screening"
     ],
     "soleAreas": 1,
     "external": false,
@@ -908,7 +917,8 @@
     "areas": [
       "Biostatistics",
       "Surveillance Systems Design",
-      "Surveillance Reporting & Analytics"
+      "Surveillance Reporting & Analytics",
+      "Disease Modelling & Forecasting"
     ],
     "soleAreas": 0,
     "external": false,
@@ -1112,7 +1122,8 @@
     "background": "Medicine",
     "areas": [
       "Infectious Disease Epidemiology",
-      "Burden of Disease Analysis"
+      "Burden of Disease Analysis",
+      "Cancer Epidemiology & Screening"
     ],
     "soleAreas": 0,
     "external": true,
@@ -1135,7 +1146,8 @@
     "areas": [
       "NCD Prevention & Control",
       "Strategic Planning & Priority Setting",
-      "Registry Development (Cancer, RTI, etc.)"
+      "Registry Development (Cancer, RTI, etc.)",
+      "Cancer Epidemiology & Screening"
     ],
     "soleAreas": 0,
     "external": true,
@@ -1225,7 +1237,8 @@
     "areas": [
       "Competency Framework Design",
       "Public Health Informatics",
-      "Curriculum & Instructional Design"
+      "Curriculum & Instructional Design",
+      "Public Health Microbiology & Genomics"
     ],
     "soleAreas": 2,
     "external": true,

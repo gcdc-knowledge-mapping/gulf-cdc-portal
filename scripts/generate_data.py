@@ -98,13 +98,29 @@ for r in wb["05_Critical_Holders"].iter_rows(min_row=5, values_only=True):
 EXPERTISE_EDITS = {
     "Abrar Alsurayhi":        {"remove": ["Medical Laboratory"], "add": ["Vector-borne Diseases"]},
     "Faris Aldammas":         {"remove": ["Data Analysis (Quantitative)"]},
-    "Abdullatif Bin Khunayn": {"remove": ["Strategic Stockpile Management"]},
+    "Abdullatif Bin Khunayn": {"remove": ["Strategic Stockpile Management"],
+                               "add": ["Simulation Exercises (SimEx)"]},
     "Ahmed Alhatlan":         {"remove": ["Data Governance"]},
     "Mahim Al Balushi":       {"remove": ["Leadership", "Survey Design & Validation"]},
+    # Taxonomy review: areas added to the vocabulary, with holders coded from
+    # each person's own survey answers to the "advanced or strategic expert"
+    # and "technical focal point" questions.
+    "Turki Almalki":          {"add": ["Disease Modelling & Forecasting"]},
+    "Bushra Alghamdi":        {"add": ["Disease Modelling & Forecasting"]},
+    "Said Alghafri":          {"add": ["Cancer Epidemiology & Screening"]},
+    "Haya Alzeer":            {"add": ["Public Health Nutrition"]},
+    "Hamad Alsaab":           {"add": ["Simulation Exercises (SimEx)"]},
 }
 # Areas that don't exist in the workbook taxonomy yet: (domain, sub-domain)
 NEW_AREAS = {
     "Vector-borne Diseases": ("Communicable & Non-Communicable Diseases", "Communicable Diseases"),
+    # Added in the taxonomy review. An area nobody holds at core level is
+    # retired below, so these appear only where there is a holder.
+    "Disease Modelling & Forecasting": ("Epidemiology & Surveillance", "Biostatistics & Population Health"),
+    "Cancer Epidemiology & Screening": ("Communicable & Non-Communicable Diseases", "Non-Communicable Diseases"),
+    "Public Health Nutrition": ("Health Promotion, Education & Workforce", "Health Promotion"),
+    "Simulation Exercises (SimEx)": ("Public Health Emergency & Health Security", "Preparedness & Planning"),
+    "Public Health Microbiology & Genomics": ("Clinical & Specialized Practice", "Laboratory & Diagnostics"),
 }
 
 dept_of = {m["name"]: m["department"] for m in master}

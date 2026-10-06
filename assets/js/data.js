@@ -41,6 +41,12 @@ window.GCDC_DATA = {
       "path": "Epidemiology & Surveillance > Biostatistics & Population Health > Burden of Disease Analysis"
     },
     {
+      "domain": "Epidemiology & Surveillance",
+      "subdomain": "Biostatistics & Population Health",
+      "expertise": "Disease Modelling & Forecasting",
+      "path": "Epidemiology & Surveillance > Biostatistics & Population Health > Disease Modelling & Forecasting"
+    },
+    {
       "domain": "Public Health Emergency & Health Security",
       "subdomain": "Preparedness & Planning",
       "expertise": "Emergency Preparedness Planning",
@@ -51,6 +57,12 @@ window.GCDC_DATA = {
       "subdomain": "Preparedness & Planning",
       "expertise": "Risk Assessment (Rapid Risk Assessment)",
       "path": "Public Health Emergency & Health Security > Preparedness & Planning > Risk Assessment (Rapid Risk Assessment)"
+    },
+    {
+      "domain": "Public Health Emergency & Health Security",
+      "subdomain": "Preparedness & Planning",
+      "expertise": "Simulation Exercises (SimEx)",
+      "path": "Public Health Emergency & Health Security > Preparedness & Planning > Simulation Exercises (SimEx)"
     },
     {
       "domain": "Public Health Emergency & Health Security",
@@ -93,6 +105,12 @@ window.GCDC_DATA = {
       "subdomain": "Non-Communicable Diseases",
       "expertise": "NCD Prevention & Control",
       "path": "Communicable & Non-Communicable Diseases > Non-Communicable Diseases > NCD Prevention & Control"
+    },
+    {
+      "domain": "Communicable & Non-Communicable Diseases",
+      "subdomain": "Non-Communicable Diseases",
+      "expertise": "Cancer Epidemiology & Screening",
+      "path": "Communicable & Non-Communicable Diseases > Non-Communicable Diseases > Cancer Epidemiology & Screening"
     },
     {
       "domain": "Communicable & Non-Communicable Diseases",
@@ -153,6 +171,12 @@ window.GCDC_DATA = {
       "subdomain": "Health Promotion",
       "expertise": "Behavior Change Theory & Campaigns",
       "path": "Health Promotion, Education & Workforce > Health Promotion > Behavior Change Theory & Campaigns"
+    },
+    {
+      "domain": "Health Promotion, Education & Workforce",
+      "subdomain": "Health Promotion",
+      "expertise": "Public Health Nutrition",
+      "path": "Health Promotion, Education & Workforce > Health Promotion > Public Health Nutrition"
     },
     {
       "domain": "Health Promotion, Education & Workforce",
@@ -395,6 +419,16 @@ window.GCDC_DATA = {
       ]
     },
     {
+      "domain": "Epidemiology & Surveillance",
+      "subdomain": "Biostatistics & Population Health",
+      "expertise": "Disease Modelling & Forecasting",
+      "holders_n": 2,
+      "holders": [
+        "Turki Almalki (PHI)",
+        "Bushra Alghamdi (PHI)"
+      ]
+    },
+    {
       "domain": "Public Health Emergency & Health Security",
       "subdomain": "Preparedness & Planning",
       "expertise": "Emergency Preparedness Planning",
@@ -412,6 +446,16 @@ window.GCDC_DATA = {
       "holders_n": 1,
       "holders": [
         "Mahim Al Balushi (PHPP)"
+      ]
+    },
+    {
+      "domain": "Public Health Emergency & Health Security",
+      "subdomain": "Preparedness & Planning",
+      "expertise": "Simulation Exercises (SimEx)",
+      "holders_n": 2,
+      "holders": [
+        "Abdullatif Bin Khunayn (PHE)",
+        "Hamad Alsaab (PHE)"
       ]
     },
     {
@@ -480,6 +524,15 @@ window.GCDC_DATA = {
       "holders": [
         "Nada Alnaji (PHPP)",
         "Haya Alzeer (PHPP)"
+      ]
+    },
+    {
+      "domain": "Communicable & Non-Communicable Diseases",
+      "subdomain": "Non-Communicable Diseases",
+      "expertise": "Cancer Epidemiology & Screening",
+      "holders_n": 1,
+      "holders": [
+        "Said Alghafri (TCB)"
       ]
     },
     {
@@ -578,6 +631,15 @@ window.GCDC_DATA = {
       "holders_n": 1,
       "holders": [
         "Reem Alotaibi (PHPP)"
+      ]
+    },
+    {
+      "domain": "Health Promotion, Education & Workforce",
+      "subdomain": "Health Promotion",
+      "expertise": "Public Health Nutrition",
+      "holders_n": 1,
+      "holders": [
+        "Haya Alzeer (PHPP)"
       ]
     },
     {
@@ -936,6 +998,16 @@ window.GCDC_DATA = {
       "in_taxonomy": true
     },
     {
+      "domain": "Epidemiology & Surveillance",
+      "subdomain": "Biostatistics & Population Health",
+      "expertise": "Disease Modelling & Forecasting",
+      "holders_n": 2,
+      "status": "🟡 Thin Coverage",
+      "sole_holder": "(nobody)",
+      "recommendation": "Only two core holders — build redundancy and document SOPs.",
+      "in_taxonomy": true
+    },
+    {
       "domain": "Public Health Emergency & Health Security",
       "subdomain": "Preparedness & Planning",
       "expertise": "Emergency Preparedness Planning",
@@ -953,6 +1025,16 @@ window.GCDC_DATA = {
       "status": "🟠 Single Core Expert (SPOF)",
       "sole_holder": "Dr Mahim Al Balushi (PHPP, Strategic)",
       "recommendation": "One person is the sole core expert. Capture knowledge, cross-train a successor, document SOPs.",
+      "in_taxonomy": true
+    },
+    {
+      "domain": "Public Health Emergency & Health Security",
+      "subdomain": "Preparedness & Planning",
+      "expertise": "Simulation Exercises (SimEx)",
+      "holders_n": 2,
+      "status": "🟡 Thin Coverage",
+      "sole_holder": "(nobody)",
+      "recommendation": "Only two core holders — build redundancy and document SOPs.",
       "in_taxonomy": true
     },
     {
@@ -1023,6 +1105,16 @@ window.GCDC_DATA = {
       "status": "🟡 Thin Coverage",
       "sole_holder": "",
       "recommendation": "Only two core holders — build redundancy and document SOPs.",
+      "in_taxonomy": true
+    },
+    {
+      "domain": "Communicable & Non-Communicable Diseases",
+      "subdomain": "Non-Communicable Diseases",
+      "expertise": "Cancer Epidemiology & Screening",
+      "holders_n": 1,
+      "status": "🟠 Single Core Expert (SPOF)",
+      "sole_holder": "Said Alghafri (TCB)",
+      "recommendation": "Single core expert — capture knowledge and identify a successor.",
       "in_taxonomy": true
     },
     {
@@ -1123,6 +1215,16 @@ window.GCDC_DATA = {
       "status": "🟠 Single Core Expert (SPOF)",
       "sole_holder": "Reem Alotaibi (PHPP, Practitioner)",
       "recommendation": "One person is the sole core expert. Capture knowledge, cross-train a successor, document SOPs.",
+      "in_taxonomy": true
+    },
+    {
+      "domain": "Health Promotion, Education & Workforce",
+      "subdomain": "Health Promotion",
+      "expertise": "Public Health Nutrition",
+      "holders_n": 1,
+      "status": "🟠 Single Core Expert (SPOF)",
+      "sole_holder": "(nobody)",
+      "recommendation": "Not part of the active taxonomy. Consider recruitment, external partnership, or targeted development if strategically needed.",
       "in_taxonomy": true
     },
     {
@@ -1947,8 +2049,8 @@ window.GCDC_DATA = {
       "scarcity": 5,
       "impact": 5,
       "risk_index": 125,
-      "core_count": 3,
-      "core_areas": "Emergency Preparedness Planning; Infection & Immunity; Project Management (PMP/CAPM)",
+      "core_count": 4,
+      "core_areas": "Emergency Preparedness Planning; Infection & Immunity; Project Management (PMP/CAPM); Simulation Exercises (SimEx)",
       "rare_expertise": "Infection & Immunity",
       "flag": "🔴 High Continuity Risk",
       "leader": true,
@@ -2061,8 +2163,8 @@ window.GCDC_DATA = {
       "scarcity": 5,
       "impact": 4,
       "risk_index": 100,
-      "core_count": 3,
-      "core_areas": "PHEOC / Emergency Operations Centers; Disaster Medicine & Management; Emergency Preparedness Planning",
+      "core_count": 4,
+      "core_areas": "PHEOC / Emergency Operations Centers; Disaster Medicine & Management; Emergency Preparedness Planning; Simulation Exercises (SimEx)",
       "rare_expertise": "PHEOC / Emergency Operations Centers",
       "flag": "🔴 High Continuity Risk",
       "leader": false,
@@ -2099,8 +2201,8 @@ window.GCDC_DATA = {
       "scarcity": 5,
       "impact": 4,
       "risk_index": 80,
-      "core_count": 3,
-      "core_areas": "Surveillance Systems Design; Usability Testing & Health System Design; AI in Health",
+      "core_count": 4,
+      "core_areas": "Surveillance Systems Design; Usability Testing & Health System Design; AI in Health; Disease Modelling & Forecasting",
       "rare_expertise": "Surveillance Systems Design; Usability Testing & Health System Design",
       "flag": "🔴 High Continuity Risk",
       "leader": true,
@@ -2251,9 +2353,9 @@ window.GCDC_DATA = {
       "scarcity": 5,
       "impact": 3,
       "risk_index": 60,
-      "core_count": 3,
-      "core_areas": "Curriculum & Instructional Design; Competency Framework Design; Training Delivery & Facilitation",
-      "rare_expertise": "Competency Framework Design; Training Delivery & Facilitation",
+      "core_count": 4,
+      "core_areas": "Curriculum & Instructional Design; Competency Framework Design; Training Delivery & Facilitation; Cancer Epidemiology & Screening",
+      "rare_expertise": "Cancer Epidemiology & Screening; Competency Framework Design; Training Delivery & Facilitation",
       "flag": "🟡 Moderate Risk",
       "leader": false,
       "continuity": "",
@@ -2384,9 +2486,9 @@ window.GCDC_DATA = {
       "scarcity": 5,
       "impact": 2,
       "risk_index": 30,
-      "core_count": 3,
-      "core_areas": "Clinical Nutrition; NCD Prevention & Control; Health Promotion Strategy",
-      "rare_expertise": "Clinical Nutrition",
+      "core_count": 4,
+      "core_areas": "Clinical Nutrition; NCD Prevention & Control; Health Promotion Strategy; Public Health Nutrition",
+      "rare_expertise": "Public Health Nutrition; Clinical Nutrition",
       "flag": "🟢 Low/Standard",
       "leader": false,
       "continuity": "",
@@ -2479,8 +2581,8 @@ window.GCDC_DATA = {
       "scarcity": 4,
       "impact": 2,
       "risk_index": 16,
-      "core_count": 4,
-      "core_areas": "Surveillance Reporting & Analytics; Data Analysis (Quantitative); Data Engineering & Automation; AI in Health",
+      "core_count": 5,
+      "core_areas": "Surveillance Reporting & Analytics; Data Analysis (Quantitative); Data Engineering & Automation; AI in Health; Disease Modelling & Forecasting",
       "rare_expertise": "(none sole-held)",
       "flag": "🟢 Low/Standard",
       "leader": false,

@@ -44,6 +44,35 @@ OUT_DIR = os.path.join(ROOT, "data", "network")
 # Group" column to 02_Master_Dataset and this layer becomes unnecessary.
 NETWORK_GROUP = {}
 
+# --- taxonomy review -------------------------------------------------------
+# Areas added to the shared vocabulary because respondents named expertise the
+# 57-area taxonomy had no home for, and the coding had to absorb it into the
+# nearest existing area. Holders come from 09_Coding_Log column K, where each
+# respondent's off-taxonomy expertise was recorded verbatim.
+NEW_AREAS = {
+    "Disease Modelling & Forecasting": ("Epidemiology & Surveillance", "Biostatistics & Population Health"),
+    "Cancer Epidemiology & Screening": ("Communicable & Non-Communicable Diseases", "Non-Communicable Diseases"),
+    "Public Health Nutrition": ("Health Promotion, Education & Workforce", "Health Promotion"),
+    "Simulation Exercises (SimEx)": ("Public Health Emergency & Health Security", "Preparedness & Planning"),
+    "Public Health Microbiology & Genomics": ("Clinical & Specialized Practice", "Laboratory & Diagnostics"),
+}
+
+EXPERTISE_ADDS = {
+    "Ebrahim Matar": ["Disease Modelling & Forecasting"],
+    "Saeed Mahdi Algarni": ["Disease Modelling & Forecasting"],
+    "Amani Albasmi": ["Cancer Epidemiology & Screening"],
+    "Nourah M A S Sh Alsheridah": ["Cancer Epidemiology & Screening"],
+    "Hanan M Almajed": ["Cancer Epidemiology & Screening"],
+    "Esraa Ibrahim Al Abbadi": ["Cancer Epidemiology & Screening"],
+    "Fatma AlMatrooshi": ["Public Health Nutrition"],
+    "Fatma Alattar": ["Simulation Exercises (SimEx)"],
+    "Manaf Alqahtani": ["Public Health Microbiology & Genomics"],
+    "Dr. Mashael Al-Badr": ["Public Health Microbiology & Genomics"],
+    "Dr. Devendra Bansal": ["Public Health Microbiology & Genomics"],
+    "Amjad Ghanem Zaed Ghanem": ["Public Health Microbiology & Genomics"],
+    "Muhannad Sulaiman Aloraini": ["Public Health Microbiology & Genomics"],
+}
+
 GROUPS = [
     ("CEO", "CEO / Executive"),
     ("PCN", "Permanent Contact Network"),
@@ -128,6 +157,14 @@ def status_of(holders):
     return "Adequate", "good"
 
 
+def _domain_of(tree, i):
+    """The Tier-1 domain label governing tree[i]."""
+    for n in reversed(tree[: i + 1]):
+        if n["level"] == 1:
+            return n["label"]
+    return ""
+
+
 def emails_by_id():
     """Respondent ID -> official email, from the raw survey export.
 
@@ -192,6 +229,16 @@ def main():
             }
         )
 
+    # ---- apply the taxonomy-review additions ------------------------------
+    by_name = {norm(p["name"]): p for p in people}
+    for who, areas in EXPERTISE_ADDS.items():
+        person = by_name.get(norm(who))
+        assert person, f"EXPERTISE_ADDS: no respondent named {who!r}"
+        for area in areas:
+            assert area in NEW_AREAS, f"EXPERTISE_ADDS: {area!r} missing from NEW_AREAS"
+            if area not in person["areas"]:
+                person["areas"].append(area)
+
     # ---- taxonomy with live network holder counts -------------------------
     _, tax_rows = table(wb["01_Taxonomy"])
     taxonomy = []
@@ -213,6 +260,22 @@ def main():
             }
         )
 
+    for area, (dom, sub) in NEW_AREAS.items():
+        holders = [p for p in people if area in p["areas"]]
+        if not holders:
+            continue
+        label, cls = status_of(len(holders))
+        entry = {
+            "domain": dom, "sub": sub, "area": area,
+            "holders": len(holders),
+            "states": len({p["state"] for p in holders}),
+            "status": label, "cls": cls,
+        }
+        # keep it beside the other areas of the same sub-domain
+        idx = max((i for i, t in enumerate(taxonomy)
+                   if t["domain"] == dom and t["sub"] == sub), default=len(taxonomy) - 1) + 1
+        taxonomy.insert(idx, entry)
+
     # ---- member-state coverage -------------------------------------------
     _, cov_rows = table(wb["04_MemberState_Coverage"])
     coverage = []
@@ -232,6 +295,20 @@ def main():
                 "states": num(r.get("States Covering")),
             }
         )
+
+    for area, (dom, sub) in NEW_AREAS.items():
+        holders = [p for p in people if area in p["areas"]]
+        if not holders:
+            continue
+        by = {st: sum(1 for p in holders if p["state"] == st) for st in STATES}
+        entry = {
+            "domain": dom, "area": area, "by": by,
+            "total": len(holders),
+            "states": sum(1 for n in by.values() if n),
+        }
+        idx = max((i for i, c in enumerate(coverage) if c["domain"] == dom),
+                  default=len(coverage) - 1) + 1
+        coverage.insert(idx, entry)
 
     # ---- gaps -------------------------------------------------------------
     _, gap_rows = table(wb["06_Knowledge_Gaps"])
@@ -301,6 +378,36 @@ def main():
                 "note": clean(r[3]),
             }
         )
+
+    # Mirror the taxonomy-review additions into the tree, so the Mapping view
+    # shows them alongside the areas that came from the workbook.
+    for area, (dom, sub) in NEW_AREAS.items():
+        holders = [p for p in people if area in p["areas"]]
+        if not holders:
+            continue
+        # the last node belonging to this sub-domain, so the area lands inside it
+        anchor = None
+        in_sub = False
+        for i, n in enumerate(tree):
+            if n["level"] == 2:
+                in_sub = n["label"] == sub and _domain_of(tree, i) == dom
+            elif n["level"] == 1:
+                in_sub = False
+            if in_sub:
+                anchor = i
+        if anchor is None:
+            continue
+        label, _ = status_of(len(holders))
+        states = len({p["state"] for p in holders})
+        nodes = [{
+            "level": 3, "label": area, "type": "Core Expertise (Tier 3)",
+            "note": f"{len(holders)} holder(s) · {states} state(s)"
+                    + (" · SOLE EXPERT" if len(holders) == 1 else ""),
+        }]
+        for h in sorted(holders, key=lambda p: p["name"]):
+            nodes.append({"level": 4, "label": f"{h['name']} ({h['code']})",
+                          "type": "Holder", "note": ""})
+        tree[anchor + 1 : anchor + 1] = nodes
 
     # ---- bridge: internal vs network per expertise area -------------------
     bridge = []
