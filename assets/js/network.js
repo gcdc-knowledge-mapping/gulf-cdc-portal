@@ -159,9 +159,8 @@
       '<button type="button" class="btn" data-clear="all">Clear all filters</button></div>';
   }
 
-  var EXTERNAL_NOTE =
-    "These experts were nominated by the six GCC Member States. They are " +
-    "<b>not Gulf CDC staff</b> and do not appear in the internal Contacts or Core Expertise sections.";
+  var NOMINATED_NOTE =
+    "These experts were nominated by the six GCC Member States.";
 
   var state = {
     q: "", st: "", track: "",          // Experts
@@ -249,7 +248,7 @@
       "A live picture of where public health expertise sits across the GCC Permanent Contact Network, " +
       "Country Liaison Officers and Working Group members: <b>" + M.people + " experts</b> across <b>" +
       M.states + " Member States</b>, mapped to " + (D.byDomain || []).length + " domains and " +
-      M.areas + " core expertise areas. " + EXTERNAL_NOTE) +
+      M.areas + " core expertise areas. " + NOMINATED_NOTE) +
 
       '<div class="grid grid--kpi">' +
         kpi(M.people, "Network experts", M.states + " Member States", "var(--net)", "view:directory", "Open the expert directory") +
@@ -325,7 +324,7 @@
 
     return head("Core Expertise",
       "Every network expert and the areas they hold at <em>core</em> expertise level, with the Member State " +
-      "they represent. Filter by country, or search by name or expertise. " + EXTERNAL_NOTE) +
+      "they represent. Filter by country, or search by name or expertise.") +
 
       '<div class="toolbar">' +
         '<div class="field field--search"><span class="field__icon" aria-hidden="true">⌕</span>' +
@@ -378,7 +377,7 @@
 
     return head("Experts",
       "A profile for every expert in the network: position, institution, Member State, work email and the areas " +
-      "they hold at core expertise level. " + EXTERNAL_NOTE) +
+      "they hold at core expertise level. " + NOMINATED_NOTE) +
 
       '<div class="toolbar">' +
         '<div class="field field--search"><span class="field__icon" aria-hidden="true">⌕</span>' +
@@ -431,8 +430,6 @@
                   : '<span class="contact__email" style="pointer-events:none">' +
                     '<span aria-hidden="true">✉</span> <span>—</span></span>') +
               "</div>" +
-              '<div class="netcard__foot"><span>' + esc(p.profile) + " profile</span>" +
-              '<span class="netcard__idx">Index ' + p.index + "</span></div>" +
             "</article>";
           }).join("") + "</div>"
         : emptyState("No expert matches these filters."));
