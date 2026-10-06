@@ -126,6 +126,24 @@
     "note": ""
   },
   {
+    "level": 3,
+    "label": "Disease Modelling & Forecasting",
+    "type": "Core Expertise (Tier 3)",
+    "note": "2 holder(s) · 2 state(s)"
+  },
+  {
+    "level": 4,
+    "label": "Ebrahim Matar (BH)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 4,
+    "label": "Saeed Mahdi Algarni (SA)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
     "level": 2,
     "label": "Biostatistics & Population Health",
     "type": "Sub-Domain (Tier 2)",
@@ -182,24 +200,6 @@
   {
     "level": 4,
     "label": "Hanan M Almajed (KW)",
-    "type": "Holder",
-    "note": ""
-  },
-  {
-    "level": 3,
-    "label": "Disease Modelling & Forecasting",
-    "type": "Core Expertise (Tier 3)",
-    "note": "2 holder(s) · 2 state(s)"
-  },
-  {
-    "level": 4,
-    "label": "Ebrahim Matar (BH)",
-    "type": "Holder",
-    "note": ""
-  },
-  {
-    "level": 4,
-    "label": "Saeed Mahdi Algarni (SA)",
     "type": "Holder",
     "note": ""
   },
@@ -330,18 +330,6 @@
     "note": ""
   },
   {
-    "level": 3,
-    "label": "Simulation Exercises (SimEx)",
-    "type": "Core Expertise (Tier 3)",
-    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
-  },
-  {
-    "level": 4,
-    "label": "Fatma Alattar (AE)",
-    "type": "Holder",
-    "note": ""
-  },
-  {
     "level": 2,
     "label": "Response & Operations",
     "type": "Sub-Domain (Tier 2)",
@@ -356,6 +344,18 @@
   {
     "level": 4,
     "label": "Mohammad Behbehani (KW)",
+    "type": "Holder",
+    "note": ""
+  },
+  {
+    "level": 3,
+    "label": "Simulation Exercises (SimEx)",
+    "type": "Core Expertise (Tier 3)",
+    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+  },
+  {
+    "level": 4,
+    "label": "Fatma Alattar (AE)",
     "type": "Holder",
     "note": ""
   },

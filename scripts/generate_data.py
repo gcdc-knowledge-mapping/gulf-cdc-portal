@@ -116,10 +116,10 @@ NEW_AREAS = {
     "Vector-borne Diseases": ("Communicable & Non-Communicable Diseases", "Communicable Diseases"),
     # Added in the taxonomy review. An area nobody holds at core level is
     # retired below, so these appear only where there is a holder.
-    "Disease Modelling & Forecasting": ("Epidemiology & Surveillance", "Biostatistics & Population Health"),
+    "Disease Modelling & Forecasting": ("Epidemiology & Surveillance", "Disease Surveillance"),
     "Cancer Epidemiology & Screening": ("Communicable & Non-Communicable Diseases", "Non-Communicable Diseases"),
     "Public Health Nutrition": ("Health Promotion, Education & Workforce", "Health Promotion"),
-    "Simulation Exercises (SimEx)": ("Public Health Emergency & Health Security", "Preparedness & Planning"),
+    "Simulation Exercises (SimEx)": ("Public Health Emergency & Health Security", "Response & Operations"),
     "Public Health Microbiology & Genomics": ("Clinical & Specialized Practice", "Laboratory & Diagnostics"),
 }
 
@@ -213,8 +213,13 @@ for t in tax:
         rec = meta.get("rec", "") or "Single core expert — capture knowledge and identify a successor."
     gaps.append(dict(domain=t["domain"], subdomain=t["subdomain"], expertise=t["expertise"],
         holders_n=n, status=status_for(n), sole_holder=sole_holder, recommendation=rec, in_taxonomy=True))
+covered_now = {t["expertise"] for t in tax}
 for r in wb["06_Knowledge_Gaps"].iter_rows(min_row=4, values_only=True):
     if r[0] and "No Core Expert" in s(r[4]):
+        # An area EXPERTISE_EDITS has since given a holder is no longer a gap;
+        # re-adding the workbook row would list it twice, once each way.
+        if s(r[2]) in covered_now:
+            continue
         gaps.append(dict(domain=s(r[0]), subdomain=s(r[1]), expertise=s(r[2]), holders_n=0,
             status="\U0001F534 No Core Expert", sole_holder=s(r[5]), recommendation=s(r[6]), in_taxonomy=False))
 # Areas retired by EXPERTISE_EDITS (their last core holder was removed)

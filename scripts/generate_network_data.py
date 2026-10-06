@@ -50,10 +50,10 @@ NETWORK_GROUP = {}
 # nearest existing area. Holders come from 09_Coding_Log column K, where each
 # respondent's off-taxonomy expertise was recorded verbatim.
 NEW_AREAS = {
-    "Disease Modelling & Forecasting": ("Epidemiology & Surveillance", "Biostatistics & Population Health"),
+    "Disease Modelling & Forecasting": ("Epidemiology & Surveillance", "Disease Surveillance"),
     "Cancer Epidemiology & Screening": ("Communicable & Non-Communicable Diseases", "Non-Communicable Diseases"),
     "Public Health Nutrition": ("Health Promotion, Education & Workforce", "Health Promotion"),
-    "Simulation Exercises (SimEx)": ("Public Health Emergency & Health Security", "Preparedness & Planning"),
+    "Simulation Exercises (SimEx)": ("Public Health Emergency & Health Security", "Response & Operations"),
     "Public Health Microbiology & Genomics": ("Clinical & Specialized Practice", "Laboratory & Diagnostics"),
 }
 

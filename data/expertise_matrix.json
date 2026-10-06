@@ -41,6 +41,16 @@
   },
   {
     "domain": "Epidemiology & Surveillance",
+    "subdomain": "Disease Surveillance",
+    "expertise": "Disease Modelling & Forecasting",
+    "holders_n": 2,
+    "holders": [
+      "Turki Almalki (PHI)",
+      "Bushra Alghamdi (PHI)"
+    ]
+  },
+  {
+    "domain": "Epidemiology & Surveillance",
     "subdomain": "Biostatistics & Population Health",
     "expertise": "Biostatistics",
     "holders_n": 1,
@@ -55,16 +65,6 @@
     "holders_n": 1,
     "holders": [
       "Raghad AlHumud (PHPP)"
-    ]
-  },
-  {
-    "domain": "Epidemiology & Surveillance",
-    "subdomain": "Biostatistics & Population Health",
-    "expertise": "Disease Modelling & Forecasting",
-    "holders_n": 2,
-    "holders": [
-      "Turki Almalki (PHI)",
-      "Bushra Alghamdi (PHI)"
     ]
   },
   {
@@ -89,16 +89,6 @@
   },
   {
     "domain": "Public Health Emergency & Health Security",
-    "subdomain": "Preparedness & Planning",
-    "expertise": "Simulation Exercises (SimEx)",
-    "holders_n": 2,
-    "holders": [
-      "Abdullatif Bin Khunayn (PHE)",
-      "Hamad Alsaab (PHE)"
-    ]
-  },
-  {
-    "domain": "Public Health Emergency & Health Security",
     "subdomain": "Response & Operations",
     "expertise": "PHEOC / Emergency Operations Centers",
     "holders_n": 1,
@@ -113,6 +103,16 @@
     "holders_n": 2,
     "holders": [
       "Abdullah Fahad Alnowaiser (PHE)",
+      "Hamad Alsaab (PHE)"
+    ]
+  },
+  {
+    "domain": "Public Health Emergency & Health Security",
+    "subdomain": "Response & Operations",
+    "expertise": "Simulation Exercises (SimEx)",
+    "holders_n": 2,
+    "holders": [
+      "Abdullatif Bin Khunayn (PHE)",
       "Hamad Alsaab (PHE)"
     ]
   },
