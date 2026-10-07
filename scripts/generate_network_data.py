@@ -276,6 +276,20 @@ def main():
                    if t["domain"] == dom and t["sub"] == sub), default=len(taxonomy) - 1) + 1
         taxonomy.insert(idx, entry)
 
+    # Recompute each person's sole-holder count from the finished taxonomy.
+    # The workbook column was calculated before the taxonomy review, so it
+    # misses areas added since — two respondents became the only holder of a
+    # new area and would otherwise still read zero.
+    sole_names = {}
+    for t in taxonomy:
+        if t["holders"] != 1:
+            continue
+        who = [p for p in people if t["area"] in p["areas"]]
+        if len(who) == 1:
+            sole_names[who[0]["name"]] = sole_names.get(who[0]["name"], 0) + 1
+    for p in people:
+        p["soleAreas"] = sole_names.get(p["name"], 0)
+
     # ---- member-state coverage -------------------------------------------
     _, cov_rows = table(wb["04_MemberState_Coverage"])
     coverage = []
@@ -502,6 +516,7 @@ def main():
         "adequate": counts["good"],
         "thin": counts["warn"],
         "sole": counts["serious"],
+        "soleExperts": sum(1 for p in people if p["soleAreas"] > 0),
         "noCore": counts["critical"],
         "external": sum(1 for p in people if p["external"]),
         "critical": sum(1 for p in people if p["index"] >= 60),
