@@ -532,7 +532,7 @@
     return head("Expertise Mapping",
       "The full GCC network hierarchy as an interactive tree — Network → Domain → Sub-domain → Core expertise → " +
       "Holder, with each holder's Member State shown as a flag. Click a node to expand or collapse its branch; " +
-      "drag to pan and scroll to zoom. Clicking a person opens them in Core Expertise.") +
+      "drag to pan and scroll to zoom. Clicking a person opens their profile.") +
       '<div class="toolbar">' +
       '<div class="field field--search"><span class="field__icon" aria-hidden="true">⌕</span>' +
       '<input type="search" id="mapq" data-view-search placeholder="Search the tree…  (press /)" aria-label="Search mapping tree" value="' + esc(mapState.q) + '"></div>' +
@@ -630,7 +630,7 @@
                     n.tier === 4 ? "fill:color-mix(in srgb, " + n.color + " 14%, var(--surface))" : "";
         var title = esc(n.label) + (expandable
           ? " — " + n.nExp + " area" + (n.nExp !== 1 ? "s" : "") + ", " + n.nHold + " holder" + (n.nHold !== 1 ? "s" : "")
-          : isPerson ? (hState ? " — " + esc(hState.label) + " · open in Core Expertise" : " — open in Core Expertise") : "");
+          : isPerson ? (hState ? " — " + esc(hState.label) + " · open their profile" : " — open their profile") : "");
         return '<g class="' + cls + '" transform="translate(' + o.x + "," + o.y + ')" data-id="' + n.id + '"' +
           (expandable ? ' data-toggle="1"' : "") + (isPerson ? ' data-person="' + esc(person) + '"' : "") + ">" +
           "<title>" + title + "</title>" +
@@ -671,8 +671,10 @@
       downTarget = null;
       var person = node.getAttribute("data-person");
       if (person) {
-        state.coreQ = person; state.coreSt = "";
-        return go("core");
+        // open the expert's own profile, clearing any other directory filter
+        // so the person is never hidden by one that was left on
+        state.q = person; state.st = ""; state.track = ""; state.sole = false;
+        return go("directory");
       }
       var id = node.getAttribute("data-id");
       if (mapState.q) { mapState.q = ""; $("#mapq").value = ""; }
