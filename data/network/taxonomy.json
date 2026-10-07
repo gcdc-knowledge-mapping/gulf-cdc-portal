@@ -5,7 +5,7 @@
     "area": "Outbreak Investigation",
     "holders": 1,
     "states": 1,
-    "status": "Sole expert",
+    "status": "Single core expert",
     "cls": "serious"
   },
   {
@@ -23,7 +23,7 @@
     "area": "Epidemic Intelligence",
     "holders": 1,
     "states": 1,
-    "status": "Sole expert",
+    "status": "Single core expert",
     "cls": "serious"
   },
   {
@@ -86,7 +86,7 @@
     "area": "PHEOC / Emergency Operations Centers",
     "holders": 1,
     "states": 1,
-    "status": "Sole expert",
+    "status": "Single core expert",
     "cls": "serious"
   },
   {
@@ -104,7 +104,7 @@
     "area": "Simulation Exercises (SimEx)",
     "holders": 1,
     "states": 1,
-    "status": "Sole expert",
+    "status": "Single core expert",
     "cls": "serious"
   },
   {
@@ -203,7 +203,7 @@
     "area": "Health Economics & Financing",
     "holders": 1,
     "states": 1,
-    "status": "Sole expert",
+    "status": "Single core expert",
     "cls": "serious"
   },
   {
@@ -257,7 +257,7 @@
     "area": "Public Health Nutrition",
     "holders": 1,
     "states": 1,
-    "status": "Sole expert",
+    "status": "Single core expert",
     "cls": "serious"
   },
   {
@@ -266,7 +266,7 @@
     "area": "Competency Framework Design",
     "holders": 1,
     "states": 1,
-    "status": "Sole expert",
+    "status": "Single core expert",
     "cls": "serious"
   },
   {
@@ -284,7 +284,7 @@
     "area": "Curriculum & Instructional Design",
     "holders": 1,
     "states": 1,
-    "status": "Sole expert",
+    "status": "Single core expert",
     "cls": "serious"
   },
   {
@@ -311,7 +311,7 @@
     "area": "Data Governance",
     "holders": 1,
     "states": 1,
-    "status": "Sole expert",
+    "status": "Single core expert",
     "cls": "serious"
   },
   {
@@ -338,7 +338,7 @@
     "area": "Data Engineering & Automation",
     "holders": 1,
     "states": 1,
-    "status": "Sole expert",
+    "status": "Single core expert",
     "cls": "serious"
   },
   {
@@ -410,7 +410,7 @@
     "area": "Survey Design & Validation",
     "holders": 1,
     "states": 1,
-    "status": "Sole expert",
+    "status": "Single core expert",
     "cls": "serious"
   },
   {
@@ -446,7 +446,7 @@
     "area": "Patient Safety",
     "holders": 1,
     "states": 1,
-    "status": "Sole expert",
+    "status": "Single core expert",
     "cls": "serious"
   },
   {
@@ -545,7 +545,7 @@
     "area": "Leadership",
     "holders": 1,
     "states": 1,
-    "status": "Sole expert",
+    "status": "Single core expert",
     "cls": "serious"
   },
   {
