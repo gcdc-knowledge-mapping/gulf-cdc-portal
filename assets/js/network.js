@@ -163,7 +163,7 @@
     "These experts were nominated by the six GCC Member States.";
 
   var state = {
-    q: "", st: "", track: "",          // Experts
+    q: "", st: "", track: "", sole: false,   // Experts
     coreQ: "", coreSt: "",             // Core Expertise
     domain: "",                        // Member States
     sort: "name", dir: 1
@@ -254,7 +254,7 @@
       '<div class="grid grid--kpi">' +
         kpi(M.people, "Network experts", M.states + " Member States", "var(--net)", "view:directory", "Open the expert directory") +
         kpi(M.covered + " / " + M.areas, "Taxonomy areas covered", M.tags + " core expertise tags", "var(--accent)", "view:states", "See coverage by Member State") +
-        kpi(M.sole, "Single core expert", "Only one holder in the network", "var(--st-serious)", "view:states", "See where the network is thin") +
+        kpi(M.sole, "Single core expert", "Only one holder — " + M.soleExperts + " experts", "var(--st-serious)", "sole:1", "Show the " + M.soleExperts + " experts who are the only holder of an area") +
         kpi(M.external, "Externally consulted", "advise WHO / Member States / partners", "var(--st-good)", "view:directory", "Show externally consulted experts") +
       "</div>" +
 
@@ -365,6 +365,7 @@
   /* --------------------------------------------------------- Experts */
   VIEWS.directory = function () {
     var list = PEOPLE.filter(function (p) {
+      if (state.sole && !p.soleAreas) return false;
       if (state.st && p.state !== state.st) return false;
       if (state.track && p.track !== state.track) return false;
       if (state.q) {
@@ -398,7 +399,8 @@
       filterChips([
         { label: "Search", value: state.q, clear: "q" },
         { label: "Member State", value: state.st ? stateLabel(state.st) : "", clear: "st" },
-        { label: "Track", value: state.track, clear: "track" }
+        { label: "Track", value: state.track, clear: "track" },
+        { label: "Only holder of an area", value: state.sole ? "Yes" : "", clear: "sole" }
       ]) +
       (list.length
         ? '<div class="net-grid">' + list.map(function (p) {
@@ -819,6 +821,7 @@
         var kind = a.slice(0, a.indexOf(":"));
         var val = a.slice(a.indexOf(":") + 1);
         if (kind === "view") return jumpTo(val, {});
+        if (kind === "sole") return jumpTo("directory", { sole: true, q: "", st: "", track: "" });
         if (kind === "state") return jumpTo("directory", { st: val, q: "", track: "" });
         if (kind === "domain") return jumpTo("states", { domain: val });
         return;
@@ -828,8 +831,10 @@
       var clear = e.target.closest("[data-clear]");
       if (clear) {
         var what = clear.getAttribute("data-clear");
-        if (what === "all") { state.q = ""; state.st = ""; state.track = ""; state.coreQ = ""; state.coreSt = ""; state.domain = ""; }
-        else state[what] = "";
+        if (what === "all") {
+          state.q = ""; state.st = ""; state.track = ""; state.sole = false;
+          state.coreQ = ""; state.coreSt = ""; state.domain = "";
+        } else state[what] = (what === "sole") ? false : "";
         return go(current);
       }
 
@@ -862,6 +867,7 @@
       }
       if (e.target.closest("#dirCsv")) {
         var dirList = PEOPLE.filter(function (p) {
+          if (state.sole && !p.soleAreas) return false;
           if (state.st && p.state !== state.st) return false;
           if (state.track && p.track !== state.track) return false;
           if (state.q) {

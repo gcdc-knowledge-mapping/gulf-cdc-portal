@@ -375,7 +375,7 @@
       "Policy Drafting & Analysis",
       "Public Health Nutrition"
     ],
-    "soleAreas": 0,
+    "soleAreas": 1,
     "external": false,
     "profile": "Practitioner",
     "index": 2,
@@ -465,7 +465,7 @@
       "Risk Assessment (Rapid Risk Assessment)",
       "Simulation Exercises (SimEx)"
     ],
-    "soleAreas": 0,
+    "soleAreas": 1,
     "external": true,
     "profile": "Strategic",
     "index": 25,
