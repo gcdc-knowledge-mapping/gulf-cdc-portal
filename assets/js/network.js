@@ -254,7 +254,7 @@
       '<div class="grid grid--kpi">' +
         kpi(M.people, "Network experts", M.states + " Member States", "var(--net)", "view:directory", "Open the expert directory") +
         kpi(M.covered + " / " + M.areas, "Taxonomy areas covered", M.tags + " core expertise tags", "var(--accent)", "view:states", "See coverage by Member State") +
-        kpi(M.sole, "Single core expert", "Only one holder — " + M.soleExperts + " experts", "var(--st-serious)", "sole:1", "Show the " + M.soleExperts + " experts who are the only holder of an area") +
+        kpi(M.soleExperts, "Single core experts", "Sole holders of " + M.sole + " areas", "var(--st-serious)", "sole:1", "Show the " + M.soleExperts + " experts who are the only holder of an area") +
         kpi(M.external, "Externally consulted", "advise WHO / Member States / partners", "var(--st-good)", "view:directory", "Show externally consulted experts") +
       "</div>" +
 
