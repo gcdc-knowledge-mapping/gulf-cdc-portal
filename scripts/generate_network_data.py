@@ -280,15 +280,18 @@ def main():
     # The workbook column was calculated before the taxonomy review, so it
     # misses areas added since — two respondents became the only holder of a
     # new area and would otherwise still read zero.
-    sole_names = {}
+    sole_by_name = {}
     for t in taxonomy:
         if t["holders"] != 1:
             continue
         who = [p for p in people if t["area"] in p["areas"]]
         if len(who) == 1:
-            sole_names[who[0]["name"]] = sole_names.get(who[0]["name"], 0) + 1
+            sole_by_name.setdefault(who[0]["name"], []).append(t["area"])
     for p in people:
-        p["soleAreas"] = sole_names.get(p["name"], 0)
+        # the areas this person is the network's only holder of, named so the
+        # profile can show which ones rather than just how many
+        p["soleList"] = sorted(sole_by_name.get(p["name"], []))
+        p["soleAreas"] = len(p["soleList"])
 
     # ---- member-state coverage -------------------------------------------
     _, cov_rows = table(wb["04_MemberState_Coverage"])

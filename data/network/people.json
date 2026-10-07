@@ -21,7 +21,8 @@
     "index": 75,
     "confidence": "High",
     "email": "m.alqahtani@gulfcdc.org",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 4,
@@ -44,7 +45,8 @@
     "index": 8,
     "confidence": "Low",
     "email": "mmqahtani@pha.gov.sa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 5,
@@ -66,7 +68,8 @@
     "index": 25,
     "confidence": "Low",
     "email": "fatma.hussain@mohap.gov.ae",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 6,
@@ -87,7 +90,8 @@
     "index": 25,
     "confidence": "High",
     "email": "anooh@health.gov.bh",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 7,
@@ -110,7 +114,8 @@
     "index": 100,
     "confidence": "Medium",
     "email": "khami001@gmail.com",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 8,
@@ -133,7 +138,8 @@
     "index": 100,
     "confidence": "Medium",
     "email": "Alya.harbi@mohap.gov.ae",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 9,
@@ -156,7 +162,8 @@
     "index": 100,
     "confidence": "High",
     "email": "hyalghareeلا@moh.gov.kw",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 10,
@@ -178,7 +185,8 @@
     "index": 16,
     "confidence": "Medium",
     "email": "ymbakhsh@pha.gov.sa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 11,
@@ -200,7 +208,8 @@
     "index": 75,
     "confidence": "Medium",
     "email": "najiba.abdulrazzaq@ehs.gov.ae",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 12,
@@ -222,7 +231,8 @@
     "index": 6,
     "confidence": "Medium",
     "email": "mbadr@moph.gov.qa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 13,
@@ -245,7 +255,8 @@
     "index": 48,
     "confidence": "High",
     "email": "sjama@moph.gov.qa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 14,
@@ -268,7 +279,8 @@
     "index": 75,
     "confidence": "Medium",
     "email": "alqaudi99@gmail.com",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 15,
@@ -290,7 +302,8 @@
     "index": 6,
     "confidence": "Medium",
     "email": "aalbinali@moph.gov.qa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 16,
@@ -313,7 +326,8 @@
     "index": 8,
     "confidence": "Medium",
     "email": "Mariam.AlOwais@mohap.gov.ae",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 17,
@@ -335,7 +349,8 @@
     "index": 16,
     "confidence": "High",
     "email": "gzayani@health.gov.bh",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 18,
@@ -358,7 +373,8 @@
     "index": 25,
     "confidence": "Medium",
     "email": "smgarni@pha.gov.sa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 19,
@@ -381,7 +397,10 @@
     "index": 2,
     "confidence": "High",
     "email": "fatma.almatrooshi@mohap.gov.ae",
-    "group": ""
+    "group": "",
+    "soleList": [
+      "Public Health Nutrition"
+    ]
   },
   {
     "id": 20,
@@ -404,7 +423,8 @@
     "index": 100,
     "confidence": "Medium",
     "email": "abkhb1959@gmail.com , aalbaho@moh.gov.kw",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 21,
@@ -425,7 +445,8 @@
     "index": 2,
     "confidence": "Low",
     "email": "Khalid.AlSulimani@mafwr.gov.om",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 22,
@@ -448,7 +469,8 @@
     "index": 64,
     "confidence": "High",
     "email": "FMutawa4@health.gov.bh",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 23,
@@ -471,7 +493,10 @@
     "index": 25,
     "confidence": "High",
     "email": "fatma.alattar@mohap.gov.ae",
-    "group": ""
+    "group": "",
+    "soleList": [
+      "Simulation Exercises (SimEx)"
+    ]
   },
   {
     "id": 24,
@@ -494,7 +519,8 @@
     "index": 16,
     "confidence": "Medium",
     "email": "RSALOOM@HEALTH.GOV.BH",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 25,
@@ -518,7 +544,8 @@
     "index": 48,
     "confidence": "High",
     "email": "dbansal@moph.gov.qa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 26,
@@ -540,7 +567,8 @@
     "index": 8,
     "confidence": "Medium",
     "email": "kalturki@moph.gov.qa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 27,
@@ -563,7 +591,8 @@
     "index": 25,
     "confidence": "Medium",
     "email": "nada.almarzouqi@mohap.gov.ae",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 28,
@@ -585,7 +614,8 @@
     "index": 75,
     "confidence": "Low",
     "email": "issohaibani@pha.gov.sa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 29,
@@ -608,7 +638,10 @@
     "index": 45,
     "confidence": "High",
     "email": "Aali9@heallth.gov.bh",
-    "group": ""
+    "group": "",
+    "soleList": [
+      "Outbreak Investigation"
+    ]
   },
   {
     "id": 30,
@@ -630,7 +663,8 @@
     "index": 64,
     "confidence": "High",
     "email": "bsaffar@health.gov.bh",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 31,
@@ -651,7 +685,8 @@
     "index": 9,
     "confidence": "Medium",
     "email": "salyafei@moph.gov.qa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 32,
@@ -674,7 +709,10 @@
     "index": 10,
     "confidence": "High",
     "email": "nhkanhal@pha.gov.sa",
-    "group": ""
+    "group": "",
+    "soleList": [
+      "Survey Design & Validation"
+    ]
   },
   {
     "id": 33,
@@ -696,7 +734,8 @@
     "index": 6,
     "confidence": "Medium",
     "email": "haltamimi@moph.gov.qa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 34,
@@ -720,7 +759,8 @@
     "index": 48,
     "confidence": "High",
     "email": "azaed@health.gov.bh",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 35,
@@ -742,7 +782,8 @@
     "index": 64,
     "confidence": "Medium",
     "email": "saifo7@rop.gov.om",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 36,
@@ -766,7 +807,8 @@
     "index": 100,
     "confidence": "Medium",
     "email": "aelbasmi@moh.gov.kw",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 37,
@@ -790,7 +832,10 @@
     "index": 30,
     "confidence": "High",
     "email": "nalsheridah@moh.gov.kw",
-    "group": ""
+    "group": "",
+    "soleList": [
+      "Data Engineering & Automation"
+    ]
   },
   {
     "id": 38,
@@ -813,7 +858,10 @@
     "index": 80,
     "confidence": "High",
     "email": "aazehr@pha.gov.sa",
-    "group": ""
+    "group": "",
+    "soleList": [
+      "Health Economics & Financing"
+    ]
   },
   {
     "id": 39,
@@ -835,7 +883,8 @@
     "index": 24,
     "confidence": "High",
     "email": "rmaswad@pha.gov.sa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 40,
@@ -856,7 +905,8 @@
     "index": 75,
     "confidence": "Medium",
     "email": "Sulaiman.alrawahi@moh.gov",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 41,
@@ -879,7 +929,8 @@
     "index": 64,
     "confidence": "High",
     "email": "ysmuzaini@pha.gov.sa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 42,
@@ -902,7 +953,12 @@
     "index": 80,
     "confidence": "Medium",
     "email": "mqbehbehani@moh.gov.kw",
-    "group": ""
+    "group": "",
+    "soleList": [
+      "Leadership",
+      "PHEOC / Emergency Operations Centers",
+      "Patient Safety"
+    ]
   },
   {
     "id": 43,
@@ -926,7 +982,8 @@
     "index": 3,
     "confidence": "High",
     "email": "ematar1@health.gov.bh",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 44,
@@ -949,7 +1006,8 @@
     "index": 75,
     "confidence": "Medium",
     "email": "rsudandiradas@moph.gov.qa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 45,
@@ -972,7 +1030,8 @@
     "index": 16,
     "confidence": "Medium",
     "email": "halburno@moph.gov.qa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 46,
@@ -995,7 +1054,8 @@
     "index": 25,
     "confidence": "High",
     "email": "Buthaina.Almuhair@mohap.gov.ae",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 47,
@@ -1018,7 +1078,10 @@
     "index": 80,
     "confidence": "High",
     "email": "mubarkah.alkarbi@mohap.gov.ae",
-    "group": ""
+    "group": "",
+    "soleList": [
+      "Data Governance"
+    ]
   },
   {
     "id": 48,
@@ -1041,7 +1104,8 @@
     "index": 16,
     "confidence": "High",
     "email": "mariam.alameeri@mohap.gov.ae",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 49,
@@ -1064,7 +1128,8 @@
     "index": 24,
     "confidence": "High",
     "email": "water140@hotmail.co.uk",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 50,
@@ -1085,7 +1150,8 @@
     "index": 9,
     "confidence": "Medium",
     "email": "huda.alabdouli@mohap.gov.ae",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 51,
@@ -1108,7 +1174,8 @@
     "index": 100,
     "confidence": "High",
     "email": "asayyad@health.gov.bh",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 52,
@@ -1131,7 +1198,8 @@
     "index": 64,
     "confidence": "Medium",
     "email": "h.almajed@moh.gov.kw",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 53,
@@ -1155,7 +1223,8 @@
     "index": 16,
     "confidence": "High",
     "email": "ealabadi@moph.gov.qa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 54,
@@ -1178,7 +1247,8 @@
     "index": 100,
     "confidence": "High",
     "email": "mashahin@pha.gov.sa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 55,
@@ -1199,7 +1269,8 @@
     "index": 18,
     "confidence": "Medium",
     "email": "adahir@moph.gov.qa",
-    "group": ""
+    "group": "",
+    "soleList": []
   },
   {
     "id": 56,
@@ -1222,7 +1293,10 @@
     "index": 80,
     "confidence": "High",
     "email": "ntbcps288@gmail.com",
-    "group": ""
+    "group": "",
+    "soleList": [
+      "Epidemic Intelligence"
+    ]
   },
   {
     "id": 57,
@@ -1246,6 +1320,10 @@
     "index": 125,
     "confidence": "High",
     "email": "msoraini@pha.gov.sa",
-    "group": ""
+    "group": "",
+    "soleList": [
+      "Competency Framework Design",
+      "Curriculum & Instructional Design"
+    ]
   }
 ]
