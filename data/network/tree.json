@@ -21,7 +21,7 @@
     "level": 3,
     "label": "Outbreak Investigation",
     "type": "Core Expertise (Tier 3)",
-    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+    "note": "1 holder(s) · 1 state(s) · SINGLE CORE EXPERT"
   },
   {
     "level": 4,
@@ -93,7 +93,7 @@
     "level": 3,
     "label": "Epidemic Intelligence",
     "type": "Core Expertise (Tier 3)",
-    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+    "note": "1 holder(s) · 1 state(s) · SINGLE CORE EXPERT"
   },
   {
     "level": 4,
@@ -339,7 +339,7 @@
     "level": 3,
     "label": "PHEOC / Emergency Operations Centers",
     "type": "Core Expertise (Tier 3)",
-    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+    "note": "1 holder(s) · 1 state(s) · SINGLE CORE EXPERT"
   },
   {
     "level": 4,
@@ -351,7 +351,7 @@
     "level": 3,
     "label": "Simulation Exercises (SimEx)",
     "type": "Core Expertise (Tier 3)",
-    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+    "note": "1 holder(s) · 1 state(s) · SINGLE CORE EXPERT"
   },
   {
     "level": 4,
@@ -705,7 +705,7 @@
     "level": 3,
     "label": "Health Economics & Financing",
     "type": "Core Expertise (Tier 3)",
-    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+    "note": "1 holder(s) · 1 state(s) · SINGLE CORE EXPERT"
   },
   {
     "level": 4,
@@ -861,7 +861,7 @@
     "level": 3,
     "label": "Public Health Nutrition",
     "type": "Core Expertise (Tier 3)",
-    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+    "note": "1 holder(s) · 1 state(s) · SINGLE CORE EXPERT"
   },
   {
     "level": 4,
@@ -879,7 +879,7 @@
     "level": 3,
     "label": "Competency Framework Design",
     "type": "Core Expertise (Tier 3)",
-    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+    "note": "1 holder(s) · 1 state(s) · SINGLE CORE EXPERT"
   },
   {
     "level": 4,
@@ -897,7 +897,7 @@
     "level": 3,
     "label": "Curriculum & Instructional Design",
     "type": "Core Expertise (Tier 3)",
-    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+    "note": "1 holder(s) · 1 state(s) · SINGLE CORE EXPERT"
   },
   {
     "level": 4,
@@ -945,7 +945,7 @@
     "level": 3,
     "label": "Data Governance",
     "type": "Core Expertise (Tier 3)",
-    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+    "note": "1 holder(s) · 1 state(s) · SINGLE CORE EXPERT"
   },
   {
     "level": 4,
@@ -987,7 +987,7 @@
     "level": 3,
     "label": "Data Engineering & Automation",
     "type": "Core Expertise (Tier 3)",
-    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+    "note": "1 holder(s) · 1 state(s) · SINGLE CORE EXPERT"
   },
   {
     "level": 4,
@@ -1149,7 +1149,7 @@
     "level": 3,
     "label": "Survey Design & Validation",
     "type": "Core Expertise (Tier 3)",
-    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+    "note": "1 holder(s) · 1 state(s) · SINGLE CORE EXPERT"
   },
   {
     "level": 4,
@@ -1227,7 +1227,7 @@
     "level": 3,
     "label": "Patient Safety",
     "type": "Core Expertise (Tier 3)",
-    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+    "note": "1 holder(s) · 1 state(s) · SINGLE CORE EXPERT"
   },
   {
     "level": 4,
@@ -1371,7 +1371,7 @@
     "level": 3,
     "label": "Leadership",
     "type": "Core Expertise (Tier 3)",
-    "note": "1 holder(s) · 1 state(s) · SOLE EXPERT"
+    "note": "1 holder(s) · 1 state(s) · SINGLE CORE EXPERT"
   },
   {
     "level": 4,

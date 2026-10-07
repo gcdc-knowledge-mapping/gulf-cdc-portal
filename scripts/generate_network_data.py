@@ -151,7 +151,7 @@ def status_of(holders):
     if holders <= 0:
         return "No core expert", "critical"
     if holders == 1:
-        return "Sole expert", "serious"
+        return "Single core expert", "serious"
     if holders == 2:
         return "Thin", "warn"
     return "Adequate", "good"
@@ -375,7 +375,8 @@ def main():
                 "level": num(r[0]),
                 "label": re.sub(r"^[\s└─•]+", "", label).strip(),
                 "type": clean(r[2]),
-                "note": clean(r[3]),
+                # the workbook writes "SOLE EXPERT"; keep one vocabulary
+                "note": clean(r[3]).replace("SOLE EXPERT", "SINGLE CORE EXPERT"),
             }
         )
 
@@ -402,7 +403,7 @@ def main():
         nodes = [{
             "level": 3, "label": area, "type": "Core Expertise (Tier 3)",
             "note": f"{len(holders)} holder(s) · {states} state(s)"
-                    + (" · SOLE EXPERT" if len(holders) == 1 else ""),
+                    + (" · SINGLE CORE EXPERT" if len(holders) == 1 else ""),
         }]
         for h in sorted(holders, key=lambda p: p["name"]):
             nodes.append({"level": 4, "label": f"{h['name']} ({h['code']})",

@@ -228,7 +228,7 @@
     var segs = [
       { label: "Adequate (3+ holders)", value: M.adequate, color: CLS_COLOR.good },
       { label: "Thin (2 holders)", value: M.thin, color: CLS_COLOR.warn },
-      { label: "Sole expert (1)", value: M.sole, color: CLS_COLOR.serious }
+      { label: "Single core expert (1)", value: M.sole, color: CLS_COLOR.serious }
     ];
     var fragile = Math.round(((M.sole + M.thin) / M.covered) * 100);
 
@@ -254,7 +254,7 @@
       '<div class="grid grid--kpi">' +
         kpi(M.people, "Network experts", M.states + " Member States", "var(--net)", "view:directory", "Open the expert directory") +
         kpi(M.covered + " / " + M.areas, "Taxonomy areas covered", M.tags + " core expertise tags", "var(--accent)", "view:states", "See coverage by Member State") +
-        kpi(M.sole, "Sole regional expert", "Only one holder in the network", "var(--st-serious)", "view:states", "See where the network is thin") +
+        kpi(M.sole, "Single core expert", "Only one holder in the network", "var(--st-serious)", "view:states", "See where the network is thin") +
         kpi(M.external, "Externally consulted", "advise WHO / Member States / partners", "var(--st-good)", "view:directory", "Show externally consulted experts") +
       "</div>" +
 
@@ -271,7 +271,7 @@
         "<dd>Three or more experts across the GCC hold the area as core expertise — deep enough to anchor a regional Community of Practice.</dd></div>" +
         '<div><dt><span class="legend__swatch" style="background:var(--st-warn)"></span> Thin</dt>' +
         "<dd>Exactly two holders region-wide. Workable today, but one departure leaves a single regional expert.</dd></div>" +
-        '<div><dt><span class="legend__swatch" style="background:var(--st-serious)"></span> Sole expert</dt>' +
+        '<div><dt><span class="legend__swatch" style="background:var(--st-serious)"></span> Single core expert</dt>' +
         "<dd>One person in the entire network holds this area. The region depends on a single individual — the highest continuity risk.</dd></div>" +
         "</dl></div>" +
 
@@ -414,7 +414,7 @@
               '<div class="netcard__tags">' +
                 '<span class="pill pill--neutral"><span class="pill__dot"></span>' + esc(p.track) + "</span>" +
                 (p.external ? pill("good", "Externally consulted") : "") +
-                (p.soleAreas > 0 ? pill("serious", p.soleAreas + " sole-expert area" + (p.soleAreas > 1 ? "s" : "")) : "") +
+                (p.soleAreas > 0 ? pill("serious", "Single core expert in " + p.soleAreas + " area" + (p.soleAreas > 1 ? "s" : "")) : "") +
               "</div>" +
               '<div class="netcard__areas">' + p.areas.map(function (a) {
                 return '<button type="button" class="tag-chip is-clickable" data-area="' + esc(a) +
