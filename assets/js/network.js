@@ -162,6 +162,9 @@
   var NOMINATED_NOTE =
     "These experts were nominated by the six GCC Member States.";
 
+  var SOLE_KEY =
+    "An area marked <b class=\"tag-chip--sole\" style=\"background:none;border:0;padding:0\">\u25B2</b> is one this person is the <b>only</b> holder of in the network.";
+
   var state = {
     q: "", st: "", track: "", sole: false,   // Experts
     coreQ: "", coreSt: "",             // Core Expertise
@@ -177,6 +180,20 @@
   function jumpTo(view, patch) {
     Object.keys(patch || {}).forEach(function (k) { state[k] = patch[k]; });
     go(view);
+  }
+
+  // Expertise chips for one person. An area only they hold in the network is
+  // marked, so the profile shows which area makes them a single core expert.
+  function areaChips(person) {
+    var sole = person.soleList || [];
+    if (!person.areas.length) return '<span class="muted">\u2014</span>';
+    return person.areas.map(function (a) {
+      var only = sole.indexOf(a) !== -1;
+      return '<button type="button" class="tag-chip is-clickable' + (only ? " tag-chip--sole" : "") +
+        '" data-area="' + esc(a) + '" title="' +
+        (only ? "Only holder in the network \u2014 " : "") + 'find this area in the expertise map">' +
+        (only ? '<span class="tag-chip__mark" aria-hidden="true">\u25B2</span> ' : "") + esc(a) + "</button>";
+    }).join("");
   }
 
   /* -------------------------------------------------------------- views */
@@ -323,7 +340,7 @@
 
     return head("Core Expertise",
       "Every network expert and the areas they hold at <em>core</em> expertise level, with the Member State " +
-      "they represent. Filter by country, or search by name or expertise.") +
+      "they represent. Filter by country, or search by name or expertise. " + SOLE_KEY) +
 
       '<div class="toolbar">' +
         '<div class="field field--search"><span class="field__icon" aria-hidden="true">⌕</span>' +
@@ -351,12 +368,7 @@
               '<div style="font-size:12px;color:var(--ink-muted)">' + esc(p.level) + "</div></td>" +
               '<td data-label="Member State">' + flagChip(p.state) + "</td>" +
               '<td data-label="Core expertise"><div class="netcard__areas">' +
-              (p.areas.length
-                ? p.areas.map(function (a) {
-                    return '<button type="button" class="tag-chip is-clickable" data-area="' + esc(a) +
-                      '" title="Find this area in the expertise map">' + esc(a) + "</button>";
-                  }).join("")
-                : '<span class="muted">—</span>') +
+              areaChips(p) +
               "</div></td></tr>";
           }).join("") + "</tbody></table></div>"
         : emptyState("No expert matches these filters."));
@@ -377,7 +389,7 @@
 
     return head("Experts",
       "A profile for every expert in the network: position, institution, Member State, work email and the areas " +
-      "they hold at core expertise level. " + NOMINATED_NOTE) +
+      "they hold at core expertise level. " + NOMINATED_NOTE + " " + SOLE_KEY) +
 
       '<div class="toolbar">' +
         '<div class="field field--search"><span class="field__icon" aria-hidden="true">⌕</span>' +
@@ -418,10 +430,7 @@
                 (p.external ? pill("good", "Externally consulted") : "") +
                 (p.soleAreas > 0 ? pill("serious", "Single core expert in " + p.soleAreas + " area" + (p.soleAreas > 1 ? "s" : "")) : "") +
               "</div>" +
-              '<div class="netcard__areas">' + p.areas.map(function (a) {
-                return '<button type="button" class="tag-chip is-clickable" data-area="' + esc(a) +
-                  '" title="Find this area in the expertise map">' + esc(a) + "</button>";
-              }).join("") + "</div>" +
+              '<div class="netcard__areas">' + areaChips(p) + "</div>" +
               '<div class="contact__actions">' +
                 (p.email
                   ? '<a class="contact__email" href="mailto:' + esc(p.email) + '" title="Send an email">' +

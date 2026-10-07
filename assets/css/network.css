@@ -137,6 +137,16 @@
 /* The email row closes the card, so it takes the remaining space. */
 .netcard .contact__actions { margin-top: auto; }
 
+/* --- expertise chip for an area only this person holds -------------------- */
+.tag-chip--sole {
+  color: var(--st-serious);
+  background: var(--st-serious-bg);
+  border-color: var(--st-serious);
+  font-weight: 700;
+}
+.tag-chip--sole:hover { border-color: var(--st-serious); }
+.tag-chip__mark { font-size: 9px; vertical-align: 1px; }
+
 /* --- heatmap -------------------------------------------------------------- */
 .heat { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 860px; }
 .heat th, .heat td { padding: 7px 10px; border-bottom: 1px solid var(--border); }
