@@ -12,3 +12,8 @@ node_modules/
 data/GulfCDC_KnowledgeMapping_Network_MasterAnalysis_v3_CoreTaxonomy.xlsx
 data/Knowledge_Mapping_Survey_GCDC_Network.xlsx
 data/network/engagement.json
+
+# Personal achievement report. Kept local: this repository is public, and a
+# staff member's performance write-up is not project documentation. Delete
+# this line to publish it.
+docs/تقرير-الإنجاز-2026.md
