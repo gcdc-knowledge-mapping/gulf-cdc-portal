@@ -353,10 +353,10 @@
       M.areas + " expertise areas. " + NOMINATED_NOTE) +
 
       '<div class="grid grid--kpi">' +
-        kpi(M.people, "Network experts", M.states + " Member States", "var(--net)", "view:directory", "Open the expert directory") +
-        kpi(M.covered + ' <span class="kpi__of">/ ' + M.areas + "</span>", "Expertise areas covered", "Level 3 of the taxonomy", "var(--accent)", "view:states", "See coverage by Member State") +
-        kpi(M.competenciesHeld + ' <span class="kpi__of">/ ' + M.competencies + "</span>", "CF competencies covered", "Level 2 of the taxonomy", "var(--c6)", "view:states", "See coverage by competency") +
-        kpi(M.soleExperts, "Single core experts", "Sole holders of " + M.sole + " areas", "var(--st-serious)", "sole:1", "Show the " + M.soleExperts + " experts who are the only holder of an area") +
+        kpi(M.people, "Experts who took part", M.states + " Member States", "var(--net)", "view:directory", "Open the expert directory") +
+        kpi(M.covered + ' <span class="kpi__of">/ ' + M.areas + "</span>", "Expertise areas covered", M.competenciesHeld + " of " + M.competencies + " CF competencies", "var(--accent)", "view:states", "See coverage by Member State") +
+        kpi(M.thin, "Areas held by two", "One departure leaves a single holder", "var(--st-warn)", "view:states", "See the areas two experts hold") +
+        kpi(M.sole, "Areas held by one", "Held by " + M.soleExperts + " experts region-wide", "var(--st-serious)", "sole:1", "Show the " + M.soleExperts + " experts who are the only holder of an area") +
         kpi(M.external, "Externally consulted", "advise WHO, Member States or partners", "var(--st-good)", "view:directory", "Show externally consulted experts") +
       "</div>" +
 

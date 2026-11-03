@@ -318,10 +318,10 @@
       </div>
 
       <div class="grid grid--kpi">
-        ${kpi(M.experts, "Staff assessed", `${M.depts} departments`, "var(--brand)", "view:contacts", "Open the staff directory")}
-        ${kpi(`${M.areasHeld} <span class="kpi__of">/ ${M.expertiseAreas}</span>`, "Expertise areas covered", "Level 3 of the taxonomy", "var(--accent)", "view:matrix", "Browse the expertise matrix")}
-        ${kpi(`${M.competenciesHeld} <span class="kpi__of">/ ${M.competencies}</span>`, "CF competencies covered", "Level 2 of the taxonomy", "var(--c6)", "view:matrix", "Browse coverage by competency")}
-        ${kpi(M.spof, "Single core expert", "Only one core holder", "var(--st-serious)", "view:matrix", "See which areas have a single holder")}
+        ${kpi(M.experts, "Staff who took part", `${M.depts} departments`, "var(--brand)", "view:contacts", "Open the staff directory")}
+        ${kpi(`${M.areasHeld} <span class="kpi__of">/ ${M.expertiseAreas}</span>`, "Expertise areas covered", `${M.competenciesHeld} of ${M.competencies} CF competencies`, "var(--accent)", "view:matrix", "Browse the expertise matrix")}
+        ${kpi(M.thin, "Areas held by two", "One departure leaves a single holder", "var(--st-warn)", "view:matrix", "See the areas two people hold")}
+        ${kpi(M.spof, "Areas held by one", "The capability leaves with them", "var(--st-serious)", "view:matrix", "See the areas a single person holds")}
       </div>
 
       <div class="grid grid--2" style="margin-top:16px">
