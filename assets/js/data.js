@@ -83,7 +83,6 @@ window.GCDC_DATA = {
       "subdomain": "1.1 Detect and Investigate Health Hazards",
       "expertise": "Outbreak Investigation",
       "fit": "Direct",
-      "origin": "Epidemiology & Surveillance › Field Epidemiology",
       "holders_n": 4,
       "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.1 Detect and Investigate Health Hazards > Outbreak Investigation"
     },
@@ -94,7 +93,6 @@ window.GCDC_DATA = {
       "subdomain": "1.1 Detect and Investigate Health Hazards",
       "expertise": "Infectious Disease Epidemiology",
       "fit": "Direct",
-      "origin": "Communicable & Non-Communicable Diseases › Communicable Diseases",
       "holders_n": 4,
       "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.1 Detect and Investigate Health Hazards > Infectious Disease Epidemiology"
     },
@@ -105,7 +103,6 @@ window.GCDC_DATA = {
       "subdomain": "1.1 Detect and Investigate Health Hazards",
       "expertise": "Infection Prevention & Control",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Communicable & Non-Communicable Diseases › Communicable Diseases",
       "holders_n": 2,
       "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.1 Detect and Investigate Health Hazards > Infection Prevention & Control"
     },
@@ -116,7 +113,6 @@ window.GCDC_DATA = {
       "subdomain": "1.1 Detect and Investigate Health Hazards",
       "expertise": "Infection & Immunity",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Communicable & Non-Communicable Diseases › Communicable Diseases",
       "holders_n": 1,
       "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.1 Detect and Investigate Health Hazards > Infection & Immunity"
     },
@@ -127,7 +123,6 @@ window.GCDC_DATA = {
       "subdomain": "1.1 Detect and Investigate Health Hazards",
       "expertise": "Medical Laboratory",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Clinical & Specialized Practice › Laboratory & Diagnostics",
       "holders_n": 0,
       "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.1 Detect and Investigate Health Hazards > Medical Laboratory"
     },
@@ -138,7 +133,6 @@ window.GCDC_DATA = {
       "subdomain": "1.1 Detect and Investigate Health Hazards",
       "expertise": "Vector-borne Diseases",
       "fit": "Direct",
-      "origin": "Portal taxonomy review (Claude Code)",
       "holders_n": 1,
       "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.1 Detect and Investigate Health Hazards > Vector-borne Diseases"
     },
@@ -149,7 +143,6 @@ window.GCDC_DATA = {
       "subdomain": "1.1 Detect and Investigate Health Hazards",
       "expertise": "Public Health Microbiology & Genomics",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Portal taxonomy review (Claude Code)",
       "holders_n": 0,
       "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.1 Detect and Investigate Health Hazards > Public Health Microbiology & Genomics"
     },
@@ -160,7 +153,6 @@ window.GCDC_DATA = {
       "subdomain": "1.2 Conduct Public Health Risk Assessment",
       "expertise": "Risk Assessment (Rapid Risk Assessment)",
       "fit": "Direct",
-      "origin": "Public Health Emergency & Health Security › Preparedness & Planning",
       "holders_n": 1,
       "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.2 Conduct Public Health Risk Assessment > Risk Assessment (Rapid Risk Assessment)"
     },
@@ -171,7 +163,6 @@ window.GCDC_DATA = {
       "subdomain": "1.2 Conduct Public Health Risk Assessment",
       "expertise": "Toxicology",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Clinical & Specialized Practice › Specialized Areas",
       "holders_n": 1,
       "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.2 Conduct Public Health Risk Assessment > Toxicology"
     },
@@ -182,7 +173,6 @@ window.GCDC_DATA = {
       "subdomain": "1.3 Plan and Manage Emergency Preparedness",
       "expertise": "Emergency Preparedness Planning",
       "fit": "Direct",
-      "origin": "Public Health Emergency & Health Security › Preparedness & Planning",
       "holders_n": 3,
       "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.3 Plan and Manage Emergency Preparedness > Emergency Preparedness Planning"
     },
@@ -193,7 +183,6 @@ window.GCDC_DATA = {
       "subdomain": "1.3 Plan and Manage Emergency Preparedness",
       "expertise": "Strategic Stockpile Management",
       "fit": "Direct",
-      "origin": "Public Health Emergency & Health Security › Health Security",
       "holders_n": 0,
       "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.3 Plan and Manage Emergency Preparedness > Strategic Stockpile Management"
     },
@@ -204,7 +193,6 @@ window.GCDC_DATA = {
       "subdomain": "1.3 Plan and Manage Emergency Preparedness",
       "expertise": "Simulation Exercises (SimEx)",
       "fit": "Direct",
-      "origin": "Portal taxonomy review (Claude Code)",
       "holders_n": 2,
       "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.3 Plan and Manage Emergency Preparedness > Simulation Exercises (SimEx)"
     },
@@ -215,7 +203,6 @@ window.GCDC_DATA = {
       "subdomain": "1.4 Lead/Contribute to Emergency Response and Recovery",
       "expertise": "PHEOC / Emergency Operations Centers",
       "fit": "Direct",
-      "origin": "Public Health Emergency & Health Security › Response & Operations",
       "holders_n": 1,
       "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.4 Lead/Contribute to Emergency Response and Recovery > PHEOC / Emergency Operations Centers"
     },
@@ -226,7 +213,6 @@ window.GCDC_DATA = {
       "subdomain": "1.4 Lead/Contribute to Emergency Response and Recovery",
       "expertise": "Disaster Medicine & Management",
       "fit": "Direct",
-      "origin": "Public Health Emergency & Health Security › Response & Operations",
       "holders_n": 2,
       "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.4 Lead/Contribute to Emergency Response and Recovery > Disaster Medicine & Management"
     },
@@ -237,7 +223,6 @@ window.GCDC_DATA = {
       "subdomain": "1.4 Lead/Contribute to Emergency Response and Recovery",
       "expertise": "Emergency Medical Services / Paramedic",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Clinical & Specialized Practice › Clinical Disciplines",
       "holders_n": 2,
       "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.4 Lead/Contribute to Emergency Response and Recovery > Emergency Medical Services / Paramedic"
     },
@@ -248,7 +233,6 @@ window.GCDC_DATA = {
       "subdomain": "2.1 Assess Health Needs and Prioritise Interventions",
       "expertise": "Burden of Disease Analysis",
       "fit": "Direct",
-      "origin": "Epidemiology & Surveillance › Biostatistics & Population Health",
       "holders_n": 1,
       "path": "Gulf CDC > D2 – Health Improvement and Promotion > 2.1 Assess Health Needs and Prioritise Interventions > Burden of Disease Analysis"
     },
@@ -259,7 +243,6 @@ window.GCDC_DATA = {
       "subdomain": "2.1 Assess Health Needs and Prioritise Interventions",
       "expertise": "Survey Design & Validation",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Research & Scientific Practice › Research Methodology",
       "holders_n": 0,
       "path": "Gulf CDC > D2 – Health Improvement and Promotion > 2.1 Assess Health Needs and Prioritise Interventions > Survey Design & Validation"
     },
@@ -270,7 +253,6 @@ window.GCDC_DATA = {
       "subdomain": "2.1 Assess Health Needs and Prioritise Interventions",
       "expertise": "Cancer Epidemiology & Screening",
       "fit": "Direct",
-      "origin": "Portal taxonomy review (Claude Code)",
       "holders_n": 1,
       "path": "Gulf CDC > D2 – Health Improvement and Promotion > 2.1 Assess Health Needs and Prioritise Interventions > Cancer Epidemiology & Screening"
     },
@@ -281,7 +263,6 @@ window.GCDC_DATA = {
       "subdomain": "2.2 Design, Implement and Evaluate Health Improvement Programmes",
       "expertise": "NCD Prevention & Control",
       "fit": "Direct",
-      "origin": "Communicable & Non-Communicable Diseases › Non-Communicable Diseases",
       "holders_n": 1,
       "path": "Gulf CDC > D2 – Health Improvement and Promotion > 2.2 Design, Implement and Evaluate Health Improvement Programmes > NCD Prevention & Control"
     },
@@ -292,7 +273,6 @@ window.GCDC_DATA = {
       "subdomain": "2.2 Design, Implement and Evaluate Health Improvement Programmes",
       "expertise": "Health Promotion Strategy",
       "fit": "Direct",
-      "origin": "Health Promotion, Education & Workforce › Health Promotion",
       "holders_n": 1,
       "path": "Gulf CDC > D2 – Health Improvement and Promotion > 2.2 Design, Implement and Evaluate Health Improvement Programmes > Health Promotion Strategy"
     },
@@ -303,7 +283,6 @@ window.GCDC_DATA = {
       "subdomain": "2.2 Design, Implement and Evaluate Health Improvement Programmes",
       "expertise": "Behavior Change Theory & Campaigns",
       "fit": "Direct",
-      "origin": "Health Promotion, Education & Workforce › Health Promotion",
       "holders_n": 1,
       "path": "Gulf CDC > D2 – Health Improvement and Promotion > 2.2 Design, Implement and Evaluate Health Improvement Programmes > Behavior Change Theory & Campaigns"
     },
@@ -314,7 +293,6 @@ window.GCDC_DATA = {
       "subdomain": "2.2 Design, Implement and Evaluate Health Improvement Programmes",
       "expertise": "Road Traffic & Injury Prevention",
       "fit": "Direct",
-      "origin": "Communicable & Non-Communicable Diseases › Injuries & Special Populations",
       "holders_n": 3,
       "path": "Gulf CDC > D2 – Health Improvement and Promotion > 2.2 Design, Implement and Evaluate Health Improvement Programmes > Road Traffic & Injury Prevention"
     },
@@ -325,7 +303,6 @@ window.GCDC_DATA = {
       "subdomain": "2.2 Design, Implement and Evaluate Health Improvement Programmes",
       "expertise": "Clinical Nutrition",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Clinical & Specialized Practice › Clinical Disciplines",
       "holders_n": 0,
       "path": "Gulf CDC > D2 – Health Improvement and Promotion > 2.2 Design, Implement and Evaluate Health Improvement Programmes > Clinical Nutrition"
     },
@@ -336,7 +313,6 @@ window.GCDC_DATA = {
       "subdomain": "2.2 Design, Implement and Evaluate Health Improvement Programmes",
       "expertise": "Public Health Nutrition",
       "fit": "Direct",
-      "origin": "Portal taxonomy review (Claude Code)",
       "holders_n": 1,
       "path": "Gulf CDC > D2 – Health Improvement and Promotion > 2.2 Design, Implement and Evaluate Health Improvement Programmes > Public Health Nutrition"
     },
@@ -347,7 +323,6 @@ window.GCDC_DATA = {
       "subdomain": "2.3 Collaborate with Stakeholders and Communities",
       "expertise": "Community Engagement & Healthy Settings",
       "fit": "Added in v6 — CF coverage",
-      "origin": "New in v6",
       "holders_n": 0,
       "path": "Gulf CDC > D2 – Health Improvement and Promotion > 2.3 Collaborate with Stakeholders and Communities > Community Engagement & Healthy Settings"
     },
@@ -358,7 +333,6 @@ window.GCDC_DATA = {
       "subdomain": "3.1 Design, Manage and Interpret Intelligence Systems",
       "expertise": "Surveillance Systems Design",
       "fit": "Direct",
-      "origin": "Epidemiology & Surveillance › Disease Surveillance",
       "holders_n": 1,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.1 Design, Manage and Interpret Intelligence Systems > Surveillance Systems Design"
     },
@@ -369,7 +343,6 @@ window.GCDC_DATA = {
       "subdomain": "3.1 Design, Manage and Interpret Intelligence Systems",
       "expertise": "Epidemic Intelligence",
       "fit": "Direct",
-      "origin": "Epidemiology & Surveillance › Disease Surveillance",
       "holders_n": 1,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.1 Design, Manage and Interpret Intelligence Systems > Epidemic Intelligence"
     },
@@ -380,7 +353,6 @@ window.GCDC_DATA = {
       "subdomain": "3.1 Design, Manage and Interpret Intelligence Systems",
       "expertise": "Registry Development (Cancer, RTI, etc.)",
       "fit": "Direct",
-      "origin": "Data, Digital Health & Health Informatics › Health Informatics",
       "holders_n": 1,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.1 Design, Manage and Interpret Intelligence Systems > Registry Development (Cancer, RTI, etc.)"
     },
@@ -391,7 +363,6 @@ window.GCDC_DATA = {
       "subdomain": "3.1 Design, Manage and Interpret Intelligence Systems",
       "expertise": "Data Governance",
       "fit": "Direct",
-      "origin": "Data, Digital Health & Health Informatics › Data Governance & Quality",
       "holders_n": 1,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.1 Design, Manage and Interpret Intelligence Systems > Data Governance"
     },
@@ -402,7 +373,6 @@ window.GCDC_DATA = {
       "subdomain": "3.1 Design, Manage and Interpret Intelligence Systems",
       "expertise": "Indicators Development & Measurement",
       "fit": "Direct",
-      "origin": "Research & Scientific Practice › Research Methodology",
       "holders_n": 1,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.1 Design, Manage and Interpret Intelligence Systems > Indicators Development & Measurement"
     },
@@ -413,7 +383,6 @@ window.GCDC_DATA = {
       "subdomain": "3.2 Use Public Health Informatics and Intelligence Tools",
       "expertise": "Public Health Informatics",
       "fit": "Direct",
-      "origin": "Data, Digital Health & Health Informatics › Health Informatics",
       "holders_n": 1,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.2 Use Public Health Informatics and Intelligence Tools > Public Health Informatics"
     },
@@ -424,7 +393,6 @@ window.GCDC_DATA = {
       "subdomain": "3.2 Use Public Health Informatics and Intelligence Tools",
       "expertise": "Biostatistics",
       "fit": "Direct",
-      "origin": "Epidemiology & Surveillance › Biostatistics & Population Health",
       "holders_n": 1,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.2 Use Public Health Informatics and Intelligence Tools > Biostatistics"
     },
@@ -435,7 +403,6 @@ window.GCDC_DATA = {
       "subdomain": "3.2 Use Public Health Informatics and Intelligence Tools",
       "expertise": "Data Analysis (Quantitative)",
       "fit": "Direct",
-      "origin": "Data, Digital Health & Health Informatics › Data Analytics & BI",
       "holders_n": 6,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.2 Use Public Health Informatics and Intelligence Tools > Data Analysis (Quantitative)"
     },
@@ -446,7 +413,6 @@ window.GCDC_DATA = {
       "subdomain": "3.2 Use Public Health Informatics and Intelligence Tools",
       "expertise": "Dashboard & BI Development",
       "fit": "Direct",
-      "origin": "Data, Digital Health & Health Informatics › Data Analytics & BI",
       "holders_n": 2,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.2 Use Public Health Informatics and Intelligence Tools > Dashboard & BI Development"
     },
@@ -457,7 +423,6 @@ window.GCDC_DATA = {
       "subdomain": "3.2 Use Public Health Informatics and Intelligence Tools",
       "expertise": "Data Engineering & Automation",
       "fit": "Direct",
-      "origin": "Data, Digital Health & Health Informatics › Data Analytics & BI",
       "holders_n": 2,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.2 Use Public Health Informatics and Intelligence Tools > Data Engineering & Automation"
     },
@@ -468,7 +433,6 @@ window.GCDC_DATA = {
       "subdomain": "3.2 Use Public Health Informatics and Intelligence Tools",
       "expertise": "AI in Health",
       "fit": "Direct",
-      "origin": "Data, Digital Health & Health Informatics › Digital Health",
       "holders_n": 2,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.2 Use Public Health Informatics and Intelligence Tools > AI in Health"
     },
@@ -479,7 +443,6 @@ window.GCDC_DATA = {
       "subdomain": "3.2 Use Public Health Informatics and Intelligence Tools",
       "expertise": "Usability Testing & Health System Design",
       "fit": "Direct",
-      "origin": "Data, Digital Health & Health Informatics › Digital Health",
       "holders_n": 1,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.2 Use Public Health Informatics and Intelligence Tools > Usability Testing & Health System Design"
     },
@@ -490,7 +453,6 @@ window.GCDC_DATA = {
       "subdomain": "3.2 Use Public Health Informatics and Intelligence Tools",
       "expertise": "Disease Modelling & Forecasting",
       "fit": "Direct",
-      "origin": "Portal taxonomy review (Claude Code)",
       "holders_n": 2,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.2 Use Public Health Informatics and Intelligence Tools > Disease Modelling & Forecasting"
     },
@@ -501,7 +463,6 @@ window.GCDC_DATA = {
       "subdomain": "3.3 Generate Strategic Public Health Reports",
       "expertise": "Surveillance Reporting & Analytics",
       "fit": "Direct",
-      "origin": "Epidemiology & Surveillance › Disease Surveillance",
       "holders_n": 2,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.3 Generate Strategic Public Health Reports > Surveillance Reporting & Analytics"
     },
@@ -512,7 +473,6 @@ window.GCDC_DATA = {
       "subdomain": "3.3 Generate Strategic Public Health Reports",
       "expertise": "Scientific Writing & Publications",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Research & Scientific Practice › Scientific Communication",
       "holders_n": 3,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.3 Generate Strategic Public Health Reports > Scientific Writing & Publications"
     },
@@ -523,7 +483,6 @@ window.GCDC_DATA = {
       "subdomain": "3.3 Generate Strategic Public Health Reports",
       "expertise": "Research Methodology Development",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Research & Scientific Practice › Research Methodology",
       "holders_n": 3,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.3 Generate Strategic Public Health Reports > Research Methodology Development"
     },
@@ -534,7 +493,6 @@ window.GCDC_DATA = {
       "subdomain": "3.3 Generate Strategic Public Health Reports",
       "expertise": "Clinical Research / Clinical Trials",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Research & Scientific Practice › Clinical Research",
       "holders_n": 2,
       "path": "Gulf CDC > D3 – Public Health Surveillance and Intelligence > 3.3 Generate Strategic Public Health Reports > Clinical Research / Clinical Trials"
     },
@@ -545,7 +503,6 @@ window.GCDC_DATA = {
       "subdomain": "4.1 Assess, Plan and Deliver Programs and Services",
       "expertise": "Project Management (PMP/CAPM)",
       "fit": "Direct",
-      "origin": "Quality, Governance & Project Management › Project & Program Management",
       "holders_n": 8,
       "path": "Gulf CDC > D4 – Health System Strengthening and Service Improvement > 4.1 Assess, Plan and Deliver Programs and Services > Project Management (PMP/CAPM)"
     },
@@ -556,7 +513,6 @@ window.GCDC_DATA = {
       "subdomain": "4.2 Evaluate and Strengthen Health Systems",
       "expertise": "Health Systems Research",
       "fit": "Direct",
-      "origin": "Health Policy, Systems & Strategy › Health Systems",
       "holders_n": 1,
       "path": "Gulf CDC > D4 – Health System Strengthening and Service Improvement > 4.2 Evaluate and Strengthen Health Systems > Health Systems Research"
     },
@@ -567,7 +523,6 @@ window.GCDC_DATA = {
       "subdomain": "4.2 Evaluate and Strengthen Health Systems",
       "expertise": "Program Evaluation",
       "fit": "Direct",
-      "origin": "Quality, Governance & Project Management › Project & Program Management",
       "holders_n": 1,
       "path": "Gulf CDC > D4 – Health System Strengthening and Service Improvement > 4.2 Evaluate and Strengthen Health Systems > Program Evaluation"
     },
@@ -578,7 +533,6 @@ window.GCDC_DATA = {
       "subdomain": "4.2 Evaluate and Strengthen Health Systems",
       "expertise": "Competency Framework Design",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Health Promotion, Education & Workforce › Workforce Development",
       "holders_n": 1,
       "path": "Gulf CDC > D4 – Health System Strengthening and Service Improvement > 4.2 Evaluate and Strengthen Health Systems > Competency Framework Design"
     },
@@ -589,7 +543,6 @@ window.GCDC_DATA = {
       "subdomain": "4.2 Evaluate and Strengthen Health Systems",
       "expertise": "Continuing Professional Development (CPD)",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Health Promotion, Education & Workforce › Workforce Development",
       "holders_n": 1,
       "path": "Gulf CDC > D4 – Health System Strengthening and Service Improvement > 4.2 Evaluate and Strengthen Health Systems > Continuing Professional Development (CPD)"
     },
@@ -600,7 +553,6 @@ window.GCDC_DATA = {
       "subdomain": "4.2 Evaluate and Strengthen Health Systems",
       "expertise": "Curriculum & Instructional Design",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Health Promotion, Education & Workforce › Training & Education",
       "holders_n": 1,
       "path": "Gulf CDC > D4 – Health System Strengthening and Service Improvement > 4.2 Evaluate and Strengthen Health Systems > Curriculum & Instructional Design"
     },
@@ -611,7 +563,6 @@ window.GCDC_DATA = {
       "subdomain": "4.2 Evaluate and Strengthen Health Systems",
       "expertise": "Training Delivery & Facilitation",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Health Promotion, Education & Workforce › Training & Education",
       "holders_n": 0,
       "path": "Gulf CDC > D4 – Health System Strengthening and Service Improvement > 4.2 Evaluate and Strengthen Health Systems > Training Delivery & Facilitation"
     },
@@ -622,7 +573,6 @@ window.GCDC_DATA = {
       "subdomain": "4.2 Evaluate and Strengthen Health Systems",
       "expertise": "Digital Learning (LMS / LXP)",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Health Promotion, Education & Workforce › Training & Education",
       "holders_n": 1,
       "path": "Gulf CDC > D4 – Health System Strengthening and Service Improvement > 4.2 Evaluate and Strengthen Health Systems > Digital Learning (LMS / LXP)"
     },
@@ -633,7 +583,6 @@ window.GCDC_DATA = {
       "subdomain": "4.3 Lead/Contribute to Quality Improvement",
       "expertise": "Patient Safety",
       "fit": "Direct",
-      "origin": "Quality, Governance & Project Management › Quality & Patient Safety",
       "holders_n": 1,
       "path": "Gulf CDC > D4 – Health System Strengthening and Service Improvement > 4.3 Lead/Contribute to Quality Improvement > Patient Safety"
     },
@@ -644,7 +593,6 @@ window.GCDC_DATA = {
       "subdomain": "4.3 Lead/Contribute to Quality Improvement",
       "expertise": "Governance, Risk & Compliance (GRC)",
       "fit": "Direct",
-      "origin": "Quality, Governance & Project Management › Governance & Compliance",
       "holders_n": 1,
       "path": "Gulf CDC > D4 – Health System Strengthening and Service Improvement > 4.3 Lead/Contribute to Quality Improvement > Governance, Risk & Compliance (GRC)"
     },
@@ -655,7 +603,6 @@ window.GCDC_DATA = {
       "subdomain": "4.3 Lead/Contribute to Quality Improvement",
       "expertise": "Performance Management (KPIs / OKRs)",
       "fit": "Direct",
-      "origin": "Health Policy, Systems & Strategy › Strategic Planning",
       "holders_n": 3,
       "path": "Gulf CDC > D4 – Health System Strengthening and Service Improvement > 4.3 Lead/Contribute to Quality Improvement > Performance Management (KPIs / OKRs)"
     },
@@ -666,7 +613,6 @@ window.GCDC_DATA = {
       "subdomain": "5.1 Apply Principles of Health Economics",
       "expertise": "Health Economics & Financing",
       "fit": "Direct",
-      "origin": "Health Policy, Systems & Strategy › Health Systems",
       "holders_n": 1,
       "path": "Gulf CDC > D5 – Health Economics and Resource Prioritisation > 5.1 Apply Principles of Health Economics > Health Economics & Financing"
     },
@@ -677,7 +623,6 @@ window.GCDC_DATA = {
       "subdomain": "5.1 Apply Principles of Health Economics",
       "expertise": "Value-Based Healthcare (VBHC)",
       "fit": "Direct",
-      "origin": "Health Policy, Systems & Strategy › Health Systems",
       "holders_n": 1,
       "path": "Gulf CDC > D5 – Health Economics and Resource Prioritisation > 5.1 Apply Principles of Health Economics > Value-Based Healthcare (VBHC)"
     },
@@ -688,7 +633,6 @@ window.GCDC_DATA = {
       "subdomain": "5.1 Apply Principles of Health Economics",
       "expertise": "Casemix Funding & Classification",
       "fit": "Direct",
-      "origin": "Quality, Governance & Project Management › Governance & Compliance",
       "holders_n": 1,
       "path": "Gulf CDC > D5 – Health Economics and Resource Prioritisation > 5.1 Apply Principles of Health Economics > Casemix Funding & Classification"
     },
@@ -699,7 +643,6 @@ window.GCDC_DATA = {
       "subdomain": "5.2 Use Economic Evaluation Methods",
       "expertise": "Economic Evaluation",
       "fit": "Added in v6 — CF coverage",
-      "origin": "New in v6",
       "holders_n": 0,
       "path": "Gulf CDC > D5 – Health Economics and Resource Prioritisation > 5.2 Use Economic Evaluation Methods > Economic Evaluation"
     },
@@ -710,7 +653,6 @@ window.GCDC_DATA = {
       "subdomain": "6.1 Appraise, Develop and Implement Public Health Policy",
       "expertise": "Policy Drafting & Analysis",
       "fit": "Direct",
-      "origin": "Health Policy, Systems & Strategy › Policy & Guidelines",
       "holders_n": 4,
       "path": "Gulf CDC > D6 – Health Policy and Advocacy > 6.1 Appraise, Develop and Implement Public Health Policy > Policy Drafting & Analysis"
     },
@@ -721,7 +663,6 @@ window.GCDC_DATA = {
       "subdomain": "6.1 Appraise, Develop and Implement Public Health Policy",
       "expertise": "Research Governance",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Research & Scientific Practice › Scientific Communication",
       "holders_n": 2,
       "path": "Gulf CDC > D6 – Health Policy and Advocacy > 6.1 Appraise, Develop and Implement Public Health Policy > Research Governance"
     },
@@ -732,7 +673,6 @@ window.GCDC_DATA = {
       "subdomain": "6.1 Appraise, Develop and Implement Public Health Policy",
       "expertise": "Ethical Review & Compliance",
       "fit": "Nearest fit — outside CF scope",
-      "origin": "Research & Scientific Practice › Clinical Research",
       "holders_n": 1,
       "path": "Gulf CDC > D6 – Health Policy and Advocacy > 6.1 Appraise, Develop and Implement Public Health Policy > Ethical Review & Compliance"
     },
@@ -743,7 +683,6 @@ window.GCDC_DATA = {
       "subdomain": "6.2 Lead Advocacy and Strategic Communication",
       "expertise": "Policy Brief & White Paper Writing",
       "fit": "Direct",
-      "origin": "Health Policy, Systems & Strategy › Policy & Guidelines",
       "holders_n": 1,
       "path": "Gulf CDC > D6 – Health Policy and Advocacy > 6.2 Lead Advocacy and Strategic Communication > Policy Brief & White Paper Writing"
     },
@@ -754,7 +693,6 @@ window.GCDC_DATA = {
       "subdomain": "6.3 Engage Stakeholders to Advance Policy Goals",
       "expertise": "Stakeholder Engagement",
       "fit": "Direct",
-      "origin": "Cross-Cutting Professional Skills › Communication & Engagement",
       "holders_n": 1,
       "path": "Gulf CDC > D6 – Health Policy and Advocacy > 6.3 Engage Stakeholders to Advance Policy Goals > Stakeholder Engagement"
     },
@@ -765,7 +703,6 @@ window.GCDC_DATA = {
       "subdomain": "7.1 Provide Strategic Vision and Lead Transformation",
       "expertise": "Strategic Planning & Priority Setting",
       "fit": "Direct",
-      "origin": "Health Policy, Systems & Strategy › Strategic Planning",
       "holders_n": 1,
       "path": "Gulf CDC > D7 – Strategic Leadership, Management and Core Enabling Skills > 7.1 Provide Strategic Vision and Lead Transformation > Strategic Planning & Priority Setting"
     },
@@ -776,7 +713,6 @@ window.GCDC_DATA = {
       "subdomain": "7.2 Lead and Manage Change",
       "expertise": "Change Management",
       "fit": "Direct",
-      "origin": "Quality, Governance & Project Management › Project & Program Management",
       "holders_n": 1,
       "path": "Gulf CDC > D7 – Strategic Leadership, Management and Core Enabling Skills > 7.2 Lead and Manage Change > Change Management"
     },
@@ -787,7 +723,6 @@ window.GCDC_DATA = {
       "subdomain": "7.4 Lead Teams and Foster Collaborative Working",
       "expertise": "Leadership",
       "fit": "Direct",
-      "origin": "Cross-Cutting Professional Skills › Leadership & Strategy",
       "holders_n": 1,
       "path": "Gulf CDC > D7 – Strategic Leadership, Management and Core Enabling Skills > 7.4 Lead Teams and Foster Collaborative Working > Leadership"
     }

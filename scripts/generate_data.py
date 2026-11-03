@@ -381,11 +381,16 @@ def main():
         "treeNodes": tree_nodes,
     }
 
+    # `origin` records which retired domain each area came from. Only the
+    # generated taxonomy document uses it, so it stays in data/taxonomy.json
+    # and out of the browser bundle, which carries nothing a view cannot read.
+    bundle_taxonomy = [{k: v for k, v in t.items() if k != "origin"} for t in taxonomy]
+
     out = {
         "meta": meta,
         "profileLevels": profile_levels,
         "profileNotes": profile_notes,
-        "taxonomy": taxonomy,
+        "taxonomy": bundle_taxonomy,
         "competencies": competencies,
         "expertiseMatrix": matrix,
         "knowledgeGaps": gaps,
