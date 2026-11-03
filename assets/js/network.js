@@ -357,6 +357,7 @@
         kpi(M.covered + ' <span class="kpi__of">/ ' + M.areas + "</span>", "Expertise areas covered", "Level 3 of the taxonomy", "var(--accent)", "view:states", "See coverage by Member State") +
         kpi(M.competenciesHeld + ' <span class="kpi__of">/ ' + M.competencies + "</span>", "CF competencies covered", "Level 2 of the taxonomy", "var(--c6)", "view:states", "See coverage by competency") +
         kpi(M.soleExperts, "Single core experts", "Sole holders of " + M.sole + " areas", "var(--st-serious)", "sole:1", "Show the " + M.soleExperts + " experts who are the only holder of an area") +
+        kpi(M.external, "Externally consulted", "advise WHO, Member States or partners", "var(--st-good)", "view:directory", "Show externally consulted experts") +
       "</div>" +
 
       '<div class="grid grid--2" style="margin-top:16px">' +
