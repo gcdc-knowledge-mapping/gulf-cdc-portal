@@ -9,12 +9,12 @@ first to capture that knowledge.
 
 | Section | Purpose |
 |---|---|
-| **Overview** | Headline KPIs, expertise-coverage and workforce-risk breakdowns, coverage-by-domain, and the highest continuity risks at a glance. |
+| **Overview** | Headline KPIs, expertise-coverage and workforce-risk breakdowns, coverage by CF domain, a table of all 23 CF competencies, and the highest continuity risks at a glance. |
 | **Critical Experts** | All assessed staff scored on knowledge depth, skill scarcity, and impact. Sortable/filterable; risk index = depth × scarcity × impact. |
 | **Knowledge Gaps** | Every core area rated by number of core holders, with a domain × resilience heatmap and recommended actions. Flags single core experts, thin coverage, and areas with no core expert. |
 | **Interview Plan** | The knowledge-capture interview shortlist with per-person core-expertise focus and interview status. |
-| **Expertise Matrix** | The full core taxonomy (domains → sub-domains → expertise) with the people holding each area, colour-coded by coverage resilience. |
-| **Mapping** | The whole hierarchy as an interactive Coggle-style tree: Root → Domain → Sub-domain → Expertise → Holders. |
+| **Expertise Matrix** | The full taxonomy (CF domain → CF competency → expertise area) with the people holding each area, colour-coded by coverage resilience and marked where an area sits outside the framework's own scope. |
+| **Mapping** | The hierarchy as an interactive Coggle-style tree: Root → CF domain → CF competency → Expertise area → Holder. Only areas someone holds appear; the rest are on the Gaps tab. |
 
 ## Running it
 

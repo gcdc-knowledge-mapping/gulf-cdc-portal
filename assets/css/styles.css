@@ -319,6 +319,63 @@ table.data { width: 100%; border-collapse: collapse; font-size: 13.5px; min-widt
 .domain-block__hd h3 { font-size: 16px; }
 .domain-block__count { font-size: 12px; color: var(--ink-muted); }
 
+/* --- CF taxonomy: competency code chips, competency blocks, fit markers --- */
+.code-chip {
+  display: inline-block; font-variant-numeric: tabular-nums; font-weight: 700;
+  font-size: 11.5px; line-height: 1; padding: 4px 6px; border-radius: 5px;
+  background: var(--surface-2); color: var(--ink-2);
+  border: 1px solid var(--border); white-space: nowrap;
+}
+.code-chip--sm { font-size: 10.5px; padding: 2px 4px; border-radius: 4px; }
+.fit-mark {
+  display: inline-block; font-size: 10.5px; line-height: 1; padding: 3px 6px;
+  border-radius: 999px; border: 1px dashed var(--border-strong);
+  color: var(--ink-muted); white-space: nowrap;
+}
+
+/* a CF competency and the expertise areas under it, inside a domain block */
+.comp-block { margin: 0 0 16px 10px; }
+.comp-block:last-child { margin-bottom: 4px; }
+.comp-block__hd {
+  display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-bottom: 8px;
+}
+.comp-block__hd h4 { font-size: 13.5px; font-weight: 700; color: var(--ink-2); }
+.comp-block__count {
+  font-size: 11.5px; color: var(--ink-muted); margin-left: auto; white-space: nowrap;
+}
+
+/* Coverage by CF competency table */
+.comp__table td, .comp__table th { vertical-align: middle; }
+.comp__domhd th {
+  background: var(--surface-2); font-size: 12px; letter-spacing: .02em;
+  padding-top: 10px; padding-bottom: 10px;
+}
+.comp__dot {
+  display: inline-block; width: 9px; height: 9px; border-radius: 50%;
+  margin-right: 8px; vertical-align: middle;
+}
+.comp__name { text-align: left; font: inherit; color: var(--ink); }
+button.comp__name {
+  background: none; border: 0; padding: 0; cursor: pointer;
+  text-decoration: underline; text-decoration-color: var(--border-strong);
+  text-underline-offset: 3px;
+}
+button.comp__name:hover { color: var(--brand); text-decoration-color: currentColor; }
+.comp__areas { display: block; font-size: 11.5px; color: var(--ink-muted); margin-top: 3px; }
+
+/* a compact, foldable explainer (Profile Level rules) */
+.note {
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface); padding: 10px 14px; margin-bottom: 14px;
+}
+.note > summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.note > summary:hover { color: var(--brand); }
+.note p { font-size: 13px; color: var(--ink-2); margin: 10px 0; }
+.note table.data { margin: 10px 0; font-size: 12.5px; }
+.note__list { margin: 10px 0 2px 18px; font-size: 12.5px; color: var(--ink-muted); }
+.note__list li { margin-bottom: 5px; }
+.kpi__of { font-size: 20px; font-weight: 700; color: var(--ink-muted); }
+
 .exp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
 .exp {
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
@@ -688,9 +745,21 @@ mark.hl {
 }
 /* Stacked table rows on small screens: each cell becomes a labelled line */
 @media (max-width: 700px) {
-  .data--stack { min-width: 0; }
+  /* `table.data` is tag+class, so it out-specifies a bare `.data--stack`;
+     the override has to carry the tag too or the 620px min-width survives. */
+  table.data--stack { min-width: 0; }
   .data--stack thead { display: none; }
   .data--stack, .data--stack tbody, .data--stack tr, .data--stack td { display: block; width: 100%; }
+  /* a grouping row inside the body (the CF domain headers) reads as a heading */
+  .data--stack tbody th { display: block; width: 100%; text-align: left; }
+  .comp__domhd th { border-radius: var(--radius-sm); padding: 8px 12px; }
+  .comp__table tbody tr.comp__domhd { border: 0; padding: 0; margin-bottom: 6px; background: transparent; }
+  /* the Code cell comes first but is not this card's title, so it keeps its label */
+  .comp__table tbody td:first-child::before { display: block; }
+  .comp__table tbody td:first-child { font-size: inherit; }
+  .comp__table tbody td:nth-child(2) { font-size: 15px; font-weight: 600; }
+  /* long option labels (competency names) must not set the control's width */
+  .field select { width: 100%; min-width: 0; }
   .data--stack tbody tr {
     border: 1px solid var(--border); border-radius: var(--radius-sm);
     margin-bottom: 10px; padding: 10px 12px; background: var(--surface);

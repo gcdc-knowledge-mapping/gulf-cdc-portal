@@ -147,19 +147,41 @@
 .tag-chip--sole:hover { border-color: var(--st-serious); }
 .tag-chip__mark { font-size: 9px; vertical-align: 1px; }
 
+/* --- segmented control (Member States: competency vs. expertise area) ----- */
+.seg {
+  display: inline-flex; border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm); overflow: hidden; background: var(--surface);
+}
+.seg__btn {
+  font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+  padding: 8px 14px; border: 0; background: transparent; color: var(--ink-2);
+  white-space: nowrap;
+}
+.seg__btn + .seg__btn { border-left: 1px solid var(--border); }
+.seg__btn:hover { background: var(--surface-2); color: var(--ink); }
+.seg__btn.is-on { background: var(--net); color: #fff; }
+.seg__btn.is-on:hover { background: var(--net); color: #fff; }
+.seg__btn:focus-visible { outline: 2px solid var(--net); outline-offset: -2px; }
+
 /* --- heatmap -------------------------------------------------------------- */
 .heat { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 860px; }
 .heat th, .heat td { padding: 7px 10px; border-bottom: 1px solid var(--border); }
-.heat thead th:not(:first-child) { width: 104px; }
+.heat thead th:not(:first-child):not(:nth-child(2)) { width: 104px; }
 .heat thead tr { border-bottom: 1px solid var(--border-strong); }
 .heat thead th {
   font-size: 11px; text-transform: uppercase; letter-spacing: .5px;
   color: var(--ink-muted); text-align: center; white-space: nowrap;
 }
-.heat thead th:first-child { text-align: left; }
+.heat thead th:first-child, .heat thead th:nth-child(2) { text-align: left; }
+.heat td.code { text-align: left; width: 1%; white-space: nowrap; }
 /* styles.css already defines a .heat with centred cells — override explicitly. */
 .heat td.area { text-align: left; color: var(--ink); font-weight: 600; }
-.heat td.cell { text-align: center; font-variant-numeric: tabular-nums; font-weight: 700; }
+.heat td.cell {
+  text-align: center; font-variant-numeric: tabular-nums; font-weight: 700;
+  /* keep adjacent shaded cells legible as separate countries, not one block */
+  box-shadow: inset -1px 0 0 var(--surface);
+}
+.heat td.cell:last-child { box-shadow: none; }
 .heat .h0 { color: var(--ink-muted); opacity: .45; }
 .heat .h1 { background: rgba(4, 111, 138, .12); color: var(--net-ink); }
 .heat .h2 { background: rgba(4, 111, 138, .26); color: var(--net-ink); }

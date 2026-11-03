@@ -11,6 +11,10 @@
   const GAPS = DATA.knowledgeGaps || [];
   const HOLDERS = DATA.criticalHolders || [];
   const SHORTLIST = DATA.interviewShortlist || [];
+  const COMPS = DATA.competencies || [];
+  const PLEVELS = DATA.profileLevels || [];
+  const PNOTES = DATA.profileNotes || [];
+  const META = DATA.meta || {};
 
   /* ---------------------------------------------------------------- helpers */
   const $ = (sel, root = document) => root.querySelector(sel);
@@ -37,11 +41,58 @@
     return { cls: "good", label: "Low / Standard" };
   }
 
-  // Fixed categorical colour per domain (order of first appearance in taxonomy)
+  // Fixed categorical colour per CF domain, assigned in D1 → D7 order so the
+  // same domain keeps the same colour here and on the GCC Network scope.
   const DOMAINS = [];
   TX.forEach((t) => { if (!DOMAINS.includes(t.domain)) DOMAINS.push(t.domain); });
+  DOMAINS.sort((a, b) => domainNo(a) - domainNo(b));
   const DOMAIN_COLOR = {};
   DOMAINS.forEach((d, i) => { DOMAIN_COLOR[d] = `var(--c${(i % 9) + 1})`; });
+
+  function domainNo(d) {
+    const m = /^D(\d+)/.exec(String(d || ""));
+    return m ? +m[1] : 99;
+  }
+  // "D3 – Public Health Surveillance and Intelligence" → "D3"
+  const domainTag = (d) => String(d || "").split(/[–—-]/)[0].trim();
+  // Competency labels arrive as "2.2 Design, Implement and …" — split the code off
+  function compParts(label) {
+    const m = /^(\d+\.\d+)\s+(.*)$/.exec(String(label || "").trim());
+    return m ? { code: m[1], name: m[2] } : { code: "", name: String(label || "") };
+  }
+  const codeOrder = (c) => String(c || "").split(".").map(Number);
+  const byCode = (a, b) => {
+    const x = codeOrder(a), y = codeOrder(b);
+    return (x[0] - y[0]) || ((x[1] || 0) - (y[1] || 0));
+  };
+
+  // Profile Level — CF proficiency, ranked Expert > Proficient > Competent
+  const PROFILE_RANK = { Expert: 3, Proficient: 2, Competent: 1 };
+  const profileRank = (p) => PROFILE_RANK[String(p || "").trim()] || 0;
+  const PROFILE_CLASS = { Expert: "good", Proficient: "warn", Competent: "neutral" };
+  // the levels the workbook actually defines, most senior first
+  const PROFILE_SORTED = Array.from(new Set(PLEVELS.map((p) => p.level)))
+    .sort((a, b) => profileRank(b) - profileRank(a));
+  function profilePill(level) {
+    if (!level) return "";
+    const cls = PROFILE_CLASS[String(level).trim()] || "neutral";
+    return `<span class="pill pill--${cls}" title="CF proficiency level"><span class="pill__dot"></span>${esc(level)}</span>`;
+  }
+  // The rules table, as read from the workbook — never hard-coded here
+  function profileExplainer() {
+    if (!PLEVELS.length) return "";
+    const rows = PLEVELS.map((p) => `<tr><td>${esc(p.years)}</td><td>${esc(p.level)}</td>
+      <td>${esc(p.stage)}</td></tr>`).join("");
+    return `<details class="note"><summary>How Profile Level is set</summary>
+      <p>Profile Level is the proficiency level of the Gulf CDC Public Health Competency
+      Framework, derived from the years of professional experience each person reported
+      in the survey. Where it is sorted or filtered the order is
+      <b>Expert &gt; Proficient &gt; Competent</b>.</p>
+      <table class="data data--stack"><thead><tr><th>Years of experience</th>
+        <th>CF proficiency</th><th>Career stage</th></tr></thead><tbody>${rows}</tbody></table>
+      ${PNOTES.length ? `<ul class="note__list">${PNOTES.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>` : ""}
+    </details>`;
+  }
 
   function pill(cls, label, icon) {
     return `<span class="pill pill--${cls}"><span class="pill__dot"></span>${icon ? esc(icon) + " " : ""}${esc(label)}</span>`;
@@ -172,7 +223,13 @@
     experts: HOLDERS.length,
     domains: DOMAINS.length,
     expertiseAreas: TX.length,
-    subdomains: new Set(TX.map((t) => t.domain + " > " + t.subdomain)).size,
+    // CF competencies: all 23 defined, and the ones at least one person holds.
+    // 7.3 and 7.5 are behavioural, have no Level-3 area, and are never a gap.
+    competencies: COMPS.length || new Set(TX.map((t) => t.code)).size,
+    competenciesHeld: META.competenciesHeld != null ? META.competenciesHeld
+      : COMPS.filter((c) => !c.behavioural && c.people > 0).length,
+    behavioural: COMPS.filter((c) => c.behavioural).length,
+    areasHeld: META.areasHeld != null ? META.areasHeld : MATRIX.length,
     depts: new Set(HOLDERS.map((h) => h.department)).size,
     spof: GAPS.filter((g) => coverageStatus(g.status).cls === "serious").length,
     thin: GAPS.filter((g) => coverageStatus(g.status).cls === "warn").length,
@@ -185,6 +242,46 @@
   };
 
   /* ================================================================ VIEWS  */
+
+  /* Coverage by CF competency (Level 2) — all 23, grouped by CF domain.
+     Counts are distinct people: holding two areas under one competency counts
+     once. The two behavioural competencies have no Level-3 area by design and
+     are shown as "Not mapped — behavioural" in neutral grey, never as a gap. */
+  function competencyTable(onRowAction) {
+    if (!COMPS.length) return "";
+    const groups = [];
+    DOMAINS.forEach((d) => {
+      const rows = COMPS.filter((c) => c.domain === d).sort((a, b) => byCode(a.code, b.code));
+      if (rows.length) groups.push({ domain: d, rows });
+    });
+    const body = groups.map((g) => `
+      <tr class="comp__domhd"><th colspan="4" scope="colgroup">
+        <span class="comp__dot" style="background:${DOMAIN_COLOR[g.domain]}"></span>${esc(g.domain)}
+      </th></tr>
+      ${g.rows.map((c) => {
+        const p = compParts(c.competency);
+        const st = c.behavioural
+          ? { cls: "neutral", icon: "•", label: "Not mapped — behavioural" }
+          : coverageStatus(c.status);
+        const act = c.behavioural ? "" : onRowAction(c);
+        const tag = act ? "button" : "span";
+        const attrs = act
+          ? ` type="button" class="comp__name is-clickable" data-action="${esc(act)}"
+              title="Show ${esc(p.name)} in the expertise matrix"`
+          : ' class="comp__name"';
+        return `<tr>
+          <td data-label="Code"><span class="code-chip">${esc(c.code)}</span></td>
+          <td data-label="CF competency"><${tag}${attrs}>${esc(p.name)}</${tag}></td>
+          <td data-label="Holders" class="num">${c.behavioural ? "—" : c.people}</td>
+          <td data-label="Coverage">${pill(st.cls, st.label, st.icon)}
+            ${c.behavioural ? "" : `<span class="comp__areas">${c.areasHeld} / ${c.areasDefined} areas</span>`}</td>
+        </tr>`;
+      }).join("")}`).join("");
+    return `<table class="data data--stack comp__table">
+      <thead><tr><th scope="col">Code</th><th scope="col">CF competency</th>
+        <th scope="col" class="num">Holders</th><th scope="col">Coverage</th></tr></thead>
+      <tbody>${body}</tbody></table>`;
+  }
 
   function renderOverview(el) {
     const cov = [
@@ -217,19 +314,19 @@
     el.innerHTML = `
       <div class="view__head">
         <h1>Knowledge Mapping</h1>
-        <p>A live picture of where GCDC's core expertise lives and where it is thinly held. Built from the core-taxonomy analysis: ${M.experts} staff across 4 departments, mapped to ${M.domains} domains and ${M.expertiseAreas} core expertise areas.</p>
+        <p>A live picture of where GCDC's core expertise lives and where it is thinly held. ${M.experts} staff across ${M.depts} departments, mapped against the Gulf CDC Public Health Competency Framework: ${M.domains} CF domains, ${M.competencies} competencies and ${M.expertiseAreas} expertise areas.</p>
       </div>
 
       <div class="grid grid--kpi">
-        ${kpi(M.experts, "Staff assessed", "4 departments", "var(--brand)", "view:contacts", "Open the staff directory")}
-        ${kpi(M.expertiseAreas, "Core expertise areas", `${M.subdomains} sub-domains`, "var(--accent)", "view:matrix", "Browse the expertise matrix")}
+        ${kpi(M.experts, "Staff assessed", `${M.depts} departments`, "var(--brand)", "view:contacts", "Open the staff directory")}
+        ${kpi(`${M.areasHeld} <span class="kpi__of">/ ${M.expertiseAreas}</span>`, "Expertise areas covered", "Level 3 of the taxonomy", "var(--accent)", "view:matrix", "Browse the expertise matrix")}
+        ${kpi(`${M.competenciesHeld} <span class="kpi__of">/ ${M.competencies}</span>`, "CF competencies covered", "Level 2 of the taxonomy", "var(--c6)", "view:matrix", "Browse coverage by competency")}
         ${kpi(M.spof, "Single core expert", "Only one core holder", "var(--st-serious)", "view:matrix", "See which areas have a single holder")}
-        ${kpi(M.thin, "Thinly covered", "Only two core holders", "var(--st-warn)", "view:matrix", "See thinly covered areas")}
       </div>
 
       <div class="grid grid--2" style="margin-top:16px">
         <div class="card">
-          <div class="card__hd"><div class="card__title">Expertise coverage</div>
+          <div class="card__hd"><div class="card__title">Expertise areas (Level 3)</div>
             <div class="card__sub">How many of the ${M.expertiseAreas} areas are resilient vs. fragile</div></div>
           <div class="donut-wrap">
             ${donut(cov, { centerNum: M.expertiseAreas, centerLbl: "areas", aria: "Expertise coverage distribution" })}
@@ -252,6 +349,13 @@
           ${rankedBars(deptCov, maxDeptCov)}
           <p class="card__sub" style="margin-top:12px">Select a department to see its experts.</p>
         </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <div class="card__hd"><div class="card__title">Coverage by CF competency</div>
+          <div class="card__sub">All ${M.competencies} competencies of the Competency Framework (Level 2), grouped by CF domain. ${M.competenciesHeld} are held by at least one member of staff.</div></div>
+        ${competencyTable((c) => `comp:${c.code}`)}
+        <p class="card__sub" style="margin-top:12px">Holders are <b>distinct people</b>: someone who holds two expertise areas under one competency counts once. Select a competency to see its areas in the expertise matrix.${M.behavioural ? ` The ${M.behavioural} behavioural competencies describe how someone works rather than a body of knowledge, so they carry no expertise area and are not counted as gaps.` : ""}</p>
       </div>`;
 
     // KPI tiles and department bars act as navigation
@@ -261,6 +365,9 @@
       if (action.startsWith("dept:")) {
         const d = action.slice(5);
         return jumpTo("core", { dept: d, q: "" });
+      }
+      if (action.startsWith("comp:")) {
+        return jumpTo("matrix", { comp: action.slice(5), domain: "all", q: "" });
       }
     };
     // Assignment (not addEventListener): every go() re-renders this view, and
@@ -281,11 +388,17 @@
   const coreState = { dept: "all", q: "", sort: "name", dir: 1, expanded: new Set() };
   const CHIP_LIMIT = 4; // areas shown before "+N more"
 
+  // expertise area → its CF competency, so area chips can carry the code
+  const AREA_CF = {};
+  TX.forEach((t) => {
+    AREA_CF[t.expertise] = { code: t.code, competency: compParts(t.subdomain).name, fit: t.fit };
+  });
+
   function renderCore(el) {
     const depts = ["all", ...Array.from(new Set(HOLDERS.map((h) => h.department)))];
     el.innerHTML = `
       <div class="view__head"><h1>Core Expertise</h1>
-        <p>Every staff member and the areas they hold at <em>core</em> expertise level. Filter by department, or search by name or expertise.</p></div>
+        <p>Every staff member and the areas they hold at <em>core</em> expertise level, each tagged with its CF competency code. Filter by department, or search by name, expertise or code.</p></div>
       <div class="toolbar">
         <div class="field field--search">
           <span class="field__icon" aria-hidden="true">⌕</span>
@@ -304,16 +417,27 @@
     const cols = [
       { key: "name", label: "Name" },
       { key: "department", label: "Department" },
+      { key: "profile_level", label: "Profile level" },
       { key: "core_areas", label: "Core expertise areas", sort: false },
     ];
 
     function currentRows() {
       const q = coreState.q.trim().toLowerCase();
-      const rows = HOLDERS.filter((h) =>
-        (coreState.dept === "all" || h.department === coreState.dept) &&
-        (!q || (h.name + " " + h.core_areas).toLowerCase().includes(q)));
+      const rows = HOLDERS.filter((h) => {
+        if (coreState.dept !== "all" && h.department !== coreState.dept) return false;
+        if (!q) return true;
+        const codes = String(h.core_areas || "").split(";").map(clean)
+          .map((a) => (AREA_CF[a] || {}).code || "").join(" ");
+        return (h.name + " " + h.core_areas + " " + codes + " " +
+                (h.competencies || []).join(" ")).toLowerCase().includes(q);
+      });
       const k = coreState.sort, dir = coreState.dir;
       return rows.slice().sort((a, b) => {
+        // Profile level is ordinal, not alphabetical: Expert > Proficient > Competent
+        if (k === "profile_level") {
+          return (profileRank(b.profile_level) - profileRank(a.profile_level)) * dir
+            || a.name.localeCompare(b.name);
+        }
         const x = String(a[k] || ""), y = String(b[k] || "");
         return x.localeCompare(y) * dir || a.name.localeCompare(b.name);
       });
@@ -351,17 +475,22 @@
             <button type="button" class="dept-tag dept-tag--btn" data-dept="${esc(h.department)}"
               title="Filter by ${esc(h.department)}">${esc(h.department)}</button>
           </td>
+          <td data-label="Profile level">${profilePill(h.profile_level)}</td>
           <td data-label="Core expertise areas">
             ${areas.length ? `<span class="chip-list">
-              ${shown.map((a) => `<button type="button" class="tag-chip tag-chip--btn" data-area="${esc(a)}"
-                  title="Search for “${esc(a)}”">${hl(a, q)}</button>`).join("")}
+              ${shown.map((a) => {
+                  const cf = AREA_CF[a] || {};
+                  return `<button type="button" class="tag-chip tag-chip--btn" data-area="${esc(a)}"
+                    title="${esc(a)}${cf.code ? ` — CF competency ${cf.code} ${cf.competency}` : ""}">${
+                    cf.code ? `<span class="code-chip code-chip--sm">${esc(cf.code)}</span> ` : ""}${hl(a, q)}</button>`;
+                }).join("")}
               ${rest > 0 ? `<button type="button" class="more-btn" data-more="${esc(h.name)}">+${rest} more</button>` : ""}
               ${open && areas.length > CHIP_LIMIT ? `<button type="button" class="more-btn" data-more="${esc(h.name)}">show less</button>` : ""}
             </span>` : '<span class="muted">—</span>'}
           </td>
         </tr>`;
       }).join("")}</tbody>`
-      : `<tbody><tr><td colspan="3">
+      : `<tbody><tr><td colspan="4">
           <div class="empty">
             <div class="empty__icon" aria-hidden="true">🔍</div>
             <p><b>No staff match these filters.</b></p>
@@ -378,10 +507,24 @@
 
     $("#cq").addEventListener("input", (e) => { coreState.q = e.target.value; draw(); });
     $("#cdept").addEventListener("change", (e) => { coreState.dept = e.target.value; draw(); });
+    // One row per person × expertise area, so the Code and CF competency
+    // columns carry a single value each and the file pivots cleanly in Excel.
     $("#cexport").addEventListener("click", () => downloadCsv(
       "gcdc-core-expertise.csv",
-      ["Name", "Department", "Position", "Core expertise areas"],
-      currentRows().map((h) => [h.name.trim(), h.department, h.position, h.core_areas])));
+      ["Name", "Department", "Position", "Profile level", "CF domain",
+       "Code", "CF competency", "Expertise area", "Framework fit"],
+      currentRows().flatMap((h) => {
+        const areas = String(h.core_areas || "").split(";").map(clean).filter(Boolean);
+        if (!areas.length) {
+          return [[h.name.trim(), h.department, h.position, h.profile_level, "", "", "", "", ""]];
+        }
+        return areas.map((a) => {
+          const t = TX.find((x) => x.expertise === a) || {};
+          return [h.name.trim(), h.department, h.position, h.profile_level,
+                  t.domain || "", t.code || "", compParts(t.subdomain).name || "",
+                  a, t.fit || ""];
+        });
+      })));
 
     el.onclick = (e) => {
       const t = e.target;
@@ -416,7 +559,7 @@
   }
 
   /* ---------------------------------------------------------------- Contacts */
-  const contactsState = { dept: "all", q: "" };
+  const contactsState = { dept: "all", q: "", profile: "all" };
   function initials(name) {
     const parts = clean(name).split(" ").filter(Boolean);
     const skip = /^(dr|mr|ms|mrs)\.?$/i;
@@ -427,7 +570,7 @@
     const depts = ["all", ...Array.from(new Set(HOLDERS.map((h) => h.department)))];
     el.innerHTML = `
       <div class="view__head"><h1>Contacts</h1>
-        <p>Directory of all ${M.experts} staff — role, core expertise, and work email. Filter by department, or search by name or expertise.</p></div>
+        <p>Directory of all ${M.experts} staff — role, CF profile level, core expertise, and work email. Filter by department or profile level, or search by name or expertise.</p></div>
       <div class="toolbar">
         <div class="field field--search">
           <span class="field__icon" aria-hidden="true">⌕</span>
@@ -437,9 +580,14 @@
         <div class="field"><select id="ctdept" aria-label="Filter by department">
           ${depts.map((d) => `<option value="${esc(d)}"${d === contactsState.dept ? " selected" : ""}>${d === "all" ? "All departments" : esc(d)}</option>`).join("")}
         </select></div>
+        <div class="field"><select id="ctprofile" aria-label="Filter by profile level">
+          <option value="all">All profile levels</option>
+          ${PROFILE_SORTED.map((p) => `<option value="${esc(p)}"${p === contactsState.profile ? " selected" : ""}>${esc(p)}</option>`).join("")}
+        </select></div>
         <button type="button" class="btn btn--ghost" id="ctexport" title="Download the filtered list as CSV">⭳ Export CSV</button>
         <span class="count" id="ctcount" role="status"></span>
       </div>
+      ${profileExplainer()}
       <div id="ctchips"></div>
       <div class="contact-grid" id="ctgrid"></div>`;
 
@@ -447,8 +595,11 @@
       const q = contactsState.q.trim().toLowerCase();
       return HOLDERS.filter((h) =>
         (contactsState.dept === "all" || h.department === contactsState.dept) &&
+        (contactsState.profile === "all" || h.profile_level === contactsState.profile) &&
         (!q || (h.name + " " + h.core_areas + " " + h.email).toLowerCase().includes(q))
-      ).slice().sort((a, b) => a.name.localeCompare(b.name));
+      ).slice().sort((a, b) =>
+        // most senior first, then alphabetically inside each level
+        (profileRank(b.profile_level) - profileRank(a.profile_level)) || a.name.localeCompare(b.name));
     }
 
     function draw() {
@@ -459,6 +610,7 @@
 
       $("#ctchips").innerHTML = filterChips([
         { label: "Department", value: contactsState.dept === "all" ? "" : contactsState.dept, clear: "dept" },
+        { label: "Profile level", value: contactsState.profile === "all" ? "" : contactsState.profile, clear: "profile" },
         { label: "Search", value: q, clear: "q" },
       ]);
 
@@ -475,12 +627,15 @@
             </div>
           </div>
           <dl class="contact__meta">
-            <div><dt>Profile</dt><dd>${esc(h.profile_level)}</dd></div>
+            <div><dt>Profile level</dt><dd>${profilePill(h.profile_level) || "—"}</dd></div>
             <div><dt>Core areas</dt><dd>${areas.length}</dd></div>
           </dl>
-          <div class="contact__areas">${areas.map((a) =>
-            `<button type="button" class="tag-chip tag-chip--btn" data-area="${esc(a)}"
-              title="Search for “${esc(a)}”">${hl(a, q)}</button>`).join("")}</div>
+          <div class="contact__areas">${areas.map((a) => {
+              const cf = AREA_CF[a] || {};
+              return `<button type="button" class="tag-chip tag-chip--btn" data-area="${esc(a)}"
+                title="${esc(a)}${cf.code ? ` — CF competency ${cf.code} ${cf.competency}` : ""}">${
+                cf.code ? `<span class="code-chip code-chip--sm">${esc(cf.code)}</span> ` : ""}${hl(a, q)}</button>`;
+            }).join("")}</div>
           <div class="contact__actions">
             <a class="contact__email" href="mailto:${esc(h.email)}" title="Send an email">
               <span aria-hidden="true">✉</span> <span>${h.email ? hl(h.email, q) : "—"}</span>
@@ -504,10 +659,13 @@
 
     $("#ctq").addEventListener("input", (e) => { contactsState.q = e.target.value; draw(); });
     $("#ctdept").addEventListener("change", (e) => { contactsState.dept = e.target.value; draw(); });
+    $("#ctprofile").addEventListener("change", (e) => { contactsState.profile = e.target.value; draw(); });
     $("#ctexport").addEventListener("click", () => downloadCsv(
       "gcdc-contacts.csv",
-      ["Name", "Department", "Position", "Email", "Core expertise areas"],
-      currentRows().map((h) => [h.name.trim(), h.department, h.position, h.email, h.core_areas])));
+      ["Name", "Department", "Position", "Profile level", "Email",
+       "CF competencies", "Core expertise areas"],
+      currentRows().map((h) => [h.name.trim(), h.department, h.position, h.profile_level,
+        h.email, (h.competencies || []).join("; "), h.core_areas])));
 
     el.onclick = async (e) => {
       const copy = e.target.closest("[data-copy]");
@@ -528,10 +686,13 @@
       const clear = e.target.closest("[data-clear]");
       if (clear) {
         const what = clear.getAttribute("data-clear");
-        if (what === "all") { contactsState.dept = "all"; contactsState.q = ""; }
+        if (what === "all") { contactsState.dept = "all"; contactsState.q = ""; contactsState.profile = "all"; }
         if (what === "dept") contactsState.dept = "all";
+        if (what === "profile") contactsState.profile = "all";
         if (what === "q") contactsState.q = "";
-        $("#ctq").value = contactsState.q; $("#ctdept").value = contactsState.dept;
+        $("#ctq").value = contactsState.q;
+        $("#ctdept").value = contactsState.dept;
+        $("#ctprofile").value = contactsState.profile;
         return draw();
       }
       const dept = e.target.closest("[data-dept]");
@@ -542,22 +703,27 @@
   }
 
   /* ---------------------------------------------------------------- Matrix */
-  const matrixState = { q: "", domain: "all" };
+  const matrixState = { q: "", domain: "all", comp: "all" };
   function renderMatrix(el) {
     // index coverage status by expertise path
     const statusByPath = {};
     GAPS.forEach((g) => { statusByPath[g.domain + ">" + g.subdomain + ">" + g.expertise] = g; });
     const holdersByPath = {};
     MATRIX.forEach((m) => { holdersByPath[m.domain + ">" + m.subdomain + ">" + m.expertise] = m; });
+    // the competencies that actually carry a Level-3 area, in code order
+    const compList = COMPS.filter((c) => c.areasDefined > 0).sort((a, b) => byCode(a.code, b.code));
+    const compName = {};
+    compList.forEach((c) => { compName[c.code] = compParts(c.competency).name; });
 
     el.innerHTML = `
       <div class="view__head"><h1>Expertise Matrix</h1>
-        <p>The full taxonomy: ${M.domains} domains, ${M.subdomains} sub-domains and ${M.expertiseAreas} expertise areas, showing who holds each. Colour marks coverage resilience.</p></div>
+        <p>The full taxonomy: ${M.domains} CF domains, ${M.competencies} competencies and ${M.expertiseAreas} expertise areas, showing who holds each. Colour marks coverage resilience.</p></div>
 
       <details class="howto card">
         <summary>How to read this matrix</summary>
         <div class="howto__body">
-          <p>Each card is one <b>core expertise area</b>. The bold line is the area's name, and the smaller line under it is the <b>sub-domain</b> it belongs to. Cards are grouped under colour-coded <b>domain</b> headings.</p>
+          <p>Each card is one <b>core expertise area</b> — Level 3 of the taxonomy. The bold line is the area's name. Cards are grouped under their <b>CF competency</b> (Level 2, with its framework code), and those under colour-coded <b>CF domain</b> headings (Level 1).</p>
+          <p>A <span class="fit-mark">Nearest fit</span> marker means the area sits outside the Competency Framework's own scope — research, laboratory and clinical, or workforce-education expertise — and has been placed under the closest competency rather than forced to fit.</p>
           <p>The badge in the top-right corner (for example ${pill("serious", "1", "▲")}) tells you two things at a glance:</p>
           <ul>
             <li>The <b>number</b> is how many staff hold this area as core expertise.</li>
@@ -578,65 +744,96 @@
           <input type="search" id="mq" data-view-search placeholder="Search expertise or person…  (press /)"
                  aria-label="Search matrix" value="${esc(matrixState.q)}">
         </div>
-        <div class="field"><select id="mdomain" aria-label="Filter by domain">
-          <option value="all">All domains</option>
+        <div class="field"><select id="mdomain" aria-label="Filter by CF domain">
+          <option value="all">All CF domains</option>
           ${DOMAINS.map((d) => `<option value="${esc(d)}">${esc(d)}</option>`).join("")}
+        </select></div>
+        <div class="field"><select id="mcomp" aria-label="Filter by CF competency">
+          <option value="all">All competencies</option>
+          ${compList.map((c) => `<option value="${esc(c.code)}">${esc(c.code)} ${esc(compName[c.code])}</option>`).join("")}
         </select></div>
         <span class="count" id="mcount" role="status"></span>
       </div>
       <div id="mchips"></div>
       <div id="mbody"></div>`;
     $("#mdomain").value = matrixState.domain;
+    $("#mcomp").value = matrixState.comp;
 
     function draw() {
       const qRaw = matrixState.q.trim();
       const q = qRaw.toLowerCase();
+      const compChip = matrixState.comp === "all" ? ""
+        : `${matrixState.comp} ${compName[matrixState.comp] || ""}`.trim();
       $("#mchips").innerHTML = filterChips([
-        { label: "Domain", value: matrixState.domain === "all" ? "" : matrixState.domain, clear: "domain" },
+        { label: "CF domain", value: matrixState.domain === "all" ? "" : matrixState.domain, clear: "domain" },
+        { label: "Competency", value: compChip, clear: "comp" },
         { label: "Search", value: qRaw, clear: "q" },
       ]);
       let shown = 0;
+
+      const card = (t) => {
+        const key = t.domain + ">" + t.subdomain + ">" + t.expertise;
+        const m = holdersByPath[key]; const g = statusByPath[key];
+        const s = coverageStatus(g ? g.status : "");
+        const holders = m ? m.holders : [];
+        const nearest = t.fit && t.fit !== "Direct";
+        return `<div class="exp">
+          <div class="exp__hd">
+            <div><div class="exp__name">${hl(t.expertise, qRaw)}</div>
+              <div class="exp__sub"><span class="code-chip code-chip--sm">${esc(t.code)}</span>${
+                nearest ? ` <span class="fit-mark" title="${esc(t.fit)}">Nearest fit</span>` : ""}</div></div>
+            ${pill(s.cls, String(holders.length), s.icon)}
+          </div>
+          <div class="exp__holders">${holders.length
+            ? holders.map((h) => {
+                const label = clean(h);
+                const person = label.replace(/\s*\([^)]*\)\s*$/, "");
+                return `<button type="button" class="holder-chip holder-chip--btn" data-person="${esc(person)}"
+                  title="Open ${esc(person)} in Contacts">${hl(label, qRaw)}</button>`;
+              }).join("")
+            : `<span class="muted" style="font-size:12px">No holder recorded</span>`}</div>
+        </div>`;
+      };
+
       const html = DOMAINS.filter((d) => matrixState.domain === "all" || d === matrixState.domain).map((d) => {
-        const items = TX.filter((t) => t.domain === d).filter((t) => {
-          const key = t.domain + ">" + t.subdomain + ">" + t.expertise;
-          const m = holdersByPath[key];
-          const hay = (t.expertise + " " + t.subdomain + " " + (m ? m.holders.join(" ") : "")).toLowerCase();
-          return !q || hay.includes(q);
-        });
+        const items = TX.filter((t) => t.domain === d)
+          .filter((t) => matrixState.comp === "all" || t.code === matrixState.comp)
+          .filter((t) => {
+            const key = t.domain + ">" + t.subdomain + ">" + t.expertise;
+            const m = holdersByPath[key];
+            const hay = (t.expertise + " " + t.code + " " + t.subdomain + " " +
+                         (m ? m.holders.join(" ") : "")).toLowerCase();
+            return !q || hay.includes(q);
+          });
         if (!items.length) return "";
         shown += items.length;
-        const cards = items.map((t) => {
-          const key = t.domain + ">" + t.subdomain + ">" + t.expertise;
-          const m = holdersByPath[key]; const g = statusByPath[key];
-          const s = coverageStatus(g ? g.status : "");
-          const holders = m ? m.holders : [];
-          return `<div class="exp">
-            <div class="exp__hd">
-              <div><div class="exp__name">${hl(t.expertise, qRaw)}</div>
-                <div class="exp__sub">${esc(t.subdomain)}</div></div>
-              ${pill(s.cls, String(holders.length), s.icon)}
+        // group the domain's areas under their CF competency, in code order
+        const codes = [];
+        items.forEach((t) => { if (!codes.includes(t.code)) codes.push(t.code); });
+        codes.sort(byCode);
+        const blocks = codes.map((code) => {
+          const rows = items.filter((t) => t.code === code);
+          const held = rows.filter((t) => (holdersByPath[t.domain + ">" + t.subdomain + ">" + t.expertise] || {}).holders);
+          return `<div class="comp-block">
+            <div class="comp-block__hd">
+              <span class="code-chip">${esc(code)}</span>
+              <h4>${esc(compName[code] || compParts(rows[0].subdomain).name)}</h4>
+              <span class="comp-block__count">${held.length} / ${rows.length} held</span>
             </div>
-            <div class="exp__holders">${holders.length
-              ? holders.map((h) => {
-                  const label = clean(h);
-                  const person = label.replace(/\s*\([^)]*\)\s*$/, "");
-                  return `<button type="button" class="holder-chip holder-chip--btn" data-person="${esc(person)}"
-                    title="Open ${esc(person)} in Contacts">${hl(label, qRaw)}</button>`;
-                }).join("")
-              : `<span class="muted" style="font-size:12px">No holder recorded</span>`}</div>
+            <div class="exp-grid">${rows.map(card).join("")}</div>
           </div>`;
         }).join("");
         return `<div class="domain-block">
           <div class="domain-block__hd" style="--dom-color:${DOMAIN_COLOR[d]}">
             <h3>${esc(d)}</h3><span class="domain-block__count">${items.length} area${items.length !== 1 ? "s" : ""}</span>
           </div>
-          <div class="exp-grid">${cards}</div>
+          ${blocks}
         </div>`;
       }).join("");
       $("#mbody").innerHTML = html || `<div class="empty">
           <div class="empty__icon" aria-hidden="true">🔍</div>
           <p><b>No expertise areas match these filters.</b></p>
-          <p class="muted">Try a different search term or domain.</p>
+          <p class="muted">Try a different search term, CF domain or competency.</p>
           <button type="button" class="btn" data-clear="all">Clear all filters</button>
         </div>`;
       $("#mcount").textContent = `${shown} of ${TX.length} areas`;
@@ -645,47 +842,60 @@
     draw();
     $("#mq").addEventListener("input", (e) => { matrixState.q = e.target.value; draw(); });
     $("#mdomain").addEventListener("change", (e) => { matrixState.domain = e.target.value; draw(); });
+    $("#mcomp").addEventListener("change", (e) => { matrixState.comp = e.target.value; draw(); });
     el.onclick = (e) => {
       const person = e.target.closest("[data-person]");
       if (person) return jumpTo("contacts", { q: person.getAttribute("data-person"), dept: "all" });
       const clear = e.target.closest("[data-clear]");
       if (clear) {
         const what = clear.getAttribute("data-clear");
-        if (what === "all") { matrixState.domain = "all"; matrixState.q = ""; }
+        if (what === "all") { matrixState.domain = "all"; matrixState.comp = "all"; matrixState.q = ""; }
         if (what === "domain") matrixState.domain = "all";
+        if (what === "comp") matrixState.comp = "all";
         if (what === "q") matrixState.q = "";
-        $("#mq").value = matrixState.q; $("#mdomain").value = matrixState.domain;
+        $("#mq").value = matrixState.q;
+        $("#mdomain").value = matrixState.domain;
+        $("#mcomp").value = matrixState.comp;
         draw();
       }
     };
   }
 
   /* ---------------------------------------------------------------- Mapping (Coggle-style tree) */
-  // Root → Domain (Tier 1) → Sub-domain (Tier 2) → Expertise (Tier 3) → Holders
+  // Root → CF Domain (Tier 1) → CF Competency (Tier 2) → Expertise area (Tier 3) → Holders
   const mapState = { expanded: null, q: "", k: 1, tx: 24, ty: 24 };
 
   const MAP_TREE = (function buildTree() {
     const holdersByPath = {};
     MATRIX.forEach((m) => { holdersByPath[m.domain + ">" + m.subdomain + ">" + m.expertise] = m.holders; });
     const root = { id: "root", label: "GCDC Expertise", tier: 0, color: "var(--brand)", children: [] };
+    // Only branches someone actually holds. Areas with no core holder are the
+    // gaps and belong on the Gaps tab, not in a map of who holds what.
     DOMAINS.forEach((d, di) => {
       const dn = { id: "d" + di, label: d, tier: 1, color: DOMAIN_COLOR[d], children: [] };
-      const subs = [];
-      TX.forEach((t) => { if (t.domain === d && !subs.includes(t.subdomain)) subs.push(t.subdomain); });
-      subs.forEach((s, si) => {
-        const sn = { id: dn.id + "-s" + si, label: s, tier: 2, color: dn.color, children: [] };
-        TX.filter((t) => t.domain === d && t.subdomain === s).forEach((t, ei) => {
-          const holders = holdersByPath[d + ">" + s + ">" + t.expertise] || [];
+      const codes = [];
+      TX.forEach((t) => { if (t.domain === d && !codes.includes(t.code)) codes.push(t.code); });
+      codes.sort(byCode);
+      codes.forEach((code, si) => {
+        const areas = TX.filter((t) => t.domain === d && t.code === code);
+        // competency nodes carry their framework code, as in the CF itself
+        const name = compParts(areas[0].subdomain).name || areas[0].subdomain;
+        const sn = { id: dn.id + "-s" + si, label: code + " " + name, code,
+                     tier: 2, color: dn.color, children: [] };
+        areas.forEach((t, ei) => {
+          const holders = holdersByPath[d + ">" + t.subdomain + ">" + t.expertise] || [];
+          if (!holders.length) return;
           sn.children.push({
             id: sn.id + "-e" + ei, label: t.expertise, tier: 3, color: dn.color,
+            fit: t.fit, code,
             children: holders.map((h, hi) => ({
               id: sn.id + "-e" + ei + "-h" + hi, label: clean(h), tier: 4, color: dn.color, children: [],
             })),
           });
         });
-        dn.children.push(sn);
+        if (sn.children.length) dn.children.push(sn);
       });
-      root.children.push(dn);
+      if (dn.children.length) root.children.push(dn);
     });
     // descendant counts (expertise areas + holders) for collapsed-node badges
     (function count(n) {
@@ -705,28 +915,30 @@
 
     el.innerHTML = `
       <div class="view__head"><h1>Expertise Mapping</h1>
-        <p>The full knowledge hierarchy as an interactive tree — Root → Domain → Sub-domain → Expertise → Holders. Click a node to expand or collapse its branch; drag to pan and scroll to zoom.</p></div>
+        <p>The knowledge hierarchy as an interactive tree — Root → CF domain → CF competency → Expertise area → Holder. Only areas someone holds at core level appear here; areas with no core holder are listed on the Gaps tab. Click a node to expand or collapse its branch; drag to pan and scroll to zoom.</p></div>
       <div class="toolbar">
         <div class="field"><input type="search" id="mapq" placeholder="Search the tree…" aria-label="Search mapping tree" value="${esc(mapState.q)}"></div>
         <button class="btn" id="mapExpand">Expand all</button>
         <button class="btn" id="mapCollapse">Collapse all</button>
         <button class="btn" id="mapReset">Reset view</button>
-        <span class="muted" style="margin-left:auto;font-size:13px">${MAP_TREE.children.length} domains · ${M.subdomains} sub-domains · ${M.expertiseAreas} areas · ${M.experts} experts</span>
+        <span class="muted" style="margin-left:auto;font-size:13px">${MAP_TREE.children.length} CF domains · ${M.competenciesHeld} competencies · ${M.areasHeld} areas held · ${M.experts} staff</span>
       </div>
       <div class="map-wrap card" id="mapWrap">
         <svg id="mapSvg" class="map-svg" role="tree" aria-label="Expertise hierarchy tree"><g id="mapPan"></g></svg>
       </div>
       <div class="legend" style="margin-top:12px">
         <span class="legend__item"><span class="legend__swatch" style="background:var(--brand)"></span>Root</span>
-        <span class="legend__item"><span class="legend__swatch" style="background:var(--c2)"></span>Domain</span>
-        <span class="legend__item"><span class="legend__swatch" style="background:var(--surface);border:2px solid var(--c2)"></span>Sub-domain</span>
-        <span class="legend__item"><span class="legend__swatch" style="background:var(--surface-2);border:1px solid var(--border-strong)"></span>Expertise</span>
+        <span class="legend__item"><span class="legend__swatch" style="background:var(--c2)"></span>CF domain</span>
+        <span class="legend__item"><span class="legend__swatch" style="background:var(--surface);border:2px solid var(--c2)"></span>CF competency</span>
+        <span class="legend__item"><span class="legend__swatch" style="background:var(--surface-2);border:1px solid var(--border-strong)"></span>Expertise area</span>
         <span class="legend__item"><span class="legend__swatch" style="background:var(--brand-soft);border-radius:8px"></span>Holder</span>
       </div>`;
 
     // Tier geometry: x offset and node width per tier
-    const TIER_X = [0, 240, 520, 790, 1090];
-    const TIER_W = [200, 240, 230, 260, 210];
+    // Competency labels carry the framework's own wording and are long, so
+    // tier 2 is the widest; the full name is always in the node's tooltip.
+    const TIER_X = [0, 240, 580, 950, 1250];
+    const TIER_W = [200, 300, 340, 260, 210];
     const ROW_H = 34, NODE_H = 26;
 
     function visibleChildren(n) {
@@ -784,7 +996,9 @@
           ? (n.tier <= 1 ? ` · ${n.nExp}▸` : n.tier === 2 ? ` · ${n.nExp}▸` : ` · ${n.nHold}▸`)
           : "";
         const arrow = expandable ? (open ? "▾ " : "▸ ") : "";
-        const budget = Math.floor((w - 22) / 6.6) - badge.length - arrow.length;
+        // tiers 0–1 are bold, so their glyphs are wider; budget per tier
+        const charW = n.tier === 0 ? 8.0 : n.tier === 1 ? 8.3 : n.tier === 2 ? 7.1 : 6.6;
+        const budget = Math.floor((w - 22) / charW) - badge.length - arrow.length;
         const label = n.label.length > budget ? n.label.slice(0, budget - 1) + "…" : n.label;
         const isPerson = n.tier === 4;
         const person = isPerson ? n.label.replace(/\s*\([^)]*\)\s*$/, "") : "";
@@ -897,17 +1111,18 @@
 
       <div class="home-stats">
         <div class="card home-stat">
-          <div class="home-stat__num">30<span class="home-stat__den">/40</span></div>
+          <div class="home-stat__num">${M.experts}<span class="home-stat__den">/40</span></div>
           <div class="home-stat__label">Employees contributed</div>
-          <div class="home-stat__note">30 of 40 GCDC employees took part</div>
+          <div class="home-stat__note">${M.experts} of 40 GCDC employees took part</div>
         </div>
         <div class="card home-stat">
-          <div class="home-stat__num">4</div>
+          <div class="home-stat__num">${M.depts}</div>
           <div class="home-stat__label">Departments</div>
         </div>
         <div class="card home-stat">
-          <div class="home-stat__num">10</div>
+          <div class="home-stat__num">${M.domains}</div>
           <div class="home-stat__label">Domains of experience</div>
+          <div class="home-stat__note">${M.competencies} competencies · ${M.expertiseAreas} expertise areas</div>
         </div>
       </div>`;
   }

@@ -11,9 +11,62 @@
   var PEOPLE = D.people || [];
   var TAX = D.taxonomy || [];
   var COV = D.coverage || [];
+  var COMPS = D.competencies || [];
+  var COMPCOV = D.competencyCoverage || [];
+  var PLEVELS = D.profileLevels || [];
+  var PNOTES = D.profileNotes || [];
   var FLAT = D.tree || [];
   var STATES = D.states || [];
   var M = D.meta || {};
+
+  // "D3 – Public Health Surveillance and Intelligence" → 3, for D1→D7 ordering
+  function domainNo(d) {
+    var m = /^D(\d+)/.exec(String(d || ""));
+    return m ? +m[1] : 99;
+  }
+  // "2.2 Design, Implement and …" → { code: "2.2", name: "Design, Implement and …" }
+  function compParts(label) {
+    var m = /^(\d+\.\d+)\s+([\s\S]*)$/.exec(String(label || "").trim());
+    return m ? { code: m[1], name: m[2] } : { code: "", name: String(label || "") };
+  }
+  function byCode(a, b) {
+    var x = String(a || "").split("."), y = String(b || "").split(".");
+    return (+x[0] - +y[0]) || ((+x[1] || 0) - (+y[1] || 0));
+  }
+
+  // Profile Level — CF proficiency, ranked Expert > Proficient > Competent
+  var PROFILE_RANK = { Expert: 3, Proficient: 2, Competent: 1 };
+  function profileRank(p) { return PROFILE_RANK[String(p || "").trim()] || 0; }
+  var PROFILE_CLASS = { Expert: "good", Proficient: "warn", Competent: "neutral" };
+  var PROFILE_SORTED = PLEVELS.map(function (p) { return p.level; })
+    .filter(function (v, i, a) { return a.indexOf(v) === i; })
+    .sort(function (a, b) { return profileRank(b) - profileRank(a); });
+  function profilePill(level) {
+    if (!level) return "";
+    var cls = PROFILE_CLASS[String(level).trim()] || "neutral";
+    return '<span class="pill pill--' + cls + '" title="CF proficiency level">' +
+      '<span class="pill__dot"></span>' + esc(level) + "</span>";
+  }
+  // The rules table, as read from the workbook — never hard-coded here
+  function profileExplainer() {
+    if (!PLEVELS.length) return "";
+    var rows = PLEVELS.map(function (p) {
+      return "<tr><td>" + esc(p.years) + "</td><td>" + esc(p.level) + "</td><td>" +
+        esc(p.stage) + "</td></tr>";
+    }).join("");
+    return '<details class="note"><summary>How Profile Level is set</summary>' +
+      "<p>Profile Level is the proficiency level of the Gulf CDC Public Health Competency " +
+      "Framework, derived from the years of professional experience each expert reported " +
+      "in the survey. Where it is sorted or filtered the order is " +
+      "<b>Expert &gt; Proficient &gt; Competent</b>.</p>" +
+      '<table class="data data--stack"><thead><tr><th>Years of experience</th>' +
+      "<th>CF proficiency</th><th>Career stage</th></tr></thead><tbody>" + rows +
+      "</tbody></table>" +
+      (PNOTES.length ? '<ul class="note__list">' + PNOTES.map(function (n) {
+        return "<li>" + esc(n) + "</li>";
+      }).join("") + "</ul>" : "") +
+      "</details>";
+  }
 
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
@@ -104,6 +157,24 @@
   var NET = "var(--net)";
   var CLS_COLOR = { good: "var(--st-good)", warn: "var(--st-warn)", serious: "var(--st-serious)", critical: "var(--st-critical)" };
 
+  // Holder count → status. Same thresholds and wording as the internal scope.
+  function statusOf(n) {
+    if (n >= 3) return { cls: "good", icon: "●", label: "Adequate" };
+    if (n === 2) return { cls: "warn", icon: "◆", label: "Thin coverage" };
+    if (n === 1) return { cls: "serious", icon: "▲", label: "Single core expert" };
+    return { cls: "critical", icon: "■", label: "No core expert" };
+  }
+  // Fixed categorical colour per CF domain, in D1 → D7 order, so a domain keeps
+  // the same colour on this scope as on the internal one.
+  var DOMAIN_ORDER = [];
+  (D.byDomain || []).forEach(function (d) { DOMAIN_ORDER.push(d.domain); });
+  TAX.forEach(function (t) { if (DOMAIN_ORDER.indexOf(t.domain) === -1) DOMAIN_ORDER.push(t.domain); });
+  DOMAIN_ORDER.sort(function (a, b) { return domainNo(a) - domainNo(b); });
+  function domainColor(d) {
+    var i = DOMAIN_ORDER.indexOf(d);
+    return "var(--c" + ((i < 0 ? 0 : i) % 9 + 1) + ")";
+  }
+
   /* ------------------------------------------------------- shared UI bits */
   function kpi(value, label, note, accent, action, hint) {
     var tag = action ? "button" : "div";
@@ -112,7 +183,8 @@
       : "";
     return "<" + tag + ' class="card kpi' + (action ? " is-clickable" : "") +
       '" style="--kpi-accent:' + (accent || "var(--net)") + '"' + attrs + ">" +
-      '<div class="kpi__value">' + esc(String(value)) + "</div>" +
+      // value is built here from counts and our own markup, never user input
+      '<div class="kpi__value">' + value + "</div>" +
       '<div class="kpi__label">' + esc(label) + "</div>" +
       (note ? '<div class="kpi__note">' + esc(note) + "</div>" : "") +
       (action ? '<span class="kpi__go" aria-hidden="true">→</span>' : "") +
@@ -166,9 +238,9 @@
     "An area marked <b class=\"tag-chip--sole\" style=\"background:none;border:0;padding:0\">\u25B2</b> is one this person is the <b>only</b> holder of in the network.";
 
   var state = {
-    q: "", st: "", track: "", sole: false,   // Experts
-    coreQ: "", coreSt: "",             // Core Expertise
-    domain: "",                        // Member States
+    q: "", st: "", track: "", sole: false, profile: "",  // Experts
+    coreQ: "", coreSt: "",                  // Core Expertise
+    domain: "", comp: "", level: "competency",  // Member States
     sort: "name", dir: 1
   };
 
@@ -184,15 +256,25 @@
 
   // Expertise chips for one person. An area only they hold in the network is
   // marked, so the profile shows which area makes them a single core expert.
+  // expertise area \u2192 its CF competency, so area chips can carry the code
+  var AREA_CF = {};
+  TAX.forEach(function (t) {
+    AREA_CF[t.area] = { code: t.code, competency: compParts(t.competency).name, fit: t.fit };
+  });
+
   function areaChips(person) {
     var sole = person.soleList || [];
     if (!person.areas.length) return '<span class="muted">\u2014</span>';
     return person.areas.map(function (a) {
       var only = sole.indexOf(a) !== -1;
+      var cf = AREA_CF[a] || {};
       return '<button type="button" class="tag-chip is-clickable' + (only ? " tag-chip--sole" : "") +
-        '" data-area="' + esc(a) + '" title="' +
-        (only ? "Only holder in the network \u2014 " : "") + 'find this area in the expertise map">' +
-        (only ? '<span class="tag-chip__mark" aria-hidden="true">\u25B2</span> ' : "") + esc(a) + "</button>";
+        '" data-area="' + esc(a) + '" title="' + esc(a) +
+        (cf.code ? " \u2014 CF competency " + esc(cf.code) + " " + esc(cf.competency) : "") +
+        (only ? " \u2014 only holder in the network" : "") + '">' +
+        (only ? '<span class="tag-chip__mark" aria-hidden="true">\u25B2</span> ' : "") +
+        (cf.code ? '<span class="code-chip code-chip--sm">' + esc(cf.code) + "</span> " : "") +
+        esc(a) + "</button>";
     }).join("");
   }
 
@@ -233,9 +315,10 @@
           return '<img class="flag" src="' + FLAG_DIR + esc(s.flag) + '" width="26" alt="' +
             esc(s.label) + '" title="' + esc(s.label) + '" />';
         }).join("") + "</div></div>" +
-      '<div class="card home-stat"><div class="home-stat__num">' + (D.byDomain || []).length + "</div>" +
+      '<div class="card home-stat"><div class="home-stat__num">' + M.domains + "</div>" +
         '<div class="home-stat__label">Domains of experience</div>' +
-        '<div class="home-stat__note">' + M.tags + " core expertise tags recorded</div></div>" +
+        '<div class="home-stat__note">' + M.competencies + " competencies · " + M.areas +
+        " expertise areas</div></div>" +
       "</div>";
   };
 
@@ -265,18 +348,19 @@
     return head("Knowledge Mapping — GCC Network",
       "A live picture of where public health expertise sits across the GCC Permanent Contact Network, " +
       "Country Liaison Officers and Working Group members: <b>" + M.people + " experts</b> across <b>" +
-      M.states + " Member States</b>, mapped to " + (D.byDomain || []).length + " domains and " +
-      M.areas + " core expertise areas. " + NOMINATED_NOTE) +
+      M.states + " Member States</b>, mapped against the Gulf CDC Public Health Competency Framework: " +
+      M.domains + " CF domains, " + M.competencies + " competencies and " +
+      M.areas + " expertise areas. " + NOMINATED_NOTE) +
 
       '<div class="grid grid--kpi">' +
         kpi(M.people, "Network experts", M.states + " Member States", "var(--net)", "view:directory", "Open the expert directory") +
-        kpi(M.covered + " / " + M.areas, "Taxonomy areas covered", M.tags + " core expertise tags", "var(--accent)", "view:states", "See coverage by Member State") +
+        kpi(M.covered + ' <span class="kpi__of">/ ' + M.areas + "</span>", "Expertise areas covered", "Level 3 of the taxonomy", "var(--accent)", "view:states", "See coverage by Member State") +
+        kpi(M.competenciesHeld + ' <span class="kpi__of">/ ' + M.competencies + "</span>", "CF competencies covered", "Level 2 of the taxonomy", "var(--c6)", "view:states", "See coverage by competency") +
         kpi(M.soleExperts, "Single core experts", "Sole holders of " + M.sole + " areas", "var(--st-serious)", "sole:1", "Show the " + M.soleExperts + " experts who are the only holder of an area") +
-        kpi(M.external, "Externally consulted", "advise WHO / Member States / partners", "var(--st-good)", "view:directory", "Show externally consulted experts") +
       "</div>" +
 
       '<div class="grid grid--2" style="margin-top:16px">' +
-        '<div class="card"><div class="card__hd"><div class="card__title">Expertise coverage</div>' +
+        '<div class="card"><div class="card__hd"><div class="card__title">Expertise areas (Level 3)</div>' +
         '<div class="card__sub">How many of the ' + M.covered + " areas the network holds are resilient vs. fragile</div></div>" +
         '<div class="donut-wrap">' +
         donut(segs, { centerNum: M.covered, centerLbl: "areas held", aria: "Network coverage by status" }) +
@@ -298,19 +382,76 @@
       "</div>" +
 
       '<div class="card" style="margin-top:16px">' +
-        '<div class="card__hd"><div class="card__title">Coverage by domain</div>' +
+        '<div class="card__hd"><div class="card__title">Coverage by CF domain</div>' +
         '<div class="card__sub">Areas held by at least one network expert, out of all areas in the domain</div></div>' +
         rankedBars((D.byDomain || []).map(function (d) {
           return {
             label: d.domain, value: d.covered,
             color: d.covered === d.areas ? CLS_COLOR.good : NET,
-            tip: d.covered + " of " + d.areas + " areas covered",
+            tip: d.covered + " of " + d.areas + " areas covered · " +
+              d.competenciesHeld + " of " + d.competencies + " competencies held",
             action: "domain:" + d.domain,
             actionHint: "Show " + d.domain + " in Member States"
           };
         }), domMax) +
+      "</div>" +
+
+      '<div class="card" style="margin-top:16px">' +
+        '<div class="card__hd"><div class="card__title">Coverage by CF competency</div>' +
+        '<div class="card__sub">All ' + M.competencies + " competencies of the Competency Framework " +
+        "(Level 2), grouped by CF domain. " + M.competenciesHeld +
+        " are held by at least one expert in the network.</div></div>" +
+        competencyTable() +
+        '<p class="card__sub" style="margin-top:12px">Holders are <b>distinct people</b>: ' +
+        "an expert who holds two areas under one competency counts once. Select a competency " +
+        "to see it by Member State." +
+        (M.competencyStatus && M.competencyStatus.behavioural
+          ? " The " + M.competencyStatus.behavioural + " behavioural competencies describe how " +
+            "someone works rather than a body of knowledge, so they carry no expertise area and " +
+            "are not counted as gaps." : "") + "</p>" +
       "</div>";
   };
+
+  /* Coverage by CF competency (Level 2) — all 23, grouped by CF domain.
+     Counts are distinct people. The two behavioural competencies have no
+     Level-3 area by design and are shown as "Not mapped — behavioural". */
+  function competencyTable() {
+    if (!COMPS.length) return "";
+    var domains = [];
+    COMPS.forEach(function (c) { if (domains.indexOf(c.domain) === -1) domains.push(c.domain); });
+    domains.sort(function (a, b) { return domainNo(a) - domainNo(b); });
+
+    var body = domains.map(function (dom) {
+      var rows = COMPS.filter(function (c) { return c.domain === dom; })
+        .sort(function (a, b) { return byCode(a.code, b.code); });
+      return '<tr class="comp__domhd"><th colspan="4" scope="colgroup">' +
+        '<span class="comp__dot" style="background:' + domainColor(dom) + '"></span>' +
+        esc(dom) + "</th></tr>" +
+        rows.map(function (c) {
+          var p = compParts(c.competency);
+          var st = c.behavioural
+            ? { cls: "neutral", icon: "•", label: "Not mapped — behavioural" }
+            : statusOf(c.people);
+          var tag = c.behavioural ? "span" : "button";
+          var attrs = c.behavioural ? ' class="comp__name"'
+            : ' type="button" class="comp__name is-clickable" data-action="comp:' + esc(c.code) +
+              '" title="Show ' + esc(p.name) + ' by Member State"';
+          return "<tr>" +
+            '<td data-label="Code"><span class="code-chip">' + esc(c.code) + "</span></td>" +
+            '<td data-label="CF competency"><' + tag + attrs + ">" + esc(p.name) + "</" + tag + "></td>" +
+            '<td data-label="Holders" class="num">' + (c.behavioural ? "—" : c.people) + "</td>" +
+            '<td data-label="Coverage">' + pill(st.cls, st.label, st.icon) +
+            (c.behavioural ? "" : '<span class="comp__areas">' + c.areasHeld + " / " +
+              c.areasDefined + " areas · " + c.states + " state" + (c.states === 1 ? "" : "s") +
+              "</span>") + "</td></tr>";
+        }).join("");
+    }).join("");
+
+    return '<table class="data data--stack comp__table">' +
+      '<thead><tr><th scope="col">Code</th><th scope="col">CF competency</th>' +
+      '<th scope="col" class="num">Holders</th><th scope="col">Coverage</th></tr></thead>' +
+      "<tbody>" + body + "</tbody></table>";
+  }
 
   /* --------------------------------------------------- Core Expertise */
   VIEWS.core = function () {
@@ -325,9 +466,15 @@
     var order = {};
     STATES.forEach(function (s, i) { order[s.name] = i; });
     list.sort(function (a, b) {
-      var v = state.sort === "state"
-        ? (order[a.state] - order[b.state]) || a.name.localeCompare(b.name)
-        : a.name.localeCompare(b.name);
+      var v;
+      if (state.sort === "state") {
+        v = (order[a.state] - order[b.state]) || a.name.localeCompare(b.name);
+      } else if (state.sort === "profile") {
+        // ordinal, not alphabetical: Expert > Proficient > Competent
+        v = (profileRank(b.profile) - profileRank(a.profile)) || a.name.localeCompare(b.name);
+      } else {
+        v = a.name.localeCompare(b.name);
+      }
       return v * state.dir;
     });
 
@@ -339,8 +486,9 @@
     };
 
     return head("Core Expertise",
-      "Every network expert and the areas they hold at <em>core</em> expertise level, with the Member State " +
-      "they represent. Filter by country, or search by name or expertise. " + SOLE_KEY) +
+      "Every network expert and the areas they hold at <em>core</em> expertise level, each tagged with its " +
+      "CF competency code, alongside the Member State they represent and their CF profile level. " +
+      "Filter by country, or search by name, expertise or code. " + SOLE_KEY) +
 
       '<div class="toolbar">' +
         '<div class="field field--search"><span class="field__icon" aria-hidden="true">⌕</span>' +
@@ -362,11 +510,13 @@
         ? '<div class="table-wrap"><table class="data data--stack"><thead><tr>' +
           '<th data-sort="name" aria-sort="' + sortAttr("name") + '">Name<span class="arrow">' + arrow("name") + "</span></th>" +
           '<th data-sort="state" aria-sort="' + sortAttr("state") + '">Member State<span class="arrow">' + arrow("state") + "</span></th>" +
+          '<th data-sort="profile" aria-sort="' + sortAttr("profile") + '">Profile level<span class="arrow">' + arrow("profile") + "</span></th>" +
           '<th class="no-sort">Core expertise</th></tr></thead><tbody>' +
           list.map(function (p) {
             return '<tr><td data-label="Name"><b>' + esc(p.name) + "</b>" +
               '<div style="font-size:12px;color:var(--ink-muted)">' + esc(p.level) + "</div></td>" +
               '<td data-label="Member State">' + flagChip(p.state) + "</td>" +
+              '<td data-label="Profile level">' + (profilePill(p.profile) || "—") + "</td>" +
               '<td data-label="Core expertise"><div class="netcard__areas">' +
               areaChips(p) +
               "</div></td></tr>";
@@ -380,16 +530,21 @@
       if (state.sole && !p.soleAreas) return false;
       if (state.st && p.state !== state.st) return false;
       if (state.track && p.track !== state.track) return false;
+      if (state.profile && p.profile !== state.profile) return false;
       if (state.q) {
         var hay = (p.name + " " + p.state + " " + p.level + " " + p.entity + " " + p.email + " " + p.areas.join(" ")).toLowerCase();
         if (hay.indexOf(state.q.toLowerCase()) === -1) return false;
       }
       return true;
     });
+    // most senior profile level first, then alphabetically inside each level
+    list = list.slice().sort(function (a, b) {
+      return (profileRank(b.profile) - profileRank(a.profile)) || a.name.localeCompare(b.name);
+    });
 
     return head("Experts",
-      "A profile for every expert in the network: position, institution, Member State, work email and the areas " +
-      "they hold at core expertise level. " + NOMINATED_NOTE + " " + SOLE_KEY) +
+      "A profile for every expert in the network: position, institution, Member State, CF profile level, " +
+      "work email and the areas they hold at core expertise level. " + NOMINATED_NOTE + " " + SOLE_KEY) +
 
       '<div class="toolbar">' +
         '<div class="field field--search"><span class="field__icon" aria-hidden="true">⌕</span>' +
@@ -405,13 +560,20 @@
         ["Managerial", "Professional"].map(function (v) {
           return '<option value="' + v + '"' + (state.track === v ? " selected" : "") + ">" + v + "</option>";
         }).join("") + "</select></div>" +
+        '<div class="field"><select id="dirProfile" aria-label="Filter by profile level">' +
+        '<option value="">All profile levels</option>' +
+        PROFILE_SORTED.map(function (v) {
+          return '<option value="' + esc(v) + '"' + (state.profile === v ? " selected" : "") + ">" + esc(v) + "</option>";
+        }).join("") + "</select></div>" +
         '<button type="button" class="btn btn--ghost" id="dirCsv" title="Download the filtered list as CSV">⭳ Export CSV</button>' +
         '<span class="count" role="status">' + list.length + " of " + PEOPLE.length + " experts</span>" +
       "</div>" +
+      profileExplainer() +
       filterChips([
         { label: "Search", value: state.q, clear: "q" },
         { label: "Member State", value: state.st ? stateLabel(state.st) : "", clear: "st" },
         { label: "Track", value: state.track, clear: "track" },
+        { label: "Profile level", value: state.profile, clear: "profile" },
         { label: "Only holder of an area", value: state.sole ? "Yes" : "", clear: "sole" }
       ]) +
       (list.length
@@ -426,6 +588,7 @@
                 '<span class="netcard__country">' + esc(st.label || p.state) + "</span>" +
               "</div></div>" +
               '<div class="netcard__tags">' +
+                profilePill(p.profile) +
                 '<span class="pill pill--neutral"><span class="pill__dot"></span>' + esc(p.track) + "</span>" +
                 (p.external ? pill("good", "Externally consulted") : "") +
                 (p.soleAreas > 0 ? pill("serious", "Single core expert in " + p.soleAreas + " area" + (p.soleAreas > 1 ? "s" : "")) : "") +
@@ -446,45 +609,99 @@
   };
 
   VIEWS.states = function () {
-    var rows = COV.filter(function (c) { return !state.domain || c.domain === state.domain; });
+    // Two levels of the same picture. Competency is the default: at Level 2
+    // a cell counts distinct people, so an expert holding two areas under one
+    // competency is not counted twice.
+    var byComp = state.level !== "area";
+    var source = byComp ? COMPCOV : COV;
+    var rows = source.filter(function (c) {
+      // behavioural competencies have no Level-3 area, so no state can "hold" one
+      if (c.behavioural) return false;
+      if (state.domain && c.domain !== state.domain) return false;
+      if (state.comp && c.code !== state.comp) return false;
+      return true;
+    });
     var domains = [];
-    COV.forEach(function (c) { if (domains.indexOf(c.domain) === -1) domains.push(c.domain); });
+    source.forEach(function (c) { if (domains.indexOf(c.domain) === -1) domains.push(c.domain); });
+    domains.sort(function (a, b) { return domainNo(a) - domainNo(b); });
+    var compList = COMPS.filter(function (c) { return !c.behavioural; })
+      .sort(function (a, b) { return byCode(a.code, b.code); });
 
-    var thead = "<tr><th>Core expertise area</th>" + STATES.map(function (s) {
-      return '<th><span class="heat__state">' +
-        '<img class="flag flag--lg" src="' + FLAG_DIR + esc(s.flag) + '" width="30" alt="" />' +
-        '<span class="heat__name">' + esc(s.label) + "</span></span></th>";
-    }).join("") + "<th>Total</th><th>States</th></tr>";
+    var thead = "<tr><th>Code</th><th>" + (byComp ? "CF competency" : "Expertise area") + "</th>" +
+      STATES.map(function (s) {
+        return '<th><span class="heat__state">' +
+          '<img class="flag flag--lg" src="' + FLAG_DIR + esc(s.flag) + '" width="30" alt="" />' +
+          '<span class="heat__name">' + esc(s.label) + "</span></span></th>";
+      }).join("") + "<th>Total</th><th>States</th></tr>";
 
+    var unit = byComp ? "expert" : "holder";
     var tbody = rows.map(function (c) {
-      return '<tr><td class="area">' + esc(c.area) + "</td>" + STATES.map(function (s) {
-        var n = c.by[s.name] || 0;
-        var h = n === 0 ? "h0" : n === 1 ? "h1" : n === 2 ? "h2" : "h3";
-        return '<td class="cell ' + h + '" title="' + esc(s.label) + ": " + n +
-          " holder" + (n === 1 ? "" : "s") + '">' + (n || "·") + "</td>";
-      }).join("") + '<td class="cell"><b>' + c.total + "</b></td>" +
+      var label = byComp ? compParts(c.competency).name : c.area;
+      return "<tr>" +
+        '<td class="code"><span class="code-chip">' + esc(c.code) + "</span></td>" +
+        '<td class="area">' + esc(label) + "</td>" +
+        STATES.map(function (s) {
+          var n = (c.by || {})[s.name] || 0;
+          var h = n === 0 ? "h0" : n === 1 ? "h1" : n === 2 ? "h2" : "h3";
+          return '<td class="cell ' + h + '" title="' + esc(s.label) + ": " + n + " " +
+            unit + (n === 1 ? "" : "s") + '">' + (n || "·") + "</td>";
+        }).join("") +
+        '<td class="cell"><b>' + c.total + "</b></td>" +
         '<td class="cell">' + c.states + "</td></tr>";
     }).join("");
 
+    var compChip = state.comp
+      ? state.comp + " " + ((compList.filter(function (c) { return c.code === state.comp; })[0] || {}).competency || "")
+          .replace(/^\d+\.\d+\s+/, "")
+      : "";
+
     return head("Member States",
-      "Which Member State holds each area of core expertise. A darker cell means more holders in that country; " +
-      "a row covered by a single state is a regional concentration risk, and an empty row has no holder anywhere " +
-      "in the network.") +
+      byComp
+        ? "Which Member State holds each competency of the Gulf CDC Public Health Competency Framework. " +
+          "A cell counts <b>distinct experts</b>, so someone holding two expertise areas under one " +
+          "competency is counted once. A darker cell means more experts in that country; a row covered " +
+          "by a single state is a regional concentration risk."
+        : "Which Member State holds each Level-3 expertise area. A darker cell means more holders in " +
+          "that country; a row covered by a single state is a regional concentration risk, and an " +
+          "empty row has no holder anywhere in the network.") +
 
       '<div class="toolbar">' +
-        '<div class="field"><select id="stDomain" aria-label="Filter by domain">' +
-        '<option value="">All domains</option>' +
+        '<div class="seg" role="group" aria-label="Level of detail">' +
+          '<button type="button" class="seg__btn' + (byComp ? " is-on" : "") +
+            '" data-level="competency"' + (byComp ? ' aria-pressed="true"' : ' aria-pressed="false"') +
+            ">CF competency</button>" +
+          '<button type="button" class="seg__btn' + (byComp ? "" : " is-on") +
+            '" data-level="area"' + (byComp ? ' aria-pressed="false"' : ' aria-pressed="true"') +
+            ">Expertise area</button>" +
+        "</div>" +
+        '<div class="field"><select id="stDomain" aria-label="Filter by CF domain">' +
+        '<option value="">All CF domains</option>' +
         domains.map(function (d) {
           return '<option value="' + esc(d) + '"' + (state.domain === d ? " selected" : "") + ">" + esc(d) + "</option>";
         }).join("") + "</select></div>" +
+        '<div class="field"><select id="stComp" aria-label="Filter by CF competency">' +
+        '<option value="">All competencies</option>' +
+        compList.map(function (c) {
+          var p = compParts(c.competency);
+          return '<option value="' + esc(c.code) + '"' + (state.comp === c.code ? " selected" : "") +
+            ">" + esc(c.code) + " " + esc(p.name) + "</option>";
+        }).join("") + "</select></div>" +
         '<button type="button" class="btn btn--ghost" id="stCsv" title="Download this table as CSV">⭳ Export CSV</button>' +
-        '<span class="count" role="status">' + rows.length + " of " + COV.length + " areas</span>" +
+        '<span class="count" role="status">' + rows.length + " of " +
+        source.filter(function (c) { return !c.behavioural; }).length + " " +
+        (byComp ? "competencies" : "areas") + "</span>" +
       "</div>" +
-      filterChips([{ label: "Domain", value: state.domain, clear: "domain" }]) +
+      filterChips([
+        { label: "CF domain", value: state.domain, clear: "domain" },
+        { label: "Competency", value: compChip, clear: "comp" }
+      ]) +
       (rows.length
         ? '<div class="card"><div class="scroll-y"><table class="heat"><thead>' + thead +
-          "</thead><tbody>" + tbody + "</tbody></table></div></div>"
-        : emptyState("No area matches this filter."));
+          "</thead><tbody>" + tbody + "</tbody></table></div></div>" +
+          (byComp ? '<p class="card__sub" style="margin-top:10px">The ' +
+            ((M.competencyStatus || {}).behavioural || 0) + " behavioural competencies carry no " +
+            "expertise area and are left out of this table." + "</p>" : "")
+        : emptyState("No " + (byComp ? "competency" : "area") + " matches these filters."));
   };
   var MAP_TREE = (function () {
     var root = null, stack = [], di = -1, colors = {};
@@ -530,9 +747,10 @@
 
   VIEWS.mapping = function () {
     return head("Expertise Mapping",
-      "The full GCC network hierarchy as an interactive tree — Network → Domain → Sub-domain → Core expertise → " +
-      "Holder, with each holder's Member State shown as a flag. Click a node to expand or collapse its branch; " +
-      "drag to pan and scroll to zoom. Clicking a person opens their profile.") +
+      "The GCC network hierarchy as an interactive tree — Network → CF domain → CF competency → Expertise area → " +
+      "Holder, with each holder's Member State shown as a flag. Only areas someone holds at core level appear " +
+      "here. Click a node to expand or collapse its branch; drag to pan and scroll to zoom. Clicking a person " +
+      "opens their profile.") +
       '<div class="toolbar">' +
       '<div class="field field--search"><span class="field__icon" aria-hidden="true">⌕</span>' +
       '<input type="search" id="mapq" data-view-search placeholder="Search the tree…  (press /)" aria-label="Search mapping tree" value="' + esc(mapState.q) + '"></div>' +
@@ -540,16 +758,17 @@
       '<button class="btn" id="mapCollapse">Collapse all</button>' +
       '<button class="btn" id="mapReset">Reset view</button>' +
       '<span class="muted" style="margin-left:auto;font-size:13px">' + MAP_TREE.children.length +
-      " domains · " + M.areas + " areas · " + M.people + " experts</span>" +
+      " CF domains · " + M.competenciesHeld + " competencies · " + M.covered +
+      " areas held · " + M.people + " experts</span>" +
       "</div>" +
       '<div class="map-wrap card" id="mapWrap">' +
       '<svg id="mapSvg" class="map-svg map-svg--net" role="tree" aria-label="Network expertise hierarchy tree"><g id="mapPan"></g></svg>' +
       "</div>" +
       '<div class="legend" style="margin-top:12px">' +
       '<span class="legend__item"><span class="legend__swatch" style="background:var(--net)"></span>Network</span>' +
-      '<span class="legend__item"><span class="legend__swatch" style="background:var(--c2)"></span>Domain</span>' +
-      '<span class="legend__item"><span class="legend__swatch" style="background:var(--surface);border:2px solid var(--c2)"></span>Sub-domain</span>' +
-      '<span class="legend__item"><span class="legend__swatch" style="background:var(--surface-2);border:1px solid var(--border-strong)"></span>Core expertise</span>' +
+      '<span class="legend__item"><span class="legend__swatch" style="background:var(--c2)"></span>CF domain</span>' +
+      '<span class="legend__item"><span class="legend__swatch" style="background:var(--surface);border:2px solid var(--c2)"></span>CF competency</span>' +
+      '<span class="legend__item"><span class="legend__swatch" style="background:var(--surface-2);border:1px solid var(--border-strong)"></span>Expertise area</span>' +
       '<span class="legend__item"><span class="legend__swatch" style="background:var(--net-soft);border-radius:8px"></span>Holder</span>' +
       "</div>";
   };
@@ -557,8 +776,10 @@
   function bindMapping() {
     if (!mapState.expanded) mapState.expanded = mapDefaultExpanded();
 
-    var TIER_X = [0, 240, 520, 790, 1090];
-    var TIER_W = [200, 240, 230, 260, 210];
+    // Competency labels carry the framework's own wording and are long, so
+    // tier 2 is the widest; the full name is always in the node's tooltip.
+    var TIER_X = [0, 240, 580, 950, 1250];
+    var TIER_W = [200, 300, 340, 260, 210];
     var ROW_H = 34, NODE_H = 26;
 
     function applySearch() {
@@ -734,10 +955,22 @@
     toast("Downloaded " + filename);
   }
 
+  // One row per expert × expertise area, so the Code and CF competency columns
+  // carry a single value each and the file pivots cleanly in a spreadsheet.
   function peopleRows(list) {
-    var rows = [["Name", "Position", "Institution", "Member State", "Track", "Email", "Core expertise"]];
+    var rows = [["Name", "Position", "Institution", "Member State", "Track", "Profile level",
+                 "Email", "CF domain", "Code", "CF competency", "Expertise area", "Framework fit"]];
     list.forEach(function (p) {
-      rows.push([p.name, p.level, p.entity, stateLabel(p.state), p.track, p.email, p.areas.join("; ")]);
+      var base = [p.name, p.level, p.entity, stateLabel(p.state), p.track, p.profile, p.email];
+      if (!p.areas.length) {
+        rows.push(base.concat(["", "", "", "", ""]));
+        return;
+      }
+      p.areas.forEach(function (a) {
+        var t = TAX.filter(function (x) { return x.area === a; })[0] || {};
+        rows.push(base.concat([t.domain || "", t.code || "",
+          compParts(t.competency).name || "", a, t.fit || ""]));
+      });
     });
     return rows;
   }
@@ -803,6 +1036,10 @@
 
     var dm = $("#stDomain", el);
     if (dm) dm.onchange = function () { state.domain = dm.value; go(current); };
+    var cf = $("#stComp", el);
+    if (cf) cf.onchange = function () { state.comp = cf.value; go(current); };
+    var pf = $("#dirProfile", el);
+    if (pf) pf.onchange = function () { state.profile = pf.value; go(current); };
 
     // Ranked bars are role="button", so they must answer Enter and Space too.
     el.onkeydown = function (e) {
@@ -834,8 +1071,17 @@
         if (kind === "view") return jumpTo(val, {});
         if (kind === "sole") return jumpTo("directory", { sole: true, q: "", st: "", track: "" });
         if (kind === "state") return jumpTo("directory", { st: val, q: "", track: "" });
-        if (kind === "domain") return jumpTo("states", { domain: val });
+        if (kind === "domain") return jumpTo("states", { domain: val, comp: "" });
+        if (kind === "comp") return jumpTo("states", { comp: val, domain: "", level: "competency" });
         return;
+      }
+
+      // Member States level toggle: CF competency (default) or expertise area
+      var lv = e.target.closest("[data-level]");
+      if (lv) {
+        state.level = lv.getAttribute("data-level");
+        // a competency filter has no meaning once rows are areas of every competency
+        return go(current);
       }
 
       // Removable filter chips
@@ -843,8 +1089,8 @@
       if (clear) {
         var what = clear.getAttribute("data-clear");
         if (what === "all") {
-          state.q = ""; state.st = ""; state.track = ""; state.sole = false;
-          state.coreQ = ""; state.coreSt = ""; state.domain = "";
+          state.q = ""; state.st = ""; state.track = ""; state.sole = false; state.profile = "";
+          state.coreQ = ""; state.coreSt = ""; state.domain = ""; state.comp = "";
         } else state[what] = (what === "sole") ? false : "";
         return go(current);
       }
@@ -890,12 +1136,26 @@
         return downloadCsv("gcc-network-experts.csv", peopleRows(dirList));
       }
       if (e.target.closest("#stCsv")) {
-        var head1 = ["Domain", "Core expertise area"].concat(STATES.map(function (s) { return s.label; }), ["Total", "States covering"]);
+        // export exactly what the table is showing: the chosen level and filters
+        var byComp = state.level !== "area";
+        var src = byComp ? COMPCOV : COV;
+        var head1 = ["CF domain", "Code", "CF competency"]
+          .concat(byComp ? [] : ["Expertise area"])
+          .concat(STATES.map(function (s) { return s.label; }), ["Total", "States covering"]);
         var rows = [head1];
-        COV.filter(function (c) { return !state.domain || c.domain === state.domain; }).forEach(function (c) {
-          rows.push([c.domain, c.area].concat(STATES.map(function (s) { return c.by[s.name] || 0; }), [c.total, c.states]));
+        src.filter(function (c) {
+          if (c.behavioural) return false;
+          if (state.domain && c.domain !== state.domain) return false;
+          if (state.comp && c.code !== state.comp) return false;
+          return true;
+        }).forEach(function (c) {
+          rows.push([c.domain, c.code, compParts(c.competency).name]
+            .concat(byComp ? [] : [c.area])
+            .concat(STATES.map(function (s) { return (c.by || {})[s.name] || 0; }),
+                    [c.total, c.states]));
         });
-        return downloadCsv("gcc-network-member-state-coverage.csv", rows);
+        return downloadCsv("gcc-network-member-state-coverage-by-" +
+          (byComp ? "competency" : "area") + ".csv", rows);
       }
     };
   }

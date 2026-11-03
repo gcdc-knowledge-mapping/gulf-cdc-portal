@@ -5,21 +5,24 @@ database, no API keys) presenting the GCDC Knowledge Mapping in two scopes:
 
 - **Internal GCDC** — core expertise for 30 staff, coverage by department, and a
   browsable expertise map.
-- **GCC Network** — core expertise for 55 Permanent Contact Network members,
+- **GCC Network** — core expertise for 68 Permanent Contact Network members,
   Country Liaison Officers and Working Group members nominated by the six GCC
   Member States.
 
+Both scopes are coded against the Gulf CDC Public Health Competency Framework:
+7 domains, 23 competencies and 65 expertise areas.
+
 **Why we are moving it:** it currently runs on public GitHub Pages, where anyone
-with the address can read it. It publishes:
+with the address can read it. It publishes the names, positions and work email
+addresses of **30 GCDC staff** and of **68 officials of six Member State health
+ministries and national public health authorities**.
 
-- the names, positions and work email addresses of **30 GCDC staff**; and
-- the names, institutions and work email addresses of **55 officials of six
-  Member State health ministries and national public health authorities**.
-
-The second group is the material risk: this is not GCDC's data to publish, and
-the addresses are exposed to automated harvesting. Azure Static Web Apps gives
-us Microsoft Entra ID sign-in on the free tier, keeps automatic deployment, and
-lets the source repository become private.
+A project-owner decision of November 2026 treats that information as public, so
+this is no longer a blocker on publishing. It remains a good reason to move:
+Azure Static Web Apps gives us Microsoft Entra ID sign-in on the free tier, so
+the page is reachable by GCDC staff rather than by anyone with the address and
+by address-harvesting crawlers. It also keeps automatic deployment and lets the
+source repository become private.
 
 **Requested outcome**
 
@@ -115,8 +118,7 @@ silent redirect with no password prompt.
 Once the Azure deployment is confirmed working:
 
 1. GitHub → repository **Settings → General → Danger Zone → Change visibility →
-   Private**. *(Azure Static Web Apps deploys from private repositories; this is
-   what removes the public exposure of staff data.)*
+   Private**. *(Azure Static Web Apps deploys from private repositories.)*
 2. **Settings → Pages** → set Source to **None** to retire the public
    `github.io` address.
 3. Optionally delete the `gh-pages` branch and
