@@ -1,0 +1,26 @@
+[
+  {
+    "years": "Less than 2 years",
+    "level": "Competent",
+    "stage": "Entry",
+    "depth": 2
+  },
+  {
+    "years": "2–5 years",
+    "level": "Competent",
+    "stage": "Entry",
+    "depth": 3
+  },
+  {
+    "years": "6–10 years",
+    "level": "Proficient",
+    "stage": "Mid-career",
+    "depth": 4
+  },
+  {
+    "years": "More than 10 years",
+    "level": "Expert",
+    "stage": "Senior",
+    "depth": 5
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "people": 30,
+  "departments": 5,
+  "departmentCounts": {
+    "CEO Office": 2,
+    "HI": 9,
+    "PHE": 4,
+    "PHPP": 10,
+    "TCB": 5
+  },
+  "domains": 7,
+  "competencies": 23,
+  "competenciesHeld": 19,
+  "areas": 65,
+  "areasHeld": 57,
+  "tags": 99,
+  "areaStatus": {
+    "adequate": 10,
+    "thin": 11,
+    "single": 36,
+    "noCore": 8
+  },
+  "competencyStatus": {
+    "adequate": 12,
+    "thin": 2,
+    "single": 5,
+    "noCore": 2,
+    "behavioural": 2
+  },
+  "profileCounts": {
+    "Expert": 8,
+    "Competent": 17,
+    "Proficient": 5
+  },
+  "highRisk": 8,
+  "moderateRisk": 12,
+  "lowRisk": 10,
+  "withEmail": 30,
+  "treeNodes": 183
+}

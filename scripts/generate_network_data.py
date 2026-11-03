@@ -3,26 +3,23 @@
 Build the GCC Network dataset for the Knowledge Mapping Page.
 
 Source of truth:
-    data/GulfCDC_KnowledgeMapping_Network_MasterAnalysis_v3_CoreTaxonomy.xlsx
+    data/GulfCDC_KnowledgeMapping_Network_MasterAnalysis_v8_HybridTaxonomy.xlsx
+    data/Knowledge_Mapping_Survey_GCDC_Network.xlsx   (work e-mails, joined on ID)
 
 Writes:
-    assets/js/network-data.js (window.GCDC_NETWORK — embedded so file:// works)
-    data/network/*.json       (same payload, one file per table)
+    assets/js/network-data.js   (window.GCDC_NETWORK — embedded so file:// works)
+    data/network/*.json         (the same payload, one file per table)
 
-The network population (PCN, Country Liaison Officers, Working Group members,
-CEO-level) is kept in its own dataset object and is never merged with the
-internal staff dataset in assets/js/data.js. The only place the two meet is the
-"bridge" table, which compares holder counts per expertise area.
+The workbook is the single source of truth: the taxonomy-review additions and
+every expertise edit now live inside it, so no correction layer remains here.
 
-NETWORK_GROUP maps a respondent name to one of: CEO, PCN, CLO, WG.
-The v3 workbook does not yet carry a constituency column, so until it does
-every unmapped respondent is reported as "Unassigned".
+The network population is never merged with the internal staff dataset. The one
+place the two meet is data/network/bridge.json, which is written for reference
+and is not bundled into the page.
 """
 
 import json
 import os
-import re
-import unicodedata
 
 import openpyxl
 
@@ -30,86 +27,37 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
 SRC = os.path.join(
-    ROOT, "data", "GulfCDC_KnowledgeMapping_Network_MasterAnalysis_v3_CoreTaxonomy.xlsx"
+    ROOT, "data", "GulfCDC_KnowledgeMapping_Network_MasterAnalysis_v8_HybridTaxonomy.xlsx"
 )
-# Raw survey export — the only source of the network members' email addresses.
 SURVEY = os.path.join(ROOT, "data", "Knowledge_Mapping_Survey_GCDC_Network.xlsx")
+EMAILS = os.path.join(ROOT, "data", "network_emails.json")
 INTERNAL_MATRIX = os.path.join(ROOT, "data", "expertise_matrix.json")
+INTERNAL_COMPS = os.path.join(ROOT, "data", "competencies.json")
 OUT_JS = os.path.join(ROOT, "assets", "js", "network-data.js")
 OUT_DIR = os.path.join(ROOT, "data", "network")
 
-# --- correction layers (same pattern as generate_data.py) --------------------
-
-# name -> constituency. Fill in from the network roster, or add a "Network
-# Group" column to 02_Master_Dataset and this layer becomes unnecessary.
-NETWORK_GROUP = {}
-
-# --- taxonomy review -------------------------------------------------------
-# Areas added to the shared vocabulary because respondents named expertise the
-# 57-area taxonomy had no home for, and the coding had to absorb it into the
-# nearest existing area. Holders come from 09_Coding_Log column K, where each
-# respondent's off-taxonomy expertise was recorded verbatim.
-NEW_AREAS = {
-    "Disease Modelling & Forecasting": ("Epidemiology & Surveillance", "Disease Surveillance"),
-    "Cancer Epidemiology & Screening": ("Communicable & Non-Communicable Diseases", "Non-Communicable Diseases"),
-    "Public Health Nutrition": ("Health Promotion, Education & Workforce", "Health Promotion"),
-    "Simulation Exercises (SimEx)": ("Public Health Emergency & Health Security", "Response & Operations"),
-    "Public Health Microbiology & Genomics": ("Clinical & Specialized Practice", "Laboratory & Diagnostics"),
-}
-
-EXPERTISE_ADDS = {
-    "Ebrahim Matar": ["Disease Modelling & Forecasting"],
-    "Saeed Mahdi Algarni": ["Disease Modelling & Forecasting"],
-    "Amani Albasmi": ["Cancer Epidemiology & Screening"],
-    "Nourah M A S Sh Alsheridah": ["Cancer Epidemiology & Screening"],
-    "Hanan M Almajed": ["Cancer Epidemiology & Screening"],
-    "Esraa Ibrahim Al Abbadi": ["Cancer Epidemiology & Screening"],
-    "Fatma AlMatrooshi": ["Public Health Nutrition"],
-    "Fatma Alattar": ["Simulation Exercises (SimEx)"],
-    "Manaf Alqahtani": ["Public Health Microbiology & Genomics"],
-    "Dr. Mashael Al-Badr": ["Public Health Microbiology & Genomics"],
-    "Dr. Devendra Bansal": ["Public Health Microbiology & Genomics"],
-    "Amjad Ghanem Zaed Ghanem": ["Public Health Microbiology & Genomics"],
-    "Muhannad Sulaiman Aloraini": ["Public Health Microbiology & Genomics"],
-}
-
-GROUPS = [
-    ("CEO", "CEO / Executive"),
-    ("PCN", "Permanent Contact Network"),
-    ("CLO", "Country Liaison Officers"),
-    ("WG", "Working Group"),
-]
-
 STATE_CODE = {
-    "Bahrain": "BH",
-    "Kuwait": "KW",
-    "Oman": "OM",
-    "Qatar": "QA",
-    "Saudi Arabia": "SA",
-    "UAE": "AE",
+    "Bahrain": "BH", "Kuwait": "KW", "Oman": "OM",
+    "Qatar": "QA", "Saudi Arabia": "SA", "UAE": "AE",
 }
-
-# Display order requested for the Member State columns, left to right.
+# Column order requested for the Member States view, left to right.
 STATE_ORDER = ["UAE", "Bahrain", "Saudi Arabia", "Oman", "Qatar", "Kuwait"]
-
-# Full names as they should appear in the column headers.
 STATE_LABEL = {
-    "UAE": "United Arab Emirates",
-    "Bahrain": "Bahrain",
-    "Saudi Arabia": "Saudi Arabia",
-    "Oman": "Oman",
-    "Qatar": "Qatar",
-    "Kuwait": "Kuwait",
+    "UAE": "United Arab Emirates", "Bahrain": "Bahrain",
+    "Saudi Arabia": "Saudi Arabia", "Oman": "Oman",
+    "Qatar": "Qatar", "Kuwait": "Kuwait",
 }
-
 STATES = STATE_ORDER
 
+# Competencies 7.3 and 7.5 are behavioural: no Level-3 area, never a gap.
+BEHAVIOURAL = {"7.3", "7.5"}
 
-def clean(v):
+
+def s(v):
     if v is None:
         return ""
-    s = str(v).replace("\xa0", " ").strip()
-    return "" if s in {"·", "-", "—", "None", "nan"} else s
+    t = str(v).replace("\xa0", " ").strip()
+    return "" if t in {"·", "-", "—", "None", "nan"} else t
 
 
 def num(v, default=0):
@@ -119,440 +67,394 @@ def num(v, default=0):
         return default
 
 
-def norm(s):
-    s = unicodedata.normalize("NFKD", clean(s)).lower()
-    s = re.sub(r"\b(dr|prof|mr|ms|mrs|eng)\.?\s+", "", s)
-    return re.sub(r"[^a-z]+", "", s)
-
-
-def header_row(rows, limit=8):
-    best, count = 0, -1
-    for i in range(min(limit, len(rows))):
-        n = sum(1 for v in rows[i] if v is not None)
-        if n > count:
-            best, count = i, n
-    return best
-
-
-def table(ws):
-    """Return (headers, list-of-dicts) for a sheet with a banner above the header."""
-    rows = list(ws.iter_rows(values_only=True))
-    hi = header_row(rows)
-    hdr = [clean(v) for v in rows[hi]]
+def table(wb, sheet, header_row):
+    data = list(wb[sheet].iter_rows(values_only=True))
+    head = [s(c) for c in data[header_row - 1]]
     out = []
-    for r in rows[hi + 1 :]:
-        if all(v is None or clean(v) == "" for v in r):
+    for r in data[header_row:]:
+        if all(c is None for c in r):
             continue
-        out.append({h: r[i] for i, h in enumerate(hdr) if h})
-    return hdr, out
+        out.append({h: r[i] for i, h in enumerate(head) if h})
+    return out
 
 
-def status_of(holders):
-    if holders <= 0:
+def status_of(n):
+    if n <= 0:
         return "No core expert", "critical"
-    if holders == 1:
+    if n == 1:
         return "Single core expert", "serious"
-    if holders == 2:
+    if n == 2:
         return "Thin", "warn"
     return "Adequate", "good"
 
 
-def _domain_of(tree, i):
-    """The Tier-1 domain label governing tree[i]."""
-    for n in reversed(tree[: i + 1]):
-        if n["level"] == 1:
-            return n["label"]
-    return ""
-
-
 def emails_by_id():
-    """Respondent ID -> official email, from the raw survey export.
+    """Respondent ID -> official e-mail.
 
-    The survey keeps its original numbering (1-57, including the two excluded
-    test submissions), and so does the master dataset, so the join is on ID
-    rather than on name. Returns {} when the survey file is absent, which lets
-    the generator still run from the analysis workbook alone.
+    Preferred source is the raw survey export, joined on the respondent ID.
+    The export carries verbatim answers for named officials of six foreign
+    health authorities, so it is not kept in the repository; when it is absent
+    the addresses already extracted from it are read from data/network_emails.json
+    instead. Either way the join is on ID, with an exact-name fallback, and the
+    run prints who is left without an address.
     """
-    if not os.path.exists(SURVEY):
-        print(f"note: {os.path.basename(SURVEY)} not found — emails omitted")
-        return {}
-    ws = openpyxl.load_workbook(SURVEY, data_only=True)["Sheet1"]
-    rows = list(ws.iter_rows(values_only=True))
-    hdr = [clean(h) for h in rows[0]]
-    try:
-        i_id, i_mail = hdr.index("ID"), hdr.index("Official email")
-    except ValueError:
-        print("note: survey file has no ID / Official email column — emails omitted")
-        return {}
-    out = {}
-    for r in rows[1:]:
-        rid = num(r[i_id], -1)
-        mail = clean(r[i_mail])
-        if rid >= 0 and mail:
-            out[rid] = mail
-    return out
+    if os.path.exists(SURVEY):
+        ws = openpyxl.load_workbook(SURVEY, data_only=True)["Sheet1"]
+        data = list(ws.iter_rows(values_only=True))
+        head = [s(c) for c in data[0]]
+        try:
+            i_id, i_mail = head.index("ID"), head.index("Official email")
+            i_name = head.index("Name") if "Name" in head else None
+        except ValueError:
+            print("note: survey export has no ID / Official email column")
+            return {}, {}
+        by_id, by_name = {}, {}
+        for r in data[1:]:
+            rid, mail = num(r[i_id], -1), s(r[i_mail])
+            if not mail:
+                continue
+            if rid >= 0:
+                by_id[rid] = mail
+            if i_name is not None and s(r[i_name]):
+                by_name[s(r[i_name])] = mail
+        print(f"e-mails: {os.path.basename(SURVEY)} ({len(by_id)} addresses)")
+        return by_id, by_name
+
+    if os.path.exists(EMAILS):
+        with open(EMAILS, encoding="utf-8") as fh:
+            rows = json.load(fh)
+        by_id = {num(r["id"], -1): r["email"] for r in rows if r.get("email")}
+        by_name = {s(r.get("name")): r["email"] for r in rows if r.get("email")}
+        print(f"e-mails: {os.path.basename(EMAILS)} ({len(by_id)} addresses) "
+              "— survey export not present")
+        return by_id, by_name
+
+    print("note: no e-mail source found — e-mails omitted")
+    return {}, {}
 
 
 def main():
     wb = openpyxl.load_workbook(SRC, data_only=True)
-    mails = emails_by_id()
+    mail_by_id, mail_by_name = emails_by_id()
 
-    # ---- people -----------------------------------------------------------
-    _, master = table(wb["02_Master_Dataset"])
-    people = []
-    for r in master:
-        name = clean(r.get("Name"))
-        if not name:
+    # ---- profile-level rules ----------------------------------------------
+    # The sheet lists the bands first, then explanatory bullet rows that reuse
+    # the same first column. Only rows naming a proficiency level are bands.
+    profile_levels, profile_notes = [], []
+    for r in table(wb, "Profile_Level_Rules", 4):
+        years = s(r.get("Years of experience (survey answer)"))
+        if not years:
             continue
-        state = clean(r.get("Member State"))
-        areas = [clean(r.get(f"Core {i}")) for i in (1, 2, 3)]
-        areas = [a for a in areas if a]
-        people.append(
-            {
-                "id": num(r.get("ID")),
-                "name": name,
-                "state": state,
-                "code": STATE_CODE.get(state, ""),
-                "entity": clean(r.get("Entity")),
-                "track": clean(r.get("Track")),
-                "level": clean(r.get("Position Level")),
-                "years": clean(r.get("Years")),
-                "background": clean(r.get("Primary Background")),
-                "areas": areas,
-                "soleAreas": num(r.get("Sole-Expert Areas (n)")),
-                "external": clean(r.get("Externally Consulted")).lower().startswith("y"),
-                "profile": clean(r.get("Profile Level")),
-                "index": num(r.get("Expertise Index (1-125)")),
-                "confidence": clean(r.get("Coding Confidence")),
-                "email": mails.get(num(r.get("ID")), ""),
-                "group": NETWORK_GROUP.get(norm(name), ""),
-            }
-        )
+        level = s(r.get("CF Proficiency Level"))
+        if not level or years.startswith("•"):
+            profile_notes.append(years.lstrip("• ").strip())
+            continue
+        profile_levels.append({
+            "years": years,
+            "level": level,
+            "stage": s(r.get("Career Stage (toolkit: entry / mid / senior)")),
+            "depth": num(r.get("Depth Score (1-5) — used in the Index")),
+        })
 
-    # ---- apply the taxonomy-review additions ------------------------------
-    by_name = {norm(p["name"]): p for p in people}
-    for who, areas in EXPERTISE_ADDS.items():
-        person = by_name.get(norm(who))
-        assert person, f"EXPERTISE_ADDS: no respondent named {who!r}"
-        for area in areas:
-            assert area in NEW_AREAS, f"EXPERTISE_ADDS: {area!r} missing from NEW_AREAS"
-            if area not in person["areas"]:
-                person["areas"].append(area)
-
-    # ---- taxonomy with live network holder counts -------------------------
-    _, tax_rows = table(wb["01_Taxonomy"])
+    # ---- taxonomy ----------------------------------------------------------
     taxonomy = []
-    for r in tax_rows:
-        area = clean(r.get("Tier 3 – Expertise"))
+    for r in table(wb, "01_Taxonomy", 4):
+        area = s(r.get("Level 3 – Expertise Area"))
         if not area:
             continue
-        holders = num(r.get("Network Core Holders (n)"))
+        competency = s(r.get("Level 2 – CF Competency"))
+        holders = num(r.get("Area Holders (n)"))
         label, cls = status_of(holders)
-        taxonomy.append(
-            {
-                "domain": clean(r.get("Tier 1 – Domain")),
-                "sub": clean(r.get("Tier 2 – Sub-Domain")),
-                "area": area,
-                "holders": holders,
-                "states": num(r.get("Member States Covering")),
-                "status": label,
-                "cls": cls,
-            }
-        )
-
-    for area, (dom, sub) in NEW_AREAS.items():
-        holders = [p for p in people if area in p["areas"]]
-        if not holders:
-            continue
-        label, cls = status_of(len(holders))
-        entry = {
-            "domain": dom, "sub": sub, "area": area,
-            "holders": len(holders),
-            "states": len({p["state"] for p in holders}),
+        taxonomy.append({
+            "domain": s(r.get("Level 1 – CF Domain")),
+            "code": s(r.get("Code")),
+            "competency": competency,
+            "sub": competency,          # back-compatible with existing views
+            "area": area,
+            "fit": s(r.get("Framework Fit")),
+            "origin": s(r.get("Origin (Core Taxonomy domain › sub-domain)")),
+            "holders": holders,
+            "states": num(r.get("Member States Covering")),
             "status": label, "cls": cls,
-        }
-        # keep it beside the other areas of the same sub-domain
-        idx = max((i for i, t in enumerate(taxonomy)
-                   if t["domain"] == dom and t["sub"] == sub), default=len(taxonomy) - 1) + 1
-        taxonomy.insert(idx, entry)
+        })
 
-    # Recompute each person's sole-holder count from the finished taxonomy.
-    # The workbook column was calculated before the taxonomy review, so it
-    # misses areas added since — two respondents became the only holder of a
-    # new area and would otherwise still read zero.
-    sole_by_name = {}
-    for t in taxonomy:
-        if t["holders"] != 1:
+    # ---- people ------------------------------------------------------------
+    stage_of_level = {p["level"]: p["stage"] for p in profile_levels}
+    people = []
+    for r in table(wb, "02_Master_Dataset", 4):
+        name = s(r.get("Name"))
+        if not name:
             continue
-        who = [p for p in people if t["area"] in p["areas"]]
+        state = s(r.get("Member State"))
+        areas = [s(r.get(f"L3 Expertise Area {i}")) for i in range(1, 6)]
+        areas = [a for a in areas if a]
+        level = s(r.get("Profile Level (CF)"))
+        rid = num(r.get("ID"))
+        people.append({
+            "id": rid,
+            "name": name,
+            "state": state,
+            "code": STATE_CODE.get(state, ""),
+            "entity": s(r.get("Entity")),
+            "track": s(r.get("Track")),
+            "level": s(r.get("Position Level")),
+            "years": s(r.get("Years")),
+            "background": s(r.get("Primary Background")),
+            "areas": areas,
+            "competencies": [c for c in
+                             (x.strip() for x in s(r.get("L2 CF Competencies (rolled up)")).split(";"))
+                             if c],
+            "soleAreas": num(r.get("Sole-Expert Areas (n)")),
+            "external": s(r.get("Externally Consulted")).lower().startswith("y"),
+            "profile": level,
+            "stage": s(r.get("CF Career Stage")) or stage_of_level.get(level, ""),
+            "index": num(r.get("Expertise Index (1-125)")),
+            "confidence": s(r.get("Coding Confidence")),
+            "email": mail_by_id.get(rid) or mail_by_name.get(name, ""),
+        })
+
+    # ---- long table --------------------------------------------------------
+    fact = [f for f in table(wb, "Fact_CoreExpertise", 1) if s(f.get("Name"))]
+    by_name = {p["name"]: p for p in people}
+
+    # areas each person is the network's only holder of
+    holders_by_area = {}
+    for f in fact:
+        area, nm = s(f.get("L3 – Expertise Area")), s(f.get("Name"))
+        if area and nm:
+            holders_by_area.setdefault(area, []).append(nm)
+    sole_by_name = {}
+    for area, who in holders_by_area.items():
         if len(who) == 1:
-            sole_by_name.setdefault(who[0]["name"], []).append(t["area"])
+            sole_by_name.setdefault(who[0], []).append(area)
     for p in people:
-        # the areas this person is the network's only holder of, named so the
-        # profile can show which ones rather than just how many
         p["soleList"] = sorted(sole_by_name.get(p["name"], []))
         p["soleAreas"] = len(p["soleList"])
 
-    # ---- member-state coverage -------------------------------------------
-    _, cov_rows = table(wb["04_MemberState_Coverage"])
+    # ---- competencies: distinct people ------------------------------------
+    people_per_comp, tags_per_comp, states_per_comp = {}, {}, {}
+    for f in fact:
+        code, nm = s(f.get("Code")), s(f.get("Name"))
+        if not code or not nm:
+            continue
+        tags_per_comp[code] = tags_per_comp.get(code, 0) + 1
+        people_per_comp.setdefault(code, set()).add(nm)
+        st = by_name.get(nm, {}).get("state", "")
+        if st:
+            states_per_comp.setdefault(code, set()).add(st)
+
+    competencies = []
+    for r in table(wb, "06_Competency_Coverage", 4):
+        code = s(r.get("Code"))
+        if not code:
+            continue
+        behavioural = code in BEHAVIOURAL
+        n = len(people_per_comp.get(code, ()))
+        label, cls = status_of(n)
+        competencies.append({
+            "domain": s(r.get("L1 – CF Domain")),
+            "code": code,
+            "competency": s(r.get("L2 – CF Competency")),
+            "areasDefined": num(r.get("L3 Areas Defined")),
+            "areasHeld": num(r.get("L3 Areas Held")),
+            "people": n,
+            "tags": tags_per_comp.get(code, 0),
+            "states": len(states_per_comp.get(code, ())),
+            "status": "Not mapped — behavioural" if behavioural else label,
+            "cls": "neutral" if behavioural else cls,
+            "behavioural": behavioural,
+            "recommendation": s(r.get("Strategic Recommendation")),
+        })
+
+    # ---- coverage: areas by state, and competencies by state --------------
     coverage = []
-    for r in cov_rows:
-        area = clean(r.get("Tier 3 – Expertise"))
-        domain = clean(r.get("Tier 1 – Domain"))
-        # The sheet ends with three roll-up rows ("Respondents per Member
-        # State", …) that carry no domain. They are not expertise areas.
-        if not area or not domain:
+    for t in taxonomy:
+        who = holders_by_area.get(t["area"], [])
+        by = {st: sum(1 for nm in who if by_name.get(nm, {}).get("state") == st) for st in STATES}
+        coverage.append({
+            "domain": t["domain"], "code": t["code"], "competency": t["competency"],
+            "area": t["area"], "by": by, "total": len(who),
+            "states": sum(1 for v in by.values() if v),
+        })
+
+    comp_people_state = {}
+    for f in fact:
+        code, nm = s(f.get("Code")), s(f.get("Name"))
+        st = by_name.get(nm, {}).get("state", "")
+        if code and nm and st:
+            comp_people_state.setdefault(code, {}).setdefault(st, set()).add(nm)
+
+    competency_coverage = []
+    for c in competencies:
+        per = comp_people_state.get(c["code"], {})
+        by = {st: len(per.get(st, ())) for st in STATES}
+        competency_coverage.append({
+            "domain": c["domain"], "code": c["code"], "competency": c["competency"],
+            "by": by, "total": sum(by.values()),
+            "states": sum(1 for v in by.values() if v),
+            "behavioural": c["behavioural"],
+        })
+
+    # ---- tree: Root -> domain -> competency -> area -> holder -------------
+    domains = []
+    for t in taxonomy:
+        if t["domain"] not in domains:
+            domains.append(t["domain"])
+    comp_order = []
+    for t in taxonomy:
+        key = (t["domain"], t["code"], t["competency"])
+        if key not in comp_order:
+            comp_order.append(key)
+
+    tree = [{"level": 0, "label": "GCC Network", "type": "ROOT",
+             "note": f"{len(people)} experts · {len({p['state'] for p in people})} Member States"}]
+    for dom in domains:
+        dom_areas = [t for t in taxonomy if t["domain"] == dom and t["holders"] > 0]
+        if not dom_areas:
             continue
-        coverage.append(
-            {
-                "domain": domain,
-                "area": area,
-                "by": {s: num(r.get(s)) for s in STATES},
-                "total": num(r.get("Total")),
-                "states": num(r.get("States Covering")),
-            }
-        )
+        tree.append({"level": 1, "label": dom, "type": "CF Domain (Level 1)",
+                     "note": f"{len(dom_areas)} area(s) held"})
+        for d2, code, comp in comp_order:
+            if d2 != dom:
+                continue
+            comp_areas = [t for t in dom_areas if t["code"] == code]
+            if not comp_areas:
+                continue
+            tree.append({"level": 2, "label": comp, "type": "CF Competency (Level 2)",
+                         "note": f"{len(people_per_comp.get(code, ()))} holder(s)"})
+            for t in comp_areas:
+                who = sorted(holders_by_area.get(t["area"], []))
+                note = f"{len(who)} holder(s) · {t['states']} state(s)"
+                if len(who) == 1:
+                    note += " · SINGLE CORE EXPERT"
+                tree.append({"level": 3, "label": t["area"],
+                             "type": "Expertise Area (Level 3)", "note": note})
+                for nm in who:
+                    cc = by_name.get(nm, {}).get("code", "")
+                    tree.append({"level": 4, "label": f"{nm} ({cc})",
+                                 "type": "Holder", "note": ""})
 
-    for area, (dom, sub) in NEW_AREAS.items():
-        holders = [p for p in people if area in p["areas"]]
-        if not holders:
-            continue
-        by = {st: sum(1 for p in holders if p["state"] == st) for st in STATES}
-        entry = {
-            "domain": dom, "area": area, "by": by,
-            "total": len(holders),
-            "states": sum(1 for n in by.values() if n),
-        }
-        idx = max((i for i, c in enumerate(coverage) if c["domain"] == dom),
-                  default=len(coverage) - 1) + 1
-        coverage.insert(idx, entry)
-
-    # ---- gaps -------------------------------------------------------------
-    _, gap_rows = table(wb["06_Knowledge_Gaps"])
-    gaps = []
-    for r in gap_rows:
-        area = clean(r.get("Tier 3 – Expertise"))
-        if not area:
-            continue
-        holders = num(r.get("Holders (n)"))
-        label, cls = status_of(holders)
-        gaps.append(
-            {
-                "domain": clean(r.get("Tier 1 – Domain")),
-                "sub": clean(r.get("Tier 2 – Sub-Domain")),
-                "area": area,
-                "holders": holders,
-                "states": num(r.get("States Covering")),
-                "status": label,
-                "cls": cls,
-                "concentration": clean(r.get("Concentration")),
-                "snapshot": clean(r.get("Holders (Name, State) — snapshot")),
-                "recommendation": clean(r.get("Strategic Recommendation")),
-            }
-        )
-
-    # ---- engagement plan --------------------------------------------------
-    _, eng_rows = table(wb["07_Engagement_Plan"])
-    engagement = []
-    for r in eng_rows:
-        name = clean(r.get("Name"))
-        if not name:
-            continue
-        engagement.append(
-            {
-                "priority": clean(r.get("Priority")),
-                "name": name,
-                "state": clean(r.get("Member State")),
-                "role": clean(r.get("Suggested Network Role")),
-                "action": clean(r.get("Validation Action")),
-                "focus": clean(r.get("Engagement Focus")),
-            }
-        )
-
-    # ---- transferable skills ---------------------------------------------
-    ws = wb["10_Transferable_Skills"]
-    _, skill_rows = table(ws)
-    skills = []
-    for r in skill_rows:
-        cat = clean(r.get("Skill Category"))
-        if cat:
-            skills.append({"skill": cat, "people": num(r.get("People (n)"))})
-    skills.sort(key=lambda s: -s["people"])
-
-    # ---- hierarchy --------------------------------------------------------
-    rows = list(wb["08_Mapping_Hierarchy"].iter_rows(values_only=True))
-    hi = header_row(rows)
-    tree = []
-    for r in rows[hi + 1 :]:
-        label = clean(r[1])
-        if not label:
-            continue
-        tree.append(
-            {
-                "level": num(r[0]),
-                "label": re.sub(r"^[\s└─•]+", "", label).strip(),
-                "type": clean(r[2]),
-                # the workbook writes "SOLE EXPERT"; keep one vocabulary
-                "note": clean(r[3]).replace("SOLE EXPERT", "SINGLE CORE EXPERT"),
-            }
-        )
-
-    # Mirror the taxonomy-review additions into the tree, so the Mapping view
-    # shows them alongside the areas that came from the workbook.
-    for area, (dom, sub) in NEW_AREAS.items():
-        holders = [p for p in people if area in p["areas"]]
-        if not holders:
-            continue
-        # the last node belonging to this sub-domain, so the area lands inside it
-        anchor = None
-        in_sub = False
-        for i, n in enumerate(tree):
-            if n["level"] == 2:
-                in_sub = n["label"] == sub and _domain_of(tree, i) == dom
-            elif n["level"] == 1:
-                in_sub = False
-            if in_sub:
-                anchor = i
-        if anchor is None:
-            continue
-        label, _ = status_of(len(holders))
-        states = len({p["state"] for p in holders})
-        nodes = [{
-            "level": 3, "label": area, "type": "Core Expertise (Tier 3)",
-            "note": f"{len(holders)} holder(s) · {states} state(s)"
-                    + (" · SINGLE CORE EXPERT" if len(holders) == 1 else ""),
-        }]
-        for h in sorted(holders, key=lambda p: p["name"]):
-            nodes.append({"level": 4, "label": f"{h['name']} ({h['code']})",
-                          "type": "Holder", "note": ""})
-        tree[anchor + 1 : anchor + 1] = nodes
-
-    # ---- bridge: internal vs network per expertise area -------------------
-    bridge = []
-    if os.path.exists(INTERNAL_MATRIX):
-        with open(INTERNAL_MATRIX, encoding="utf-8") as fh:
-            internal = json.load(fh)
-        internal_by_area = {}
-        for row in internal:
-            area = clean(row.get("expertise"))
-            if area:
-                internal_by_area[area] = row
-        net_by_area = {t["area"]: t for t in taxonomy}
-        for area in sorted(set(internal_by_area) | set(net_by_area)):
-            irow = internal_by_area.get(area, {})
-            ih = num(irow.get("holders_n"), 0)
-            nrow = net_by_area.get(area, {})
-            nh = num(nrow.get("holders"), 0)
-            ilabel, icls = status_of(ih)
-            nlabel, ncls = status_of(nh)
-            if ih <= 1 and nh >= 2:
-                verdict, vcls = "Network covers the gap", "good"
-            elif ih <= 1 and nh == 1:
-                verdict, vcls = "One regional holder only", "warn"
-            elif ih <= 1 and nh == 0:
-                verdict, vcls = "Gap on both sides", "critical"
-            elif nh == 0:
-                verdict, vcls = "Internal only", "neutral"
-            else:
-                verdict, vcls = "Covered both sides", "good"
-            bridge.append(
-                {
-                    "domain": clean(nrow.get("domain") or irow.get("domain")),
-                    "area": area,
-                    "internal": ih,
-                    "internalStatus": ilabel,
-                    "internalCls": icls,
-                    "network": nh,
-                    "networkStatus": nlabel,
-                    "networkCls": ncls,
-                    "verdict": verdict,
-                    "verdictCls": vcls,
-                }
-            )
-
-    # ---- rollups ----------------------------------------------------------
+    # ---- roll-ups ----------------------------------------------------------
     by_state = []
-    for s in STATES:
-        members = [p for p in people if p["state"] == s]
-        by_state.append(
-            {
-                "state": s,
-                "code": STATE_CODE[s],
-                "people": len(members),
-                "tags": sum(len(p["areas"]) for p in members),
-                "areas": len({a for p in members for a in p["areas"]}),
-            }
-        )
-    by_state.sort(key=lambda d: -d["people"])
+    for st in STATES:
+        members = [p for p in people if p["state"] == st]
+        by_state.append({
+            "state": st, "label": STATE_LABEL[st], "code": STATE_CODE[st],
+            "people": len(members),
+            "tags": sum(len(p["areas"]) for p in members),
+            "areas": len({a for p in members for a in p["areas"]}),
+        })
 
-    by_domain = {}
+    by_domain = []
+    for dom in domains:
+        areas = [t for t in taxonomy if t["domain"] == dom]
+        comps = [c for c in competencies if c["domain"] == dom]
+        live = [c for c in comps if not c["behavioural"]]
+        by_domain.append({
+            "domain": dom,
+            "areas": len(areas),
+            "covered": sum(1 for t in areas if t["holders"] > 0),
+            "competencies": len(comps),
+            "competenciesHeld": sum(1 for c in live if c["people"] > 0),
+            "good": sum(1 for t in areas if t["cls"] == "good"),
+            "warn": sum(1 for t in areas if t["cls"] == "warn"),
+            "serious": sum(1 for t in areas if t["cls"] == "serious"),
+            "critical": sum(1 for t in areas if t["cls"] == "critical"),
+        })
+
+    area_counts = {"good": 0, "warn": 0, "serious": 0, "critical": 0}
     for t in taxonomy:
-        d = by_domain.setdefault(
-            t["domain"],
-            {"domain": t["domain"], "areas": 0, "covered": 0, "good": 0, "warn": 0, "serious": 0, "critical": 0},
-        )
-        d["areas"] += 1
-        if t["holders"] > 0:
-            d["covered"] += 1
-        d[t["cls"]] += 1
-    by_domain = sorted(by_domain.values(), key=lambda d: -d["covered"])
+        area_counts[t["cls"]] += 1
+    comp_counts = {"good": 0, "warn": 0, "serious": 0, "critical": 0, "behavioural": 0}
+    for c in competencies:
+        comp_counts["behavioural" if c["behavioural"] else c["cls"]] += 1
 
-    by_group = []
-    for key, label in GROUPS:
-        members = [p for p in people if p["group"] == key]
-        by_group.append({"key": key, "label": label, "people": len(members)})
-    unassigned = [p for p in people if not p["group"]]
-    if unassigned:
-        by_group.append({"key": "", "label": "Unassigned", "people": len(unassigned)})
+    profile_counts = {}
+    for p in people:
+        profile_counts[p["profile"]] = profile_counts.get(p["profile"], 0) + 1
 
-    counts = {"good": 0, "warn": 0, "serious": 0, "critical": 0}
-    for t in taxonomy:
-        counts[t["cls"]] += 1
+    # ---- engagement plan (reference only, never bundled) ------------------
+    engagement = []
+    for r in table(wb, "08_Engagement_Plan", 4):
+        nm = s(r.get("Name"))
+        if not nm:
+            continue
+        engagement.append({
+            "priority": s(r.get("Priority")), "name": nm,
+            "state": s(r.get("Member State")),
+            "role": s(r.get("Suggested Network Role")),
+            "action": s(r.get("Validation Action")),
+            "focus": s(r.get("Engagement Focus")),
+        })
 
     meta = {
         "people": len(people),
-        "withEmail": sum(1 for p in people if p["email"]),
         "states": len({p["state"] for p in people if p["state"]}),
-        "tags": sum(len(p["areas"]) for p in people),
+        "domains": len(domains),
+        "competencies": len(competencies),
+        "competenciesHeld": sum(1 for c in competencies if not c["behavioural"] and c["people"] > 0),
         "areas": len(taxonomy),
         "covered": sum(1 for t in taxonomy if t["holders"] > 0),
-        "adequate": counts["good"],
-        "thin": counts["warn"],
-        "sole": counts["serious"],
+        "tags": len(fact),
+        "adequate": area_counts["good"], "thin": area_counts["warn"],
+        "sole": area_counts["serious"], "noCore": area_counts["critical"],
+        "competencyStatus": comp_counts,
+        "profileCounts": profile_counts,
         "soleExperts": sum(1 for p in people if p["soleAreas"] > 0),
-        "noCore": counts["critical"],
         "external": sum(1 for p in people if p["external"]),
         "critical": sum(1 for p in people if p["index"] >= 60),
         "focalPoints": sum(1 for e in engagement if e["priority"] == "P1"),
-        "grouped": sum(1 for p in people if p["group"]),
+        "withEmail": sum(1 for p in people if p["email"]),
+        "treeNodes": len(tree),
     }
 
-    # Only what a view actually reads is bundled into the published JS.
+    # ---- bridge: internal vs network, at both levels (not bundled) --------
+    bridge = {"areas": [], "competencies": []}
+    if os.path.exists(INTERNAL_MATRIX):
+        with open(INTERNAL_MATRIX, encoding="utf-8") as fh:
+            internal_areas = {s(r.get("expertise")): num(r.get("holders_n")) for r in json.load(fh)}
+        for t in taxonomy:
+            ih, nh = internal_areas.get(t["area"], 0), t["holders"]
+            bridge["areas"].append({
+                "domain": t["domain"], "code": t["code"], "area": t["area"],
+                "internal": ih, "network": nh, "verdict": verdict_for(ih, nh),
+            })
+    if os.path.exists(INTERNAL_COMPS):
+        with open(INTERNAL_COMPS, encoding="utf-8") as fh:
+            internal_comps = {s(r.get("code")): (num(r.get("people")), bool(r.get("behavioural")))
+                              for r in json.load(fh)}
+        for c in competencies:
+            ih, beh = internal_comps.get(c["code"], (0, c["behavioural"]))
+            bridge["competencies"].append({
+                "domain": c["domain"], "code": c["code"], "competency": c["competency"],
+                "internal": ih, "network": c["people"],
+                "verdict": "Behavioural — not mapped" if (beh or c["behavioural"])
+                           else verdict_for(ih, c["people"]),
+            })
+
     payload = {
         "meta": meta,
+        "profileLevels": profile_levels,
+        "profileNotes": profile_notes,
         "people": people,
         "taxonomy": taxonomy,
+        "competencies": competencies,
         "coverage": coverage,
+        "competencyCoverage": competency_coverage,
         "tree": tree,
         "byState": by_state,
         "byDomain": by_domain,
-        "byGroup": by_group,
-        "states": [
-            {
-                "name": s,
-                "label": STATE_LABEL[s],
-                "code": STATE_CODE[s],
-                "flag": STATE_CODE[s].lower() + ".svg",
-            }
-            for s in STATE_ORDER
-        ],
+        "states": [{"name": st, "label": STATE_LABEL[st], "code": STATE_CODE[st],
+                    "flag": STATE_CODE[st].lower() + ".svg"} for st in STATE_ORDER],
     }
 
     os.makedirs(os.path.dirname(OUT_JS), exist_ok=True)
     os.makedirs(OUT_DIR, exist_ok=True)
 
     with open(OUT_JS, "w", encoding="utf-8") as fh:
-        fh.write("/* Generated by scripts/generate_network_data.py — do not edit by hand. */\n")
+        fh.write("/* Generated by scripts/generate_network_data.py — do not edit by hand.\n"
+                 "   Hybrid taxonomy: 7 CF domains · 23 competencies · 65 expertise areas"
+                 f" · {len(people)} experts. */\n")
         fh.write("window.GCDC_NETWORK = ")
         json.dump(payload, fh, ensure_ascii=False, separators=(",", ":"))
         fh.write(";\n")
@@ -561,21 +463,39 @@ def main():
         with open(os.path.join(OUT_DIR, f"{key}.json"), "w", encoding="utf-8") as fh:
             json.dump(value, fh, ensure_ascii=False, indent=2)
 
-    # Derived tables kept as JSON for reference but not bundled into the page:
-    # no view reads them, so they stay out of the shipped JavaScript.
-    for name, value in (("gaps", gaps), ("skills", skills), ("byGroup", by_group), ("bridge", bridge)):
+    # written for reference; no view reads them, so they stay out of the bundle
+    for name, value in (("bridge", bridge), ("engagement", engagement)):
         with open(os.path.join(OUT_DIR, f"{name}.json"), "w", encoding="utf-8") as fh:
             json.dump(value, fh, ensure_ascii=False, indent=2)
 
-    # The engagement plan names who to approach and in what order. It is written
-    # for local use only — never bundled into network-data.js, and git-ignored —
-    # until the repository is private and the site is behind Entra ID sign-in.
-    with open(os.path.join(OUT_DIR, "engagement.json"), "w", encoding="utf-8") as fh:
-        json.dump(engagement, fh, ensure_ascii=False, indent=2)
-
-    print(f"people={meta['people']} states={meta['states']} areas={meta['areas']} "
-          f"covered={meta['covered']} bridge={len(bridge)} emails={meta['withEmail']}")
     print(f"wrote {OUT_JS}")
+    print(f"  people={meta['people']} states={meta['states']} tags={meta['tags']}")
+    print(f"  areas={meta['covered']}/{meta['areas']} "
+          f"A/T/S/N={area_counts['good']}/{area_counts['warn']}/"
+          f"{area_counts['serious']}/{area_counts['critical']}")
+    print(f"  competencies held={meta['competenciesHeld']}/{meta['competencies']} "
+          f"A/T/S/N/B={comp_counts['good']}/{comp_counts['warn']}/"
+          f"{comp_counts['serious']}/{comp_counts['critical']}/{comp_counts['behavioural']}")
+    print(f"  profile={profile_counts} external={meta['external']} "
+          f"index>=60={meta['critical']} P1={meta['focalPoints']}")
+    print(f"  tree nodes={meta['treeNodes']} emails={meta['withEmail']}/{len(people)}")
+    missing = [f"{p['id']} {p['name']} ({p['state']})" for p in people if not p["email"]]
+    if missing:
+        print(f"  no e-mail on file for {len(missing)}:")
+        for m in missing:
+            print(f"    - {m}")
+
+
+def verdict_for(internal, network):
+    if internal <= 1 and network >= 2:
+        return "Network covers the gap"
+    if internal <= 1 and network == 1:
+        return "One regional holder only"
+    if internal <= 1 and network == 0:
+        return "Gap on both sides"
+    if network == 0:
+        return "Internal only"
+    return "Covered both sides"
 
 
 if __name__ == "__main__":

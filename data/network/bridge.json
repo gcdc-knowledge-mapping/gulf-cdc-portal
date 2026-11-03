@@ -1,758 +1,710 @@
-[
-  {
-    "domain": "Data, Digital Health & Health Informatics",
-    "area": "AI in Health",
-    "internal": 4,
-    "internalStatus": "Adequate",
-    "internalCls": "good",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Internal only",
-    "verdictCls": "neutral"
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "area": "Behavior Change Theory & Campaigns",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 2,
-    "networkStatus": "Thin",
-    "networkCls": "warn",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Epidemiology & Surveillance",
-    "area": "Biostatistics",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 5,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Epidemiology & Surveillance",
-    "area": "Burden of Disease Analysis",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 2,
-    "networkStatus": "Thin",
-    "networkCls": "warn",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Communicable & Non-Communicable Diseases",
-    "area": "Cancer Epidemiology & Screening",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 4,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Quality, Governance & Project Management",
-    "area": "Casemix Funding & Classification",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Gap on both sides",
-    "verdictCls": "critical"
-  },
-  {
-    "domain": "Quality, Governance & Project Management",
-    "area": "Change Management",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Gap on both sides",
-    "verdictCls": "critical"
-  },
-  {
-    "domain": "Clinical & Specialized Practice",
-    "area": "Clinical Nutrition",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Gap on both sides",
-    "verdictCls": "critical"
-  },
-  {
-    "domain": "Research & Scientific Practice",
-    "area": "Clinical Research / Clinical Trials",
-    "internal": 2,
-    "internalStatus": "Thin",
-    "internalCls": "warn",
-    "network": 2,
-    "networkStatus": "Thin",
-    "networkCls": "warn",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "area": "Competency Framework Design",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 1,
-    "networkStatus": "Single core expert",
-    "networkCls": "serious",
-    "verdict": "One regional holder only",
-    "verdictCls": "warn"
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "area": "Continuing Professional Development (CPD)",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Gap on both sides",
-    "verdictCls": "critical"
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "area": "Curriculum & Instructional Design",
-    "internal": 2,
-    "internalStatus": "Thin",
-    "internalCls": "warn",
-    "network": 1,
-    "networkStatus": "Single core expert",
-    "networkCls": "serious",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Data, Digital Health & Health Informatics",
-    "area": "Dashboard & BI Development",
-    "internal": 2,
-    "internalStatus": "Thin",
-    "internalCls": "warn",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Internal only",
-    "verdictCls": "neutral"
-  },
-  {
-    "domain": "Data, Digital Health & Health Informatics",
-    "area": "Data Analysis (Quantitative)",
-    "internal": 7,
-    "internalStatus": "Adequate",
-    "internalCls": "good",
-    "network": 3,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Data, Digital Health & Health Informatics",
-    "area": "Data Engineering & Automation",
-    "internal": 2,
-    "internalStatus": "Thin",
-    "internalCls": "warn",
-    "network": 1,
-    "networkStatus": "Single core expert",
-    "networkCls": "serious",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Data, Digital Health & Health Informatics",
-    "area": "Data Governance",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 1,
-    "networkStatus": "Single core expert",
-    "networkCls": "serious",
-    "verdict": "One regional holder only",
-    "verdictCls": "warn"
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "area": "Digital Learning (LMS / LXP)",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Gap on both sides",
-    "verdictCls": "critical"
-  },
-  {
-    "domain": "Public Health Emergency & Health Security",
-    "area": "Disaster Medicine & Management",
-    "internal": 2,
-    "internalStatus": "Thin",
-    "internalCls": "warn",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Internal only",
-    "verdictCls": "neutral"
-  },
-  {
-    "domain": "Epidemiology & Surveillance",
-    "area": "Disease Modelling & Forecasting",
-    "internal": 2,
-    "internalStatus": "Thin",
-    "internalCls": "warn",
-    "network": 2,
-    "networkStatus": "Thin",
-    "networkCls": "warn",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Clinical & Specialized Practice",
-    "area": "Emergency Medical Services / Paramedic",
-    "internal": 2,
-    "internalStatus": "Thin",
-    "internalCls": "warn",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Internal only",
-    "verdictCls": "neutral"
-  },
-  {
-    "domain": "Public Health Emergency & Health Security",
-    "area": "Emergency Preparedness Planning",
-    "internal": 3,
-    "internalStatus": "Adequate",
-    "internalCls": "good",
-    "network": 12,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Epidemiology & Surveillance",
-    "area": "Epidemic Intelligence",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 1,
-    "networkStatus": "Single core expert",
-    "networkCls": "serious",
-    "verdict": "One regional holder only",
-    "verdictCls": "warn"
-  },
-  {
-    "domain": "Research & Scientific Practice",
-    "area": "Ethical Review & Compliance",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 2,
-    "networkStatus": "Thin",
-    "networkCls": "warn",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Quality, Governance & Project Management",
-    "area": "Governance, Risk & Compliance (GRC)",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 2,
-    "networkStatus": "Thin",
-    "networkCls": "warn",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Health Policy, Systems & Strategy",
-    "area": "Health Economics & Financing",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 1,
-    "networkStatus": "Single core expert",
-    "networkCls": "serious",
-    "verdict": "One regional holder only",
-    "verdictCls": "warn"
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "area": "Health Promotion Strategy",
-    "internal": 2,
-    "internalStatus": "Thin",
-    "internalCls": "warn",
-    "network": 7,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Health Policy, Systems & Strategy",
-    "area": "Health Systems Research",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 2,
-    "networkStatus": "Thin",
-    "networkCls": "warn",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Research & Scientific Practice",
-    "area": "Indicators Development & Measurement",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Gap on both sides",
-    "verdictCls": "critical"
-  },
-  {
-    "domain": "Communicable & Non-Communicable Diseases",
-    "area": "Infection & Immunity",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 2,
-    "networkStatus": "Thin",
-    "networkCls": "warn",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Communicable & Non-Communicable Diseases",
-    "area": "Infection Prevention & Control",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 3,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Communicable & Non-Communicable Diseases",
-    "area": "Infectious Disease Epidemiology",
-    "internal": 4,
-    "internalStatus": "Adequate",
-    "internalCls": "good",
-    "network": 14,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Cross-Cutting Professional Skills",
-    "area": "Leadership",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 1,
-    "networkStatus": "Single core expert",
-    "networkCls": "serious",
-    "verdict": "One regional holder only",
-    "verdictCls": "warn"
-  },
-  {
-    "domain": "Clinical & Specialized Practice",
-    "area": "Medical Laboratory",
-    "internal": 0,
-    "internalStatus": "No core expert",
-    "internalCls": "critical",
-    "network": 3,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Communicable & Non-Communicable Diseases",
-    "area": "NCD Prevention & Control",
-    "internal": 2,
-    "internalStatus": "Thin",
-    "internalCls": "warn",
-    "network": 8,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Epidemiology & Surveillance",
-    "area": "Outbreak Investigation",
-    "internal": 4,
-    "internalStatus": "Adequate",
-    "internalCls": "good",
-    "network": 1,
-    "networkStatus": "Single core expert",
-    "networkCls": "serious",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Public Health Emergency & Health Security",
-    "area": "PHEOC / Emergency Operations Centers",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 1,
-    "networkStatus": "Single core expert",
-    "networkCls": "serious",
-    "verdict": "One regional holder only",
-    "verdictCls": "warn"
-  },
-  {
-    "domain": "Quality, Governance & Project Management",
-    "area": "Patient Safety",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 1,
-    "networkStatus": "Single core expert",
-    "networkCls": "serious",
-    "verdict": "One regional holder only",
-    "verdictCls": "warn"
-  },
-  {
-    "domain": "Health Policy, Systems & Strategy",
-    "area": "Performance Management (KPIs / OKRs)",
-    "internal": 3,
-    "internalStatus": "Adequate",
-    "internalCls": "good",
-    "network": 2,
-    "networkStatus": "Thin",
-    "networkCls": "warn",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Health Policy, Systems & Strategy",
-    "area": "Policy Brief & White Paper Writing",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Gap on both sides",
-    "verdictCls": "critical"
-  },
-  {
-    "domain": "Health Policy, Systems & Strategy",
-    "area": "Policy Drafting & Analysis",
-    "internal": 4,
-    "internalStatus": "Adequate",
-    "internalCls": "good",
-    "network": 7,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Quality, Governance & Project Management",
-    "area": "Program Evaluation",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Gap on both sides",
-    "verdictCls": "critical"
-  },
-  {
-    "domain": "Quality, Governance & Project Management",
-    "area": "Project Management (PMP/CAPM)",
-    "internal": 8,
-    "internalStatus": "Adequate",
-    "internalCls": "good",
-    "network": 2,
-    "networkStatus": "Thin",
-    "networkCls": "warn",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Data, Digital Health & Health Informatics",
-    "area": "Public Health Informatics",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 2,
-    "networkStatus": "Thin",
-    "networkCls": "warn",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Clinical & Specialized Practice",
-    "area": "Public Health Microbiology & Genomics",
-    "internal": 0,
-    "internalStatus": "No core expert",
-    "internalCls": "critical",
-    "network": 5,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "area": "Public Health Nutrition",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 1,
-    "networkStatus": "Single core expert",
-    "networkCls": "serious",
-    "verdict": "One regional holder only",
-    "verdictCls": "warn"
-  },
-  {
-    "domain": "Data, Digital Health & Health Informatics",
-    "area": "Registry Development (Cancer, RTI, etc.)",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 6,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Research & Scientific Practice",
-    "area": "Research Governance",
-    "internal": 2,
-    "internalStatus": "Thin",
-    "internalCls": "warn",
-    "network": 4,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Research & Scientific Practice",
-    "area": "Research Methodology Development",
-    "internal": 2,
-    "internalStatus": "Thin",
-    "internalCls": "warn",
-    "network": 4,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Public Health Emergency & Health Security",
-    "area": "Risk Assessment (Rapid Risk Assessment)",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 5,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Communicable & Non-Communicable Diseases",
-    "area": "Road Traffic & Injury Prevention",
-    "internal": 3,
-    "internalStatus": "Adequate",
-    "internalCls": "good",
-    "network": 2,
-    "networkStatus": "Thin",
-    "networkCls": "warn",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Research & Scientific Practice",
-    "area": "Scientific Writing & Publications",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 2,
-    "networkStatus": "Thin",
-    "networkCls": "warn",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Public Health Emergency & Health Security",
-    "area": "Simulation Exercises (SimEx)",
-    "internal": 2,
-    "internalStatus": "Thin",
-    "internalCls": "warn",
-    "network": 1,
-    "networkStatus": "Single core expert",
-    "networkCls": "serious",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Cross-Cutting Professional Skills",
-    "area": "Stakeholder Engagement",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Gap on both sides",
-    "verdictCls": "critical"
-  },
-  {
-    "domain": "Health Policy, Systems & Strategy",
-    "area": "Strategic Planning & Priority Setting",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 6,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Public Health Emergency & Health Security",
-    "area": "Strategic Stockpile Management",
-    "internal": 0,
-    "internalStatus": "No core expert",
-    "internalCls": "critical",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Gap on both sides",
-    "verdictCls": "critical"
-  },
-  {
-    "domain": "Epidemiology & Surveillance",
-    "area": "Surveillance Reporting & Analytics",
-    "internal": 2,
-    "internalStatus": "Thin",
-    "internalCls": "warn",
-    "network": 3,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Covered both sides",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Epidemiology & Surveillance",
-    "area": "Surveillance Systems Design",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 8,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Research & Scientific Practice",
-    "area": "Survey Design & Validation",
-    "internal": 0,
-    "internalStatus": "No core expert",
-    "internalCls": "critical",
-    "network": 1,
-    "networkStatus": "Single core expert",
-    "networkCls": "serious",
-    "verdict": "One regional holder only",
-    "verdictCls": "warn"
-  },
-  {
-    "domain": "Clinical & Specialized Practice",
-    "area": "Toxicology",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Gap on both sides",
-    "verdictCls": "critical"
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "area": "Training Delivery & Facilitation",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 3,
-    "networkStatus": "Adequate",
-    "networkCls": "good",
-    "verdict": "Network covers the gap",
-    "verdictCls": "good"
-  },
-  {
-    "domain": "Data, Digital Health & Health Informatics",
-    "area": "Usability Testing & Health System Design",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Gap on both sides",
-    "verdictCls": "critical"
-  },
-  {
-    "domain": "Health Policy, Systems & Strategy",
-    "area": "Value-Based Healthcare (VBHC)",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Gap on both sides",
-    "verdictCls": "critical"
-  },
-  {
-    "domain": "Communicable & Non-Communicable Diseases",
-    "area": "Vector-borne Diseases",
-    "internal": 1,
-    "internalStatus": "Single core expert",
-    "internalCls": "serious",
-    "network": 0,
-    "networkStatus": "No core expert",
-    "networkCls": "critical",
-    "verdict": "Gap on both sides",
-    "verdictCls": "critical"
-  }
-]
+{
+  "areas": [
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.1",
+      "area": "Outbreak Investigation",
+      "internal": 4,
+      "network": 3,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.1",
+      "area": "Infectious Disease Epidemiology",
+      "internal": 4,
+      "network": 18,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.1",
+      "area": "Infection Prevention & Control",
+      "internal": 2,
+      "network": 4,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.1",
+      "area": "Infection & Immunity",
+      "internal": 1,
+      "network": 2,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.1",
+      "area": "Medical Laboratory",
+      "internal": 0,
+      "network": 5,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.1",
+      "area": "Vector-borne Diseases",
+      "internal": 1,
+      "network": 4,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.1",
+      "area": "Public Health Microbiology & Genomics",
+      "internal": 0,
+      "network": 7,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.2",
+      "area": "Risk Assessment (Rapid Risk Assessment)",
+      "internal": 1,
+      "network": 4,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.2",
+      "area": "Toxicology",
+      "internal": 1,
+      "network": 0,
+      "verdict": "Gap on both sides"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.3",
+      "area": "Emergency Preparedness Planning",
+      "internal": 3,
+      "network": 15,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.3",
+      "area": "Strategic Stockpile Management",
+      "internal": 0,
+      "network": 0,
+      "verdict": "Gap on both sides"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.3",
+      "area": "Simulation Exercises (SimEx)",
+      "internal": 2,
+      "network": 1,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.4",
+      "area": "PHEOC / Emergency Operations Centers",
+      "internal": 1,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.4",
+      "area": "Disaster Medicine & Management",
+      "internal": 2,
+      "network": 0,
+      "verdict": "Internal only"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.4",
+      "area": "Emergency Medical Services / Paramedic",
+      "internal": 2,
+      "network": 0,
+      "verdict": "Internal only"
+    },
+    {
+      "domain": "D2 – Health Improvement and Promotion",
+      "code": "2.1",
+      "area": "Burden of Disease Analysis",
+      "internal": 1,
+      "network": 3,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D2 – Health Improvement and Promotion",
+      "code": "2.1",
+      "area": "Survey Design & Validation",
+      "internal": 0,
+      "network": 2,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D2 – Health Improvement and Promotion",
+      "code": "2.1",
+      "area": "Cancer Epidemiology & Screening",
+      "internal": 1,
+      "network": 5,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D2 – Health Improvement and Promotion",
+      "code": "2.2",
+      "area": "NCD Prevention & Control",
+      "internal": 1,
+      "network": 10,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D2 – Health Improvement and Promotion",
+      "code": "2.2",
+      "area": "Health Promotion Strategy",
+      "internal": 1,
+      "network": 7,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D2 – Health Improvement and Promotion",
+      "code": "2.2",
+      "area": "Behavior Change Theory & Campaigns",
+      "internal": 1,
+      "network": 2,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D2 – Health Improvement and Promotion",
+      "code": "2.2",
+      "area": "Road Traffic & Injury Prevention",
+      "internal": 3,
+      "network": 2,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D2 – Health Improvement and Promotion",
+      "code": "2.2",
+      "area": "Clinical Nutrition",
+      "internal": 0,
+      "network": 0,
+      "verdict": "Gap on both sides"
+    },
+    {
+      "domain": "D2 – Health Improvement and Promotion",
+      "code": "2.2",
+      "area": "Public Health Nutrition",
+      "internal": 1,
+      "network": 3,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D2 – Health Improvement and Promotion",
+      "code": "2.3",
+      "area": "Community Engagement & Healthy Settings",
+      "internal": 0,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.1",
+      "area": "Surveillance Systems Design",
+      "internal": 1,
+      "network": 10,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.1",
+      "area": "Epidemic Intelligence",
+      "internal": 1,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.1",
+      "area": "Registry Development (Cancer, RTI, etc.)",
+      "internal": 1,
+      "network": 7,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.1",
+      "area": "Data Governance",
+      "internal": 1,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.1",
+      "area": "Indicators Development & Measurement",
+      "internal": 1,
+      "network": 0,
+      "verdict": "Gap on both sides"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.2",
+      "area": "Public Health Informatics",
+      "internal": 1,
+      "network": 3,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.2",
+      "area": "Biostatistics",
+      "internal": 1,
+      "network": 5,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.2",
+      "area": "Data Analysis (Quantitative)",
+      "internal": 6,
+      "network": 2,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.2",
+      "area": "Dashboard & BI Development",
+      "internal": 2,
+      "network": 0,
+      "verdict": "Internal only"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.2",
+      "area": "Data Engineering & Automation",
+      "internal": 2,
+      "network": 1,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.2",
+      "area": "AI in Health",
+      "internal": 2,
+      "network": 0,
+      "verdict": "Internal only"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.2",
+      "area": "Usability Testing & Health System Design",
+      "internal": 1,
+      "network": 0,
+      "verdict": "Gap on both sides"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.2",
+      "area": "Disease Modelling & Forecasting",
+      "internal": 2,
+      "network": 2,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.3",
+      "area": "Surveillance Reporting & Analytics",
+      "internal": 2,
+      "network": 3,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.3",
+      "area": "Scientific Writing & Publications",
+      "internal": 3,
+      "network": 2,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.3",
+      "area": "Research Methodology Development",
+      "internal": 3,
+      "network": 5,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.3",
+      "area": "Clinical Research / Clinical Trials",
+      "internal": 2,
+      "network": 2,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D4 – Health System Strengthening and Service Improvement",
+      "code": "4.1",
+      "area": "Project Management (PMP/CAPM)",
+      "internal": 8,
+      "network": 3,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D4 – Health System Strengthening and Service Improvement",
+      "code": "4.2",
+      "area": "Health Systems Research",
+      "internal": 1,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D4 – Health System Strengthening and Service Improvement",
+      "code": "4.2",
+      "area": "Program Evaluation",
+      "internal": 1,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D4 – Health System Strengthening and Service Improvement",
+      "code": "4.2",
+      "area": "Competency Framework Design",
+      "internal": 1,
+      "network": 3,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D4 – Health System Strengthening and Service Improvement",
+      "code": "4.2",
+      "area": "Continuing Professional Development (CPD)",
+      "internal": 1,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D4 – Health System Strengthening and Service Improvement",
+      "code": "4.2",
+      "area": "Curriculum & Instructional Design",
+      "internal": 1,
+      "network": 2,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D4 – Health System Strengthening and Service Improvement",
+      "code": "4.2",
+      "area": "Training Delivery & Facilitation",
+      "internal": 0,
+      "network": 5,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D4 – Health System Strengthening and Service Improvement",
+      "code": "4.2",
+      "area": "Digital Learning (LMS / LXP)",
+      "internal": 1,
+      "network": 0,
+      "verdict": "Gap on both sides"
+    },
+    {
+      "domain": "D4 – Health System Strengthening and Service Improvement",
+      "code": "4.3",
+      "area": "Patient Safety",
+      "internal": 1,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D4 – Health System Strengthening and Service Improvement",
+      "code": "4.3",
+      "area": "Governance, Risk & Compliance (GRC)",
+      "internal": 1,
+      "network": 2,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D4 – Health System Strengthening and Service Improvement",
+      "code": "4.3",
+      "area": "Performance Management (KPIs / OKRs)",
+      "internal": 3,
+      "network": 1,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D5 – Health Economics and Resource Prioritisation",
+      "code": "5.1",
+      "area": "Health Economics & Financing",
+      "internal": 1,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D5 – Health Economics and Resource Prioritisation",
+      "code": "5.1",
+      "area": "Value-Based Healthcare (VBHC)",
+      "internal": 1,
+      "network": 0,
+      "verdict": "Gap on both sides"
+    },
+    {
+      "domain": "D5 – Health Economics and Resource Prioritisation",
+      "code": "5.1",
+      "area": "Casemix Funding & Classification",
+      "internal": 1,
+      "network": 0,
+      "verdict": "Gap on both sides"
+    },
+    {
+      "domain": "D5 – Health Economics and Resource Prioritisation",
+      "code": "5.2",
+      "area": "Economic Evaluation",
+      "internal": 0,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D6 – Health Policy and Advocacy",
+      "code": "6.1",
+      "area": "Policy Drafting & Analysis",
+      "internal": 4,
+      "network": 12,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D6 – Health Policy and Advocacy",
+      "code": "6.1",
+      "area": "Research Governance",
+      "internal": 2,
+      "network": 5,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D6 – Health Policy and Advocacy",
+      "code": "6.1",
+      "area": "Ethical Review & Compliance",
+      "internal": 1,
+      "network": 2,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D6 – Health Policy and Advocacy",
+      "code": "6.2",
+      "area": "Policy Brief & White Paper Writing",
+      "internal": 1,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D6 – Health Policy and Advocacy",
+      "code": "6.3",
+      "area": "Stakeholder Engagement",
+      "internal": 1,
+      "network": 0,
+      "verdict": "Gap on both sides"
+    },
+    {
+      "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+      "code": "7.1",
+      "area": "Strategic Planning & Priority Setting",
+      "internal": 1,
+      "network": 6,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+      "code": "7.2",
+      "area": "Change Management",
+      "internal": 1,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+      "code": "7.4",
+      "area": "Leadership",
+      "internal": 1,
+      "network": 1,
+      "verdict": "One regional holder only"
+    }
+  ],
+  "competencies": [
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.1",
+      "competency": "1.1 Detect and Investigate Health Hazards",
+      "internal": 7,
+      "network": 24,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.2",
+      "competency": "1.2 Conduct Public Health Risk Assessment",
+      "internal": 2,
+      "network": 4,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.3",
+      "competency": "1.3 Plan and Manage Emergency Preparedness",
+      "internal": 3,
+      "network": 15,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D1 – Health Hazards and Emergency Preparedness",
+      "code": "1.4",
+      "competency": "1.4 Lead/Contribute to Emergency Response and Recovery",
+      "internal": 3,
+      "network": 1,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D2 – Health Improvement and Promotion",
+      "code": "2.1",
+      "competency": "2.1 Assess Health Needs and Prioritise Interventions",
+      "internal": 2,
+      "network": 7,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D2 – Health Improvement and Promotion",
+      "code": "2.2",
+      "competency": "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+      "internal": 6,
+      "network": 19,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D2 – Health Improvement and Promotion",
+      "code": "2.3",
+      "competency": "2.3 Collaborate with Stakeholders and Communities",
+      "internal": 0,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.1",
+      "competency": "3.1 Design, Manage and Interpret Intelligence Systems",
+      "internal": 5,
+      "network": 17,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.2",
+      "competency": "3.2 Use Public Health Informatics and Intelligence Tools",
+      "internal": 10,
+      "network": 11,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D3 – Public Health Surveillance and Intelligence",
+      "code": "3.3",
+      "competency": "3.3 Generate Strategic Public Health Reports",
+      "internal": 8,
+      "network": 12,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D4 – Health System Strengthening and Service Improvement",
+      "code": "4.1",
+      "competency": "4.1 Assess, Plan and Deliver Programs and Services",
+      "internal": 8,
+      "network": 3,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D4 – Health System Strengthening and Service Improvement",
+      "code": "4.2",
+      "competency": "4.2 Evaluate and Strengthen Health Systems",
+      "internal": 3,
+      "network": 10,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D4 – Health System Strengthening and Service Improvement",
+      "code": "4.3",
+      "competency": "4.3 Lead/Contribute to Quality Improvement",
+      "internal": 4,
+      "network": 4,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D5 – Health Economics and Resource Prioritisation",
+      "code": "5.1",
+      "competency": "5.1 Apply Principles of Health Economics",
+      "internal": 3,
+      "network": 1,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D5 – Health Economics and Resource Prioritisation",
+      "code": "5.2",
+      "competency": "5.2 Use Economic Evaluation Methods",
+      "internal": 0,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D6 – Health Policy and Advocacy",
+      "code": "6.1",
+      "competency": "6.1 Appraise, Develop and Implement Public Health Policy",
+      "internal": 6,
+      "network": 18,
+      "verdict": "Covered both sides"
+    },
+    {
+      "domain": "D6 – Health Policy and Advocacy",
+      "code": "6.2",
+      "competency": "6.2 Lead Advocacy and Strategic Communication",
+      "internal": 1,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D6 – Health Policy and Advocacy",
+      "code": "6.3",
+      "competency": "6.3 Engage Stakeholders to Advance Policy Goals",
+      "internal": 1,
+      "network": 0,
+      "verdict": "Gap on both sides"
+    },
+    {
+      "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+      "code": "7.1",
+      "competency": "7.1 Provide Strategic Vision and Lead Transformation",
+      "internal": 1,
+      "network": 6,
+      "verdict": "Network covers the gap"
+    },
+    {
+      "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+      "code": "7.2",
+      "competency": "7.2 Lead and Manage Change",
+      "internal": 1,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+      "code": "7.3",
+      "competency": "7.3 Build Relationships and Communicate with Influence",
+      "internal": 0,
+      "network": 0,
+      "verdict": "Behavioural — not mapped"
+    },
+    {
+      "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+      "code": "7.4",
+      "competency": "7.4 Lead Teams and Foster Collaborative Working",
+      "internal": 1,
+      "network": 1,
+      "verdict": "One regional holder only"
+    },
+    {
+      "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+      "code": "7.5",
+      "competency": "7.5 Apply Self-Awareness and Reflective Practice",
+      "internal": 0,
+      "network": 0,
+      "verdict": "Behavioural — not mapped"
+    }
+  ]
+}

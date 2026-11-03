@@ -1,0 +1,34 @@
+{
+  "bands": [
+    {
+      "years": "Less than 2 years",
+      "level": "Competent",
+      "stage": "Entry",
+      "depth": 2
+    },
+    {
+      "years": "2–5 years",
+      "level": "Competent",
+      "stage": "Entry",
+      "depth": 3
+    },
+    {
+      "years": "6–10 years",
+      "level": "Proficient",
+      "stage": "Mid-career",
+      "depth": 4
+    },
+    {
+      "years": "More than 10 years",
+      "level": "Expert",
+      "stage": "Senior",
+      "depth": 5
+    }
+  ],
+  "notes": [
+    "Why these bands: the toolkit defines three proficiency levels — Competent, Proficient, Expert — \"based on training, experience and performance\", and tags training to staff levels entry / mid / senior (Ch. 7). It sets no year thresholds, so the survey bands are mapped to those three stages: up to 5 years = entry (Competent), 6–10 = mid-career (Proficient), more than 10 = senior (Expert).",
+    "Depth keeps a step between <2 and 2–5 years so the earlier rule (juniors under 2 years rank lowest) still holds inside Competent.",
+    "This replaces the earlier 5-level composite (Aware → Strategic). Seniority and external consultation now count only in Impact, not in the level.",
+    "Source: the internal staff survey question on years of professional experience. Haya Sulaiman Alothaimeen and Abdullah Alqahtani are not in the survey — their years are carried from the Phase-2 workbook."
+  ]
+}

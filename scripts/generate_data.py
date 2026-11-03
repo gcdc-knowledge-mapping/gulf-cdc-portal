@@ -1,262 +1,606 @@
 #!/usr/bin/env python3
-"""Regenerate the portal's dataset from the master workbook.
-
-Reads data/GulfCDC_KnowledgeMapping_MasterAnalysis_CoreTaxonomy.xlsx and writes:
-  - assets/js/data.js  (embedded dataset the portal loads)
-  - data/*.json        (readable JSON exports of each part)
-
-Usage:  python3 scripts/generate_data.py
 """
-import openpyxl, json, re, os
+Build the internal Gulf CDC dataset for the Knowledge Mapping Page.
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-XLSX = os.path.join(ROOT, "data", "GulfCDC_KnowledgeMapping_MasterAnalysis_CoreTaxonomy.xlsx")
+Source of truth:
+    data/GulfCDC_KnowledgeMapping_MasterAnalysis_Internal_HybridTaxonomy_v3.xlsx
+    data/Knowledge_Mapping_survey.xlsx   (work e-mail addresses only)
+
+Writes:
+    assets/js/data.js   (window.GCDC_DATA — embedded so file:// works)
+    data/*.json         (the same payload, one file per table)
+
+The workbook is the single source of truth. Every correction that used to live
+in this script (name fixes, department moves, expertise edits, areas added in
+the portal) is now inside the workbook, so no correction layer remains here —
+except the small alias map used to join work e-mails from the raw survey, whose
+"Full Name" answers do not always match the workbook spelling.
+
+Taxonomy model: 7 CF domains -> 23 CF competencies -> 65 Level-3 expertise
+areas. People are coded at Level 3; competencies and domains roll up, and a
+person holding two areas under one competency counts once for that competency.
+"""
+
+import json
+import os
+import re
+import unicodedata
+
+import openpyxl
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+
+SRC = os.path.join(
+    ROOT, "data", "GulfCDC_KnowledgeMapping_MasterAnalysis_Internal_HybridTaxonomy_v3.xlsx"
+)
 SURVEY = os.path.join(ROOT, "data", "Knowledge_Mapping_survey.xlsx")
 
-def s(v): return "" if v is None else str(v).strip()
+# Survey "Full Name" answers that differ from the workbook spelling. This is the
+# only correction layer left, and it exists solely for the e-mail join.
+EMAIL_ALIAS = {
+    "Bushra": "Bushra Alghamdi",
+    "Faris": "Faris Aldammas",
+    "Rose": "Rose Nazra",
+    "Dr Mahim Al Balushi": "Mahim Al Balushi",
+    "MOHAMMED ALSHEHRI": "Mohammed Alshehri",
+}
 
-def norm(n):
-    return re.sub(r"[^a-z0-9 ]", "", str(n or "").lower()).strip()
+# Competencies 7.3 and 7.5 are behavioural: they carry no Level-3 area and are
+# never a gap.
+BEHAVIOURAL = {"7.3", "7.5"}
 
-# Display-name and department corrections, applied everywhere downstream
-NAME_FIX = {"Bushra": "Bushra Alghamdi", "Faris": "Faris Aldammas", "Rose": "Rose Nazra",
-            "Dr Mahim Al Balushi": "Mahim Al Balushi"}
-DEPT_FIX = {"CEO": "CEO office"}
-# Per-person department overrides (applied after name fixes)
-PERSON_DEPT_FIX = {"Waleed Al Nadabi": "CEO office"}
-def fix_name(n): return NAME_FIX.get(s(n), s(n))
-def fix_dept(d, name=""): return PERSON_DEPT_FIX.get(s(name), DEPT_FIX.get(s(d), s(d)))
-def fix_holder(label):
-    m = re.match(r"^(.*?)\s*\(([^)]*)\)\s*$", s(label))
-    if not m:
-        return fix_name(label)
-    name = fix_name(m.group(1))
-    return f"{name} ({fix_dept(m.group(2), name)})"
 
-# Emails from the survey workbook, keyed by normalised name
-email_by_name = {}
-if os.path.exists(SURVEY):
-    sv = openpyxl.load_workbook(SURVEY, data_only=True)[["Sheet1"][0]]
-    for r in sv.iter_rows(min_row=2, values_only=True):
-        name = r[6] or r[4]
-        if not name:
+def s(v):
+    if v is None:
+        return ""
+    t = str(v).replace("\xa0", " ").strip()
+    return "" if t in {"·", "-", "—", "None", "nan"} else t
+
+
+def num(v, default=0):
+    try:
+        return int(float(str(v).strip()))
+    except (TypeError, ValueError):
+        return default
+
+
+def norm(v):
+    t = unicodedata.normalize("NFKD", s(v)).lower()
+    t = re.sub(r"\b(dr|prof|mr|ms|mrs|eng)\.?\s+", "", t)
+    return re.sub(r"[^a-z]+", "", t)
+
+
+def table(wb, sheet, header_row):
+    """Rows of a sheet as dicts. Numbered sheets put headers on row 4."""
+    data = list(wb[sheet].iter_rows(values_only=True))
+    head = [s(c) for c in data[header_row - 1]]
+    out = []
+    for r in data[header_row:]:
+        if all(c is None for c in r):
             continue
-        raw = s(r[7])
-        found = re.findall(r"[\w.\-]+@[\w.\-]+\.[A-Za-z]{2,}", raw)
-        email = next((e for e in found if "gulfcdc" in e.lower()), found[0] if found else "")
-        if email:
-            email_by_name[norm(fix_name(name))] = email.strip()
+        out.append({h: r[i] for i, h in enumerate(head) if h})
+    return out
 
-wb = openpyxl.load_workbook(XLSX, data_only=True)
 
-# 01 Taxonomy — 57 core areas
-tax = []
-for r in wb["01_Taxonomy"].iter_rows(min_row=2, values_only=True):
-    if not r[0] or not r[2]:
-        continue
-    tax.append(dict(domain=s(r[0]), subdomain=s(r[1]), expertise=s(r[2]),
-                    holders_n=int(r[3]) if r[3] not in (None, "") else 0, path=s(r[4])))
-
-# 03 Expertise Matrix — holders per area
-mws = wb["03_Expertise_Matrix"]
-hdr = list(next(mws.iter_rows(min_row=1, max_row=1, values_only=True)))
-emp_cols = [(ci, fix_holder(re.sub(r"\s+", " ", s(hdr[ci]).replace("\n", " ")))) for ci in range(4, len(hdr)) if s(hdr[ci])]
-matrix = []
-for r in mws.iter_rows(min_row=2, values_only=True):
-    if not r[0] or not r[2]:
-        continue
-    holders = [nm for ci, nm in emp_cols if s(r[ci])]
-    matrix.append(dict(domain=s(r[0]), subdomain=s(r[1]), expertise=s(r[2]),
-                       holders_n=len(holders), holders=holders))
-
-# 02 Master Dataset — all 30 staff
-def flag_for(ri):
-    if ri >= 80: return "\U0001F534 High Continuity Risk"
-    if ri >= 40: return "\U0001F7E1 Moderate Risk"
-    return "\U0001F7E2 Low/Standard"
-
-master = []
-for r in wb["02_Master_Dataset"].iter_rows(min_row=2, values_only=True):
-    if not r[0]:
-        continue
-    master.append(dict(num=int(r[0]), name=fix_name(r[1]), department=fix_dept(r[2], fix_name(r[1])), position=s(r[3]),
-        years=s(r[4]), profile_level=s(r[5]), depth=int(r[6]), scarcity=int(r[7]), impact=int(r[8]),
-        risk_index=int(r[9]), core_count=int(r[10]) if r[10] not in (None, "") else 0,
-        core_areas=s(r[11]), source=s(r[12]), leader=bool(s(r[13]))))
-
-# 05 Critical Holders — continuity note keyed by name
-cont = {}
-for r in wb["05_Critical_Holders"].iter_rows(min_row=5, values_only=True):
-    if not r[0] or r[0] == "Rank":
-        continue
-    cont[fix_name(r[1])] = s(r[10])
-
-# ---------------------------------------------------------------------------
-# Post-workbook expertise corrections (requested edits applied on top of the
-# source sheets). Everything downstream — holder counts, coverage statuses,
-# sole-holder lists, gaps, charts — recomputes from the edited matrix.
-EXPERTISE_EDITS = {
-    "Abrar Alsurayhi":        {"remove": ["Medical Laboratory"], "add": ["Vector-borne Diseases"]},
-    "Faris Aldammas":         {"remove": ["Data Analysis (Quantitative)"]},
-    "Abdullatif Bin Khunayn": {"remove": ["Strategic Stockpile Management"],
-                               "add": ["Simulation Exercises (SimEx)"]},
-    "Ahmed Alhatlan":         {"remove": ["Data Governance"]},
-    "Mahim Al Balushi":       {"remove": ["Leadership", "Survey Design & Validation"]},
-    # Taxonomy review: areas added to the vocabulary, with holders coded from
-    # each person's own survey answers to the "advanced or strategic expert"
-    # and "technical focal point" questions.
-    "Turki Almalki":          {"add": ["Disease Modelling & Forecasting"]},
-    "Bushra Alghamdi":        {"add": ["Disease Modelling & Forecasting"]},
-    "Said Alghafri":          {"add": ["Cancer Epidemiology & Screening"]},
-    "Haya Alzeer":            {"add": ["Public Health Nutrition"]},
-    "Hamad Alsaab":           {"add": ["Simulation Exercises (SimEx)"]},
-}
-# Areas that don't exist in the workbook taxonomy yet: (domain, sub-domain)
-NEW_AREAS = {
-    "Vector-borne Diseases": ("Communicable & Non-Communicable Diseases", "Communicable Diseases"),
-    # Added in the taxonomy review. An area nobody holds at core level is
-    # retired below, so these appear only where there is a holder.
-    "Disease Modelling & Forecasting": ("Epidemiology & Surveillance", "Disease Surveillance"),
-    "Cancer Epidemiology & Screening": ("Communicable & Non-Communicable Diseases", "Non-Communicable Diseases"),
-    "Public Health Nutrition": ("Health Promotion, Education & Workforce", "Health Promotion"),
-    "Simulation Exercises (SimEx)": ("Public Health Emergency & Health Security", "Response & Operations"),
-    "Public Health Microbiology & Genomics": ("Clinical & Specialized Practice", "Laboratory & Diagnostics"),
-}
-
-dept_of = {m["name"]: m["department"] for m in master}
-mat_by_exp = {m["expertise"]: m for m in matrix}
-
-for person, ops in EXPERTISE_EDITS.items():
-    for area in ops.get("remove", []):
-        m = mat_by_exp.get(area)
-        assert m, f"unknown area to remove: {area}"
-        before = len(m["holders"])
-        m["holders"] = [h for h in m["holders"] if h.split(" (")[0].strip() != person]
-        assert len(m["holders"]) == before - 1, f"{person} did not hold {area}"
-    for area in ops.get("add", []):
-        if area not in mat_by_exp:
-            dom, sub = NEW_AREAS[area]
-            entry = dict(domain=dom, subdomain=sub, expertise=area, holders_n=0, holders=[])
-            # insert alongside the other areas of the same sub-domain
-            idx = max(i for i, t in enumerate(tax) if t["domain"] == dom and t["subdomain"] == sub) + 1
-            matrix.insert(idx, entry)
-            tax.insert(idx, dict(domain=dom, subdomain=sub, expertise=area, holders_n=0,
-                                 path=f"{dom} > {sub} > {area}"))
-            mat_by_exp[area] = entry
-        mat_by_exp[area]["holders"].append(f"{person} ({dept_of[person]})")
-
-# Recompute holder counts, then retire areas nobody holds at core level
-for m in matrix:
-    m["holders_n"] = len(m["holders"])
-tax_by_exp = {t["expertise"]: t for t in tax}
-for t in tax:
-    t["holders_n"] = mat_by_exp[t["expertise"]]["holders_n"]
-retired = [t for t in tax if t["holders_n"] == 0]
-tax = [t for t in tax if t["holders_n"] > 0]
-matrix = [m for m in matrix if m["holders_n"] > 0]
-
-# Mirror the edits in each person's core-areas list
-for m in master:
-    ops = EXPERTISE_EDITS.get(m["name"])
-    if not ops:
-        continue
-    areas = [a.strip() for a in m["core_areas"].split(";") if a.strip()]
-    areas = [a for a in areas if a not in ops.get("remove", [])]
-    areas += [a for a in ops.get("add", []) if a not in areas]
-    m["core_areas"] = "; ".join(areas)
-    m["core_count"] = len(areas)
-# ---------------------------------------------------------------------------
-
-# sole-held areas per person (from matrix, holders_n == 1)
-sole = {}
-for m in matrix:
-    if m["holders_n"] == 1:
-        sole.setdefault(m["holders"][0].split(" (")[0].strip(), []).append(m["expertise"])
-
-holders_out = []
-for m in sorted(master, key=lambda x: (-x["risk_index"], x["num"])):
-    holders_out.append(dict(name=m["name"], department=m["department"], position=m["position"],
-        years=m["years"], profile_level=m["profile_level"], depth=m["depth"], scarcity=m["scarcity"],
-        impact=m["impact"], risk_index=m["risk_index"], core_count=m["core_count"],
-        core_areas=m["core_areas"], rare_expertise="; ".join(sole.get(m["name"], [])) or "(none sole-held)",
-        flag=flag_for(m["risk_index"]), leader=m["leader"], continuity=cont.get(m["name"], ""),
-        email=email_by_name.get(norm(m["name"]), "")))
-for i, h in enumerate(holders_out, 1):
-    h["rank"] = i
-
-# 06 Knowledge Gaps — 57 core areas (status from holders_n) + Section B "No Core Expert"
 def status_for(n):
-    if n >= 3: return "\U0001F7E2 Adequate"
-    if n == 2: return "\U0001F7E1 Thin Coverage"
-    if n == 1: return "\U0001F7E0 Single Core Expert (SPOF)"
+    if n >= 3:
+        return "\U0001F7E2 Adequate"
+    if n == 2:
+        return "\U0001F7E1 Thin Coverage"
+    if n == 1:
+        return "\U0001F7E0 Single Core Expert (SPOF)"
     return "\U0001F534 No Core Expert"
 
-gapmeta = {}
-for r in wb["06_Knowledge_Gaps"].iter_rows(min_row=4, values_only=True):
-    if not r[0] or r[0] == "Tier 1 – Domain" or str(r[0]).startswith("Section"):
-        continue
-    gapmeta[(s(r[0]), s(r[2]))] = dict(sole=s(r[5]), rec=s(r[6]), status=s(r[4]))
 
-mat_by_key = {(m["domain"], m["expertise"]): m for m in matrix}
-gaps = []
-for t in tax:
-    n = t["holders_n"]
-    key = (t["domain"], t["expertise"])
-    meta = gapmeta.get(key, {})
-    m = mat_by_key.get(key)
-    sole_holder = meta.get("sole", "") or (m["holders"][0] if m and n == 1 else "")
+def recommend(n):
     if n >= 3:
-        rec = "Maintain via documentation and knowledge champions."
-    elif n == 2:
-        rec = "Only two core holders — build redundancy and document SOPs."
-    else:
-        rec = meta.get("rec", "") or "Single core expert — capture knowledge and identify a successor."
-    gaps.append(dict(domain=t["domain"], subdomain=t["subdomain"], expertise=t["expertise"],
-        holders_n=n, status=status_for(n), sole_holder=sole_holder, recommendation=rec, in_taxonomy=True))
-covered_now = {t["expertise"] for t in tax}
-for r in wb["06_Knowledge_Gaps"].iter_rows(min_row=4, values_only=True):
-    if r[0] and "No Core Expert" in s(r[4]):
-        # An area EXPERTISE_EDITS has since given a holder is no longer a gap;
-        # re-adding the workbook row would list it twice, once each way.
-        if s(r[2]) in covered_now:
+        return "Maintain via documentation and knowledge champions."
+    if n == 2:
+        return "Only two core holders — build redundancy and document SOPs."
+    if n == 1:
+        return "Single core expert — capture knowledge and identify a successor."
+    return "No staff member holds this area at core level — recruit or develop this capability."
+
+
+def emails_by_name():
+    """Work e-mail per staff member, from the raw survey export."""
+    if not os.path.exists(SURVEY):
+        print(f"note: {os.path.basename(SURVEY)} not found — e-mails omitted")
+        return {}
+    ws = openpyxl.load_workbook(SURVEY, data_only=True)["Sheet1"]
+    data = list(ws.iter_rows(values_only=True))
+    head = [s(c) for c in data[0]]
+    try:
+        i_name, i_mail = head.index("Full Name:"), head.index("Work email:")
+    except ValueError:
+        print("note: survey has no Full Name / Work email column — e-mails omitted")
+        return {}
+    out = {}
+    for r in data[1:]:
+        nm, mail = s(r[i_name]), s(r[i_mail])
+        if not nm or not mail:
             continue
-        gaps.append(dict(domain=s(r[0]), subdomain=s(r[1]), expertise=s(r[2]), holders_n=0,
-            status="\U0001F534 No Core Expert", sole_holder=s(r[5]), recommendation=s(r[6]), in_taxonomy=False))
-# Areas retired by EXPERTISE_EDITS (their last core holder was removed)
-for t in retired:
-    gaps.append(dict(domain=t["domain"], subdomain=t["subdomain"], expertise=t["expertise"], holders_n=0,
-        status="\U0001F534 No Core Expert", sole_holder="",
-        recommendation="No staff member holds this area at core level any more — recruit or develop this capability.",
-        in_taxonomy=False))
+        out[norm(EMAIL_ALIAS.get(nm, nm))] = mail
+    return out
 
-# 07 Interview Shortlist
-shortlist = []
-for r in wb["07_Interview_Shortlist"].iter_rows(min_row=5, values_only=True):
-    if not r[0] or r[0] == "Order":
-        continue
-    shortlist.append(dict(order=int(r[0]), name=s(r[1]), department=s(r[2]), position=s(r[3]),
-        profile_level=s(r[4]), risk_index=int(r[5]), focus=s(r[6]), interview_status=s(r[7]), duration=s(r[8])))
 
-taxonomy = [dict(domain=t["domain"], subdomain=t["subdomain"], expertise=t["expertise"], path=t["path"]) for t in tax]
-out = dict(taxonomy=taxonomy, expertiseMatrix=matrix, knowledgeGaps=gaps,
-           criticalHolders=holders_out, interviewShortlist=shortlist)
+def main():
+    wb = openpyxl.load_workbook(SRC, data_only=True)
 
-# write /data JSON exports (readable source)
-def dump(name, obj):
-    with open(os.path.join(ROOT, "data", name), "w", encoding="utf-8") as f:
-        json.dump(obj, f, ensure_ascii=False, indent=2)
-dump("taxonomy.json", taxonomy)
-dump("expertise_matrix.json", matrix)
-dump("knowledge_gaps.json", gaps)
-dump("critical_holders.json", holders_out)
-dump("interview_shortlist.json", shortlist)
+    # ---- profile-level rules (editable in the sheet, never hard-coded) ----
+    # The sheet lists the bands first, then explanatory bullet rows that use the
+    # same first column. Only rows naming a proficiency level are bands; the
+    # bullets are kept separately so the page can show them as notes.
+    profile_levels, profile_notes = [], []
+    for r in table(wb, "Profile_Level_Rules", 4):
+        years = s(r.get("Years of experience (survey answer)"))
+        if not years:
+            continue
+        level = s(r.get("CF Proficiency Level"))
+        if not level or years.startswith("•"):
+            profile_notes.append(years.lstrip("• ").strip())
+            continue
+        profile_levels.append({
+            "years": years,
+            "level": level,
+            "stage": s(r.get("Career Stage (toolkit: entry / mid / senior)")),
+            "depth": num(r.get("Depth Score (1-5) — used in the Index")),
+        })
 
-banner = ("/* Gulf CDC Portal — embedded dataset.\n"
-          "   Generated by scripts/generate_data.py from\n"
-          "   data/GulfCDC_KnowledgeMapping_MasterAnalysis_CoreTaxonomy.xlsx.\n"
-          "   Core taxonomy: 10 domains, 30 sub-domains, 57 core expertise areas, 30 staff. */\n")
-with open(os.path.join(ROOT, "assets", "js", "data.js"), "w", encoding="utf-8") as f:
-    f.write(banner + "window.GCDC_DATA = " + json.dumps(out, ensure_ascii=False, indent=2) + ";\n")
+    # ---- taxonomy: 65 Level-3 areas under 23 competencies, 7 domains ------
+    taxonomy = []
+    for r in table(wb, "01_Taxonomy", 4):
+        area = s(r.get("Level 3 – Expertise Area"))
+        if not area:
+            continue
+        competency = s(r.get("Level 2 – CF Competency"))
+        taxonomy.append({
+            "domain": s(r.get("Level 1 – CF Domain")),
+            "code": s(r.get("Code")),
+            "competency": competency,
+            # kept so existing views that read `subdomain` keep working
+            "subdomain": competency,
+            "expertise": area,
+            "fit": s(r.get("Framework Fit")),
+            "origin": s(r.get("Origin (Core Taxonomy domain › sub-domain)")),
+            "holders_n": num(r.get("Gulf CDC Holders (n)")),
+            "path": s(r.get("Coggle Path")),
+        })
 
-print("Regenerated: assets/js/data.js and data/*.json")
-print(f"  taxonomy={len(taxonomy)} matrix={len(matrix)} gaps={len(gaps)} staff={len(holders_out)} interviews={len(shortlist)}")
+    # ---- people ------------------------------------------------------------
+    mails = emails_by_name()
+    staff = []
+    for r in table(wb, "02_Master_Dataset", 4):
+        name = s(r.get("Name"))
+        if not name:
+            continue
+        areas = [s(r.get(f"L3 Area {i}")) for i in range(1, 6)]
+        areas = [a for a in areas if a]
+        staff.append({
+            "rank": num(r.get("#")),
+            "name": name,
+            "department": s(r.get("Department")),
+            "position": s(r.get("Position")),
+            "years": s(r.get("Years (survey)")),
+            "leader": "★" in s(r.get("Leader (Mgr / Exec)")),
+            "profile_level": s(r.get("Profile Level (CF)")),
+            "impact": num(r.get("Impact (1-5)")),
+            "core_areas": "; ".join(areas),
+            "areas": areas,
+            "core_count": len(areas),
+            "sole_areas_n": num(r.get("Sole-Expert Areas (n)")),
+            "depth": num(r.get("Depth (1-5)")),
+            "scarcity": num(r.get("Scarcity (1-5)")),
+            "risk_index": num(r.get("Risk Index (1-125)")),
+            "competencies": [c for c in
+                             (x.strip() for x in s(r.get("L2 CF Competencies (rolled up)")).split(";"))
+                             if c],
+            "source": s(r.get("Coding Source")),
+            "email": mails.get(norm(name), ""),
+        })
+
+    by_name = {p["name"]: p for p in staff}
+    dept_of = {p["name"]: p["department"] for p in staff}
+
+    # ---- long table: one row per person x area ----------------------------
+    fact = [f for f in table(wb, "Fact_CoreExpertise", 1) if s(f.get("Name"))]
+
+    # career stage per person, from the profile rules
+    stage_of_level = {p["level"]: p["stage"] for p in profile_levels}
+    for p in staff:
+        p["career_stage"] = stage_of_level.get(p["profile_level"], "")
+
+    # ---- expertise matrix: holders per area -------------------------------
+    holders_by_area = {}
+    for f in fact:
+        area = s(f.get("L3 – Expertise Area"))
+        nm = s(f.get("Name"))
+        if area and nm:
+            holders_by_area.setdefault(area, []).append(f"{nm} ({dept_of.get(nm, '')})")
+
+    matrix = []
+    for t in taxonomy:
+        hs = holders_by_area.get(t["expertise"], [])
+        if not hs:
+            continue
+        matrix.append({
+            "domain": t["domain"], "code": t["code"], "competency": t["competency"],
+            "subdomain": t["subdomain"], "expertise": t["expertise"], "fit": t["fit"],
+            "holders_n": len(hs), "holders": sorted(hs),
+        })
+
+    # ---- gaps: every one of the 65 areas ----------------------------------
+    gaps = []
+    for t in taxonomy:
+        hs = holders_by_area.get(t["expertise"], [])
+        n = len(hs)
+        gaps.append({
+            "domain": t["domain"], "code": t["code"], "competency": t["competency"],
+            "subdomain": t["subdomain"], "expertise": t["expertise"], "fit": t["fit"],
+            "holders_n": n, "status": status_for(n),
+            "sole_holder": hs[0] if n == 1 else "",
+            "recommendation": recommend(n),
+        })
+
+    # ---- competencies: distinct people, not tags --------------------------
+    people_per_comp, tags_per_comp, depts_per_comp = {}, {}, {}
+    for f in fact:
+        code = s(f.get("Code"))
+        nm = s(f.get("Name"))
+        if not code or not nm:
+            continue
+        tags_per_comp[code] = tags_per_comp.get(code, 0) + 1
+        people_per_comp.setdefault(code, set()).add(nm)
+        depts_per_comp.setdefault(code, set()).add(dept_of.get(nm, ""))
+
+    competencies = []
+    for r in table(wb, "06_Competency_Coverage", 4):
+        code = s(r.get("Code"))
+        if not code:
+            continue
+        behavioural = code in BEHAVIOURAL
+        people = len(people_per_comp.get(code, ()))
+        competencies.append({
+            "domain": s(r.get("L1 – CF Domain")),
+            "code": code,
+            "competency": s(r.get("L2 – CF Competency")),
+            "areasDefined": num(r.get("L3 Areas Defined")),
+            "areasHeld": num(r.get("L3 Areas Held")),
+            "people": people,
+            "tags": tags_per_comp.get(code, 0),
+            "departments": len([d for d in depts_per_comp.get(code, ()) if d]),
+            "status": "Not mapped — behavioural" if behavioural else status_for(people),
+            "behavioural": behavioural,
+            "recommendation": s(r.get("Strategic Recommendation")),
+        })
+
+    # ---- critical holders --------------------------------------------------
+    rare_by_name = {}
+    for f in fact:
+        if num(f.get("Area Holders (n)")) == 1:
+            rare_by_name.setdefault(s(f.get("Name")), []).append(s(f.get("L3 – Expertise Area")))
+
+    continuity = {}
+    for r in table(wb, "05_Critical_Holders", 4):
+        nm = s(r.get("Name"))
+        if nm:
+            continuity[nm] = s(r.get("Continuity Consideration"))
+
+    def flag_for(ri):
+        if ri >= 80:
+            return "\U0001F534 High continuity risk"
+        if ri >= 40:
+            return "\U0001F7E1 Moderate continuity risk"
+        return "\U0001F7E2 Low continuity risk"
+
+    critical = []
+    for p in sorted(staff, key=lambda x: (-x["risk_index"], x["name"])):
+        critical.append({
+            "rank": len(critical) + 1,
+            "name": p["name"], "department": p["department"], "position": p["position"],
+            "years": p["years"], "profile_level": p["profile_level"],
+            "career_stage": p["career_stage"],
+            "depth": p["depth"], "scarcity": p["scarcity"], "impact": p["impact"],
+            "risk_index": p["risk_index"],
+            "core_count": p["core_count"], "core_areas": p["core_areas"],
+            "competencies": p["competencies"],
+            "rare_expertise": "; ".join(sorted(rare_by_name.get(p["name"], []))),
+            "flag": flag_for(p["risk_index"]),
+            "leader": p["leader"],
+            "continuity": continuity.get(p["name"], ""),
+            "source": p["source"],
+            "email": p["email"],
+        })
+
+    # ---- interview shortlist ----------------------------------------------
+    shortlist = []
+    for r in table(wb, "08_Interview_Shortlist", 4):
+        nm = s(r.get("Name"))
+        if not nm:
+            continue
+        shortlist.append({
+            "order": num(r.get("Order")), "name": nm,
+            "department": s(r.get("Department")), "position": s(r.get("Position")),
+            "profile_level": s(r.get("Profile Level")),
+            "risk_index": num(r.get("Risk Index")),
+            "focus": s(r.get("Core Expertise Focus — [CF code] area")),
+            "interview_status": s(r.get("Interview Status")),
+            "duration": s(r.get("Duration")),
+        })
+
+    # ---- headline counts ---------------------------------------------------
+    area_status = {"adequate": 0, "thin": 0, "single": 0, "noCore": 0}
+    for g in gaps:
+        n = g["holders_n"]
+        key = "adequate" if n >= 3 else "thin" if n == 2 else "single" if n == 1 else "noCore"
+        area_status[key] += 1
+
+    comp_status = {"adequate": 0, "thin": 0, "single": 0, "noCore": 0, "behavioural": 0}
+    for c in competencies:
+        if c["behavioural"]:
+            comp_status["behavioural"] += 1
+            continue
+        n = c["people"]
+        key = "adequate" if n >= 3 else "thin" if n == 2 else "single" if n == 1 else "noCore"
+        comp_status[key] += 1
+
+    profile_counts = {}
+    for p in staff:
+        profile_counts[p["profile_level"]] = profile_counts.get(p["profile_level"], 0) + 1
+
+    depts = {}
+    for p in staff:
+        depts[p["department"]] = depts.get(p["department"], 0) + 1
+
+    # Mapping tree size, counted the same way in both scopes: root, then only
+    # the CF domains, competencies and expertise areas that someone holds, then
+    # one node per Level-3 tag. Unheld areas belong to the Gaps view, not here.
+    held_areas = {m["expertise"] for m in matrix}
+    held_comps = {t["code"] for t in taxonomy if t["expertise"] in held_areas}
+    held_doms = {t["domain"] for t in taxonomy if t["expertise"] in held_areas}
+    tree_nodes = 1 + len(held_doms) + len(held_comps) + len(held_areas) + len(fact)
+
+    meta = {
+        "people": len(staff),
+        "departments": len(depts),
+        "departmentCounts": depts,
+        "domains": len({t["domain"] for t in taxonomy}),
+        "competencies": len(competencies),
+        "competenciesHeld": sum(1 for c in competencies if not c["behavioural"] and c["people"] > 0),
+        "areas": len(taxonomy),
+        "areasHeld": len(matrix),
+        "tags": len(fact),
+        "areaStatus": area_status,
+        "competencyStatus": comp_status,
+        "profileCounts": profile_counts,
+        "highRisk": sum(1 for p in staff if p["risk_index"] >= 80),
+        "moderateRisk": sum(1 for p in staff if 40 <= p["risk_index"] < 80),
+        "lowRisk": sum(1 for p in staff if p["risk_index"] < 40),
+        "withEmail": sum(1 for p in staff if p["email"]),
+        "treeNodes": tree_nodes,
+    }
+
+    out = {
+        "meta": meta,
+        "profileLevels": profile_levels,
+        "profileNotes": profile_notes,
+        "taxonomy": taxonomy,
+        "competencies": competencies,
+        "expertiseMatrix": matrix,
+        "knowledgeGaps": gaps,
+        "criticalHolders": critical,
+        "interviewShortlist": shortlist,
+    }
+
+    def dump(name, obj):
+        with open(os.path.join(ROOT, "data", name), "w", encoding="utf-8") as f:
+            json.dump(obj, f, ensure_ascii=False, indent=2)
+
+    dump("taxonomy.json", taxonomy)
+    dump("competencies.json", competencies)
+    dump("expertise_matrix.json", matrix)
+    dump("knowledge_gaps.json", gaps)
+    dump("critical_holders.json", critical)
+    dump("interview_shortlist.json", shortlist)
+    dump("profile_levels.json",
+         {"bands": profile_levels, "notes": profile_notes})
+    dump("meta.json", meta)
+
+    banner = (
+        "/* Gulf CDC Portal — embedded dataset.\n"
+        "   Generated by scripts/generate_data.py from\n"
+        f"   data/{os.path.basename(SRC)}.\n"
+        f"   Hybrid taxonomy: {meta['domains']} CF domains · "
+        f"{meta['competencies']} competencies · {meta['areas']} expertise areas "
+        f"· {meta['people']} staff. */\n"
+    )
+    with open(os.path.join(ROOT, "assets", "js", "data.js"), "w", encoding="utf-8") as f:
+        f.write(banner + "window.GCDC_DATA = " + json.dumps(out, ensure_ascii=False, indent=2) + ";\n")
+
+    write_taxonomy_doc(taxonomy, competencies, profile_levels, profile_notes, meta)
+
+    print("Regenerated: assets/js/data.js and data/*.json")
+    print(f"  people={meta['people']} departments={meta['departments']} tags={meta['tags']}")
+    print(f"  areas={meta['areasHeld']}/{meta['areas']} "
+          f"A/T/S/N={area_status['adequate']}/{area_status['thin']}/"
+          f"{area_status['single']}/{area_status['noCore']}")
+    print(f"  competencies held={meta['competenciesHeld']}/{meta['competencies']} "
+          f"A/T/S/N/B={comp_status['adequate']}/{comp_status['thin']}/"
+          f"{comp_status['single']}/{comp_status['noCore']}/{comp_status['behavioural']}")
+    print(f"  profile={profile_counts} emails={meta['withEmail']}")
+
+
+def write_taxonomy_doc(taxonomy, competencies, profile_levels, profile_notes, meta):
+    """Write docs/HYBRID_TAXONOMY.md from the workbook, so the reference
+    document can never drift from the data the page actually shows."""
+    L = []
+    w = L.append
+
+    w("# The hybrid taxonomy")
+    w("")
+    w("<!-- Generated by scripts/generate_data.py. Edit the workbook, not this file. -->")
+    w("")
+    w("Both scopes of the Knowledge Mapping Page — Internal GCDC and the GCC")
+    w("Network — are coded against one three-level structure:")
+    w("")
+    w(f"**{meta['domains']} CF domains** → **{meta['competencies']} CF competencies** "
+      f"→ **{meta['areas']} Level-3 expertise areas**")
+    w("")
+    w("Levels 1 and 2 are the Gulf CDC Public Health Competency Framework, in its")
+    w("own wording and numbering. Level 3 is this project's own layer: the")
+    w("expertise areas staff and network members actually named in the survey,")
+    w("each placed under exactly one competency.")
+    w("")
+
+    w("## 1. Framework fit")
+    w("")
+    w("Not every expertise area people named falls inside the Competency")
+    w("Framework's scope. Rather than force them, each area carries a fit flag:")
+    w("")
+    fits = {}
+    for t in taxonomy:
+        fits[t["fit"]] = fits.get(t["fit"], 0) + 1
+    w("| Framework Fit | Areas | Meaning |")
+    w("|---|---|---|")
+    meanings = {
+        "Direct": "the area sits squarely inside the competency as the framework defines it",
+        "Nearest fit — outside CF scope": "research, laboratory/clinical and workforce-education "
+                                         "expertise the framework does not cover; placed under "
+                                         "the closest competency and marked",
+        "Added in v6 — CF coverage": "added so a competency the framework requires is not left "
+                                     "without a Level-3 area",
+    }
+    for fit, n in sorted(fits.items(), key=lambda kv: -kv[1]):
+        w(f"| {fit} | {n} | {meanings.get(fit, '')} |")
+    w("")
+
+    w("## 2. Counting rules")
+    w("")
+    w("People are coded at **Level 3 only**. Competency and domain figures roll")
+    w("up from there, and someone who holds two areas under one competency counts")
+    w("**once** for that competency — so competency holders are distinct people,")
+    w("not expertise tags.")
+    w("")
+    w("An area counts only where it is held as **core** expertise — what someone")
+    w("would be called on to do or teach — not mere awareness of the subject:")
+    w("")
+    w("| Holders | Status |")
+    w("|---|---|")
+    w("| 0 | \U0001F534 No core expert |")
+    w("| 1 | \U0001F7E0 Single core expert (single point of failure) |")
+    w("| 2 | \U0001F7E1 Thin coverage |")
+    w("| 3 or more | \U0001F7E2 Adequate |")
+    w("")
+    behavioural = [c for c in competencies if c["behavioural"]]
+    if behavioural:
+        w("Two competencies are **behavioural**:")
+        w("")
+        for c in behavioural:
+            w(f"- **{c['competency']}**")
+        w("")
+        w("They describe how someone works rather than a body of knowledge, so they")
+        w("have no Level-3 area by design. They are reported as *Not mapped —")
+        w("behavioural* in neutral grey and are **never counted as a gap**. That is")
+        w(f"why {meta['competencies'] - len(behavioural)}, not {meta['competencies']}, "
+          "competencies can carry holders.")
+        w("")
+
+    w("## 3. Profile Level")
+    w("")
+    w("Profile Level is the CF proficiency band. It is derived from the years of")
+    w("experience each person reported in the survey, using the workbook's own")
+    w("`Profile_Level_Rules` sheet — the portal never hard-codes the thresholds:")
+    w("")
+    w("| Years of experience | CF proficiency | Career stage | Depth score |")
+    w("|---|---|---|---|")
+    for p in profile_levels:
+        w(f"| {p['years']} | {p['level']} | {p['stage']} | {p['depth']} |")
+    w("")
+    w("Where Profile Level is sorted or filtered, the order is")
+    w("**Expert > Proficient > Competent**.")
+    w("")
+    for note in profile_notes:
+        w(f"- {note}")
+    if profile_notes:
+        w("")
+
+    w("## 4. From the old taxonomy to the CF domains")
+    w("")
+    w("The portal previously used 10 knowledge-management domains and 30")
+    w("sub-domains of this project's own making. Every Level-3 area kept its")
+    w("identity and moved under a CF competency; this table shows where each old")
+    w("domain's areas ended up. An old domain can map to more than one CF domain,")
+    w("which is the point of the move — the framework splits distinctions the old")
+    w("structure ran together.")
+    w("")
+    origins = {}
+    for t in taxonomy:
+        old = (t.get("origin") or "").split("›")[0].strip()
+        if not old:
+            continue
+        origins.setdefault(old, {})
+        origins[old][t["domain"]] = origins[old].get(t["domain"], 0) + 1
+    w("Two labels in the first column are not previous domains: *Portal taxonomy")
+    w("review* marks the six areas created during the portal's own taxonomy")
+    w("review, and *New in v6* the two added for CF coverage. Both are now part")
+    w("of the workbook taxonomy like any other area.")
+    w("")
+    w("| Origin | CF domain(s) | Areas |")
+    w("|---|---|---|")
+    for old in sorted(origins, key=lambda k: (-sum(origins[k].values()), k)):
+        total = sum(origins[old].values())
+        targets = "<br>".join(
+            f"{dom.split('–')[0].strip()} ({n})"
+            for dom, n in sorted(origins[old].items(), key=lambda kv: kv[0])
+        )
+        w(f"| {old} | {targets} | {total} |")
+    w("")
+
+    w("## 5. The full structure")
+    w("")
+    w("Holder counts are **internal GCDC staff**; the GCC Network is counted")
+    w("separately and never merged in. Areas with no core holder are the gaps,")
+    w("listed in full on the page's Gaps tab.")
+    w("")
+    by_code = {c["code"]: c for c in competencies}
+    current_domain = None
+    for c in sorted(competencies, key=lambda c: tuple(int(x) for x in c["code"].split("."))):
+        if c["domain"] != current_domain:
+            current_domain = c["domain"]
+            w(f"### {current_domain}")
+            w("")
+        areas = [t for t in taxonomy if t["code"] == c["code"]]
+        if c["behavioural"]:
+            w(f"**{c['competency']}** — not mapped (behavioural)")
+            w("")
+            continue
+        w(f"**{c['competency']}** — {c['people']} holder(s) · "
+          f"{c['areasHeld']}/{c['areasDefined']} areas held")
+        w("")
+        for t in areas:
+            mark = "" if t["fit"] == "Direct" else f" *({t['fit']})*"
+            n = t["holders_n"]
+            if n == 0:
+                count = "no core holder"
+            elif n == 1:
+                count = "1 holder (single core expert)"
+            else:
+                count = f"{n} holders"
+            w(f"- {t['expertise']} — {count}{mark}")
+        w("")
+
+    unused = [c for c in by_code.values() if c["code"] not in {t["code"] for t in taxonomy}]
+    if unused:
+        w("Competencies with no Level-3 area defined: "
+          + ", ".join(sorted(c["code"] for c in unused)))
+        w("")
+
+    path = os.path.join(ROOT, "docs", "HYBRID_TAXONOMY.md")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("\n".join(L).rstrip() + "\n")
+
+
+if __name__ == "__main__":
+    main()

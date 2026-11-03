@@ -1,44 +1,50 @@
 [
   {
     "state": "UAE",
+    "label": "United Arab Emirates",
     "code": "AE",
-    "people": 11,
-    "tags": 29,
-    "areas": 20
-  },
-  {
-    "state": "Qatar",
-    "code": "QA",
-    "people": 11,
-    "tags": 27,
-    "areas": 16
+    "people": 13,
+    "tags": 36,
+    "areas": 21
   },
   {
     "state": "Bahrain",
+    "label": "Bahrain",
     "code": "BH",
-    "people": 10,
-    "tags": 29,
-    "areas": 17
+    "people": 11,
+    "tags": 33,
+    "areas": 21
   },
   {
     "state": "Saudi Arabia",
+    "label": "Saudi Arabia",
     "code": "SA",
-    "people": 10,
-    "tags": 28,
-    "areas": 24
+    "people": 14,
+    "tags": 42,
+    "areas": 32
   },
   {
     "state": "Oman",
+    "label": "Oman",
     "code": "OM",
-    "people": 7,
-    "tags": 16,
-    "areas": 12
+    "people": 11,
+    "tags": 28,
+    "areas": 19
+  },
+  {
+    "state": "Qatar",
+    "label": "Qatar",
+    "code": "QA",
+    "people": 12,
+    "tags": 32,
+    "areas": 22
   },
   {
     "state": "Kuwait",
+    "label": "Kuwait",
     "code": "KW",
-    "people": 6,
-    "tags": 20,
-    "areas": 15
+    "people": 7,
+    "tags": 22,
+    "areas": 16
   }
 ]
