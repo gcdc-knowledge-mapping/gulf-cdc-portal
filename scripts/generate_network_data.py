@@ -64,6 +64,23 @@ CONSUMER_MAIL = {
 ADDRESS_RE = re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$")
 
 
+# Three addresses the raw survey records wrongly or incompletely. Each
+# correction was confirmed by the project owner on 2026-11-03; they are kept
+# here, not edited into the export, because the export is not in the repository
+# and a correction made there would be lost on the next clone.
+#
+#   9  typed with two Arabic letters inside the local part
+#        ("hyalghareeلا@moh.gov.kw"), so no valid address at all
+#   29  domain misspelt with a doubled L ("heallth.gov.bh"); mail to it bounces
+#   62  answered the survey twice. The workbook keeps her later response, which
+#        gives only a personal address; the work address is on the earlier one.
+EMAIL_FIX = {
+    9: "hyalgharee@moh.gov.kw",
+    29: "Aali9@health.gov.bh",
+    62: "aalbaho@moh.gov.kw",
+}
+
+
 def pick_address(raw):
     """One address from a cell that may hold several, work address preferred.
 
@@ -240,7 +257,7 @@ def main():
             "stage": s(r.get("CF Career Stage")) or stage_of_level.get(level, ""),
             "index": num(r.get("Expertise Index (1-125)")),
             "confidence": s(r.get("Coding Confidence")),
-            "email": mail_by_id.get(rid) or mail_by_name.get(name, ""),
+            "email": EMAIL_FIX.get(rid) or mail_by_id.get(rid) or mail_by_name.get(name, ""),
         })
 
     # ---- long table --------------------------------------------------------
@@ -514,6 +531,11 @@ def main():
         print(f"  no e-mail on file for {len(missing)}:")
         for m in missing:
             print(f"    - {m}")
+    applied = [p for p in people if p["id"] in EMAIL_FIX]
+    if applied:
+        print(f"  owner-confirmed address corrections applied ({len(applied)}):")
+        for p in sorted(applied, key=lambda x: x["id"]):
+            print(f"    - {p['id']} {p['name']}: {p['email']}")
 
 
 def verdict_for(internal, network):

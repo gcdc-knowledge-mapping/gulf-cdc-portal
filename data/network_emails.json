@@ -25,6 +25,11 @@
     "email": "khami001@gmail.com"
   },
   {
+    "id": 9,
+    "name": "Huda Youssef Ghareeb",
+    "email": "hyalgharee@moh.gov.kw"
+  },
+  {
     "id": 10,
     "name": "Yasser Bakhsh",
     "email": "ymbakhsh@pha.gov.sa"
@@ -102,7 +107,7 @@
   {
     "id": 29,
     "name": "Dr. Afaf Merza Mohamed",
-    "email": "Aali9@heallth.gov.bh"
+    "email": "Aali9@health.gov.bh"
   },
   {
     "id": 31,
@@ -262,7 +267,7 @@
   {
     "id": 62,
     "name": "Abeer Khaled Albahouh",
-    "email": "abkhb1959@gmail.com"
+    "email": "aalbaho@moh.gov.kw"
   },
   {
     "id": 63,
