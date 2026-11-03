@@ -2998,7 +2998,7 @@ window.GCDC_DATA = {
       "leader": false,
       "continuity": "",
       "source": "STATED",
-      "email": "n.alzuhayri@Gulfcdc.org   Nouf12345@hotmail.co.uk"
+      "email": "n.alzuhayri@Gulfcdc.org"
     },
     {
       "rank": 19,

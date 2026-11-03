@@ -25,16 +25,6 @@
     "email": "khami001@gmail.com"
   },
   {
-    "id": 8,
-    "name": "Dr. Alya Zaid Harbi",
-    "email": "Alya.harbi@mohap.gov.ae"
-  },
-  {
-    "id": 9,
-    "name": "Huda Youssef Ghareeb",
-    "email": "hyalghareeلا@moh.gov.kw"
-  },
-  {
     "id": 10,
     "name": "Yasser Bakhsh",
     "email": "ymbakhsh@pha.gov.sa"
@@ -60,16 +50,6 @@
     "email": "alqaudi99@gmail.com"
   },
   {
-    "id": 15,
-    "name": "Dr. Alia Albinali",
-    "email": "aalbinali@moph.gov.qa"
-  },
-  {
-    "id": 16,
-    "name": "Mariam Abdalla AlOwais",
-    "email": "Mariam.AlOwais@mohap.gov.ae"
-  },
-  {
     "id": 17,
     "name": "Dr. Ghada ALZayani",
     "email": "gzayani@health.gov.bh"
@@ -83,11 +63,6 @@
     "id": 19,
     "name": "Fatma AlMatrooshi",
     "email": "fatma.almatrooshi@mohap.gov.ae"
-  },
-  {
-    "id": 20,
-    "name": "Abeer Khaled Albahouh",
-    "email": "abkhb1959@gmail.com , aalbaho@moh.gov.kw"
   },
   {
     "id": 21,
@@ -110,11 +85,6 @@
     "email": "RSALOOM@HEALTH.GOV.BH"
   },
   {
-    "id": 25,
-    "name": "Dr. Devendra Bansal",
-    "email": "dbansal@moph.gov.qa"
-  },
-  {
     "id": 26,
     "name": "Khaloud Ahmed Al-Turki",
     "email": "kalturki@moph.gov.qa"
@@ -133,11 +103,6 @@
     "id": 29,
     "name": "Dr. Afaf Merza Mohamed",
     "email": "Aali9@heallth.gov.bh"
-  },
-  {
-    "id": 30,
-    "name": "Basma Al Saffar",
-    "email": "bsaffar@health.gov.bh"
   },
   {
     "id": 31,
@@ -273,5 +238,100 @@
     "id": 57,
     "name": "Muhannad Sulaiman Aloraini",
     "email": "msoraini@pha.gov.sa"
+  },
+  {
+    "id": 58,
+    "name": "Fahad Al Zadjali",
+    "email": "fahad.alzadjali@ochs.edu.om"
+  },
+  {
+    "id": 59,
+    "name": "Jameela Ali Alajmi",
+    "email": "jalajmi@hamad.qa"
+  },
+  {
+    "id": 60,
+    "name": "Ali Saeed Al-Zahrani",
+    "email": "alisaz@kfshrc.edu.sa"
+  },
+  {
+    "id": 61,
+    "name": "Mulfi Alkhinjar",
+    "email": "Mikhinjar@pha.gov.sa"
+  },
+  {
+    "id": 62,
+    "name": "Abeer Khaled Albahouh",
+    "email": "abkhb1959@gmail.com"
+  },
+  {
+    "id": 63,
+    "name": "Hanan Al Kindi",
+    "email": "hanan.alkindi@moh.gov.om"
+  },
+  {
+    "id": 64,
+    "name": "Dr. Devendra Bansal",
+    "email": "dbansal@moph.gov.qa"
+  },
+  {
+    "id": 65,
+    "name": "Huda Alsiyabi",
+    "email": "alsiyabihuda@outlook.com"
+  },
+  {
+    "id": 66,
+    "name": "Dr. Majid Mqbel D. Alkhalaf",
+    "email": "mmkhalaf@pha.gov.sa"
+  },
+  {
+    "id": 67,
+    "name": "Dr. Alya Zaid Harbi",
+    "email": "alya.harbi@mohap.gov.ae"
+  },
+  {
+    "id": 68,
+    "name": "Amina AlJardani",
+    "email": "aksaljardani@gmail.com"
+  },
+  {
+    "id": 69,
+    "name": "Dr. Alia Albinali",
+    "email": "aalbinali@moph.gov.qa"
+  },
+  {
+    "id": 70,
+    "name": "Mariam Abdalla AlOwais",
+    "email": "mariam.alowais@mohap.gov.ae"
+  },
+  {
+    "id": 71,
+    "name": "Yazid A Al Ohaly",
+    "email": "y.ohaly@ghc.sa"
+  },
+  {
+    "id": 72,
+    "name": "Basma Al Saffar",
+    "email": "BSaffar@health.gov.bh"
+  },
+  {
+    "id": 73,
+    "name": "Muneera Ahmed Abdulla Alsobaiei",
+    "email": "msabt@health.gov.bh"
+  },
+  {
+    "id": 74,
+    "name": "Hussain Alrand",
+    "email": "hussain.alrand@mohap.gov.ae"
+  },
+  {
+    "id": 75,
+    "name": "Nouf Alali",
+    "email": "nkalali@mohap.gov.ae"
+  },
+  {
+    "id": 76,
+    "name": "Almunther W. Alhasawi",
+    "email": "awalhasawi@moh.gov.kw"
   }
 ]

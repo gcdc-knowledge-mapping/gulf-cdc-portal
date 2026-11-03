@@ -103,6 +103,31 @@ def recommend(n):
     return "No staff member holds this area at core level — recruit or develop this capability."
 
 
+# Free-text answers sometimes hold two addresses, a work one and a personal one.
+# A staff directory should show the work address, so the consumer providers are
+# listed here and an address on one of them is only used when it is all there is.
+CONSUMER_MAIL = {
+    "gmail.com", "googlemail.com", "outlook.com", "hotmail.com", "hotmail.co.uk",
+    "live.com", "yahoo.com", "yahoo.co.uk", "icloud.com", "me.com", "aol.com",
+}
+ADDRESS_RE = re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$")
+
+
+def pick_address(raw):
+    """One address from a cell that may hold several, work address preferred.
+
+    Returns "" when nothing in the cell is a syntactically valid address, so a
+    typo reaches the page as a blank rather than as a broken mailto: link.
+    """
+    found = [p for p in re.split(r"[\s,;]+", s(raw)) if ADDRESS_RE.match(p)]
+    if not found:
+        return ""
+    for a in found:
+        if a.split("@")[-1].lower() not in CONSUMER_MAIL:
+            return a
+    return found[0]
+
+
 def emails_by_name():
     """Work e-mail per staff member, from the raw survey export."""
     if not os.path.exists(SURVEY):
@@ -116,12 +141,18 @@ def emails_by_name():
     except ValueError:
         print("note: survey has no Full Name / Work email column — e-mails omitted")
         return {}
-    out = {}
+    out, rejected = {}, []
     for r in data[1:]:
-        nm, mail = s(r[i_name]), s(r[i_mail])
-        if not nm or not mail:
+        nm, mail = s(r[i_name]), pick_address(r[i_mail])
+        if not nm:
+            continue
+        if not mail:
+            if s(r[i_mail]):
+                rejected.append(f"{nm}: {s(r[i_mail])!r}")
             continue
         out[norm(EMAIL_ALIAS.get(nm, nm))] = mail
+    for rj in rejected:
+        print(f"  note: not a valid e-mail address, left blank — {rj}")
     return out
 
 

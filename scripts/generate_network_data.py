@@ -20,6 +20,7 @@ and is not bundled into the page.
 
 import json
 import os
+import re
 
 import openpyxl
 
@@ -51,6 +52,31 @@ STATES = STATE_ORDER
 
 # Competencies 7.3 and 7.5 are behavioural: no Level-3 area, never a gap.
 BEHAVIOURAL = {"7.3", "7.5"}
+
+
+# Free-text answers sometimes hold two addresses, a work one and a personal one.
+# A directory should show the work address, so the consumer providers are listed
+# here and an address on one of them is only used when it is all there is.
+CONSUMER_MAIL = {
+    "gmail.com", "googlemail.com", "outlook.com", "hotmail.com", "hotmail.co.uk",
+    "live.com", "yahoo.com", "yahoo.co.uk", "icloud.com", "me.com", "aol.com",
+}
+ADDRESS_RE = re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$")
+
+
+def pick_address(raw):
+    """One address from a cell that may hold several, work address preferred.
+
+    Returns "" when nothing in the cell is a syntactically valid address, so a
+    typo reaches the page as a blank rather than as a broken mailto: link.
+    """
+    found = [p for p in re.split(r"[\s,;]+", s(raw)) if ADDRESS_RE.match(p)]
+    if not found:
+        return ""
+    for a in found:
+        if a.split("@")[-1].lower() not in CONSUMER_MAIL:
+            return a
+    return found[0]
 
 
 def s(v):
@@ -108,16 +134,20 @@ def emails_by_id():
         except ValueError:
             print("note: survey export has no ID / Official email column")
             return {}, {}
-        by_id, by_name = {}, {}
+        by_id, by_name, rejected = {}, {}, []
         for r in data[1:]:
-            rid, mail = num(r[i_id], -1), s(r[i_mail])
+            rid, mail = num(r[i_id], -1), pick_address(r[i_mail])
             if not mail:
+                if s(r[i_mail]):
+                    rejected.append(f"id {rid}: {s(r[i_mail])!r}")
                 continue
             if rid >= 0:
                 by_id[rid] = mail
             if i_name is not None and s(r[i_name]):
                 by_name[s(r[i_name])] = mail
         print(f"e-mails: {os.path.basename(SURVEY)} ({len(by_id)} addresses)")
+        for rj in rejected:
+            print(f"  note: not a valid e-mail address, left blank — {rj}")
         return by_id, by_name
 
     if os.path.exists(EMAILS):
