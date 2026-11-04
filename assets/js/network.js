@@ -298,7 +298,8 @@
   // expertise area \u2192 its CF competency, so area chips can carry the code
   var AREA_CF = {};
   TAX.forEach(function (t) {
-    AREA_CF[t.area] = { code: t.code, competency: compParts(t.competency).name, fit: t.fit };
+    AREA_CF[t.area] = { domain: t.domain, code: t.code,
+                       competency: compParts(t.competency).name, fit: t.fit };
   });
 
   // How many people hold each area, so a chip can show where this person is the
@@ -379,10 +380,28 @@
   VIEWS.overview = function () {
     // Areas with no holder are left out: a zero reflects who answered the
     // survey, not an absence of the expertise across the GCC.
+    // The ring splits the areas the network holds by how many people hold
+    // each, in the same words as the indicators above, so the two can be read
+    // against each other: 16 areas held by one are the 13 experts in that tile.
+    function peopleHolding(n) {
+      var names = {};
+      Object.keys(AREA_HOLDERS).forEach(function (a) {
+        var k = AREA_HOLDERS[a];
+        if (n === 3 ? k >= 3 : k === n) {
+          PEOPLE.forEach(function (p) {
+            if (p.areas.indexOf(a) !== -1) names[p.name] = 1;
+          });
+        }
+      });
+      return Object.keys(names).length;
+    }
     var segs = [
-      { label: "Adequate (3+ holders)", value: M.adequate, color: CLS_COLOR.good },
-      { label: "Thin (2 holders)", value: M.thin, color: CLS_COLOR.warn },
-      { label: "Single core expert (1)", value: M.sole, color: CLS_COLOR.serious }
+      { label: "Held by three or more", value: M.adequate, color: CLS_COLOR.good,
+        people: peopleHolding(3) },
+      { label: "Held by two", value: M.thin, color: CLS_COLOR.warn,
+        people: peopleHolding(2) },
+      { label: "Held by one", value: M.sole, color: CLS_COLOR.serious,
+        people: peopleHolding(1) }
     ];
     var fragile = Math.round(((M.sole + M.thin) / M.covered) * 100);
 
@@ -419,15 +438,22 @@
         '<div class="card__sub">How many of the ' + M.covered + " areas the network holds are resilient vs. fragile</div></div>" +
         '<div class="donut-wrap">' +
         donut(segs, { centerNum: M.covered, centerLbl: "areas held", aria: "Network coverage by status" }) +
-        '<div style="flex:1;min-width:150px">' + legend(segs) +
+        '<div style="flex:1;min-width:150px">' +
+        '<ul class="ring-key">' + segs.map(function (c) {
+          return '<li><span class="legend__swatch" style="background:' + c.color + '"></span>' +
+            "<b>" + c.value + "</b> area" + (c.value === 1 ? "" : "s") + " " +
+            esc(c.label.toLowerCase()) +
+            (c.people ? " \u2014 <b>" + c.people + "</b> " +
+              (c.people === 1 ? "expert" : "experts") : "") + "</li>";
+        }).join("") + "</ul>" +
         '<p class="card__sub" style="margin-top:12px">' + fragile +
         "% of the areas the network holds rest on one or two people across the whole region.</p></div></div>" +
         '<dl class="deflist">' +
-        '<div><dt><span class="legend__swatch" style="background:var(--st-good)"></span> Adequate</dt>' +
+        '<div><dt><span class="legend__swatch" style="background:var(--st-good)"></span> Held by three or more</dt>' +
         "<dd>Three or more experts across the GCC hold the area as core expertise — deep enough to anchor a regional Community of Practice.</dd></div>" +
-        '<div><dt><span class="legend__swatch" style="background:var(--st-warn)"></span> Thin</dt>' +
+        '<div><dt><span class="legend__swatch" style="background:var(--st-warn)"></span> Held by two</dt>' +
         "<dd>Exactly two holders region-wide. Workable today, but one departure leaves a single regional expert.</dd></div>" +
-        '<div><dt><span class="legend__swatch" style="background:var(--st-serious)"></span> Single core expert</dt>' +
+        '<div><dt><span class="legend__swatch" style="background:var(--st-serious)"></span> Held by one</dt>' +
         "<dd>One person in the entire network holds this area. The region depends on a single individual — the highest continuity risk.</dd></div>" +
         "</dl></div>" +
 
@@ -438,63 +464,41 @@
 
       '<div class="card" style="margin-top:16px">' +
         '<div class="card__hd"><div class="card__title">Coverage by CF domain</div>' +
-        '<div class="card__sub">Areas held by at least one network expert, out of all areas in the domain</div></div>' +
-        rankedBars((D.byDomain || []).map(function (d) {
+        '<div class="card__sub">Expertise areas held in each of the ' + M.domains +
+        " domains of the Competency Framework (" + M.covered + " of " + M.areas +
+        " across all of them)</div></div>" +
+        // Left in the framework's own D1 → D7 order, not ranked: the order is
+        // stable, learnable, and the domain colours are assigned to match it.
+        rankedBars((D.byDomain || []).slice().sort(function (x, y) {
+          return domainNo(x.domain) - domainNo(y.domain);
+        }).map(function (d) {
+          var people = {};
+          PEOPLE.forEach(function (p) {
+            p.areas.forEach(function (a) {
+              var t = AREA_CF[a];
+              if (t && t.domain === d.domain) people[p.name] = 1;
+            });
+          });
+          var n = Object.keys(people).length;
           return {
             label: d.domain, value: d.covered,
-            color: d.covered === d.areas ? CLS_COLOR.good : NET,
-            tip: d.covered + " of " + d.areas + " areas covered · " +
-              d.competenciesHeld + " of " + d.competencies + " competencies held",
+            color: d.covered === d.areas ? CLS_COLOR.good
+                 : d.covered === 0 ? CLS_COLOR.critical : domainColor(d.domain),
+            tip: "<b>" + esc(d.domain) + "</b><br>" + d.covered + " of " + d.areas +
+              " expertise areas held · " + d.competenciesHeld + " of " +
+              d.competencies + " competencies · " + n +
+              (n === 1 ? " expert" : " experts") +
+              "<br><i>Click to see this domain by Member State</i>",
             action: "domain:" + d.domain,
             actionHint: "Show " + d.domain + " in Member States"
           };
-        }), domMax) +
+        }), domMax, "bars--wide") +
+        '<p class="card__sub" style="margin-top:12px">Select a domain to see it ' +
+        "by Member State.</p>" +
       "</div>" +
 
-      '<div class="card" style="margin-top:16px">' +
-        '<div class="card__hd"><div class="card__title">Coverage by areas</div>' +
-        '<div class="card__sub">Expertise areas held in each CF competency (' + M.covered +
-        " of " + M.areas + " across all of them)</div></div>" +
-        competencyBars() +
-        '<p class="card__sub" style="margin-top:12px">Select a competency to see it ' +
-        "by Member State.</p>" +
-      "</div>";
+      "";
   };
-
-  /* Coverage by areas — one bar per CF competency, in the same shape as
-     Experts by Member State: how many of its Level-3 expertise areas somebody
-     in the network holds. The two behavioural competencies define no area at
-     all, so they get a line of their own rather than a bar of zero. */
-  function competencyBars() {
-    if (!COMPS.length) return "";
-    var live = COMPS.filter(function (c) { return !c.behavioural && c.areasDefined > 0; });
-    var behavioural = COMPS.filter(function (c) { return c.behavioural; });
-    var rows = live.map(function (c) {
-      var p = compParts(c.competency);
-      var full = c.areasHeld === c.areasDefined;
-      return {
-        label: c.code + " " + p.name,
-        value: c.areasHeld,
-        color: c.areasHeld === 0 ? CLS_COLOR.critical : full ? CLS_COLOR.good : CLS_COLOR.warn,
-        tip: "<b>" + esc(c.code) + " " + esc(p.name) + "</b><br>" + c.areasHeld + " of " +
-             c.areasDefined + " expertise area" + (c.areasDefined === 1 ? "" : "s") +
-             " held \u00b7 " + c.people + " holder" + (c.people === 1 ? "" : "s") +
-             " \u00b7 " + c.states + " state" + (c.states === 1 ? "" : "s") +
-             "<br><i>Click to see this competency by Member State</i>",
-        action: "comp:" + c.code,
-        actionHint: "Show " + p.name + " by Member State"
-      };
-    }).sort(function (a, b) { return b.value - a.value; });
-    var max = Math.max.apply(null, rows.map(function (r) { return r.value; }).concat([1]));
-    var note = behavioural.length
-      ? '<p class="card__sub" style="margin-top:12px">' +
-        behavioural.map(function (c) { return esc(c.code); }).join(" and ") +
-        " are behavioural competencies: they describe how someone works rather than " +
-        "a body of knowledge, so they define no expertise area and are not counted " +
-        "as gaps.</p>"
-      : "";
-    return rankedBars(rows, max, "bars--wide") + note;
-  }
 
   /* --------------------------------------------------- Core Expertise */
   VIEWS.core = function () {
@@ -823,10 +827,11 @@
   function bindMapping() {
     if (!mapState.expanded) mapState.expanded = mapDefaultExpanded();
 
-    // Competency labels carry the framework's own wording and are long, so
-    // tier 2 is the widest; the full name is always in the node's tooltip.
-    var TIER_X = [0, 240, 580, 950, 1250];
-    var TIER_W = [200, 300, 340, 260, 210];
+    // Widths measured from the longest label each tier can hold, so a node
+    // shows its whole name instead of an ellipsis. The tree pans and zooms,
+    // so the extra width costs nothing but a little scrolling.
+    var TIER_X = [0, 250, 730, 1240, 1610];
+    var TIER_W = [210, 440, 470, 330, 280];
     var ROW_H = 34, NODE_H = 26;
 
     function applySearch() {
@@ -887,7 +892,10 @@
         var textX = hState ? 36 : 11;
         // Average glyph width per tier — tiers 0-2 render bold (and tier 0 at
         // 14px), so a single estimate would overflow their rects.
-        var charW = n.tier === 0 ? 8.0 : n.tier === 1 ? 8.3 : n.tier === 2 ? 7.1 : 6.6;
+        // Per-tier glyph width, measured against the real rendered text so the
+        // budget below matches the width above and nothing is cut.
+        var charW = n.tier === 0 ? 8.0 : n.tier === 1 ? 5.9
+                  : n.tier === 2 ? 6.05 : n.tier === 3 ? 5.95 : 6.3;
         var raw = isPerson && hState ? person : n.label;
         var budget = Math.floor((w - textX - 11) / charW) - badge.length - arrow.length;
         var label = raw.length > budget ? raw.slice(0, budget - 1) + "…" : raw;

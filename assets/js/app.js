@@ -272,49 +272,57 @@
 
   /* ================================================================ VIEWS  */
 
-  /* Coverage by areas — one bar per CF competency, in the same shape as
-     Coverage by department: how many of its Level-3 expertise areas somebody
-     holds. The two behavioural competencies define no area at all, so they get
-     a line of their own rather than a bar of zero that would read as a gap. */
-  function competencyBars() {
-    if (!COMPS.length) return "";
-    const live = COMPS.filter((c) => !c.behavioural && c.areasDefined > 0);
-    const behavioural = COMPS.filter((c) => c.behavioural);
-    const rows = live.map((c) => {
-      const p = compParts(c.competency);
-      const full = c.areasHeld === c.areasDefined;
+  /* Coverage by CF domain — the seven domains of the framework, each showing
+     how many of its Level-3 expertise areas somebody holds. One bar per domain
+     rather than per competency, so the whole picture fits on one screen; the
+     competency detail is a click away in the expertise matrix. */
+  function domainBars() {
+    if (!DOMAINS.length) return "";
+    const rows = DOMAINS.map((d) => {
+      const areas = TX.filter((t) => t.domain === d);
+      const held = areas.filter((t) => (AREA_HOLDERS[t.expertise] || 0) > 0).length;
+      const comps = COMPS.filter((c) => c.domain === d && !c.behavioural && c.areasDefined > 0);
+      const compsHeld = comps.filter((c) => c.people > 0).length;
+      const people = new Set();
+      MATRIX.filter((m) => m.domain === d).forEach((m) => m.holders.forEach((h) =>
+        people.add(clean(h).replace(/\s*\([^)]*\)\s*$/, ""))));
       return {
-        label: `${c.code} ${p.name}`,
-        value: c.areasHeld,
-        color: c.areasHeld === 0 ? "var(--st-critical)"
-             : full ? "var(--st-good)" : "var(--st-warn)",
-        tip: `<b>${esc(c.code)} ${esc(p.name)}</b><br>${c.areasHeld} of ${c.areasDefined} ` +
-             `expertise area${c.areasDefined === 1 ? "" : "s"} held \u00b7 ` +
-             `${c.people} holder${c.people === 1 ? "" : "s"}<br>` +
-             `<i>Click to see this competency in the expertise matrix</i>`,
-        action: `comp:${c.code}`,
-        actionHint: `Show ${p.name} in the expertise matrix`,
+        label: d,
+        value: held,
+        color: held === areas.length ? "var(--st-good)"
+             : held === 0 ? "var(--st-critical)" : DOMAIN_COLOR[d],
+        tip: `<b>${esc(d)}</b><br>${held} of ${areas.length} expertise areas held \u00b7 ` +
+             `${compsHeld} of ${comps.length} competencies \u00b7 ${people.size} ` +
+             `${people.size === 1 ? "person" : "people"}<br>` +
+             `<i>Click to see this domain in the expertise matrix</i>`,
+        action: `domain:${d}`,
+        actionHint: `Show ${d} in the expertise matrix`,
       };
-    }).sort((a, b) => b.value - a.value);
+    });
     const max = Math.max(...rows.map((r) => r.value), 1);
-    const note = behavioural.length
-      ? `<p class="card__sub" style="margin-top:12px">${behavioural.map((c) =>
-          esc(c.code)).join(" and ")} are behavioural competencies: they describe how
-         someone works rather than a body of knowledge, so they define no expertise
-         area and are not counted as gaps.</p>`
-      : "";
-    return rankedBars(rows, max, "bars--wide") + note;
+    return rankedBars(rows, max, "bars--wide");
   }
 
   function renderOverview(el) {
-    // All four statuses, so the ring adds up to the number in its middle. The
-    // areas with no core holder belong here: leaving them out made the parts
-    // sum to the areas GCDC holds while the centre counted the whole taxonomy.
+    // The ring splits the 65 areas by how many people hold each, in the same
+    // words as the indicators above, so the two can be read against each
+    // other: 37 areas held by one person are the 23 staff in that tile.
+    const peopleHolding = (n) => {
+      const names = new Set();
+      MATRIX.filter((m) => (n === 3 ? m.holders.length >= 3 : m.holders.length === n))
+        .forEach((m) => m.holders.forEach((h) =>
+          names.add(clean(h).replace(/\s*\([^)]*\)\s*$/, ""))));
+      return names.size;
+    };
     const cov = [
-      { label: "Adequate (3+ core)", value: M.adequate, color: "var(--st-good)" },
-      { label: "Thin (2 core)", value: M.thin, color: "var(--st-warn)" },
-      { label: "Single core expert", value: M.spof, color: "var(--st-serious)" },
-      { label: "No core expert", value: M.noCore, color: "var(--st-critical)" },
+      { label: "Held by three or more", value: M.adequate, color: "var(--st-good)",
+        people: peopleHolding(3) },
+      { label: "Held by two", value: M.thin, color: "var(--st-warn)",
+        people: peopleHolding(2) },
+      { label: "Held by one", value: M.spof, color: "var(--st-serious)",
+        people: peopleHolding(1) },
+      { label: "Held by nobody", value: M.noCore, color: "var(--st-critical)",
+        people: 0 },
     ];
     // Coverage by department — core areas each department has ≥1 core holder in
     const deptOf = (h) => { const m = /\(([^)]+)\)\s*$/.exec(h); return m ? m[1].trim() : ""; };
@@ -357,18 +365,21 @@
             <div class="card__sub">How many of the ${M.expertiseAreas} areas are resilient vs. fragile</div></div>
           <div class="donut-wrap">
             ${donut(cov, { centerNum: M.expertiseAreas, centerLbl: "areas", aria: "Expertise coverage distribution" })}
-            <div style="flex:1;min-width:150px">${legend(cov)}
+            <div style="flex:1;min-width:150px">
+              <ul class="ring-key">${cov.map((c) => `<li><span class="legend__swatch" style="background:${c.color}"></span>
+                <b>${c.value}</b> area${c.value === 1 ? "" : "s"} ${esc(c.label.toLowerCase())}${
+                c.people ? ` — <b>${c.people}</b> ${c.people === 1 ? "person" : "people"}` : ""}</li>`).join("")}</ul>
               <p class="card__sub" style="margin-top:12px">${M.spof + M.thin} of the ${M.expertiseAreas} areas (${Math.round((M.spof + M.thin) / M.expertiseAreas * 100)}%) rest on one or two people, and ${M.noCore} have no core holder at all.</p>
             </div>
           </div>
           <dl class="deflist">
-            <div><dt><span class="legend__swatch" style="background:var(--st-good)"></span> Adequate</dt>
+            <div><dt><span class="legend__swatch" style="background:var(--st-good)"></span> Held by three or more</dt>
               <dd>Three or more staff hold the area as core expertise — the knowledge is resilient: if one person leaves, others can carry it.</dd></div>
-            <div><dt><span class="legend__swatch" style="background:var(--st-warn)"></span> Thinly covered</dt>
+            <div><dt><span class="legend__swatch" style="background:var(--st-warn)"></span> Held by two</dt>
               <dd>Exactly two core holders. Workable today, but one departure would leave a single point of failure — worth building redundancy.</dd></div>
-            <div><dt><span class="legend__swatch" style="background:var(--st-serious)"></span> Single core expert</dt>
+            <div><dt><span class="legend__swatch" style="background:var(--st-serious)"></span> Held by one</dt>
               <dd>Only one person in GCDC holds this area at core level. If they leave, the capability leaves with them — the highest continuity risk and the priority for knowledge capture.</dd></div>
-            <div><dt><span class="legend__swatch" style="background:var(--st-critical)"></span> No core expert</dt>
+            <div><dt><span class="legend__swatch" style="background:var(--st-critical)"></span> Held by nobody</dt>
               <dd>Nobody in GCDC holds this area at core level. It is a gap in the taxonomy rather than a continuity risk — something to recruit for, train towards, or draw on the GCC Network for.</dd></div>
           </dl>
         </div>
@@ -381,10 +392,10 @@
       </div>
 
       <div class="card" style="margin-top:16px">
-        <div class="card__hd"><div class="card__title">Coverage by areas</div>
-          <div class="card__sub">Expertise areas held in each CF competency (${M.areasHeld} of ${M.expertiseAreas} across all of them)</div></div>
-        ${competencyBars()}
-        <p class="card__sub" style="margin-top:12px">Select a competency to see its areas in the expertise matrix.</p>
+        <div class="card__hd"><div class="card__title">Coverage by CF domain</div>
+          <div class="card__sub">Expertise areas held in each of the ${M.domains} domains of the Competency Framework (${M.areasHeld} of ${M.expertiseAreas} across all of them)</div></div>
+        ${domainBars()}
+        <p class="card__sub" style="margin-top:12px">Select a domain to see its areas in the expertise matrix.</p>
       </div>`;
 
     // KPI tiles and department bars act as navigation
@@ -406,6 +417,9 @@
       }
       if (action.startsWith("comp:")) {
         return jumpTo("matrix", { comp: action.slice(5), domain: "all", q: "" });
+      }
+      if (action.startsWith("domain:")) {
+        return jumpTo("matrix", { domain: action.slice(7), comp: "all", q: "" });
       }
     };
     // Assignment (not addEventListener): every go() re-renders this view, and
@@ -1012,10 +1026,11 @@
       </div>`;
 
     // Tier geometry: x offset and node width per tier
-    // Competency labels carry the framework's own wording and are long, so
-    // tier 2 is the widest; the full name is always in the node's tooltip.
-    const TIER_X = [0, 240, 580, 950, 1250];
-    const TIER_W = [200, 300, 340, 260, 210];
+    // Widths measured from the longest label each tier can hold, so a node
+    // shows its whole name instead of an ellipsis. The tree pans and zooms,
+    // so the extra width costs nothing but a little scrolling.
+    const TIER_X = [0, 250, 730, 1240, 1610];
+    const TIER_W = [210, 440, 470, 330, 280];
     const ROW_H = 34, NODE_H = 26;
 
     function visibleChildren(n) {
@@ -1073,8 +1088,10 @@
           ? (n.tier <= 1 ? ` · ${n.nExp}▸` : n.tier === 2 ? ` · ${n.nExp}▸` : ` · ${n.nHold}▸`)
           : "";
         const arrow = expandable ? (open ? "▾ " : "▸ ") : "";
-        // tiers 0–1 are bold, so their glyphs are wider; budget per tier
-        const charW = n.tier === 0 ? 8.0 : n.tier === 1 ? 8.3 : n.tier === 2 ? 7.1 : 6.6;
+        // Per-tier glyph width, measured against the real rendered text so the
+        // budget below matches the width above and nothing is cut.
+        const charW = n.tier === 0 ? 8.0 : n.tier === 1 ? 5.9
+                    : n.tier === 2 ? 6.05 : n.tier === 3 ? 5.95 : 6.3;
         const budget = Math.floor((w - 22) / charW) - badge.length - arrow.length;
         const label = n.label.length > budget ? n.label.slice(0, budget - 1) + "…" : n.label;
         const isPerson = n.tier === 4;
