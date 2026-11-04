@@ -218,6 +218,26 @@
     }).join("") + `</div>`;
   }
 
+  // How broadly each person is coded: how many Level-3 areas they hold. This
+  // describes the people, not the areas — someone with one area is a
+  // specialist, not a risk, so these carry no status colours.
+  const areaCount = (h) =>
+    String(h.core_areas || "").split(";").map(clean).filter(Boolean).length;
+  const BREADTH = {
+    one: HOLDERS.filter((h) => areaCount(h) === 1).length,
+    two: HOLDERS.filter((h) => areaCount(h) === 2).length,
+    wide: HOLDERS.filter((h) => areaCount(h) >= 3).length,
+  };
+  const pct = (n) => (HOLDERS.length ? Math.round((n / HOLDERS.length) * 100) : 0);
+  const BREADTH_LABEL = {
+    "1": "One area only", "2": "Two areas", "3": "Three areas or more",
+  };
+  function matchesBreadth(h, want) {
+    if (!want) return true;
+    const n = areaCount(h);
+    return want === "3" ? n >= 3 : n === +want;
+  }
+
   /* ---------------------------------------------------------------- metrics */
   const M = {
     experts: HOLDERS.length,
@@ -319,9 +339,9 @@
 
       <div class="grid grid--kpi">
         ${kpi(M.experts, "Staff who took part", `${M.depts} departments`, "var(--brand)", "view:contacts", "Open the staff directory")}
-        ${kpi(`${M.areasHeld} <span class="kpi__of">/ ${M.expertiseAreas}</span>`, "Expertise areas covered", `${M.competenciesHeld} of ${M.competencies} CF competencies`, "var(--accent)", "view:matrix", "Browse the expertise matrix")}
-        ${kpi(M.thin, "Areas held by two", "One departure leaves a single holder", "var(--st-warn)", "view:matrix", "See the areas two people hold")}
-        ${kpi(M.spof, "Areas held by one", "The capability leaves with them", "var(--st-serious)", "view:matrix", "See the areas a single person holds")}
+        ${kpi(BREADTH.wide, "Cover three areas or more", `${pct(BREADTH.wide)}% of the ${M.experts} staff`, "var(--st-good)", "breadth:3", "Show the staff who cover three areas or more")}
+        ${kpi(BREADTH.two, "Cover two areas", `${pct(BREADTH.two)}% of the ${M.experts} staff`, "var(--c5)", "breadth:2", "Show the staff who cover exactly two areas")}
+        ${kpi(BREADTH.one, "Cover one area only", `${pct(BREADTH.one)}% of the ${M.experts} staff`, "var(--c7)", "breadth:1", "Show the staff who cover a single area")}
       </div>
 
       <div class="grid grid--2" style="margin-top:16px">
@@ -365,6 +385,9 @@
       if (action.startsWith("dept:")) {
         const d = action.slice(5);
         return jumpTo("core", { dept: d, q: "" });
+      }
+      if (action.startsWith("breadth:")) {
+        return jumpTo("contacts", { breadth: action.slice(8), q: "", dept: "all", profile: "all" });
       }
       if (action.startsWith("comp:")) {
         return jumpTo("matrix", { comp: action.slice(5), domain: "all", q: "" });
@@ -559,7 +582,7 @@
   }
 
   /* ---------------------------------------------------------------- Contacts */
-  const contactsState = { dept: "all", q: "", profile: "all" };
+  const contactsState = { dept: "all", q: "", profile: "all", breadth: "" };
   function initials(name) {
     const parts = clean(name).split(" ").filter(Boolean);
     const skip = /^(dr|mr|ms|mrs)\.?$/i;
@@ -596,6 +619,7 @@
       return HOLDERS.filter((h) =>
         (contactsState.dept === "all" || h.department === contactsState.dept) &&
         (contactsState.profile === "all" || h.profile_level === contactsState.profile) &&
+        matchesBreadth(h, contactsState.breadth) &&
         (!q || (h.name + " " + h.core_areas + " " + h.email).toLowerCase().includes(q))
       ).slice().sort((a, b) =>
         // most senior first, then alphabetically inside each level
@@ -611,6 +635,7 @@
       $("#ctchips").innerHTML = filterChips([
         { label: "Department", value: contactsState.dept === "all" ? "" : contactsState.dept, clear: "dept" },
         { label: "Profile level", value: contactsState.profile === "all" ? "" : contactsState.profile, clear: "profile" },
+        { label: "Areas covered", value: BREADTH_LABEL[contactsState.breadth] || "", clear: "breadth" },
         { label: "Search", value: q, clear: "q" },
       ]);
 
@@ -686,7 +711,8 @@
       const clear = e.target.closest("[data-clear]");
       if (clear) {
         const what = clear.getAttribute("data-clear");
-        if (what === "all") { contactsState.dept = "all"; contactsState.q = ""; contactsState.profile = "all"; }
+        if (what === "all") { contactsState.dept = "all"; contactsState.q = ""; contactsState.profile = "all"; contactsState.breadth = ""; }
+        if (what === "breadth") contactsState.breadth = "";
         if (what === "dept") contactsState.dept = "all";
         if (what === "profile") contactsState.profile = "all";
         if (what === "q") contactsState.q = "";

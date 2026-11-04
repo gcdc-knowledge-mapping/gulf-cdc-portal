@@ -157,6 +157,26 @@
   var NET = "var(--net)";
   var CLS_COLOR = { good: "var(--st-good)", warn: "var(--st-warn)", serious: "var(--st-serious)", critical: "var(--st-critical)" };
 
+  // How broadly each expert is coded: how many Level-3 areas they hold. This
+  // describes the people, not the areas — an expert on one area is a
+  // specialist, not a risk, so these carry no status colours.
+  var BREADTH = {
+    one: PEOPLE.filter(function (p) { return p.areas.length === 1; }).length,
+    two: PEOPLE.filter(function (p) { return p.areas.length === 2; }).length,
+    wide: PEOPLE.filter(function (p) { return p.areas.length >= 3; }).length,
+  };
+  function pct(n) {
+    return PEOPLE.length ? Math.round((n / PEOPLE.length) * 100) : 0;
+  }
+  function matchesBreadth(p) {
+    if (!state.breadth) return true;
+    var n = p.areas.length;
+    return state.breadth === "3" ? n >= 3 : n === +state.breadth;
+  }
+  var BREADTH_LABEL = {
+    "1": "One area only", "2": "Two areas", "3": "Three areas or more",
+  };
+
   // Holder count → status. Same thresholds and wording as the internal scope.
   function statusOf(n) {
     if (n >= 3) return { cls: "good", icon: "●", label: "Adequate" };
@@ -238,7 +258,7 @@
     "An area marked <b class=\"tag-chip--sole\" style=\"background:none;border:0;padding:0\">\u25B2</b> is one this person is the <b>only</b> holder of in the network.";
 
   var state = {
-    q: "", st: "", track: "", sole: false, profile: "",  // Experts
+    q: "", st: "", track: "", sole: false, profile: "", breadth: "",  // Experts
     coreQ: "", coreSt: "",                  // Core Expertise
     domain: "", comp: "", level: "competency",  // Member States
     sort: "name", dir: 1
@@ -354,10 +374,10 @@
 
       '<div class="grid grid--kpi">' +
         kpi(M.people, "Experts who took part", M.states + " Member States", "var(--net)", "view:directory", "Open the expert directory") +
-        kpi(M.covered + ' <span class="kpi__of">/ ' + M.areas + "</span>", "Expertise areas covered", M.competenciesHeld + " of " + M.competencies + " CF competencies", "var(--accent)", "view:states", "See coverage by Member State") +
-        kpi(M.thin, "Areas held by two", "One departure leaves a single holder", "var(--st-warn)", "view:states", "See the areas two experts hold") +
-        kpi(M.sole, "Areas held by one", "Held by " + M.soleExperts + " experts region-wide", "var(--st-serious)", "sole:1", "Show the " + M.soleExperts + " experts who are the only holder of an area") +
-        kpi(M.external, "Externally consulted", "advise WHO, Member States or partners", "var(--st-good)", "view:directory", "Show externally consulted experts") +
+        kpi(BREADTH.wide, "Cover three areas or more", pct(BREADTH.wide) + "% of the " + M.people + " experts", "var(--st-good)", "breadth:3", "Show the experts who cover three areas or more") +
+        kpi(BREADTH.two, "Cover two areas", pct(BREADTH.two) + "% of the " + M.people + " experts", "var(--c5)", "breadth:2", "Show the experts who cover exactly two areas") +
+        kpi(BREADTH.one, "Cover one area only", pct(BREADTH.one) + "% of the " + M.people + " experts", "var(--c7)", "breadth:1", "Show the experts who cover a single area") +
+        kpi(M.external, "Externally consulted", "advise WHO, Member States or partners", "var(--net)", "view:directory", "Show externally consulted experts") +
       "</div>" +
 
       '<div class="grid grid--2" style="margin-top:16px">' +
@@ -532,6 +552,7 @@
       if (state.st && p.state !== state.st) return false;
       if (state.track && p.track !== state.track) return false;
       if (state.profile && p.profile !== state.profile) return false;
+      if (!matchesBreadth(p)) return false;
       if (state.q) {
         var hay = (p.name + " " + p.state + " " + p.level + " " + p.entity + " " + p.email + " " + p.areas.join(" ")).toLowerCase();
         if (hay.indexOf(state.q.toLowerCase()) === -1) return false;
@@ -575,6 +596,7 @@
         { label: "Member State", value: state.st ? stateLabel(state.st) : "", clear: "st" },
         { label: "Track", value: state.track, clear: "track" },
         { label: "Profile level", value: state.profile, clear: "profile" },
+        { label: "Areas covered", value: BREADTH_LABEL[state.breadth] || "", clear: "breadth" },
         { label: "Only holder of an area", value: state.sole ? "Yes" : "", clear: "sole" }
       ]) +
       (list.length
@@ -1070,7 +1092,8 @@
         var kind = a.slice(0, a.indexOf(":"));
         var val = a.slice(a.indexOf(":") + 1);
         if (kind === "view") return jumpTo(val, {});
-        if (kind === "sole") return jumpTo("directory", { sole: true, q: "", st: "", track: "" });
+        if (kind === "sole") return jumpTo("directory", { sole: true, q: "", st: "", track: "", breadth: "" });
+        if (kind === "breadth") return jumpTo("directory", { breadth: val, q: "", st: "", track: "", sole: false, profile: "" });
         if (kind === "state") return jumpTo("directory", { st: val, q: "", track: "" });
         if (kind === "domain") return jumpTo("states", { domain: val, comp: "" });
         if (kind === "comp") return jumpTo("states", { comp: val, domain: "", level: "competency" });
@@ -1090,7 +1113,8 @@
       if (clear) {
         var what = clear.getAttribute("data-clear");
         if (what === "all") {
-          state.q = ""; state.st = ""; state.track = ""; state.sole = false; state.profile = "";
+          state.q = ""; state.st = ""; state.track = ""; state.sole = false;
+          state.profile = ""; state.breadth = "";
           state.coreQ = ""; state.coreSt = ""; state.domain = ""; state.comp = "";
         } else state[what] = (what === "sole") ? false : "";
         return go(current);
