@@ -138,8 +138,9 @@
   }
   // Ranked horizontal bars. An item with `action` becomes keyboard-operable,
   // matching the internal Overview.
-  function rankedBars(items, max) {
-    return '<div class="bars">' + items.map(function (it) {
+  // `extra` adds a modifier class, e.g. "bars--wide" for long labels.
+  function rankedBars(items, max, extra) {
+    return '<div class="bars' + (extra ? " " + extra : "") + '">' + items.map(function (it) {
       var act = it.action
         ? ' role="button" tabindex="0" data-action="' + esc(it.action) +
           '" title="' + esc(it.actionHint || "Show details") + '"'
@@ -408,8 +409,8 @@
       '<div class="grid grid--kpi">' +
         kpi(M.people, "Experts who took part", M.states + " Member States", "var(--net)", "view:directory", "Open the expert directory") +
         kpi(BREADTH.wide, "Cover three areas or more", pct(BREADTH.wide) + "% of the " + M.people + " experts", "var(--st-good)", "breadth:3", "Show the experts who cover three areas or more") +
-        kpi(M.soleExperts, "Sole holder of an area", pct(M.soleExperts) + "% of the " + M.people + " experts — nobody else in the network holds it", "var(--st-serious)", "sole:1", "Show the experts who are the only holder of an area") +
         kpi(PAIR_COUNT, "Shares an area with one other", pct(PAIR_COUNT) + "% of the " + M.people + " experts — the two of them are the only holders", "var(--st-warn)", "pairs:1", "Show the experts who share an area with exactly one other person") +
+        kpi(M.soleExperts, "Sole holder of an area", pct(M.soleExperts) + "% of the " + M.people + " experts — nobody else in the network holds it", "var(--st-serious)", "sole:1", "Show the experts who are the only holder of an area") +
         kpi(M.external, "Externally consulted", "advise WHO, Member States or partners", "var(--net)", "view:directory", "Show externally consulted experts") +
       "</div>" +
 
@@ -451,60 +452,48 @@
       "</div>" +
 
       '<div class="card" style="margin-top:16px">' +
-        '<div class="card__hd"><div class="card__title">Coverage by CF competency</div>' +
-        '<div class="card__sub">All ' + M.competencies + " competencies of the Competency Framework " +
-        "(Level 2), grouped by CF domain. " + M.competenciesHeld +
-        " are held by at least one expert in the network.</div></div>" +
-        competencyTable() +
-        '<p class="card__sub" style="margin-top:12px">Holders are <b>distinct people</b>: ' +
-        "an expert who holds two areas under one competency counts once. Select a competency " +
-        "to see it by Member State." +
-        (M.competencyStatus && M.competencyStatus.behavioural
-          ? " The " + M.competencyStatus.behavioural + " behavioural competencies describe how " +
-            "someone works rather than a body of knowledge, so they carry no expertise area and " +
-            "are not counted as gaps." : "") + "</p>" +
+        '<div class="card__hd"><div class="card__title">Coverage by areas</div>' +
+        '<div class="card__sub">Expertise areas held in each CF competency (' + M.covered +
+        " of " + M.areas + " across all of them)</div></div>" +
+        competencyBars() +
+        '<p class="card__sub" style="margin-top:12px">Select a competency to see it ' +
+        "by Member State.</p>" +
       "</div>";
   };
 
-  /* Coverage by CF competency (Level 2) — all 23, grouped by CF domain.
-     Counts are distinct people. The two behavioural competencies have no
-     Level-3 area by design and are shown as "Not mapped — behavioural". */
-  function competencyTable() {
+  /* Coverage by areas — one bar per CF competency, in the same shape as
+     Experts by Member State: how many of its Level-3 expertise areas somebody
+     in the network holds. The two behavioural competencies define no area at
+     all, so they get a line of their own rather than a bar of zero. */
+  function competencyBars() {
     if (!COMPS.length) return "";
-    var domains = [];
-    COMPS.forEach(function (c) { if (domains.indexOf(c.domain) === -1) domains.push(c.domain); });
-    domains.sort(function (a, b) { return domainNo(a) - domainNo(b); });
-
-    var body = domains.map(function (dom) {
-      var rows = COMPS.filter(function (c) { return c.domain === dom; })
-        .sort(function (a, b) { return byCode(a.code, b.code); });
-      return '<tr class="comp__domhd"><th colspan="4" scope="colgroup">' +
-        '<span class="comp__dot" style="background:' + domainColor(dom) + '"></span>' +
-        esc(dom) + "</th></tr>" +
-        rows.map(function (c) {
-          var p = compParts(c.competency);
-          var st = c.behavioural
-            ? { cls: "neutral", icon: "•", label: "Not mapped — behavioural" }
-            : statusOf(c.people);
-          var tag = c.behavioural ? "span" : "button";
-          var attrs = c.behavioural ? ' class="comp__name"'
-            : ' type="button" class="comp__name is-clickable" data-action="comp:' + esc(c.code) +
-              '" title="Show ' + esc(p.name) + ' by Member State"';
-          return "<tr>" +
-            '<td data-label="Code"><span class="code-chip">' + esc(c.code) + "</span></td>" +
-            '<td data-label="CF competency"><' + tag + attrs + ">" + esc(p.name) + "</" + tag + "></td>" +
-            '<td data-label="Holders" class="num">' + (c.behavioural ? "—" : c.people) + "</td>" +
-            '<td data-label="Coverage">' + pill(st.cls, st.label, st.icon) +
-            (c.behavioural ? "" : '<span class="comp__areas">' + c.areasHeld + " / " +
-              c.areasDefined + " areas · " + c.states + " state" + (c.states === 1 ? "" : "s") +
-              "</span>") + "</td></tr>";
-        }).join("");
-    }).join("");
-
-    return '<table class="data data--stack comp__table">' +
-      '<thead><tr><th scope="col">Code</th><th scope="col">CF competency</th>' +
-      '<th scope="col" class="num">Holders</th><th scope="col">Coverage</th></tr></thead>' +
-      "<tbody>" + body + "</tbody></table>";
+    var live = COMPS.filter(function (c) { return !c.behavioural && c.areasDefined > 0; });
+    var behavioural = COMPS.filter(function (c) { return c.behavioural; });
+    var rows = live.map(function (c) {
+      var p = compParts(c.competency);
+      var full = c.areasHeld === c.areasDefined;
+      return {
+        label: c.code + " " + p.name,
+        value: c.areasHeld,
+        color: c.areasHeld === 0 ? CLS_COLOR.critical : full ? CLS_COLOR.good : CLS_COLOR.warn,
+        tip: "<b>" + esc(c.code) + " " + esc(p.name) + "</b><br>" + c.areasHeld + " of " +
+             c.areasDefined + " expertise area" + (c.areasDefined === 1 ? "" : "s") +
+             " held \u00b7 " + c.people + " holder" + (c.people === 1 ? "" : "s") +
+             " \u00b7 " + c.states + " state" + (c.states === 1 ? "" : "s") +
+             "<br><i>Click to see this competency by Member State</i>",
+        action: "comp:" + c.code,
+        actionHint: "Show " + p.name + " by Member State"
+      };
+    }).sort(function (a, b) { return b.value - a.value; });
+    var max = Math.max.apply(null, rows.map(function (r) { return r.value; }).concat([1]));
+    var note = behavioural.length
+      ? '<p class="card__sub" style="margin-top:12px">' +
+        behavioural.map(function (c) { return esc(c.code); }).join(" and ") +
+        " are behavioural competencies: they describe how someone works rather than " +
+        "a body of knowledge, so they define no expertise area and are not counted " +
+        "as gaps.</p>"
+      : "";
+    return rankedBars(rows, max, "bars--wide") + note;
   }
 
   /* --------------------------------------------------- Core Expertise */

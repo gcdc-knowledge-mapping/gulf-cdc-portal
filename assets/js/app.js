@@ -202,8 +202,9 @@
   }
   // Ranked horizontal bars: items [{label, value, color, tip, action}]
   // An item with `action` becomes a keyboard-operable button.
-  function rankedBars(items, max) {
-    return `<div class="bars">` + items.map((it) => {
+  // `extra` adds a modifier class, e.g. "bars--wide" for long labels.
+  function rankedBars(items, max, extra) {
+    return `<div class="bars${extra ? " " + extra : ""}">` + items.map((it) => {
       const act = it.action
         ? ` role="button" tabindex="0" data-action="${esc(it.action)}" title="${esc(it.actionHint || "Show details")}"`
         : "";
@@ -271,44 +272,38 @@
 
   /* ================================================================ VIEWS  */
 
-  /* Coverage by CF competency (Level 2) — all 23, grouped by CF domain.
-     Counts are distinct people: holding two areas under one competency counts
-     once. The two behavioural competencies have no Level-3 area by design and
-     are shown as "Not mapped — behavioural" in neutral grey, never as a gap. */
-  function competencyTable(onRowAction) {
+  /* Coverage by areas — one bar per CF competency, in the same shape as
+     Coverage by department: how many of its Level-3 expertise areas somebody
+     holds. The two behavioural competencies define no area at all, so they get
+     a line of their own rather than a bar of zero that would read as a gap. */
+  function competencyBars() {
     if (!COMPS.length) return "";
-    const groups = [];
-    DOMAINS.forEach((d) => {
-      const rows = COMPS.filter((c) => c.domain === d).sort((a, b) => byCode(a.code, b.code));
-      if (rows.length) groups.push({ domain: d, rows });
-    });
-    const body = groups.map((g) => `
-      <tr class="comp__domhd"><th colspan="4" scope="colgroup">
-        <span class="comp__dot" style="background:${DOMAIN_COLOR[g.domain]}"></span>${esc(g.domain)}
-      </th></tr>
-      ${g.rows.map((c) => {
-        const p = compParts(c.competency);
-        const st = c.behavioural
-          ? { cls: "neutral", icon: "•", label: "Not mapped — behavioural" }
-          : coverageStatus(c.status);
-        const act = c.behavioural ? "" : onRowAction(c);
-        const tag = act ? "button" : "span";
-        const attrs = act
-          ? ` type="button" class="comp__name is-clickable" data-action="${esc(act)}"
-              title="Show ${esc(p.name)} in the expertise matrix"`
-          : ' class="comp__name"';
-        return `<tr>
-          <td data-label="Code"><span class="code-chip">${esc(c.code)}</span></td>
-          <td data-label="CF competency"><${tag}${attrs}>${esc(p.name)}</${tag}></td>
-          <td data-label="Holders" class="num">${c.behavioural ? "—" : c.people}</td>
-          <td data-label="Coverage">${pill(st.cls, st.label, st.icon)}
-            ${c.behavioural ? "" : `<span class="comp__areas">${c.areasHeld} / ${c.areasDefined} areas</span>`}</td>
-        </tr>`;
-      }).join("")}`).join("");
-    return `<table class="data data--stack comp__table">
-      <thead><tr><th scope="col">Code</th><th scope="col">CF competency</th>
-        <th scope="col" class="num">Holders</th><th scope="col">Coverage</th></tr></thead>
-      <tbody>${body}</tbody></table>`;
+    const live = COMPS.filter((c) => !c.behavioural && c.areasDefined > 0);
+    const behavioural = COMPS.filter((c) => c.behavioural);
+    const rows = live.map((c) => {
+      const p = compParts(c.competency);
+      const full = c.areasHeld === c.areasDefined;
+      return {
+        label: `${c.code} ${p.name}`,
+        value: c.areasHeld,
+        color: c.areasHeld === 0 ? "var(--st-critical)"
+             : full ? "var(--st-good)" : "var(--st-warn)",
+        tip: `<b>${esc(c.code)} ${esc(p.name)}</b><br>${c.areasHeld} of ${c.areasDefined} ` +
+             `expertise area${c.areasDefined === 1 ? "" : "s"} held \u00b7 ` +
+             `${c.people} holder${c.people === 1 ? "" : "s"}<br>` +
+             `<i>Click to see this competency in the expertise matrix</i>`,
+        action: `comp:${c.code}`,
+        actionHint: `Show ${p.name} in the expertise matrix`,
+      };
+    }).sort((a, b) => b.value - a.value);
+    const max = Math.max(...rows.map((r) => r.value), 1);
+    const note = behavioural.length
+      ? `<p class="card__sub" style="margin-top:12px">${behavioural.map((c) =>
+          esc(c.code)).join(" and ")} are behavioural competencies: they describe how
+         someone works rather than a body of knowledge, so they define no expertise
+         area and are not counted as gaps.</p>`
+      : "";
+    return rankedBars(rows, max, "bars--wide") + note;
   }
 
   function renderOverview(el) {
@@ -352,8 +347,8 @@
       <div class="grid grid--kpi">
         ${kpi(M.experts, "Staff who took part", `${M.depts} departments`, "var(--brand)", "view:contacts", "Open the staff directory")}
         ${kpi(BREADTH.wide, "Cover three areas or more", `${pct(BREADTH.wide)}% of the ${M.experts} staff`, "var(--st-good)", "breadth:3", "Show the staff who cover three areas or more")}
-        ${kpi(SOLE_HOLDERS.length, "Sole holder of an area", `${pct(SOLE_HOLDERS.length)}% of the ${M.experts} staff — nobody else in GCDC holds it`, "var(--st-serious)", "soleholders", "Show the staff who are the only holder of an area")}
         ${kpi(PAIR_NAMES.size, "Shares an area with one other", `${pct(PAIR_NAMES.size)}% of the ${M.experts} staff — the two of them are the only holders`, "var(--st-warn)", "pairs", "Show the staff who share an area with exactly one colleague")}
+        ${kpi(SOLE_HOLDERS.length, "Sole holder of an area", `${pct(SOLE_HOLDERS.length)}% of the ${M.experts} staff — nobody else in GCDC holds it`, "var(--st-serious)", "soleholders", "Show the staff who are the only holder of an area")}
       </div>
 
       <div class="grid grid--2" style="margin-top:16px">
@@ -386,10 +381,10 @@
       </div>
 
       <div class="card" style="margin-top:16px">
-        <div class="card__hd"><div class="card__title">Coverage by CF competency</div>
-          <div class="card__sub">All ${M.competencies} competencies of the Competency Framework (Level 2), grouped by CF domain. ${M.competenciesHeld} are held by at least one member of staff.</div></div>
-        ${competencyTable((c) => `comp:${c.code}`)}
-        <p class="card__sub" style="margin-top:12px">Holders are <b>distinct people</b>: someone who holds two expertise areas under one competency counts once. Select a competency to see its areas in the expertise matrix.${M.behavioural ? ` The ${M.behavioural} behavioural competencies describe how someone works rather than a body of knowledge, so they carry no expertise area and are not counted as gaps.` : ""}</p>
+        <div class="card__hd"><div class="card__title">Coverage by areas</div>
+          <div class="card__sub">Expertise areas held in each CF competency (${M.areasHeld} of ${M.expertiseAreas} across all of them)</div></div>
+        ${competencyBars()}
+        <p class="card__sub" style="margin-top:12px">Select a competency to see its areas in the expertise matrix.</p>
       </div>`;
 
     // KPI tiles and department bars act as navigation
