@@ -5,7 +5,8 @@
     "Azure Static Web Apps configuration for the GCDC Knowledge Mapping Page.",
     "Effect: every page requires a signed-in GCDC work account (Microsoft Entra ID).",
     "Anonymous visitors are redirected to the Microsoft sign-in page.",
-    "See docs/AZURE_DEPLOYMENT.md for the setup steps."
+    "Only used if the page is hosted on Azure Static Web Apps; see",
+    "docs/HOSTING_HANDOVER.md for what the page needs from any host."
   ],
 
   "trailingSlash": "auto",

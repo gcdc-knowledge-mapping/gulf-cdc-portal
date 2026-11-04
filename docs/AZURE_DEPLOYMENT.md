@@ -1,4 +1,13 @@
-# Knowledge Mapping Page — Deployment & Access Handover (for IT)
+# Hosting on Azure Static Web Apps — one worked option
+
+> **This is not the plan, and not a request.** The handover document is
+> [`HOSTING_HANDOVER.md`](HOSTING_HANDOVER.md): it states what the page is and
+> what we need, and leaves the method to GCDC IT, who may well have their own
+> standards and infrastructure for this.
+>
+> This file is kept only as a worked example of one route that is known to
+> satisfy those requirements on a free tier, in case it is useful. Ignore it
+> otherwise — nothing in the project depends on it.
 
 **What this is:** an internal, static web site (HTML/CSS/JS only — no server, no
 database, no API keys) presenting the GCDC Knowledge Mapping in two scopes:

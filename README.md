@@ -128,8 +128,8 @@ network survey export, which carries every verbatim free-text answer and is only
 an input for the e-mail join, and the derived engagement plan, which is the
 Center's own approach priorities rather than anyone's expertise. See `.gitignore`
 for both, and `docs/NETWORK_SECTION_PROPOSAL.md` §6 for the decision in full.
-The move to Azure Static Web Apps with Microsoft Entra sign-in
-(`docs/AZURE_DEPLOYMENT.md`) remains a separate IT track; it is no longer a
+Moving the page onto Center-managed hosting behind a staff sign-in
+(`docs/HOSTING_HANDOVER.md`) remains a separate IT track; it is no longer a
 precondition for publishing.
 
 ## Design notes
@@ -158,5 +158,6 @@ scripts/check_counts.py           # asserts the headline figures after a rebuild
 data/*.xlsx                       # the two analysis workbooks — source of truth
 data/*.json, data/network/*.json  # generated JSON exports
 docs/HYBRID_TAXONOMY.md           # the taxonomy and counting rules (generated)
-docs/AZURE_DEPLOYMENT.md          # handover for IT: Entra sign-in, custom domain
+docs/HOSTING_HANDOVER.md          # handover for IT: what the page is, what it needs
+docs/AZURE_DEPLOYMENT.md          # one worked hosting option, kept for reference
 ```

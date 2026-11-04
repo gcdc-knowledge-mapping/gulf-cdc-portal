@@ -157,7 +157,7 @@ What follows from that:
 
 This replaces the earlier recommendation on this page, which was to finish the
 Azure/Entra migration before publishing the network scope. That migration
-(`docs/AZURE_DEPLOYMENT.md`) remains worth doing for access control and for a
+(`docs/HOSTING_HANDOVER.md`) remains worth doing for access control and for a
 professional address on the Center's own domain, but it is now a separate IT
 track rather than a precondition.
 
