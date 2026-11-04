@@ -2,31 +2,36 @@
 
 **Status:** approved and live.
 **GCC Network scope:** `/network/` — reachable from the scope switcher on every page.
-**Source:** `data/GulfCDC_KnowledgeMapping_Network_MasterAnalysis_v3_CoreTaxonomy.xlsx`
+**Source:** `data/GulfCDC_KnowledgeMapping_Network_MasterAnalysis_v8_HybridTaxonomy.xlsx`
 
 ---
 
-## 1. What the v3 workbook actually contains
+## 1. What the workbook contains
 
 | | |
 |---|---|
-| Valid respondents | **55** |
-| Member States | **6** (UAE 11 · Qatar 11 · Bahrain 10 · Saudi Arabia 10 · Oman 7 · Kuwait 6) |
-| Core expertise tags | 136 (2.5 areas per expert) |
-| Taxonomy areas covered | **40 of 57** |
-| Adequate / Thin / Sole expert / No holder | 17 / 12 / 11 / 17 |
-| Externally consulted by WHO or Member States | 38 |
-| Regional Focal Point candidates (P1) | 5 |
+| Valid respondents | **68** |
+| Member States | **6** |
+| Level-3 expertise tags | 193 (2.8 areas per expert) |
+| Expertise areas held | **52 of 65** |
+| Adequate / Thin / Single core expert / No holder | 25 / 11 / 16 / 13 |
+| CF competencies held | **20 of 23** (2 of the remaining 3 are behavioural) |
+| Profile level: Expert / Proficient / Competent | 58 / 5 / 5 |
+| Externally consulted by WHO or Member States | 49 |
+| Regional Focal Point candidates (P1) | 9 |
 
-The decisive fact: the network was coded against **the same 57-area Core Expertise
-Taxonomy** as the internal staff mapping. That is what makes a comparison possible
-rather than two unrelated lists sitting side by side.
+The decisive fact: the network is coded against **the same taxonomy** as the
+internal staff mapping — the 7 domains and 23 competencies of the Gulf CDC Public
+Health Competency Framework, over 65 shared Level-3 expertise areas. That is what
+makes a comparison possible rather than two unrelated lists sitting side by side.
+The comparison itself lives in `data/network/bridge.json`, at both the competency
+and the area level, and is deliberately not bundled into either page.
 
 ## 2. The recommendation: a second *scope*, not a seventh tab
 
 Adding "Network" as one more tab next to Contacts would quietly merge two
-populations that must never be confused — 30 Gulf CDC employees you can email, and
-55 officials of six sovereign health authorities that Gulf CDC does not employ.
+populations that must never be confused — 31 Gulf CDC employees you can email, and
+68 officials of six sovereign health authorities that Gulf CDC does not employ.
 
 Instead the portal gets a **scope switcher** above the navigation:
 
@@ -55,7 +60,7 @@ nothing is renamed, and no existing link breaks.
    (`AE` UAE, `BH` Bahrain …), and every network view opens with a banner stating
    in plain words that these people are *not* Gulf CDC staff.
 3. **Data** — a separate dataset object, `window.GCDC_NETWORK`, built by
-   `scripts/generate_network_data.py` from the v3 workbook. The internal
+   `scripts/generate_network_data.py` from the v8 workbook. The internal
    `assets/js/data.js` is untouched. The two people lists are never concatenated
    anywhere in the code.
 
@@ -66,18 +71,18 @@ the two scopes feels like the same portal rather than two products.
 
 | Section | Source sheet | What it shows |
 |---|---|---|
-| **Home** | 00_README | Same hero and layout as the internal Home, with a *GCC Network* badge: 55 experts, 6 Member States (with flags), 10 domains |
-| **Overview** | 00_README, 01_Taxonomy | Headline indicators, coverage donut, experts by Member State, coverage by domain |
+| **Home** | 00_README | Same hero and layout as the internal Home, with a *GCC Network* badge: 68 experts, 6 Member States (with flags), 7 CF domains |
+| **Overview** | 00_README, 01_Taxonomy, 06_Competency_Coverage | Headline indicators, coverage donut for the 65 expertise areas, experts by Member State, coverage by CF domain, and a table of all 23 CF competencies |
 | **Core Expertise** | 02_Master_Dataset | Sortable table of name, Member State (flag) and core expertise — the network twin of the internal Core Expertise page. CSV export included |
-| **Experts** | 02_Master_Dataset | 55 cards — name, position, entity, Member State, core areas, profile level. **No email addresses.** |
-| **Member States** | 04_MemberState_Coverage | Heatmap of expertise × 6 states, columns ordered United Arab Emirates · Bahrain · Saudi Arabia · Oman · Qatar · Kuwait |
-| **Mapping** | 08_Mapping_Hierarchy | The 212-node interactive tree, same geometry, controls and behaviour as the internal Mapping section, with each holder's Member State shown as a flag |
+| **Experts** | 02_Master_Dataset | 68 cards — name, position, entity, Member State, CF profile level, core areas and work email |
+| **Member States** | 04_MemberState_Coverage, Fact_CoreExpertise | Heatmap × 6 states, columns ordered United Arab Emirates · Bahrain · Saudi Arabia · Oman · Qatar · Kuwait, with a toggle between CF competency (default, distinct people) and expertise area |
+| **Mapping** | computed from Fact_CoreExpertise | The 273-node interactive tree — Network → CF domain → CF competency → Expertise area → Holder — with the same geometry, controls and behaviour as the internal Mapping section and each holder's Member State shown as a flag |
 
-Three sheets are deliberately **left out of the public view**: `06_Knowledge_Gaps`
-(the Regional Gaps page was removed on review), `07_Engagement_Plan` (who to
-approach, in what priority) and `09_Coding_Log` (verbatim survey answers plus
-confidence flags). The latter two are internal working material about named
-foreign officials and belong behind the Entra ID sign-in once Azure is live.
+Two sheets are deliberately **left out of the published bundle**:
+`08_Engagement_Plan` (who to approach, in what priority) and `10_Coding_Log`
+(verbatim survey answers plus confidence flags). They are the Center's own
+working material rather than anyone's expertise, no view reads them, and the
+engagement plan is git-ignored as well as unbundled.
 
 ### Member State flags
 
@@ -90,7 +95,8 @@ depends on recognising the image.
 
 ## 4. The Gulf CDC ↔ Network comparison
 
-The two populations share the 57-area taxonomy, so their counts join directly.
+The two populations share the 65-area taxonomy, so their counts join directly at
+both the competency and the area level.
 The comparison was built as a view and then removed from the navigation on
 review; it is still generated to `data/network/bridge.json` and can be brought
 back at any time.
@@ -131,18 +137,29 @@ If the constituencies are ever needed, `scripts/generate_network_data.py` still
 carries the `NETWORK_GROUP` correction layer, and a `Network Group` column in
 `02_Master_Dataset` would populate it.
 
-## 6. Before this goes live
+## 6. Publication decision
 
-The internal site already publishes 30 staff names and work emails, which is why
-the Azure Static Web Apps + Entra ID migration is prepared. Publishing **55 named
-officials of six foreign ministries** on a public `github.io` address raises that
-materially — these are not Gulf CDC's people to publish.
+**Decided by the project owner, November 2026:** the names, work e-mail
+addresses, expertise and skills of both populations — the 31 Gulf CDC staff and
+the 68 network members — are treated as **public information**.
 
-Recommendation: **finish the Azure/Entra migration before the network space is
-merged into the live portal** (`docs/AZURE_DEPLOYMENT.md`, blocked only on IT:
-deployment token, app registration, DNS). The network scope carries no email
-addresses and no engagement plan, which limits the exposure, but it does not
-remove it.
+What follows from that:
+
+- E-mail addresses stay visible on both scopes. There is no hide switch.
+- Both analysis workbooks are committed to `data/` as the source of truth.
+- The raw network survey export stays git-ignored. That is not a publication
+  judgement: it carries every verbatim free-text answer and exists only as an
+  input to the e-mail join. The addresses it yielded are committed separately as
+  `data/network_emails.json` so the build is reproducible without it.
+- The derived engagement plan stays out of the repository and out of the
+  bundles. The decision covers expertise and contact details, not the Center's
+  own approach priorities for named officials of six foreign health authorities.
+
+This replaces the earlier recommendation on this page, which was to finish the
+Azure/Entra migration before publishing the network scope. That migration
+(`docs/AZURE_DEPLOYMENT.md`) remains worth doing for access control and for a
+professional address on the Center's own domain, but it is now a separate IT
+track rather than a precondition.
 
 ## 7. How it is wired
 

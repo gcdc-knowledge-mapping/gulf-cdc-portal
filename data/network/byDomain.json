@@ -1,92 +1,79 @@
 [
   {
-    "domain": "Epidemiology & Surveillance",
-    "areas": 7,
-    "covered": 7,
-    "good": 3,
-    "warn": 2,
-    "serious": 2,
-    "critical": 0
-  },
-  {
-    "domain": "Communicable & Non-Communicable Diseases",
-    "areas": 6,
-    "covered": 6,
-    "good": 4,
-    "warn": 2,
-    "serious": 0,
-    "critical": 0
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "areas": 8,
-    "covered": 6,
-    "good": 2,
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "areas": 15,
+    "covered": 11,
+    "competencies": 4,
+    "competenciesHeld": 4,
+    "good": 8,
     "warn": 1,
-    "serious": 3,
-    "critical": 2
+    "serious": 2,
+    "critical": 4
   },
   {
-    "domain": "Research & Scientific Practice",
-    "areas": 7,
-    "covered": 6,
-    "good": 2,
+    "domain": "D2 – Health Improvement and Promotion",
+    "areas": 10,
+    "covered": 9,
+    "competencies": 3,
+    "competenciesHeld": 3,
+    "good": 5,
     "warn": 3,
     "serious": 1,
     "critical": 1
   },
   {
-    "domain": "Health Policy, Systems & Strategy",
-    "areas": 7,
-    "covered": 5,
-    "good": 2,
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "areas": 17,
+    "covered": 13,
+    "competencies": 3,
+    "competenciesHeld": 3,
+    "good": 6,
+    "warn": 4,
+    "serious": 3,
+    "critical": 4
+  },
+  {
+    "domain": "D4 – Health System Strengthening and Service Improvement",
+    "areas": 11,
+    "covered": 10,
+    "competencies": 3,
+    "competenciesHeld": 3,
+    "good": 3,
     "warn": 2,
-    "serious": 1,
+    "serious": 5,
+    "critical": 1
+  },
+  {
+    "domain": "D5 – Health Economics and Resource Prioritisation",
+    "areas": 4,
+    "covered": 2,
+    "competencies": 2,
+    "competenciesHeld": 2,
+    "good": 0,
+    "warn": 0,
+    "serious": 2,
     "critical": 2
   },
   {
-    "domain": "Data, Digital Health & Health Informatics",
-    "areas": 8,
-    "covered": 5,
+    "domain": "D6 – Health Policy and Advocacy",
+    "areas": 5,
+    "covered": 4,
+    "competencies": 3,
+    "competenciesHeld": 2,
     "good": 2,
     "warn": 1,
-    "serious": 2,
-    "critical": 3
-  },
-  {
-    "domain": "Public Health Emergency & Health Security",
-    "areas": 6,
-    "covered": 4,
-    "good": 2,
-    "warn": 0,
-    "serious": 2,
-    "critical": 2
-  },
-  {
-    "domain": "Quality, Governance & Project Management",
-    "areas": 6,
-    "covered": 3,
-    "good": 0,
-    "warn": 2,
-    "serious": 1,
-    "critical": 3
-  },
-  {
-    "domain": "Clinical & Specialized Practice",
-    "areas": 5,
-    "covered": 2,
-    "good": 2,
-    "warn": 0,
-    "serious": 0,
-    "critical": 3
-  },
-  {
-    "domain": "Cross-Cutting Professional Skills",
-    "areas": 2,
-    "covered": 1,
-    "good": 0,
-    "warn": 0,
     "serious": 1,
     "critical": 1
+  },
+  {
+    "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+    "areas": 3,
+    "covered": 3,
+    "competencies": 5,
+    "competenciesHeld": 3,
+    "good": 1,
+    "warn": 0,
+    "serious": 2,
+    "critical": 0
   }
 ]

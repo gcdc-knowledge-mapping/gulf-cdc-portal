@@ -1,17 +1,32 @@
 {
-  "people": 55,
-  "withEmail": 55,
+  "people": 68,
   "states": 6,
-  "tags": 149,
-  "areas": 62,
-  "covered": 45,
-  "adequate": 19,
-  "thin": 13,
-  "sole": 13,
-  "soleExperts": 10,
-  "noCore": 17,
-  "external": 38,
-  "critical": 23,
-  "focalPoints": 5,
-  "grouped": 0
+  "domains": 7,
+  "competencies": 23,
+  "competenciesHeld": 20,
+  "areas": 65,
+  "covered": 52,
+  "tags": 193,
+  "adequate": 25,
+  "thin": 11,
+  "sole": 16,
+  "noCore": 13,
+  "competencyStatus": {
+    "good": 13,
+    "warn": 0,
+    "serious": 7,
+    "critical": 1,
+    "behavioural": 2
+  },
+  "profileCounts": {
+    "Expert": 58,
+    "Competent": 5,
+    "Proficient": 5
+  },
+  "soleExperts": 13,
+  "external": 49,
+  "critical": 29,
+  "focalPoints": 9,
+  "withEmail": 68,
+  "treeNodes": 273
 }

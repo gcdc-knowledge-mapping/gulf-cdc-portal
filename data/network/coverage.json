@@ -1,54 +1,14 @@
 [
   {
-    "domain": "Epidemiology & Surveillance",
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.1",
+    "competency": "1.1 Detect and Investigate Health Hazards",
     "area": "Outbreak Investigation",
     "by": {
       "UAE": 0,
       "Bahrain": 1,
       "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 1,
-    "states": 1
-  },
-  {
-    "domain": "Epidemiology & Surveillance",
-    "area": "Surveillance Systems Design",
-    "by": {
-      "UAE": 3,
-      "Bahrain": 2,
-      "Saudi Arabia": 1,
       "Oman": 1,
-      "Qatar": 1,
-      "Kuwait": 0
-    },
-    "total": 8,
-    "states": 5
-  },
-  {
-    "domain": "Epidemiology & Surveillance",
-    "area": "Epidemic Intelligence",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 1,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 1,
-    "states": 1
-  },
-  {
-    "domain": "Epidemiology & Surveillance",
-    "area": "Surveillance Reporting & Analytics",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 1,
-      "Saudi Arabia": 1,
-      "Oman": 0,
       "Qatar": 1,
       "Kuwait": 0
     },
@@ -56,161 +16,41 @@
     "states": 3
   },
   {
-    "domain": "Epidemiology & Surveillance",
-    "area": "Biostatistics",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 1,
-      "Saudi Arabia": 1,
-      "Oman": 0,
-      "Qatar": 1,
-      "Kuwait": 2
-    },
-    "total": 5,
-    "states": 4
-  },
-  {
-    "domain": "Epidemiology & Surveillance",
-    "area": "Burden of Disease Analysis",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 2
-    },
-    "total": 2,
-    "states": 1
-  },
-  {
-    "domain": "Epidemiology & Surveillance",
-    "area": "Disease Modelling & Forecasting",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 1,
-      "Saudi Arabia": 1,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 2,
-    "states": 2
-  },
-  {
-    "domain": "Public Health Emergency & Health Security",
-    "area": "Emergency Preparedness Planning",
-    "by": {
-      "UAE": 3,
-      "Bahrain": 3,
-      "Saudi Arabia": 3,
-      "Oman": 3,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 12,
-    "states": 4
-  },
-  {
-    "domain": "Public Health Emergency & Health Security",
-    "area": "Risk Assessment (Rapid Risk Assessment)",
-    "by": {
-      "UAE": 1,
-      "Bahrain": 2,
-      "Saudi Arabia": 1,
-      "Oman": 0,
-      "Qatar": 1,
-      "Kuwait": 0
-    },
-    "total": 5,
-    "states": 4
-  },
-  {
-    "domain": "Public Health Emergency & Health Security",
-    "area": "PHEOC / Emergency Operations Centers",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 1
-    },
-    "total": 1,
-    "states": 1
-  },
-  {
-    "domain": "Public Health Emergency & Health Security",
-    "area": "Disaster Medicine & Management",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 0,
-    "states": 0
-  },
-  {
-    "domain": "Public Health Emergency & Health Security",
-    "area": "Strategic Stockpile Management",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 0,
-    "states": 0
-  },
-  {
-    "domain": "Public Health Emergency & Health Security",
-    "area": "Simulation Exercises (SimEx)",
-    "by": {
-      "UAE": 1,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 1,
-    "states": 1
-  },
-  {
-    "domain": "Communicable & Non-Communicable Diseases",
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.1",
+    "competency": "1.1 Detect and Investigate Health Hazards",
     "area": "Infectious Disease Epidemiology",
     "by": {
       "UAE": 1,
       "Bahrain": 6,
-      "Saudi Arabia": 1,
-      "Oman": 3,
-      "Qatar": 2,
-      "Kuwait": 1
+      "Saudi Arabia": 2,
+      "Oman": 4,
+      "Qatar": 3,
+      "Kuwait": 2
     },
-    "total": 14,
+    "total": 18,
     "states": 6
   },
   {
-    "domain": "Communicable & Non-Communicable Diseases",
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.1",
+    "competency": "1.1 Detect and Investigate Health Hazards",
     "area": "Infection Prevention & Control",
     "by": {
       "UAE": 1,
       "Bahrain": 1,
       "Saudi Arabia": 0,
       "Oman": 1,
-      "Qatar": 0,
+      "Qatar": 1,
       "Kuwait": 0
     },
-    "total": 3,
-    "states": 3
+    "total": 4,
+    "states": 4
   },
   {
-    "domain": "Communicable & Non-Communicable Diseases",
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.1",
+    "competency": "1.1 Detect and Investigate Health Hazards",
     "area": "Infection & Immunity",
     "by": {
       "UAE": 0,
@@ -224,595 +64,73 @@
     "states": 1
   },
   {
-    "domain": "Communicable & Non-Communicable Diseases",
-    "area": "NCD Prevention & Control",
-    "by": {
-      "UAE": 2,
-      "Bahrain": 1,
-      "Saudi Arabia": 2,
-      "Oman": 1,
-      "Qatar": 2,
-      "Kuwait": 0
-    },
-    "total": 8,
-    "states": 5
-  },
-  {
-    "domain": "Communicable & Non-Communicable Diseases",
-    "area": "Road Traffic & Injury Prevention",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 1,
-      "Oman": 1,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 2,
-    "states": 2
-  },
-  {
-    "domain": "Communicable & Non-Communicable Diseases",
-    "area": "Cancer Epidemiology & Screening",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 1,
-      "Kuwait": 3
-    },
-    "total": 4,
-    "states": 2
-  },
-  {
-    "domain": "Health Policy, Systems & Strategy",
-    "area": "Policy Drafting & Analysis",
-    "by": {
-      "UAE": 3,
-      "Bahrain": 0,
-      "Saudi Arabia": 1,
-      "Oman": 1,
-      "Qatar": 2,
-      "Kuwait": 0
-    },
-    "total": 7,
-    "states": 4
-  },
-  {
-    "domain": "Health Policy, Systems & Strategy",
-    "area": "Policy Brief & White Paper Writing",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 0,
-    "states": 0
-  },
-  {
-    "domain": "Health Policy, Systems & Strategy",
-    "area": "Health Systems Research",
-    "by": {
-      "UAE": 1,
-      "Bahrain": 0,
-      "Saudi Arabia": 1,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 2,
-    "states": 2
-  },
-  {
-    "domain": "Health Policy, Systems & Strategy",
-    "area": "Health Economics & Financing",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 1,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 1,
-    "states": 1
-  },
-  {
-    "domain": "Health Policy, Systems & Strategy",
-    "area": "Value-Based Healthcare (VBHC)",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 0,
-    "states": 0
-  },
-  {
-    "domain": "Health Policy, Systems & Strategy",
-    "area": "Strategic Planning & Priority Setting",
-    "by": {
-      "UAE": 2,
-      "Bahrain": 0,
-      "Saudi Arabia": 1,
-      "Oman": 0,
-      "Qatar": 3,
-      "Kuwait": 0
-    },
-    "total": 6,
-    "states": 3
-  },
-  {
-    "domain": "Health Policy, Systems & Strategy",
-    "area": "Performance Management (KPIs / OKRs)",
-    "by": {
-      "UAE": 1,
-      "Bahrain": 0,
-      "Saudi Arabia": 1,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 2,
-    "states": 2
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "area": "Health Promotion Strategy",
-    "by": {
-      "UAE": 2,
-      "Bahrain": 1,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 3,
-      "Kuwait": 1
-    },
-    "total": 7,
-    "states": 4
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "area": "Behavior Change Theory & Campaigns",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 1,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 1
-    },
-    "total": 2,
-    "states": 2
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "area": "Competency Framework Design",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 1,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 1,
-    "states": 1
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "area": "Continuing Professional Development (CPD)",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 0,
-    "states": 0
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "area": "Curriculum & Instructional Design",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 1,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 1,
-    "states": 1
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "area": "Training Delivery & Facilitation",
-    "by": {
-      "UAE": 1,
-      "Bahrain": 1,
-      "Saudi Arabia": 1,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 3,
-    "states": 3
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "area": "Digital Learning (LMS / LXP)",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 0,
-    "states": 0
-  },
-  {
-    "domain": "Health Promotion, Education & Workforce",
-    "area": "Public Health Nutrition",
-    "by": {
-      "UAE": 1,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 1,
-    "states": 1
-  },
-  {
-    "domain": "Data, Digital Health & Health Informatics",
-    "area": "Data Governance",
-    "by": {
-      "UAE": 1,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 1,
-    "states": 1
-  },
-  {
-    "domain": "Data, Digital Health & Health Informatics",
-    "area": "Data Analysis (Quantitative)",
-    "by": {
-      "UAE": 1,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 1,
-      "Qatar": 1,
-      "Kuwait": 0
-    },
-    "total": 3,
-    "states": 3
-  },
-  {
-    "domain": "Data, Digital Health & Health Informatics",
-    "area": "Dashboard & BI Development",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 0,
-    "states": 0
-  },
-  {
-    "domain": "Data, Digital Health & Health Informatics",
-    "area": "Data Engineering & Automation",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 1
-    },
-    "total": 1,
-    "states": 1
-  },
-  {
-    "domain": "Data, Digital Health & Health Informatics",
-    "area": "Public Health Informatics",
-    "by": {
-      "UAE": 1,
-      "Bahrain": 0,
-      "Saudi Arabia": 1,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 2,
-    "states": 2
-  },
-  {
-    "domain": "Data, Digital Health & Health Informatics",
-    "area": "Registry Development (Cancer, RTI, etc.)",
-    "by": {
-      "UAE": 1,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 1,
-      "Qatar": 2,
-      "Kuwait": 2
-    },
-    "total": 6,
-    "states": 4
-  },
-  {
-    "domain": "Data, Digital Health & Health Informatics",
-    "area": "Usability Testing & Health System Design",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 0,
-    "states": 0
-  },
-  {
-    "domain": "Data, Digital Health & Health Informatics",
-    "area": "AI in Health",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 0,
-    "states": 0
-  },
-  {
-    "domain": "Research & Scientific Practice",
-    "area": "Clinical Research / Clinical Trials",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 1,
-      "Qatar": 0,
-      "Kuwait": 1
-    },
-    "total": 2,
-    "states": 2
-  },
-  {
-    "domain": "Research & Scientific Practice",
-    "area": "Ethical Review & Compliance",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 1,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 1
-    },
-    "total": 2,
-    "states": 2
-  },
-  {
-    "domain": "Research & Scientific Practice",
-    "area": "Research Methodology Development",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 2,
-      "Saudi Arabia": 1,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 1
-    },
-    "total": 4,
-    "states": 3
-  },
-  {
-    "domain": "Research & Scientific Practice",
-    "area": "Survey Design & Validation",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 1,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 1,
-    "states": 1
-  },
-  {
-    "domain": "Research & Scientific Practice",
-    "area": "Indicators Development & Measurement",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 0,
-    "states": 0
-  },
-  {
-    "domain": "Research & Scientific Practice",
-    "area": "Scientific Writing & Publications",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 1,
-      "Oman": 1,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 2,
-    "states": 2
-  },
-  {
-    "domain": "Research & Scientific Practice",
-    "area": "Research Governance",
-    "by": {
-      "UAE": 1,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 2,
-      "Kuwait": 1
-    },
-    "total": 4,
-    "states": 3
-  },
-  {
-    "domain": "Quality, Governance & Project Management",
-    "area": "Patient Safety",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 1
-    },
-    "total": 1,
-    "states": 1
-  },
-  {
-    "domain": "Quality, Governance & Project Management",
-    "area": "Governance, Risk & Compliance (GRC)",
-    "by": {
-      "UAE": 1,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 1,
-      "Kuwait": 0
-    },
-    "total": 2,
-    "states": 2
-  },
-  {
-    "domain": "Quality, Governance & Project Management",
-    "area": "Casemix Funding & Classification",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 0,
-    "states": 0
-  },
-  {
-    "domain": "Quality, Governance & Project Management",
-    "area": "Project Management (PMP/CAPM)",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 2,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 2,
-    "states": 1
-  },
-  {
-    "domain": "Quality, Governance & Project Management",
-    "area": "Program Evaluation",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 0,
-    "states": 0
-  },
-  {
-    "domain": "Quality, Governance & Project Management",
-    "area": "Change Management",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 0,
-    "states": 0
-  },
-  {
-    "domain": "Clinical & Specialized Practice",
-    "area": "Clinical Nutrition",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 0,
-    "states": 0
-  },
-  {
-    "domain": "Clinical & Specialized Practice",
-    "area": "Emergency Medical Services / Paramedic",
-    "by": {
-      "UAE": 0,
-      "Bahrain": 0,
-      "Saudi Arabia": 0,
-      "Oman": 0,
-      "Qatar": 0,
-      "Kuwait": 0
-    },
-    "total": 0,
-    "states": 0
-  },
-  {
-    "domain": "Clinical & Specialized Practice",
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.1",
+    "competency": "1.1 Detect and Investigate Health Hazards",
     "area": "Medical Laboratory",
     "by": {
       "UAE": 0,
       "Bahrain": 1,
       "Saudi Arabia": 0,
-      "Oman": 0,
+      "Oman": 3,
+      "Qatar": 1,
+      "Kuwait": 0
+    },
+    "total": 5,
+    "states": 3
+  },
+  {
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.1",
+    "competency": "1.1 Detect and Investigate Health Hazards",
+    "area": "Vector-borne Diseases",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 1,
+      "Saudi Arabia": 1,
+      "Oman": 1,
+      "Qatar": 1,
+      "Kuwait": 0
+    },
+    "total": 4,
+    "states": 4
+  },
+  {
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.1",
+    "competency": "1.1 Detect and Investigate Health Hazards",
+    "area": "Public Health Microbiology & Genomics",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 2,
+      "Saudi Arabia": 1,
+      "Oman": 2,
       "Qatar": 2,
       "Kuwait": 0
     },
-    "total": 3,
-    "states": 2
+    "total": 7,
+    "states": 4
   },
   {
-    "domain": "Clinical & Specialized Practice",
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.2",
+    "competency": "1.2 Conduct Public Health Risk Assessment",
+    "area": "Risk Assessment (Rapid Risk Assessment)",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 2,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 4,
+    "states": 3
+  },
+  {
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.2",
+    "competency": "1.2 Conduct Public Health Risk Assessment",
     "area": "Toxicology",
     "by": {
       "UAE": 0,
@@ -826,22 +144,58 @@
     "states": 0
   },
   {
-    "domain": "Clinical & Specialized Practice",
-    "area": "Public Health Microbiology & Genomics",
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.3",
+    "competency": "1.3 Plan and Manage Emergency Preparedness",
+    "area": "Emergency Preparedness Planning",
     "by": {
-      "UAE": 0,
-      "Bahrain": 2,
-      "Saudi Arabia": 1,
-      "Oman": 0,
-      "Qatar": 2,
-      "Kuwait": 0
+      "UAE": 4,
+      "Bahrain": 3,
+      "Saudi Arabia": 3,
+      "Oman": 3,
+      "Qatar": 1,
+      "Kuwait": 1
     },
-    "total": 5,
-    "states": 3
+    "total": 15,
+    "states": 6
   },
   {
-    "domain": "Cross-Cutting Professional Skills",
-    "area": "Leadership",
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.3",
+    "competency": "1.3 Plan and Manage Emergency Preparedness",
+    "area": "Strategic Stockpile Management",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 0,
+    "states": 0
+  },
+  {
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.3",
+    "competency": "1.3 Plan and Manage Emergency Preparedness",
+    "area": "Simulation Exercises (SimEx)",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1
+  },
+  {
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.4",
+    "competency": "1.4 Lead/Contribute to Emergency Response and Recovery",
+    "area": "PHEOC / Emergency Operations Centers",
     "by": {
       "UAE": 0,
       "Bahrain": 0,
@@ -854,7 +208,777 @@
     "states": 1
   },
   {
-    "domain": "Cross-Cutting Professional Skills",
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.4",
+    "competency": "1.4 Lead/Contribute to Emergency Response and Recovery",
+    "area": "Disaster Medicine & Management",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 0,
+    "states": 0
+  },
+  {
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.4",
+    "competency": "1.4 Lead/Contribute to Emergency Response and Recovery",
+    "area": "Emergency Medical Services / Paramedic",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 0,
+    "states": 0
+  },
+  {
+    "domain": "D2 – Health Improvement and Promotion",
+    "code": "2.1",
+    "competency": "2.1 Assess Health Needs and Prioritise Interventions",
+    "area": "Burden of Disease Analysis",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 2
+    },
+    "total": 3,
+    "states": 2
+  },
+  {
+    "domain": "D2 – Health Improvement and Promotion",
+    "code": "2.1",
+    "competency": "2.1 Assess Health Needs and Prioritise Interventions",
+    "area": "Survey Design & Validation",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 2,
+    "states": 2
+  },
+  {
+    "domain": "D2 – Health Improvement and Promotion",
+    "code": "2.1",
+    "competency": "2.1 Assess Health Needs and Prioritise Interventions",
+    "area": "Cancer Epidemiology & Screening",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 1,
+      "Kuwait": 3
+    },
+    "total": 5,
+    "states": 3
+  },
+  {
+    "domain": "D2 – Health Improvement and Promotion",
+    "code": "2.2",
+    "competency": "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+    "area": "NCD Prevention & Control",
+    "by": {
+      "UAE": 4,
+      "Bahrain": 1,
+      "Saudi Arabia": 2,
+      "Oman": 1,
+      "Qatar": 2,
+      "Kuwait": 0
+    },
+    "total": 10,
+    "states": 5
+  },
+  {
+    "domain": "D2 – Health Improvement and Promotion",
+    "code": "2.2",
+    "competency": "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+    "area": "Health Promotion Strategy",
+    "by": {
+      "UAE": 2,
+      "Bahrain": 1,
+      "Saudi Arabia": 0,
+      "Oman": 1,
+      "Qatar": 2,
+      "Kuwait": 1
+    },
+    "total": 7,
+    "states": 5
+  },
+  {
+    "domain": "D2 – Health Improvement and Promotion",
+    "code": "2.2",
+    "competency": "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+    "area": "Behavior Change Theory & Campaigns",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 1,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 2,
+    "states": 2
+  },
+  {
+    "domain": "D2 – Health Improvement and Promotion",
+    "code": "2.2",
+    "competency": "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+    "area": "Road Traffic & Injury Prevention",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 1,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 2,
+    "states": 2
+  },
+  {
+    "domain": "D2 – Health Improvement and Promotion",
+    "code": "2.2",
+    "competency": "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+    "area": "Clinical Nutrition",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 0,
+    "states": 0
+  },
+  {
+    "domain": "D2 – Health Improvement and Promotion",
+    "code": "2.2",
+    "competency": "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+    "area": "Public Health Nutrition",
+    "by": {
+      "UAE": 2,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 3,
+    "states": 2
+  },
+  {
+    "domain": "D2 – Health Improvement and Promotion",
+    "code": "2.3",
+    "competency": "2.3 Collaborate with Stakeholders and Communities",
+    "area": "Community Engagement & Healthy Settings",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 1,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.1",
+    "competency": "3.1 Design, Manage and Interpret Intelligence Systems",
+    "area": "Surveillance Systems Design",
+    "by": {
+      "UAE": 4,
+      "Bahrain": 2,
+      "Saudi Arabia": 1,
+      "Oman": 2,
+      "Qatar": 1,
+      "Kuwait": 0
+    },
+    "total": 10,
+    "states": 5
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.1",
+    "competency": "3.1 Design, Manage and Interpret Intelligence Systems",
+    "area": "Epidemic Intelligence",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 1,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.1",
+    "competency": "3.1 Design, Manage and Interpret Intelligence Systems",
+    "area": "Registry Development (Cancer, RTI, etc.)",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 1,
+      "Qatar": 2,
+      "Kuwait": 2
+    },
+    "total": 7,
+    "states": 5
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.1",
+    "competency": "3.1 Design, Manage and Interpret Intelligence Systems",
+    "area": "Data Governance",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.1",
+    "competency": "3.1 Design, Manage and Interpret Intelligence Systems",
+    "area": "Indicators Development & Measurement",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 0,
+    "states": 0
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.2",
+    "competency": "3.2 Use Public Health Informatics and Intelligence Tools",
+    "area": "Public Health Informatics",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 0,
+      "Saudi Arabia": 2,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 3,
+    "states": 2
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.2",
+    "competency": "3.2 Use Public Health Informatics and Intelligence Tools",
+    "area": "Biostatistics",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 1,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 1,
+      "Kuwait": 2
+    },
+    "total": 5,
+    "states": 4
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.2",
+    "competency": "3.2 Use Public Health Informatics and Intelligence Tools",
+    "area": "Data Analysis (Quantitative)",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 1,
+      "Qatar": 1,
+      "Kuwait": 0
+    },
+    "total": 2,
+    "states": 2
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.2",
+    "competency": "3.2 Use Public Health Informatics and Intelligence Tools",
+    "area": "Dashboard & BI Development",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 0,
+    "states": 0
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.2",
+    "competency": "3.2 Use Public Health Informatics and Intelligence Tools",
+    "area": "Data Engineering & Automation",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 1
+    },
+    "total": 1,
+    "states": 1
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.2",
+    "competency": "3.2 Use Public Health Informatics and Intelligence Tools",
+    "area": "AI in Health",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 0,
+    "states": 0
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.2",
+    "competency": "3.2 Use Public Health Informatics and Intelligence Tools",
+    "area": "Usability Testing & Health System Design",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 0,
+    "states": 0
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.2",
+    "competency": "3.2 Use Public Health Informatics and Intelligence Tools",
+    "area": "Disease Modelling & Forecasting",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 1,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 2,
+    "states": 2
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.3",
+    "competency": "3.3 Generate Strategic Public Health Reports",
+    "area": "Surveillance Reporting & Analytics",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 1,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 1,
+      "Kuwait": 0
+    },
+    "total": 3,
+    "states": 3
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.3",
+    "competency": "3.3 Generate Strategic Public Health Reports",
+    "area": "Scientific Writing & Publications",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 1,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 2,
+    "states": 2
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.3",
+    "competency": "3.3 Generate Strategic Public Health Reports",
+    "area": "Research Methodology Development",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 2,
+      "Saudi Arabia": 1,
+      "Oman": 1,
+      "Qatar": 1,
+      "Kuwait": 0
+    },
+    "total": 5,
+    "states": 4
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.3",
+    "competency": "3.3 Generate Strategic Public Health Reports",
+    "area": "Clinical Research / Clinical Trials",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 1,
+      "Qatar": 0,
+      "Kuwait": 1
+    },
+    "total": 2,
+    "states": 2
+  },
+  {
+    "domain": "D4 – Health System Strengthening and Service Improvement",
+    "code": "4.1",
+    "competency": "4.1 Assess, Plan and Deliver Programs and Services",
+    "area": "Project Management (PMP/CAPM)",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 0,
+      "Saudi Arabia": 2,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 3,
+    "states": 2
+  },
+  {
+    "domain": "D4 – Health System Strengthening and Service Improvement",
+    "code": "4.2",
+    "competency": "4.2 Evaluate and Strengthen Health Systems",
+    "area": "Health Systems Research",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1
+  },
+  {
+    "domain": "D4 – Health System Strengthening and Service Improvement",
+    "code": "4.2",
+    "competency": "4.2 Evaluate and Strengthen Health Systems",
+    "area": "Program Evaluation",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1
+  },
+  {
+    "domain": "D4 – Health System Strengthening and Service Improvement",
+    "code": "4.2",
+    "competency": "4.2 Evaluate and Strengthen Health Systems",
+    "area": "Competency Framework Design",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 1,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 1,
+      "Kuwait": 0
+    },
+    "total": 3,
+    "states": 3
+  },
+  {
+    "domain": "D4 – Health System Strengthening and Service Improvement",
+    "code": "4.2",
+    "competency": "4.2 Evaluate and Strengthen Health Systems",
+    "area": "Continuing Professional Development (CPD)",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 1,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1
+  },
+  {
+    "domain": "D4 – Health System Strengthening and Service Improvement",
+    "code": "4.2",
+    "competency": "4.2 Evaluate and Strengthen Health Systems",
+    "area": "Curriculum & Instructional Design",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 1,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 2,
+    "states": 2
+  },
+  {
+    "domain": "D4 – Health System Strengthening and Service Improvement",
+    "code": "4.2",
+    "competency": "4.2 Evaluate and Strengthen Health Systems",
+    "area": "Training Delivery & Facilitation",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 1,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 1,
+      "Kuwait": 1
+    },
+    "total": 5,
+    "states": 5
+  },
+  {
+    "domain": "D4 – Health System Strengthening and Service Improvement",
+    "code": "4.2",
+    "competency": "4.2 Evaluate and Strengthen Health Systems",
+    "area": "Digital Learning (LMS / LXP)",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 0,
+    "states": 0
+  },
+  {
+    "domain": "D4 – Health System Strengthening and Service Improvement",
+    "code": "4.3",
+    "competency": "4.3 Lead/Contribute to Quality Improvement",
+    "area": "Patient Safety",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 1
+    },
+    "total": 1,
+    "states": 1
+  },
+  {
+    "domain": "D4 – Health System Strengthening and Service Improvement",
+    "code": "4.3",
+    "competency": "4.3 Lead/Contribute to Quality Improvement",
+    "area": "Governance, Risk & Compliance (GRC)",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 1,
+      "Kuwait": 0
+    },
+    "total": 2,
+    "states": 2
+  },
+  {
+    "domain": "D4 – Health System Strengthening and Service Improvement",
+    "code": "4.3",
+    "competency": "4.3 Lead/Contribute to Quality Improvement",
+    "area": "Performance Management (KPIs / OKRs)",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1
+  },
+  {
+    "domain": "D5 – Health Economics and Resource Prioritisation",
+    "code": "5.1",
+    "competency": "5.1 Apply Principles of Health Economics",
+    "area": "Health Economics & Financing",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1
+  },
+  {
+    "domain": "D5 – Health Economics and Resource Prioritisation",
+    "code": "5.1",
+    "competency": "5.1 Apply Principles of Health Economics",
+    "area": "Value-Based Healthcare (VBHC)",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 0,
+    "states": 0
+  },
+  {
+    "domain": "D5 – Health Economics and Resource Prioritisation",
+    "code": "5.1",
+    "competency": "5.1 Apply Principles of Health Economics",
+    "area": "Casemix Funding & Classification",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 0,
+    "states": 0
+  },
+  {
+    "domain": "D5 – Health Economics and Resource Prioritisation",
+    "code": "5.2",
+    "competency": "5.2 Use Economic Evaluation Methods",
+    "area": "Economic Evaluation",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1
+  },
+  {
+    "domain": "D6 – Health Policy and Advocacy",
+    "code": "6.1",
+    "competency": "6.1 Appraise, Develop and Implement Public Health Policy",
+    "area": "Policy Drafting & Analysis",
+    "by": {
+      "UAE": 4,
+      "Bahrain": 0,
+      "Saudi Arabia": 4,
+      "Oman": 1,
+      "Qatar": 2,
+      "Kuwait": 1
+    },
+    "total": 12,
+    "states": 5
+  },
+  {
+    "domain": "D6 – Health Policy and Advocacy",
+    "code": "6.1",
+    "competency": "6.1 Appraise, Develop and Implement Public Health Policy",
+    "area": "Research Governance",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 3,
+      "Kuwait": 1
+    },
+    "total": 5,
+    "states": 3
+  },
+  {
+    "domain": "D6 – Health Policy and Advocacy",
+    "code": "6.1",
+    "competency": "6.1 Appraise, Develop and Implement Public Health Policy",
+    "area": "Ethical Review & Compliance",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 1
+    },
+    "total": 2,
+    "states": 2
+  },
+  {
+    "domain": "D6 – Health Policy and Advocacy",
+    "code": "6.2",
+    "competency": "6.2 Lead Advocacy and Strategic Communication",
+    "area": "Policy Brief & White Paper Writing",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1
+  },
+  {
+    "domain": "D6 – Health Policy and Advocacy",
+    "code": "6.3",
+    "competency": "6.3 Engage Stakeholders to Advance Policy Goals",
     "area": "Stakeholder Engagement",
     "by": {
       "UAE": 0,
@@ -866,5 +990,53 @@
     },
     "total": 0,
     "states": 0
+  },
+  {
+    "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+    "code": "7.1",
+    "competency": "7.1 Provide Strategic Vision and Lead Transformation",
+    "area": "Strategic Planning & Priority Setting",
+    "by": {
+      "UAE": 2,
+      "Bahrain": 0,
+      "Saudi Arabia": 2,
+      "Oman": 0,
+      "Qatar": 2,
+      "Kuwait": 0
+    },
+    "total": 6,
+    "states": 3
+  },
+  {
+    "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+    "code": "7.2",
+    "competency": "7.2 Lead and Manage Change",
+    "area": "Change Management",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1
+  },
+  {
+    "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+    "code": "7.4",
+    "competency": "7.4 Lead Teams and Foster Collaborative Working",
+    "area": "Leadership",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 1
+    },
+    "total": 1,
+    "states": 1
   }
 ]

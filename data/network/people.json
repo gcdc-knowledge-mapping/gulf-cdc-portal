@@ -15,13 +15,17 @@
       "Emergency Preparedness Planning",
       "Public Health Microbiology & Genomics"
     ],
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards",
+      "1.3 Plan and Manage Emergency Preparedness"
+    ],
     "soleAreas": 0,
     "external": true,
-    "profile": "Strategic",
-    "index": 75,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 50,
     "confidence": "High",
     "email": "m.alqahtani@gulfcdc.org",
-    "group": "",
     "soleList": []
   },
   {
@@ -39,13 +43,18 @@
       "Biostatistics",
       "Scientific Writing & Publications"
     ],
+    "competencies": [
+      "3.1 Design, Manage and Interpret Intelligence Systems",
+      "3.2 Use Public Health Informatics and Intelligence Tools",
+      "3.3 Generate Strategic Public Health Reports"
+    ],
     "soleAreas": 0,
     "external": false,
-    "profile": "Practitioner",
-    "index": 8,
+    "profile": "Competent",
+    "stage": "Entry",
+    "index": 12,
     "confidence": "Low",
     "email": "mmqahtani@pha.gov.sa",
-    "group": "",
     "soleList": []
   },
   {
@@ -62,13 +71,17 @@
       "Emergency Preparedness Planning",
       "Surveillance Systems Design"
     ],
+    "competencies": [
+      "1.3 Plan and Manage Emergency Preparedness",
+      "3.1 Design, Manage and Interpret Intelligence Systems"
+    ],
     "soleAreas": 0,
     "external": true,
-    "profile": "Strategic",
+    "profile": "Expert",
+    "stage": "Senior",
     "index": 25,
     "confidence": "Low",
     "email": "fatma.hussain@mohap.gov.ae",
-    "group": "",
     "soleList": []
   },
   {
@@ -84,13 +97,16 @@
     "areas": [
       "NCD Prevention & Control"
     ],
+    "competencies": [
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes"
+    ],
     "soleAreas": 0,
     "external": true,
-    "profile": "Strategic",
+    "profile": "Expert",
+    "stage": "Senior",
     "index": 25,
     "confidence": "High",
     "email": "anooh@health.gov.bh",
-    "group": "",
     "soleList": []
   },
   {
@@ -108,37 +124,18 @@
       "Emergency Preparedness Planning",
       "Clinical Research / Clinical Trials"
     ],
-    "soleAreas": 0,
-    "external": true,
-    "profile": "Strategic",
-    "index": 100,
-    "confidence": "Medium",
-    "email": "khami001@gmail.com",
-    "group": "",
-    "soleList": []
-  },
-  {
-    "id": 8,
-    "name": "Dr. Alya Zaid Harbi",
-    "state": "UAE",
-    "code": "AE",
-    "entity": "Ministry of Health — headquarters",
-    "track": "Managerial",
-    "level": "Director / Head of Dept",
-    "years": "More than 10 years",
-    "background": "Health Information/Data science",
-    "areas": [
-      "Public Health Informatics",
-      "Data Analysis (Quantitative)",
-      "Health Systems Research"
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards",
+      "1.3 Plan and Manage Emergency Preparedness",
+      "3.3 Generate Strategic Public Health Reports"
     ],
     "soleAreas": 0,
     "external": true,
-    "profile": "Strategic",
+    "profile": "Expert",
+    "stage": "Senior",
     "index": 100,
     "confidence": "Medium",
-    "email": "Alya.harbi@mohap.gov.ae",
-    "group": "",
+    "email": "khami001@gmail.com",
     "soleList": []
   },
   {
@@ -156,13 +153,17 @@
       "Clinical Research / Clinical Trials",
       "Ethical Review & Compliance"
     ],
+    "competencies": [
+      "6.1 Appraise, Develop and Implement Public Health Policy",
+      "3.3 Generate Strategic Public Health Reports"
+    ],
     "soleAreas": 0,
     "external": true,
-    "profile": "Strategic",
+    "profile": "Expert",
+    "stage": "Senior",
     "index": 100,
     "confidence": "High",
-    "email": "hyalghareeلا@moh.gov.kw",
-    "group": "",
+    "email": "hyalgharee@moh.gov.kw",
     "soleList": []
   },
   {
@@ -179,13 +180,17 @@
       "Emergency Preparedness Planning",
       "Risk Assessment (Rapid Risk Assessment)"
     ],
+    "competencies": [
+      "1.3 Plan and Manage Emergency Preparedness",
+      "1.2 Conduct Public Health Risk Assessment"
+    ],
     "soleAreas": 0,
     "external": true,
     "profile": "Expert",
-    "index": 16,
+    "stage": "Senior",
+    "index": 40,
     "confidence": "Medium",
     "email": "ymbakhsh@pha.gov.sa",
-    "group": "",
     "soleList": []
   },
   {
@@ -202,13 +207,17 @@
       "Infection Prevention & Control",
       "Training Delivery & Facilitation"
     ],
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards",
+      "4.2 Evaluate and Strengthen Health Systems"
+    ],
     "soleAreas": 0,
     "external": true,
-    "profile": "Strategic",
-    "index": 75,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 50,
     "confidence": "Medium",
     "email": "najiba.abdulrazzaq@ehs.gov.ae",
-    "group": "",
     "soleList": []
   },
   {
@@ -225,13 +234,16 @@
       "Medical Laboratory",
       "Public Health Microbiology & Genomics"
     ],
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards"
+    ],
     "soleAreas": 0,
     "external": false,
-    "profile": "Practitioner",
-    "index": 6,
+    "profile": "Proficient",
+    "stage": "Mid-career",
+    "index": 4,
     "confidence": "Medium",
     "email": "mbadr@moph.gov.qa",
-    "group": "",
     "soleList": []
   },
   {
@@ -249,13 +261,18 @@
       "Biostatistics",
       "Surveillance Reporting & Analytics"
     ],
+    "competencies": [
+      "3.1 Design, Manage and Interpret Intelligence Systems",
+      "3.2 Use Public Health Informatics and Intelligence Tools",
+      "3.3 Generate Strategic Public Health Reports"
+    ],
     "soleAreas": 0,
     "external": true,
     "profile": "Expert",
-    "index": 48,
+    "stage": "Senior",
+    "index": 60,
     "confidence": "High",
     "email": "sjama@moph.gov.qa",
-    "group": "",
     "soleList": []
   },
   {
@@ -273,60 +290,17 @@
       "Infectious Disease Epidemiology",
       "Infection Prevention & Control"
     ],
+    "competencies": [
+      "1.3 Plan and Manage Emergency Preparedness",
+      "1.1 Detect and Investigate Health Hazards"
+    ],
     "soleAreas": 0,
     "external": true,
-    "profile": "Strategic",
-    "index": 75,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 50,
     "confidence": "Medium",
     "email": "alqaudi99@gmail.com",
-    "group": "",
-    "soleList": []
-  },
-  {
-    "id": 15,
-    "name": "Dr. Alia Albinali",
-    "state": "Qatar",
-    "code": "QA",
-    "entity": "Ministry of Health — headquarters",
-    "track": "Managerial",
-    "level": "Assistant Director",
-    "years": "More than 10 years",
-    "background": "Medicine",
-    "areas": [
-      "Health Promotion Strategy",
-      "Strategic Planning & Priority Setting"
-    ],
-    "soleAreas": 0,
-    "external": false,
-    "profile": "Advanced",
-    "index": 6,
-    "confidence": "Medium",
-    "email": "aalbinali@moph.gov.qa",
-    "group": "",
-    "soleList": []
-  },
-  {
-    "id": 16,
-    "name": "Mariam Abdalla AlOwais",
-    "state": "UAE",
-    "code": "AE",
-    "entity": "Ministry of Health — headquarters",
-    "track": "Managerial",
-    "level": "Manager / Head of Section",
-    "years": "6–10 years",
-    "background": "Health administration, policy or economics",
-    "areas": [
-      "Strategic Planning & Priority Setting",
-      "Performance Management (KPIs / OKRs)",
-      "Governance, Risk & Compliance (GRC)"
-    ],
-    "soleAreas": 0,
-    "external": false,
-    "profile": "Practitioner",
-    "index": 8,
-    "confidence": "Medium",
-    "email": "Mariam.AlOwais@mohap.gov.ae",
-    "group": "",
     "soleList": []
   },
   {
@@ -343,13 +317,17 @@
       "Emergency Preparedness Planning",
       "Infectious Disease Epidemiology"
     ],
+    "competencies": [
+      "1.3 Plan and Manage Emergency Preparedness",
+      "1.1 Detect and Investigate Health Hazards"
+    ],
     "soleAreas": 0,
     "external": true,
     "profile": "Expert",
-    "index": 16,
+    "stage": "Senior",
+    "index": 20,
     "confidence": "High",
     "email": "gzayani@health.gov.bh",
-    "group": "",
     "soleList": []
   },
   {
@@ -365,15 +343,21 @@
     "areas": [
       "Infectious Disease Epidemiology",
       "Emergency Preparedness Planning",
-      "Disease Modelling & Forecasting"
+      "Disease Modelling & Forecasting",
+      "Vector-borne Diseases"
+    ],
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards",
+      "1.3 Plan and Manage Emergency Preparedness",
+      "3.2 Use Public Health Informatics and Intelligence Tools"
     ],
     "soleAreas": 0,
     "external": true,
-    "profile": "Strategic",
-    "index": 25,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 100,
     "confidence": "Medium",
     "email": "smgarni@pha.gov.sa",
-    "group": "",
     "soleList": []
   },
   {
@@ -391,39 +375,17 @@
       "Policy Drafting & Analysis",
       "Public Health Nutrition"
     ],
-    "soleAreas": 1,
-    "external": false,
-    "profile": "Practitioner",
-    "index": 2,
-    "confidence": "High",
-    "email": "fatma.almatrooshi@mohap.gov.ae",
-    "group": "",
-    "soleList": [
-      "Public Health Nutrition"
-    ]
-  },
-  {
-    "id": 20,
-    "name": "Abeer Khaled Albahouh",
-    "state": "Kuwait",
-    "code": "KW",
-    "entity": "Ministry of Health — headquarters",
-    "track": "Managerial",
-    "level": "Director / Head of Dept",
-    "years": "More than 10 years",
-    "background": "Medicine",
-    "areas": [
-      "Health Promotion Strategy",
-      "Behavior Change Theory & Campaigns",
-      "Research Methodology Development"
+    "competencies": [
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+      "6.1 Appraise, Develop and Implement Public Health Policy"
     ],
     "soleAreas": 0,
-    "external": true,
-    "profile": "Strategic",
-    "index": 100,
-    "confidence": "Medium",
-    "email": "abkhb1959@gmail.com , aalbaho@moh.gov.kw",
-    "group": "",
+    "external": false,
+    "profile": "Competent",
+    "stage": "Entry",
+    "index": 9,
+    "confidence": "High",
+    "email": "fatma.almatrooshi@mohap.gov.ae",
     "soleList": []
   },
   {
@@ -439,13 +401,16 @@
     "areas": [
       "Infectious Disease Epidemiology"
     ],
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards"
+    ],
     "soleAreas": 0,
     "external": false,
-    "profile": "Practitioner",
-    "index": 2,
+    "profile": "Competent",
+    "stage": "Entry",
+    "index": 3,
     "confidence": "Low",
     "email": "Khalid.AlSulimani@mafwr.gov.om",
-    "group": "",
     "soleList": []
   },
   {
@@ -463,13 +428,17 @@
       "Behavior Change Theory & Campaigns",
       "Training Delivery & Facilitation"
     ],
+    "competencies": [
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+      "4.2 Evaluate and Strengthen Health Systems"
+    ],
     "soleAreas": 0,
     "external": true,
     "profile": "Expert",
-    "index": 64,
+    "stage": "Senior",
+    "index": 80,
     "confidence": "High",
     "email": "FMutawa4@health.gov.bh",
-    "group": "",
     "soleList": []
   },
   {
@@ -487,13 +456,17 @@
       "Risk Assessment (Rapid Risk Assessment)",
       "Simulation Exercises (SimEx)"
     ],
+    "competencies": [
+      "1.3 Plan and Manage Emergency Preparedness",
+      "1.2 Conduct Public Health Risk Assessment"
+    ],
     "soleAreas": 1,
     "external": true,
-    "profile": "Strategic",
-    "index": 25,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 125,
     "confidence": "High",
     "email": "fatma.alattar@mohap.gov.ae",
-    "group": "",
     "soleList": [
       "Simulation Exercises (SimEx)"
     ]
@@ -511,40 +484,21 @@
     "areas": [
       "Surveillance Systems Design",
       "Risk Assessment (Rapid Risk Assessment)",
-      "Infectious Disease Epidemiology"
+      "Infectious Disease Epidemiology",
+      "Vector-borne Diseases"
+    ],
+    "competencies": [
+      "3.1 Design, Manage and Interpret Intelligence Systems",
+      "1.2 Conduct Public Health Risk Assessment",
+      "1.1 Detect and Investigate Health Hazards"
     ],
     "soleAreas": 0,
     "external": true,
     "profile": "Expert",
-    "index": 16,
+    "stage": "Senior",
+    "index": 40,
     "confidence": "Medium",
     "email": "RSALOOM@HEALTH.GOV.BH",
-    "group": "",
-    "soleList": []
-  },
-  {
-    "id": 25,
-    "name": "Dr. Devendra Bansal",
-    "state": "Qatar",
-    "code": "QA",
-    "entity": "Ministry of Health — headquarters",
-    "track": "Professional",
-    "level": "Senior Specialist",
-    "years": "More than 10 years",
-    "background": "Laboratory / Biomedical sciences; Medical Microbiology",
-    "areas": [
-      "Infectious Disease Epidemiology",
-      "Medical Laboratory",
-      "Risk Assessment (Rapid Risk Assessment)",
-      "Public Health Microbiology & Genomics"
-    ],
-    "soleAreas": 0,
-    "external": true,
-    "profile": "Expert",
-    "index": 48,
-    "confidence": "High",
-    "email": "dbansal@moph.gov.qa",
-    "group": "",
     "soleList": []
   },
   {
@@ -561,13 +515,17 @@
       "Research Governance",
       "Governance, Risk & Compliance (GRC)"
     ],
+    "competencies": [
+      "6.1 Appraise, Develop and Implement Public Health Policy",
+      "4.3 Lead/Contribute to Quality Improvement"
+    ],
     "soleAreas": 0,
     "external": false,
-    "profile": "Practitioner",
-    "index": 8,
+    "profile": "Proficient",
+    "stage": "Mid-career",
+    "index": 16,
     "confidence": "Medium",
     "email": "kalturki@moph.gov.qa",
-    "group": "",
     "soleList": []
   },
   {
@@ -585,13 +543,18 @@
       "Emergency Preparedness Planning",
       "Surveillance Systems Design"
     ],
+    "competencies": [
+      "6.1 Appraise, Develop and Implement Public Health Policy",
+      "1.3 Plan and Manage Emergency Preparedness",
+      "3.1 Design, Manage and Interpret Intelligence Systems"
+    ],
     "soleAreas": 0,
     "external": true,
-    "profile": "Strategic",
+    "profile": "Expert",
+    "stage": "Senior",
     "index": 25,
     "confidence": "Medium",
     "email": "nada.almarzouqi@mohap.gov.ae",
-    "group": "",
     "soleList": []
   },
   {
@@ -608,13 +571,17 @@
       "NCD Prevention & Control",
       "Training Delivery & Facilitation"
     ],
+    "competencies": [
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+      "4.2 Evaluate and Strengthen Health Systems"
+    ],
     "soleAreas": 0,
     "external": true,
-    "profile": "Strategic",
-    "index": 75,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 25,
     "confidence": "Low",
     "email": "issohaibani@pha.gov.sa",
-    "group": "",
     "soleList": []
   },
   {
@@ -632,38 +599,17 @@
       "Infectious Disease Epidemiology",
       "Research Methodology Development"
     ],
-    "soleAreas": 1,
-    "external": false,
-    "profile": "Advanced",
-    "index": 45,
-    "confidence": "High",
-    "email": "Aali9@heallth.gov.bh",
-    "group": "",
-    "soleList": [
-      "Outbreak Investigation"
-    ]
-  },
-  {
-    "id": 30,
-    "name": "Basma Al Saffar",
-    "state": "Bahrain",
-    "code": "BH",
-    "entity": "National public health authority / national CDC",
-    "track": "Managerial",
-    "level": "Manager / Head of Section",
-    "years": "More than 10 years",
-    "background": "Medicine",
-    "areas": [
-      "Infection & Immunity",
-      "Infectious Disease Epidemiology"
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards",
+      "3.3 Generate Strategic Public Health Reports"
     ],
     "soleAreas": 0,
-    "external": true,
+    "external": false,
     "profile": "Expert",
-    "index": 64,
+    "stage": "Senior",
+    "index": 45,
     "confidence": "High",
-    "email": "bsaffar@health.gov.bh",
-    "group": "",
+    "email": "Aali9@health.gov.bh",
     "soleList": []
   },
   {
@@ -679,13 +625,16 @@
     "areas": [
       "Health Promotion Strategy"
     ],
+    "competencies": [
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes"
+    ],
     "soleAreas": 0,
     "external": false,
-    "profile": "Advanced",
-    "index": 9,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 15,
     "confidence": "Medium",
     "email": "salyafei@moph.gov.qa",
-    "group": "",
     "soleList": []
   },
   {
@@ -703,16 +652,19 @@
       "Survey Design & Validation",
       "Surveillance Reporting & Analytics"
     ],
-    "soleAreas": 1,
+    "competencies": [
+      "4.1 Assess, Plan and Deliver Programs and Services",
+      "2.1 Assess Health Needs and Prioritise Interventions",
+      "3.3 Generate Strategic Public Health Reports"
+    ],
+    "soleAreas": 0,
     "external": false,
-    "profile": "Practitioner",
-    "index": 10,
+    "profile": "Proficient",
+    "stage": "Mid-career",
+    "index": 16,
     "confidence": "High",
     "email": "nhkanhal@pha.gov.sa",
-    "group": "",
-    "soleList": [
-      "Survey Design & Validation"
-    ]
+    "soleList": []
   },
   {
     "id": 33,
@@ -728,13 +680,17 @@
       "Policy Drafting & Analysis",
       "Health Promotion Strategy"
     ],
+    "competencies": [
+      "6.1 Appraise, Develop and Implement Public Health Policy",
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes"
+    ],
     "soleAreas": 0,
     "external": false,
-    "profile": "Advanced",
-    "index": 6,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 10,
     "confidence": "Medium",
     "email": "haltamimi@moph.gov.qa",
-    "group": "",
     "soleList": []
   },
   {
@@ -753,13 +709,18 @@
       "Emergency Preparedness Planning",
       "Public Health Microbiology & Genomics"
     ],
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards",
+      "1.2 Conduct Public Health Risk Assessment",
+      "1.3 Plan and Manage Emergency Preparedness"
+    ],
     "soleAreas": 0,
     "external": true,
     "profile": "Expert",
-    "index": 48,
+    "stage": "Senior",
+    "index": 40,
     "confidence": "High",
     "email": "azaed@health.gov.bh",
-    "group": "",
     "soleList": []
   },
   {
@@ -776,13 +737,17 @@
       "Road Traffic & Injury Prevention",
       "Policy Drafting & Analysis"
     ],
+    "competencies": [
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+      "6.1 Appraise, Develop and Implement Public Health Policy"
+    ],
     "soleAreas": 0,
     "external": true,
     "profile": "Expert",
-    "index": 64,
+    "stage": "Senior",
+    "index": 80,
     "confidence": "Medium",
     "email": "saifo7@rop.gov.om",
-    "group": "",
     "soleList": []
   },
   {
@@ -801,13 +766,18 @@
       "Registry Development (Cancer, RTI, etc.)",
       "Cancer Epidemiology & Screening"
     ],
+    "competencies": [
+      "2.1 Assess Health Needs and Prioritise Interventions",
+      "3.2 Use Public Health Informatics and Intelligence Tools",
+      "3.1 Design, Manage and Interpret Intelligence Systems"
+    ],
     "soleAreas": 0,
     "external": true,
-    "profile": "Strategic",
-    "index": 100,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 75,
     "confidence": "Medium",
     "email": "aelbasmi@moh.gov.kw",
-    "group": "",
     "soleList": []
   },
   {
@@ -826,13 +796,18 @@
       "Biostatistics",
       "Cancer Epidemiology & Screening"
     ],
+    "competencies": [
+      "3.1 Design, Manage and Interpret Intelligence Systems",
+      "3.2 Use Public Health Informatics and Intelligence Tools",
+      "2.1 Assess Health Needs and Prioritise Interventions"
+    ],
     "soleAreas": 1,
     "external": false,
-    "profile": "Advanced",
-    "index": 30,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 50,
     "confidence": "High",
     "email": "nalsheridah@moh.gov.kw",
-    "group": "",
     "soleList": [
       "Data Engineering & Automation"
     ]
@@ -849,17 +824,23 @@
     "background": "Pharmacy",
     "areas": [
       "Policy Drafting & Analysis",
-      "Health Economics & Financing",
-      "Health Systems Research"
+      "Economic Evaluation",
+      "Health Economics & Financing"
     ],
-    "soleAreas": 1,
+    "competencies": [
+      "6.1 Appraise, Develop and Implement Public Health Policy",
+      "5.2 Use Economic Evaluation Methods",
+      "5.1 Apply Principles of Health Economics"
+    ],
+    "soleAreas": 2,
     "external": true,
-    "profile": "Expert",
-    "index": 80,
+    "profile": "Competent",
+    "stage": "Entry",
+    "index": 60,
     "confidence": "High",
     "email": "aazehr@pha.gov.sa",
-    "group": "",
     "soleList": [
+      "Economic Evaluation",
       "Health Economics & Financing"
     ]
   },
@@ -877,13 +858,17 @@
       "Ethical Review & Compliance",
       "Project Management (PMP/CAPM)"
     ],
+    "competencies": [
+      "6.1 Appraise, Develop and Implement Public Health Policy",
+      "4.1 Assess, Plan and Deliver Programs and Services"
+    ],
     "soleAreas": 0,
     "external": false,
-    "profile": "Advanced",
-    "index": 24,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 40,
     "confidence": "High",
     "email": "rmaswad@pha.gov.sa",
-    "group": "",
     "soleList": []
   },
   {
@@ -899,13 +884,16 @@
     "areas": [
       "Data Analysis (Quantitative)"
     ],
+    "competencies": [
+      "3.2 Use Public Health Informatics and Intelligence Tools"
+    ],
     "soleAreas": 0,
     "external": true,
-    "profile": "Strategic",
-    "index": 75,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 100,
     "confidence": "Medium",
     "email": "Sulaiman.alrawahi@moh.gov",
-    "group": "",
     "soleList": []
   },
   {
@@ -923,13 +911,18 @@
       "Emergency Preparedness Planning",
       "Research Methodology Development"
     ],
+    "competencies": [
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+      "1.3 Plan and Manage Emergency Preparedness",
+      "3.3 Generate Strategic Public Health Reports"
+    ],
     "soleAreas": 0,
     "external": true,
     "profile": "Expert",
-    "index": 64,
+    "stage": "Senior",
+    "index": 80,
     "confidence": "High",
     "email": "ysmuzaini@pha.gov.sa",
-    "group": "",
     "soleList": []
   },
   {
@@ -947,13 +940,18 @@
       "Leadership",
       "Patient Safety"
     ],
+    "competencies": [
+      "1.4 Lead/Contribute to Emergency Response and Recovery",
+      "7.4 Lead Teams and Foster Collaborative Working",
+      "4.3 Lead/Contribute to Quality Improvement"
+    ],
     "soleAreas": 3,
     "external": true,
     "profile": "Expert",
-    "index": 80,
+    "stage": "Senior",
+    "index": 100,
     "confidence": "Medium",
     "email": "mqbehbehani@moh.gov.kw",
-    "group": "",
     "soleList": [
       "Leadership",
       "PHEOC / Emergency Operations Centers",
@@ -976,13 +974,18 @@
       "Surveillance Reporting & Analytics",
       "Disease Modelling & Forecasting"
     ],
+    "competencies": [
+      "3.2 Use Public Health Informatics and Intelligence Tools",
+      "3.1 Design, Manage and Interpret Intelligence Systems",
+      "3.3 Generate Strategic Public Health Reports"
+    ],
     "soleAreas": 0,
     "external": false,
-    "profile": "Aware",
-    "index": 3,
+    "profile": "Competent",
+    "stage": "Entry",
+    "index": 12,
     "confidence": "High",
     "email": "ematar1@health.gov.bh",
-    "group": "",
     "soleList": []
   },
   {
@@ -1000,13 +1003,18 @@
       "Infectious Disease Epidemiology",
       "Data Analysis (Quantitative)"
     ],
+    "competencies": [
+      "3.1 Design, Manage and Interpret Intelligence Systems",
+      "1.1 Detect and Investigate Health Hazards",
+      "3.2 Use Public Health Informatics and Intelligence Tools"
+    ],
     "soleAreas": 0,
     "external": true,
-    "profile": "Strategic",
-    "index": 75,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 100,
     "confidence": "Medium",
     "email": "rsudandiradas@moph.gov.qa",
-    "group": "",
     "soleList": []
   },
   {
@@ -1024,13 +1032,18 @@
       "Policy Drafting & Analysis",
       "Strategic Planning & Priority Setting"
     ],
+    "competencies": [
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+      "6.1 Appraise, Develop and Implement Public Health Policy",
+      "7.1 Provide Strategic Vision and Lead Transformation"
+    ],
     "soleAreas": 0,
     "external": true,
     "profile": "Expert",
-    "index": 16,
+    "stage": "Senior",
+    "index": 20,
     "confidence": "Medium",
     "email": "halburno@moph.gov.qa",
-    "group": "",
     "soleList": []
   },
   {
@@ -1048,13 +1061,17 @@
       "Policy Drafting & Analysis",
       "Health Promotion Strategy"
     ],
+    "competencies": [
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+      "6.1 Appraise, Develop and Implement Public Health Policy"
+    ],
     "soleAreas": 0,
     "external": true,
-    "profile": "Strategic",
+    "profile": "Expert",
+    "stage": "Senior",
     "index": 25,
     "confidence": "High",
     "email": "Buthaina.Almuhair@mohap.gov.ae",
-    "group": "",
     "soleList": []
   },
   {
@@ -1072,13 +1089,18 @@
       "Data Governance",
       "Strategic Planning & Priority Setting"
     ],
+    "competencies": [
+      "6.1 Appraise, Develop and Implement Public Health Policy",
+      "3.1 Design, Manage and Interpret Intelligence Systems",
+      "7.1 Provide Strategic Vision and Lead Transformation"
+    ],
     "soleAreas": 1,
     "external": true,
     "profile": "Expert",
-    "index": 80,
+    "stage": "Senior",
+    "index": 100,
     "confidence": "High",
     "email": "mubarkah.alkarbi@mohap.gov.ae",
-    "group": "",
     "soleList": [
       "Data Governance"
     ]
@@ -1098,13 +1120,17 @@
       "Infectious Disease Epidemiology",
       "Registry Development (Cancer, RTI, etc.)"
     ],
+    "competencies": [
+      "3.1 Design, Manage and Interpret Intelligence Systems",
+      "1.1 Detect and Investigate Health Hazards"
+    ],
     "soleAreas": 0,
     "external": true,
     "profile": "Expert",
-    "index": 16,
+    "stage": "Senior",
+    "index": 20,
     "confidence": "High",
     "email": "mariam.alameeri@mohap.gov.ae",
-    "group": "",
     "soleList": []
   },
   {
@@ -1122,13 +1148,18 @@
       "NCD Prevention & Control",
       "Scientific Writing & Publications"
     ],
+    "competencies": [
+      "3.1 Design, Manage and Interpret Intelligence Systems",
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+      "3.3 Generate Strategic Public Health Reports"
+    ],
     "soleAreas": 0,
     "external": false,
-    "profile": "Advanced",
-    "index": 24,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 40,
     "confidence": "High",
     "email": "water140@hotmail.co.uk",
-    "group": "",
     "soleList": []
   },
   {
@@ -1144,13 +1175,16 @@
     "areas": [
       "NCD Prevention & Control"
     ],
+    "competencies": [
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes"
+    ],
     "soleAreas": 0,
     "external": false,
-    "profile": "Advanced",
-    "index": 9,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 15,
     "confidence": "Medium",
     "email": "huda.alabdouli@mohap.gov.ae",
-    "group": "",
     "soleList": []
   },
   {
@@ -1168,13 +1202,17 @@
       "Infection & Immunity",
       "Research Methodology Development"
     ],
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards",
+      "3.3 Generate Strategic Public Health Reports"
+    ],
     "soleAreas": 0,
     "external": true,
-    "profile": "Strategic",
+    "profile": "Expert",
+    "stage": "Senior",
     "index": 100,
     "confidence": "High",
     "email": "asayyad@health.gov.bh",
-    "group": "",
     "soleList": []
   },
   {
@@ -1192,13 +1230,17 @@
       "Burden of Disease Analysis",
       "Cancer Epidemiology & Screening"
     ],
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards",
+      "2.1 Assess Health Needs and Prioritise Interventions"
+    ],
     "soleAreas": 0,
     "external": true,
     "profile": "Expert",
-    "index": 64,
+    "stage": "Senior",
+    "index": 60,
     "confidence": "Medium",
     "email": "h.almajed@moh.gov.kw",
-    "group": "",
     "soleList": []
   },
   {
@@ -1217,13 +1259,19 @@
       "Registry Development (Cancer, RTI, etc.)",
       "Cancer Epidemiology & Screening"
     ],
+    "competencies": [
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+      "7.1 Provide Strategic Vision and Lead Transformation",
+      "3.1 Design, Manage and Interpret Intelligence Systems",
+      "2.1 Assess Health Needs and Prioritise Interventions"
+    ],
     "soleAreas": 0,
     "external": true,
     "profile": "Expert",
-    "index": 16,
+    "stage": "Senior",
+    "index": 20,
     "confidence": "High",
     "email": "ealabadi@moph.gov.qa",
-    "group": "",
     "soleList": []
   },
   {
@@ -1241,14 +1289,21 @@
       "Performance Management (KPIs / OKRs)",
       "NCD Prevention & Control"
     ],
-    "soleAreas": 0,
+    "competencies": [
+      "7.1 Provide Strategic Vision and Lead Transformation",
+      "4.3 Lead/Contribute to Quality Improvement",
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes"
+    ],
+    "soleAreas": 1,
     "external": true,
-    "profile": "Strategic",
-    "index": 100,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 125,
     "confidence": "High",
     "email": "mashahin@pha.gov.sa",
-    "group": "",
-    "soleList": []
+    "soleList": [
+      "Performance Management (KPIs / OKRs)"
+    ]
   },
   {
     "id": 55,
@@ -1263,13 +1318,16 @@
     "areas": [
       "Research Governance"
     ],
+    "competencies": [
+      "6.1 Appraise, Develop and Implement Public Health Policy"
+    ],
     "soleAreas": 0,
     "external": false,
-    "profile": "Advanced",
-    "index": 18,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 15,
     "confidence": "Medium",
     "email": "adahir@moph.gov.qa",
-    "group": "",
     "soleList": []
   },
   {
@@ -1287,13 +1345,17 @@
       "Emergency Preparedness Planning",
       "Epidemic Intelligence"
     ],
+    "competencies": [
+      "3.1 Design, Manage and Interpret Intelligence Systems",
+      "1.3 Plan and Manage Emergency Preparedness"
+    ],
     "soleAreas": 1,
     "external": true,
     "profile": "Expert",
-    "index": 80,
+    "stage": "Senior",
+    "index": 100,
     "confidence": "High",
     "email": "ntbcps288@gmail.com",
-    "group": "",
     "soleList": [
       "Epidemic Intelligence"
     ]
@@ -1314,16 +1376,570 @@
       "Curriculum & Instructional Design",
       "Public Health Microbiology & Genomics"
     ],
-    "soleAreas": 2,
+    "competencies": [
+      "4.2 Evaluate and Strengthen Health Systems",
+      "3.2 Use Public Health Informatics and Intelligence Tools",
+      "1.1 Detect and Investigate Health Hazards"
+    ],
+    "soleAreas": 0,
     "external": true,
-    "profile": "Strategic",
-    "index": 125,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 100,
     "confidence": "High",
     "email": "msoraini@pha.gov.sa",
-    "group": "",
+    "soleList": []
+  },
+  {
+    "id": 58,
+    "name": "Fahad Al Zadjali",
+    "state": "Oman",
+    "code": "OM",
+    "entity": "Academic or research institution",
+    "track": "Managerial",
+    "level": "C-Suite / Top Executive",
+    "years": "More than 10 years",
+    "background": "Laboratory / Biomedical sciences; Medicine; Public Health / Epidemiology",
+    "areas": [
+      "Medical Laboratory"
+    ],
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards"
+    ],
+    "soleAreas": 0,
+    "external": true,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 25,
+    "confidence": "Low",
+    "email": "fahad.alzadjali@ochs.edu.om",
+    "soleList": []
+  },
+  {
+    "id": 59,
+    "name": "Jameela Ali Alajmi",
+    "state": "Qatar",
+    "code": "QA",
+    "entity": "Ministry of Health — headquarters",
+    "track": "Managerial",
+    "level": "C-Suite / Top Executive",
+    "years": "More than 10 years",
+    "background": "Medicine",
+    "areas": [
+      "Infection Prevention & Control",
+      "Infectious Disease Epidemiology",
+      "Training Delivery & Facilitation"
+    ],
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards",
+      "4.2 Evaluate and Strengthen Health Systems"
+    ],
+    "soleAreas": 0,
+    "external": true,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 50,
+    "confidence": "Medium",
+    "email": "jalajmi@hamad.qa",
+    "soleList": []
+  },
+  {
+    "id": 60,
+    "name": "Ali Saeed Al-Zahrani",
+    "state": "Saudi Arabia",
+    "code": "SA",
+    "entity": "Academic or research institution",
+    "track": "Professional",
+    "level": "Consultant / Expert",
+    "years": "More than 10 years",
+    "background": "Public Health / Epidemiology",
+    "areas": [
+      "Burden of Disease Analysis",
+      "Registry Development (Cancer, RTI, etc.)",
+      "Public Health Informatics",
+      "Cancer Epidemiology & Screening"
+    ],
+    "competencies": [
+      "2.1 Assess Health Needs and Prioritise Interventions",
+      "3.1 Design, Manage and Interpret Intelligence Systems",
+      "3.2 Use Public Health Informatics and Intelligence Tools"
+    ],
+    "soleAreas": 0,
+    "external": true,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 75,
+    "confidence": "Medium",
+    "email": "alisaz@kfshrc.edu.sa",
+    "soleList": []
+  },
+  {
+    "id": 61,
+    "name": "Mulfi Alkhinjar",
+    "state": "Saudi Arabia",
+    "code": "SA",
+    "entity": "National public health authority / national CDC",
+    "track": "Professional",
+    "level": "Senior Specialist",
+    "years": "6–10 years",
+    "background": "Medicine; Public Health / Epidemiology",
+    "areas": [
+      "Program Evaluation",
+      "Infectious Disease Epidemiology",
+      "Policy Drafting & Analysis"
+    ],
+    "competencies": [
+      "4.2 Evaluate and Strengthen Health Systems",
+      "1.1 Detect and Investigate Health Hazards",
+      "6.1 Appraise, Develop and Implement Public Health Policy"
+    ],
+    "soleAreas": 1,
+    "external": false,
+    "profile": "Proficient",
+    "stage": "Mid-career",
+    "index": 20,
+    "confidence": "Medium",
+    "email": "Mikhinjar@pha.gov.sa",
     "soleList": [
-      "Competency Framework Design",
-      "Curriculum & Instructional Design"
+      "Program Evaluation"
     ]
+  },
+  {
+    "id": 62,
+    "name": "Abeer Khaled Albahouh",
+    "state": "Kuwait",
+    "code": "KW",
+    "entity": "Ministry of Health — headquarters",
+    "track": "Managerial",
+    "level": "Executive Director / DG",
+    "years": "More than 10 years",
+    "background": "Public Health / Epidemiology",
+    "areas": [
+      "Health Promotion Strategy",
+      "Training Delivery & Facilitation"
+    ],
+    "competencies": [
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+      "4.2 Evaluate and Strengthen Health Systems"
+    ],
+    "soleAreas": 0,
+    "external": true,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 25,
+    "confidence": "Medium",
+    "email": "aalbaho@moh.gov.kw",
+    "soleList": []
+  },
+  {
+    "id": 63,
+    "name": "Hanan Al Kindi",
+    "state": "Oman",
+    "code": "OM",
+    "entity": "Ministry of Health — headquarters",
+    "track": "Managerial",
+    "level": "Director / Head of Dept",
+    "years": "More than 10 years",
+    "background": "Medicine",
+    "areas": [
+      "Outbreak Investigation",
+      "Medical Laboratory",
+      "Surveillance Systems Design",
+      "Public Health Microbiology & Genomics"
+    ],
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards",
+      "3.1 Design, Manage and Interpret Intelligence Systems"
+    ],
+    "soleAreas": 0,
+    "external": true,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 75,
+    "confidence": "High",
+    "email": "hanan.alkindi@moh.gov.om",
+    "soleList": []
+  },
+  {
+    "id": 64,
+    "name": "Dr. Devendra Bansal",
+    "state": "Qatar",
+    "code": "QA",
+    "entity": "Ministry of Health — headquarters",
+    "track": "Professional",
+    "level": "Senior Specialist",
+    "years": "More than 10 years",
+    "background": "Public Health / Epidemiology; Laboratory / Biomedical sciences",
+    "areas": [
+      "Infectious Disease Epidemiology",
+      "Outbreak Investigation",
+      "Research Methodology Development",
+      "Public Health Microbiology & Genomics",
+      "Vector-borne Diseases"
+    ],
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards",
+      "3.3 Generate Strategic Public Health Reports"
+    ],
+    "soleAreas": 0,
+    "external": true,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 60,
+    "confidence": "High",
+    "email": "dbansal@moph.gov.qa",
+    "soleList": []
+  },
+  {
+    "id": 65,
+    "name": "Huda Alsiyabi",
+    "state": "Oman",
+    "code": "OM",
+    "entity": "Ministry of Health — headquarters",
+    "track": "Professional",
+    "level": "Consultant / Expert",
+    "years": "More than 10 years",
+    "background": "Medicine",
+    "areas": [
+      "Health Promotion Strategy",
+      "Community Engagement & Healthy Settings"
+    ],
+    "competencies": [
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+      "2.3 Collaborate with Stakeholders and Communities"
+    ],
+    "soleAreas": 1,
+    "external": true,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 125,
+    "confidence": "Medium",
+    "email": "alsiyabihuda@outlook.com",
+    "soleList": [
+      "Community Engagement & Healthy Settings"
+    ]
+  },
+  {
+    "id": 66,
+    "name": "Dr. Majid Mqbel D. Alkhalaf",
+    "state": "Saudi Arabia",
+    "code": "SA",
+    "entity": "National public health authority / national CDC",
+    "track": "Managerial",
+    "level": "Executive Director / DG",
+    "years": "More than 10 years",
+    "background": "Nutrition & Dietetics",
+    "areas": [
+      "Policy Drafting & Analysis",
+      "Policy Brief & White Paper Writing",
+      "Public Health Nutrition"
+    ],
+    "competencies": [
+      "6.1 Appraise, Develop and Implement Public Health Policy",
+      "6.2 Lead Advocacy and Strategic Communication",
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes"
+    ],
+    "soleAreas": 1,
+    "external": true,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 125,
+    "confidence": "Medium",
+    "email": "mmkhalaf@pha.gov.sa",
+    "soleList": [
+      "Policy Brief & White Paper Writing"
+    ]
+  },
+  {
+    "id": 67,
+    "name": "Dr. Alya Zaid Harbi",
+    "state": "UAE",
+    "code": "AE",
+    "entity": "Ministry of Health — headquarters",
+    "track": "Managerial",
+    "level": "Director / Head of Dept",
+    "years": "More than 10 years",
+    "background": "Health Information/Data science",
+    "areas": [
+      "Public Health Informatics",
+      "Health Systems Research",
+      "Survey Design & Validation"
+    ],
+    "competencies": [
+      "3.2 Use Public Health Informatics and Intelligence Tools",
+      "4.2 Evaluate and Strengthen Health Systems",
+      "2.1 Assess Health Needs and Prioritise Interventions"
+    ],
+    "soleAreas": 1,
+    "external": true,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 125,
+    "confidence": "Medium",
+    "email": "alya.harbi@mohap.gov.ae",
+    "soleList": [
+      "Health Systems Research"
+    ]
+  },
+  {
+    "id": 68,
+    "name": "Amina AlJardani",
+    "state": "Oman",
+    "code": "OM",
+    "entity": "Ministry of Health — headquarters",
+    "track": "Managerial",
+    "level": "Manager / Head of Section",
+    "years": "More than 10 years",
+    "background": "Medicine; Laboratory / Biomedical sciences",
+    "areas": [
+      "Infectious Disease Epidemiology",
+      "Research Methodology Development",
+      "Medical Laboratory",
+      "Public Health Microbiology & Genomics",
+      "Vector-borne Diseases"
+    ],
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards",
+      "3.3 Generate Strategic Public Health Reports"
+    ],
+    "soleAreas": 0,
+    "external": true,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 40,
+    "confidence": "Medium",
+    "email": "aksaljardani@gmail.com",
+    "soleList": []
+  },
+  {
+    "id": 69,
+    "name": "Dr. Alia Albinali",
+    "state": "Qatar",
+    "code": "QA",
+    "entity": "Ministry of Health — headquarters",
+    "track": "Managerial",
+    "level": "Director / Head of Dept",
+    "years": "More than 10 years",
+    "background": "Medicine",
+    "areas": [
+      "Competency Framework Design",
+      "Research Governance",
+      "Emergency Preparedness Planning"
+    ],
+    "competencies": [
+      "4.2 Evaluate and Strengthen Health Systems",
+      "6.1 Appraise, Develop and Implement Public Health Policy",
+      "1.3 Plan and Manage Emergency Preparedness"
+    ],
+    "soleAreas": 0,
+    "external": false,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 45,
+    "confidence": "Medium",
+    "email": "aalbinali@moph.gov.qa",
+    "soleList": []
+  },
+  {
+    "id": 70,
+    "name": "Mariam Abdalla AlOwais",
+    "state": "UAE",
+    "code": "AE",
+    "entity": "Ministry of Health — headquarters",
+    "track": "Managerial",
+    "level": "Manager / Head of Section",
+    "years": "6–10 years",
+    "background": "Health administration, policy or economics",
+    "areas": [
+      "Strategic Planning & Priority Setting",
+      "Project Management (PMP/CAPM)",
+      "Change Management"
+    ],
+    "competencies": [
+      "7.1 Provide Strategic Vision and Lead Transformation",
+      "4.1 Assess, Plan and Deliver Programs and Services",
+      "7.2 Lead and Manage Change"
+    ],
+    "soleAreas": 1,
+    "external": false,
+    "profile": "Proficient",
+    "stage": "Mid-career",
+    "index": 20,
+    "confidence": "High",
+    "email": "mariam.alowais@mohap.gov.ae",
+    "soleList": [
+      "Change Management"
+    ]
+  },
+  {
+    "id": 71,
+    "name": "Yazid A Al Ohaly",
+    "state": "Saudi Arabia",
+    "code": "SA",
+    "entity": "GHC",
+    "track": "Professional",
+    "level": "Consultant / Expert",
+    "years": "More than 10 years",
+    "background": "Medicine",
+    "areas": [
+      "Policy Drafting & Analysis",
+      "Governance, Risk & Compliance (GRC)",
+      "Strategic Planning & Priority Setting"
+    ],
+    "competencies": [
+      "6.1 Appraise, Develop and Implement Public Health Policy",
+      "4.3 Lead/Contribute to Quality Improvement",
+      "7.1 Provide Strategic Vision and Lead Transformation"
+    ],
+    "soleAreas": 0,
+    "external": true,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 100,
+    "confidence": "Medium",
+    "email": "y.ohaly@ghc.sa",
+    "soleList": []
+  },
+  {
+    "id": 72,
+    "name": "Basma Al Saffar",
+    "state": "Bahrain",
+    "code": "BH",
+    "entity": "National public health authority / national CDC",
+    "track": "Managerial",
+    "level": "Manager / Head of Section",
+    "years": "More than 10 years",
+    "background": "Public Health / Epidemiology",
+    "areas": [
+      "Infection & Immunity",
+      "Infectious Disease Epidemiology"
+    ],
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards"
+    ],
+    "soleAreas": 0,
+    "external": true,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 80,
+    "confidence": "High",
+    "email": "BSaffar@health.gov.bh",
+    "soleList": []
+  },
+  {
+    "id": 73,
+    "name": "Muneera Ahmed Abdulla Alsobaiei",
+    "state": "Bahrain",
+    "code": "BH",
+    "entity": "Ministry of Health — headquarters",
+    "track": "Managerial",
+    "level": "Director / Head of Dept",
+    "years": "More than 10 years",
+    "background": "Dentistry",
+    "areas": [
+      "Competency Framework Design",
+      "Curriculum & Instructional Design",
+      "Continuing Professional Development (CPD)"
+    ],
+    "competencies": [
+      "4.2 Evaluate and Strengthen Health Systems"
+    ],
+    "soleAreas": 1,
+    "external": false,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 75,
+    "confidence": "High",
+    "email": "msabt@health.gov.bh",
+    "soleList": [
+      "Continuing Professional Development (CPD)"
+    ]
+  },
+  {
+    "id": 74,
+    "name": "Hussain Alrand",
+    "state": "UAE",
+    "code": "AE",
+    "entity": "Ministry of Health — headquarters",
+    "track": "Managerial",
+    "level": "C-Suite / Top Executive",
+    "years": "More than 10 years",
+    "background": "Medicine",
+    "areas": [
+      "Emergency Preparedness Planning",
+      "NCD Prevention & Control",
+      "Surveillance Systems Design"
+    ],
+    "competencies": [
+      "1.3 Plan and Manage Emergency Preparedness",
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+      "3.1 Design, Manage and Interpret Intelligence Systems"
+    ],
+    "soleAreas": 0,
+    "external": true,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 25,
+    "confidence": "Medium",
+    "email": "hussain.alrand@mohap.gov.ae",
+    "soleList": []
+  },
+  {
+    "id": 75,
+    "name": "Nouf Alali",
+    "state": "UAE",
+    "code": "AE",
+    "entity": "Ministry of Health — headquarters",
+    "track": "Managerial",
+    "level": "Director / Head of Dept",
+    "years": "More than 10 years",
+    "background": "Health Promotion / Public Nutrition",
+    "areas": [
+      "Policy Drafting & Analysis",
+      "NCD Prevention & Control",
+      "Behavior Change Theory & Campaigns",
+      "Public Health Nutrition"
+    ],
+    "competencies": [
+      "6.1 Appraise, Develop and Implement Public Health Policy",
+      "2.2 Design, Implement and Evaluate Health Improvement Programmes"
+    ],
+    "soleAreas": 0,
+    "external": true,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 100,
+    "confidence": "High",
+    "email": "nkalali@mohap.gov.ae",
+    "soleList": []
+  },
+  {
+    "id": 76,
+    "name": "Almunther W. Alhasawi",
+    "state": "Kuwait",
+    "code": "KW",
+    "entity": "Ministry of Health — headquarters",
+    "track": "Managerial",
+    "level": "C-Suite / Top Executive",
+    "years": "More than 10 years",
+    "background": "Medicine",
+    "areas": [
+      "Infectious Disease Epidemiology",
+      "Emergency Preparedness Planning",
+      "Policy Drafting & Analysis"
+    ],
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards",
+      "1.3 Plan and Manage Emergency Preparedness",
+      "6.1 Appraise, Develop and Implement Public Health Policy"
+    ],
+    "soleAreas": 0,
+    "external": true,
+    "profile": "Expert",
+    "stage": "Senior",
+    "index": 25,
+    "confidence": "High",
+    "email": "awalhasawi@moh.gov.kw",
+    "soleList": []
   }
 ]

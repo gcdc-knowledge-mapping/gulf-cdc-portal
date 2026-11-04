@@ -1,0 +1,370 @@
+[
+  {
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.1",
+    "competency": "1.1 Detect and Investigate Health Hazards",
+    "by": {
+      "UAE": 2,
+      "Bahrain": 7,
+      "Saudi Arabia": 3,
+      "Oman": 6,
+      "Qatar": 4,
+      "Kuwait": 2
+    },
+    "total": 24,
+    "states": 6,
+    "behavioural": false
+  },
+  {
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.2",
+    "competency": "1.2 Conduct Public Health Risk Assessment",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 2,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 4,
+    "states": 3,
+    "behavioural": false
+  },
+  {
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.3",
+    "competency": "1.3 Plan and Manage Emergency Preparedness",
+    "by": {
+      "UAE": 4,
+      "Bahrain": 3,
+      "Saudi Arabia": 3,
+      "Oman": 3,
+      "Qatar": 1,
+      "Kuwait": 1
+    },
+    "total": 15,
+    "states": 6,
+    "behavioural": false
+  },
+  {
+    "domain": "D1 – Health Hazards and Emergency Preparedness",
+    "code": "1.4",
+    "competency": "1.4 Lead/Contribute to Emergency Response and Recovery",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 1
+    },
+    "total": 1,
+    "states": 1,
+    "behavioural": false
+  },
+  {
+    "domain": "D2 – Health Improvement and Promotion",
+    "code": "2.1",
+    "competency": "2.1 Assess Health Needs and Prioritise Interventions",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 0,
+      "Saudi Arabia": 2,
+      "Oman": 0,
+      "Qatar": 1,
+      "Kuwait": 3
+    },
+    "total": 7,
+    "states": 4,
+    "behavioural": false
+  },
+  {
+    "domain": "D2 – Health Improvement and Promotion",
+    "code": "2.2",
+    "competency": "2.2 Design, Implement and Evaluate Health Improvement Programmes",
+    "by": {
+      "UAE": 5,
+      "Bahrain": 2,
+      "Saudi Arabia": 4,
+      "Oman": 3,
+      "Qatar": 4,
+      "Kuwait": 1
+    },
+    "total": 19,
+    "states": 6,
+    "behavioural": false
+  },
+  {
+    "domain": "D2 – Health Improvement and Promotion",
+    "code": "2.3",
+    "competency": "2.3 Collaborate with Stakeholders and Communities",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 1,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1,
+    "behavioural": false
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.1",
+    "competency": "3.1 Design, Manage and Interpret Intelligence Systems",
+    "by": {
+      "UAE": 5,
+      "Bahrain": 2,
+      "Saudi Arabia": 2,
+      "Oman": 3,
+      "Qatar": 3,
+      "Kuwait": 2
+    },
+    "total": 17,
+    "states": 6,
+    "behavioural": false
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.2",
+    "competency": "3.2 Use Public Health Informatics and Intelligence Tools",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 1,
+      "Saudi Arabia": 4,
+      "Oman": 1,
+      "Qatar": 2,
+      "Kuwait": 2
+    },
+    "total": 11,
+    "states": 6,
+    "behavioural": false
+  },
+  {
+    "domain": "D3 – Public Health Surveillance and Intelligence",
+    "code": "3.3",
+    "competency": "3.3 Generate Strategic Public Health Reports",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 3,
+      "Saudi Arabia": 3,
+      "Oman": 3,
+      "Qatar": 2,
+      "Kuwait": 1
+    },
+    "total": 12,
+    "states": 5,
+    "behavioural": false
+  },
+  {
+    "domain": "D4 – Health System Strengthening and Service Improvement",
+    "code": "4.1",
+    "competency": "4.1 Assess, Plan and Deliver Programs and Services",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 0,
+      "Saudi Arabia": 2,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 3,
+    "states": 2,
+    "behavioural": false
+  },
+  {
+    "domain": "D4 – Health System Strengthening and Service Improvement",
+    "code": "4.2",
+    "competency": "4.2 Evaluate and Strengthen Health Systems",
+    "by": {
+      "UAE": 2,
+      "Bahrain": 2,
+      "Saudi Arabia": 3,
+      "Oman": 0,
+      "Qatar": 2,
+      "Kuwait": 1
+    },
+    "total": 10,
+    "states": 5,
+    "behavioural": false
+  },
+  {
+    "domain": "D4 – Health System Strengthening and Service Improvement",
+    "code": "4.3",
+    "competency": "4.3 Lead/Contribute to Quality Improvement",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 2,
+      "Oman": 0,
+      "Qatar": 1,
+      "Kuwait": 1
+    },
+    "total": 4,
+    "states": 3,
+    "behavioural": false
+  },
+  {
+    "domain": "D5 – Health Economics and Resource Prioritisation",
+    "code": "5.1",
+    "competency": "5.1 Apply Principles of Health Economics",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1,
+    "behavioural": false
+  },
+  {
+    "domain": "D5 – Health Economics and Resource Prioritisation",
+    "code": "5.2",
+    "competency": "5.2 Use Economic Evaluation Methods",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1,
+    "behavioural": false
+  },
+  {
+    "domain": "D6 – Health Policy and Advocacy",
+    "code": "6.1",
+    "competency": "6.1 Appraise, Develop and Implement Public Health Policy",
+    "by": {
+      "UAE": 5,
+      "Bahrain": 0,
+      "Saudi Arabia": 5,
+      "Oman": 1,
+      "Qatar": 5,
+      "Kuwait": 2
+    },
+    "total": 18,
+    "states": 5,
+    "behavioural": false
+  },
+  {
+    "domain": "D6 – Health Policy and Advocacy",
+    "code": "6.2",
+    "competency": "6.2 Lead Advocacy and Strategic Communication",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 1,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1,
+    "behavioural": false
+  },
+  {
+    "domain": "D6 – Health Policy and Advocacy",
+    "code": "6.3",
+    "competency": "6.3 Engage Stakeholders to Advance Policy Goals",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 0,
+    "states": 0,
+    "behavioural": false
+  },
+  {
+    "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+    "code": "7.1",
+    "competency": "7.1 Provide Strategic Vision and Lead Transformation",
+    "by": {
+      "UAE": 2,
+      "Bahrain": 0,
+      "Saudi Arabia": 2,
+      "Oman": 0,
+      "Qatar": 2,
+      "Kuwait": 0
+    },
+    "total": 6,
+    "states": 3,
+    "behavioural": false
+  },
+  {
+    "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+    "code": "7.2",
+    "competency": "7.2 Lead and Manage Change",
+    "by": {
+      "UAE": 1,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 1,
+    "states": 1,
+    "behavioural": false
+  },
+  {
+    "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+    "code": "7.3",
+    "competency": "7.3 Build Relationships and Communicate with Influence",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 0,
+    "states": 0,
+    "behavioural": true
+  },
+  {
+    "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+    "code": "7.4",
+    "competency": "7.4 Lead Teams and Foster Collaborative Working",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 1
+    },
+    "total": 1,
+    "states": 1,
+    "behavioural": false
+  },
+  {
+    "domain": "D7 – Strategic Leadership, Management and Core Enabling Skills",
+    "code": "7.5",
+    "competency": "7.5 Apply Self-Awareness and Reflective Practice",
+    "by": {
+      "UAE": 0,
+      "Bahrain": 0,
+      "Saudi Arabia": 0,
+      "Oman": 0,
+      "Qatar": 0,
+      "Kuwait": 0
+    },
+    "total": 0,
+    "states": 0,
+    "behavioural": true
+  }
+]
