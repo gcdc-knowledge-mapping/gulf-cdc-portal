@@ -231,6 +231,12 @@
   const pct = (n) => (HOLDERS.length ? Math.round((n / HOLDERS.length) * 100) : 0);
   // Staff who are the only person in GCDC holding at least one of their areas.
   const SOLE_HOLDERS = HOLDERS.filter((h) => String(h.rare_expertise || "").trim());
+  // Staff who hold an area that exactly two people hold — they share at least
+  // one of their areas with exactly one colleague, and nobody else.
+  const PAIR_NAMES = new Set();
+  MATRIX.filter((m) => m.holders.length === 2).forEach((m) => {
+    m.holders.forEach((h) => PAIR_NAMES.add(clean(h).replace(/\s*\([^)]*\)\s*$/, "")));
+  });
   const BREADTH_LABEL = {
     "1": "One area only", "2": "Two areas", "3": "Three areas or more",
   };
@@ -306,10 +312,14 @@
   }
 
   function renderOverview(el) {
+    // All four statuses, so the ring adds up to the number in its middle. The
+    // areas with no core holder belong here: leaving them out made the parts
+    // sum to the areas GCDC holds while the centre counted the whole taxonomy.
     const cov = [
       { label: "Adequate (3+ core)", value: M.adequate, color: "var(--st-good)" },
       { label: "Thin (2 core)", value: M.thin, color: "var(--st-warn)" },
       { label: "Single core expert", value: M.spof, color: "var(--st-serious)" },
+      { label: "No core expert", value: M.noCore, color: "var(--st-critical)" },
     ];
     // Coverage by department — core areas each department has ≥1 core holder in
     const deptOf = (h) => { const m = /\(([^)]+)\)\s*$/.exec(h); return m ? m[1].trim() : ""; };
@@ -343,7 +353,7 @@
         ${kpi(M.experts, "Staff who took part", `${M.depts} departments`, "var(--brand)", "view:contacts", "Open the staff directory")}
         ${kpi(BREADTH.wide, "Cover three areas or more", `${pct(BREADTH.wide)}% of the ${M.experts} staff`, "var(--st-good)", "breadth:3", "Show the staff who cover three areas or more")}
         ${kpi(SOLE_HOLDERS.length, "Sole holder of an area", `${pct(SOLE_HOLDERS.length)}% of the ${M.experts} staff — nobody else in GCDC holds it`, "var(--st-serious)", "soleholders", "Show the staff who are the only holder of an area")}
-        ${kpi(BREADTH.one, "Cover one area only", `${pct(BREADTH.one)}% of the ${M.experts} staff`, "var(--c7)", "breadth:1", "Show the staff who cover a single area")}
+        ${kpi(PAIR_NAMES.size, "Shares an area with one other", `${pct(PAIR_NAMES.size)}% of the ${M.experts} staff — the two of them are the only holders`, "var(--st-warn)", "pairs", "Show the staff who share an area with exactly one colleague")}
       </div>
 
       <div class="grid grid--2" style="margin-top:16px">
@@ -353,7 +363,7 @@
           <div class="donut-wrap">
             ${donut(cov, { centerNum: M.expertiseAreas, centerLbl: "areas", aria: "Expertise coverage distribution" })}
             <div style="flex:1;min-width:150px">${legend(cov)}
-              <p class="card__sub" style="margin-top:12px">${Math.round((M.spof + M.thin) / M.expertiseAreas * 100)}% of all capabilities rest on one or two people.</p>
+              <p class="card__sub" style="margin-top:12px">${M.spof + M.thin} of the ${M.expertiseAreas} areas (${Math.round((M.spof + M.thin) / M.expertiseAreas * 100)}%) rest on one or two people, and ${M.noCore} have no core holder at all.</p>
             </div>
           </div>
           <dl class="deflist">
@@ -363,6 +373,8 @@
               <dd>Exactly two core holders. Workable today, but one departure would leave a single point of failure — worth building redundancy.</dd></div>
             <div><dt><span class="legend__swatch" style="background:var(--st-serious)"></span> Single core expert</dt>
               <dd>Only one person in GCDC holds this area at core level. If they leave, the capability leaves with them — the highest continuity risk and the priority for knowledge capture.</dd></div>
+            <div><dt><span class="legend__swatch" style="background:var(--st-critical)"></span> No core expert</dt>
+              <dd>Nobody in GCDC holds this area at core level. It is a gap in the taxonomy rather than a continuity risk — something to recruit for, train towards, or draw on the GCC Network for.</dd></div>
           </dl>
         </div>
         <div class="card">
@@ -389,10 +401,13 @@
         return jumpTo("core", { dept: d, q: "" });
       }
       if (action.startsWith("breadth:")) {
-        return jumpTo("contacts", { breadth: action.slice(8), q: "", dept: "all", profile: "all", sole: false });
+        return jumpTo("contacts", { breadth: action.slice(8), q: "", dept: "all", profile: "all", sole: false, pair: false });
       }
       if (action === "soleholders") {
-        return jumpTo("contacts", { sole: true, breadth: "", q: "", dept: "all", profile: "all" });
+        return jumpTo("contacts", { sole: true, pair: false, breadth: "", q: "", dept: "all", profile: "all" });
+      }
+      if (action === "pairs") {
+        return jumpTo("contacts", { pair: true, sole: false, breadth: "", q: "", dept: "all", profile: "all" });
       }
       if (action.startsWith("comp:")) {
         return jumpTo("matrix", { comp: action.slice(5), domain: "all", q: "" });
@@ -586,7 +601,7 @@
   }
 
   /* ---------------------------------------------------------------- Contacts */
-  const contactsState = { dept: "all", q: "", profile: "all", breadth: "", sole: false };
+  const contactsState = { dept: "all", q: "", profile: "all", breadth: "", sole: false, pair: false };
   function initials(name) {
     const parts = clean(name).split(" ").filter(Boolean);
     const skip = /^(dr|mr|ms|mrs)\.?$/i;
@@ -625,6 +640,7 @@
         (contactsState.profile === "all" || h.profile_level === contactsState.profile) &&
         matchesBreadth(h, contactsState.breadth) &&
         (!contactsState.sole || String(h.rare_expertise || "").trim()) &&
+        (!contactsState.pair || PAIR_NAMES.has(h.name.trim())) &&
         (!q || (h.name + " " + h.core_areas + " " + h.email).toLowerCase().includes(q))
       ).slice().sort((a, b) =>
         // most senior first, then alphabetically inside each level
@@ -642,6 +658,7 @@
         { label: "Profile level", value: contactsState.profile === "all" ? "" : contactsState.profile, clear: "profile" },
         { label: "Areas covered", value: BREADTH_LABEL[contactsState.breadth] || "", clear: "breadth" },
         { label: "Sole holder of an area", value: contactsState.sole ? "Yes" : "", clear: "sole" },
+        { label: "Shares an area with one other", value: contactsState.pair ? "Yes" : "", clear: "pair" },
         { label: "Search", value: q, clear: "q" },
       ]);
 
@@ -719,10 +736,11 @@
         const what = clear.getAttribute("data-clear");
         if (what === "all") {
           contactsState.dept = "all"; contactsState.q = ""; contactsState.profile = "all";
-          contactsState.breadth = ""; contactsState.sole = false;
+          contactsState.breadth = ""; contactsState.sole = false; contactsState.pair = false;
         }
         if (what === "breadth") contactsState.breadth = "";
         if (what === "sole") contactsState.sole = false;
+        if (what === "pair") contactsState.pair = false;
         if (what === "dept") contactsState.dept = "all";
         if (what === "profile") contactsState.profile = "all";
         if (what === "q") contactsState.q = "";

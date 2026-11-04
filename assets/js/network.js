@@ -168,6 +168,21 @@
   function pct(n) {
     return PEOPLE.length ? Math.round((n / PEOPLE.length) * 100) : 0;
   }
+  // Experts who hold an area that exactly two people hold — they share at
+  // least one of their areas with exactly one other person in the network.
+  var PAIR_AREAS = {};
+  (function () {
+    var n = {};
+    PEOPLE.forEach(function (p) {
+      p.areas.forEach(function (a) { n[a] = (n[a] || 0) + 1; });
+    });
+    Object.keys(n).forEach(function (a) { if (n[a] === 2) PAIR_AREAS[a] = 1; });
+  })();
+  var PAIR_NAMES = {};
+  PEOPLE.forEach(function (p) {
+    if (p.areas.some(function (a) { return PAIR_AREAS[a]; })) PAIR_NAMES[p.name] = 1;
+  });
+  var PAIR_COUNT = Object.keys(PAIR_NAMES).length;
   function matchesBreadth(p) {
     if (!state.breadth) return true;
     var n = p.areas.length;
@@ -258,7 +273,7 @@
     "An area marked <b class=\"tag-chip--sole\" style=\"background:none;border:0;padding:0\">\u25B2</b> is one this person is the <b>only</b> holder of in the network.";
 
   var state = {
-    q: "", st: "", track: "", sole: false, profile: "", breadth: "",  // Experts
+    q: "", st: "", track: "", sole: false, profile: "", breadth: "", pair: false,  // Experts
     coreQ: "", coreSt: "",                  // Core Expertise
     domain: "", comp: "", level: "competency",  // Member States
     sort: "name", dir: 1
@@ -376,7 +391,7 @@
         kpi(M.people, "Experts who took part", M.states + " Member States", "var(--net)", "view:directory", "Open the expert directory") +
         kpi(BREADTH.wide, "Cover three areas or more", pct(BREADTH.wide) + "% of the " + M.people + " experts", "var(--st-good)", "breadth:3", "Show the experts who cover three areas or more") +
         kpi(M.soleExperts, "Sole holder of an area", pct(M.soleExperts) + "% of the " + M.people + " experts — nobody else in the network holds it", "var(--st-serious)", "sole:1", "Show the experts who are the only holder of an area") +
-        kpi(BREADTH.one, "Cover one area only", pct(BREADTH.one) + "% of the " + M.people + " experts", "var(--c7)", "breadth:1", "Show the experts who cover a single area") +
+        kpi(PAIR_COUNT, "Shares an area with one other", pct(PAIR_COUNT) + "% of the " + M.people + " experts — the two of them are the only holders", "var(--st-warn)", "pairs:1", "Show the experts who share an area with exactly one other person") +
         kpi(M.external, "Externally consulted", "advise WHO, Member States or partners", "var(--net)", "view:directory", "Show externally consulted experts") +
       "</div>" +
 
@@ -553,6 +568,7 @@
       if (state.track && p.track !== state.track) return false;
       if (state.profile && p.profile !== state.profile) return false;
       if (!matchesBreadth(p)) return false;
+      if (state.pair && !PAIR_NAMES[p.name]) return false;
       if (state.q) {
         var hay = (p.name + " " + p.state + " " + p.level + " " + p.entity + " " + p.email + " " + p.areas.join(" ")).toLowerCase();
         if (hay.indexOf(state.q.toLowerCase()) === -1) return false;
@@ -597,6 +613,7 @@
         { label: "Track", value: state.track, clear: "track" },
         { label: "Profile level", value: state.profile, clear: "profile" },
         { label: "Areas covered", value: BREADTH_LABEL[state.breadth] || "", clear: "breadth" },
+        { label: "Shares an area with one other", value: state.pair ? "Yes" : "", clear: "pair" },
         { label: "Only holder of an area", value: state.sole ? "Yes" : "", clear: "sole" }
       ]) +
       (list.length
@@ -1092,7 +1109,8 @@
         var kind = a.slice(0, a.indexOf(":"));
         var val = a.slice(a.indexOf(":") + 1);
         if (kind === "view") return jumpTo(val, {});
-        if (kind === "sole") return jumpTo("directory", { sole: true, q: "", st: "", track: "", breadth: "" });
+        if (kind === "sole") return jumpTo("directory", { sole: true, pair: false, q: "", st: "", track: "", breadth: "" });
+        if (kind === "pairs") return jumpTo("directory", { pair: true, sole: false, q: "", st: "", track: "", breadth: "", profile: "" });
         if (kind === "breadth") return jumpTo("directory", { breadth: val, q: "", st: "", track: "", sole: false, profile: "" });
         if (kind === "state") return jumpTo("directory", { st: val, q: "", track: "" });
         if (kind === "domain") return jumpTo("states", { domain: val, comp: "" });
@@ -1114,9 +1132,9 @@
         var what = clear.getAttribute("data-clear");
         if (what === "all") {
           state.q = ""; state.st = ""; state.track = ""; state.sole = false;
-          state.profile = ""; state.breadth = "";
+          state.profile = ""; state.breadth = ""; state.pair = false;
           state.coreQ = ""; state.coreSt = ""; state.domain = ""; state.comp = "";
-        } else state[what] = (what === "sole") ? false : "";
+        } else state[what] = (what === "sole" || what === "pair") ? false : "";
         return go(current);
       }
 
