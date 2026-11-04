@@ -12,7 +12,7 @@
       "domain": "D1 – Health Hazards and Emergency Preparedness",
       "code": "1.1",
       "area": "Infectious Disease Epidemiology",
-      "internal": 4,
+      "internal": 5,
       "network": 18,
       "verdict": "Covered both sides"
     },
@@ -20,7 +20,7 @@
       "domain": "D1 – Health Hazards and Emergency Preparedness",
       "code": "1.1",
       "area": "Infection Prevention & Control",
-      "internal": 2,
+      "internal": 3,
       "network": 4,
       "verdict": "Covered both sides"
     },
@@ -52,7 +52,7 @@
       "domain": "D1 – Health Hazards and Emergency Preparedness",
       "code": "1.1",
       "area": "Public Health Microbiology & Genomics",
-      "internal": 0,
+      "internal": 1,
       "network": 7,
       "verdict": "Network covers the gap"
     },
@@ -76,7 +76,7 @@
       "domain": "D1 – Health Hazards and Emergency Preparedness",
       "code": "1.3",
       "area": "Emergency Preparedness Planning",
-      "internal": 3,
+      "internal": 4,
       "network": 15,
       "verdict": "Covered both sides"
     },
@@ -526,7 +526,7 @@
       "domain": "D1 – Health Hazards and Emergency Preparedness",
       "code": "1.1",
       "competency": "1.1 Detect and Investigate Health Hazards",
-      "internal": 7,
+      "internal": 8,
       "network": 24,
       "verdict": "Covered both sides"
     },
@@ -542,7 +542,7 @@
       "domain": "D1 – Health Hazards and Emergency Preparedness",
       "code": "1.3",
       "competency": "1.3 Plan and Manage Emergency Preparedness",
-      "internal": 3,
+      "internal": 4,
       "network": 15,
       "verdict": "Covered both sides"
     },
