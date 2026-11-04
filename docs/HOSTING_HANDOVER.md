@@ -1,8 +1,10 @@
 # Knowledge Mapping Page — hosting handover
 
-**To:** GCDC Information Technology
-**From:** Faris Aldammas — Knowledge Management, Training and Capacity Building
-**Subject:** Hosting the Knowledge Mapping Page on a Center-managed address
+| | |
+|---|---|
+| **To** | GCDC Information Technology |
+| **From** | Faris Aldammas — Knowledge Management, Training and Capacity Building |
+| **Subject** | Hosting the Knowledge Mapping Page on a Center-managed address |
 
 ---
 
