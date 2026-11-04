@@ -24,3 +24,8 @@ data/network/engagement.json
 # staff member's performance write-up is not project documentation. Delete
 # this line to publish it.
 docs/تقرير-الإنجاز-2026.md
+
+# Internal correspondence. Kept local for the same reason as the achievement
+# report: this repository is public, and a letter to the Center's leadership is
+# not project documentation. Delete this line to publish it.
+بريد-الدكتورة-فايزة.md
