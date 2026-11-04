@@ -1,0 +1,63 @@
+@page { size: A4; margin: 20mm 18mm 18mm; }
+* { box-sizing: border-box; }
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 10.5pt; line-height: 1.55; color: #16222e; margin: 0;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+/* The lockup is the reversed (white) logo, so it sits on the brand band —
+   which is also how the site header carries it. */
+.masthead {
+  display: flex; align-items: center; gap: 16px;
+  background: #0D3269; color: #fff;
+  padding: 13px 16px; margin: 0 0 22px; border-radius: 3px;
+}
+.masthead img { height: 36px; }
+.masthead .org { font-size: 8.5pt; color: #c3d2e6; line-height: 1.4; }
+.masthead .org b { display: block; font-size: 10pt; color: #fff; }
+h1 {
+  font-size: 19pt; color: #0D3269; margin: 0 0 4px; line-height: 1.25;
+  letter-spacing: -.2px;
+}
+h2 {
+  font-size: 12.5pt; color: #0D3269; margin: 22px 0 9px;
+  padding-bottom: 5px; border-bottom: 1px solid #d9e0e8;
+  page-break-after: avoid;
+}
+h3 { font-size: 11pt; margin: 16px 0 6px; page-break-after: avoid; }
+p { margin: 0 0 9px; }
+ul, ol { margin: 0 0 10px; padding-left: 20px; }
+li { margin-bottom: 4px; }
+strong { color: #0b1b2a; }
+hr { border: 0; border-top: 1px solid #e3e9ef; margin: 20px 0; }
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0 14px;
+  font-size: 9.5pt; page-break-inside: avoid;
+}
+th {
+  background: #eef2f6; text-align: left; font-weight: 700; color: #0D3269;
+  padding: 7px 9px; border: 1px solid #d9e0e8;
+}
+td { padding: 6px 9px; border: 1px solid #e3e9ef; vertical-align: top; }
+tr:nth-child(even) td { background: #fafbfc; }
+code {
+  font-family: "Consolas", "SF Mono", monospace; font-size: 8.8pt;
+  background: #f2f5f8; padding: 1px 4px; border-radius: 3px;
+  overflow-wrap: anywhere;
+}
+/* Header names must not be hyphenated across lines; the value column may wrap. */
+td:first-child code { white-space: nowrap; overflow-wrap: normal; }
+table td:first-child { width: 29%; }
+/* The To / From / Subject block reads as a letter heading, not a data table. */
+table:first-of-type { font-size: 10.5pt; margin-top: 2px; }
+table:first-of-type th { display: none; }
+table:first-of-type td { border: 0; padding: 2px 10px 2px 0; background: none; }
+table:first-of-type td:first-child { width: 68px; color: #5a6b7c; }
+table:first-of-type tr:nth-child(even) td { background: none; }
+blockquote {
+  margin: 10px 0; padding: 9px 14px; background: #f5f8fa;
+  border-left: 3px solid #03A3CF; color: #40505f;
+}
+blockquote p:last-child { margin-bottom: 0; }
+a { color: #0D3269; }
+h2, h3, table, blockquote { break-inside: avoid; }
