@@ -229,6 +229,8 @@
     wide: HOLDERS.filter((h) => areaCount(h) >= 3).length,
   };
   const pct = (n) => (HOLDERS.length ? Math.round((n / HOLDERS.length) * 100) : 0);
+  // Staff who are the only person in GCDC holding at least one of their areas.
+  const SOLE_HOLDERS = HOLDERS.filter((h) => String(h.rare_expertise || "").trim());
   const BREADTH_LABEL = {
     "1": "One area only", "2": "Two areas", "3": "Three areas or more",
   };
@@ -340,7 +342,7 @@
       <div class="grid grid--kpi">
         ${kpi(M.experts, "Staff who took part", `${M.depts} departments`, "var(--brand)", "view:contacts", "Open the staff directory")}
         ${kpi(BREADTH.wide, "Cover three areas or more", `${pct(BREADTH.wide)}% of the ${M.experts} staff`, "var(--st-good)", "breadth:3", "Show the staff who cover three areas or more")}
-        ${kpi(BREADTH.two, "Cover two areas", `${pct(BREADTH.two)}% of the ${M.experts} staff`, "var(--c5)", "breadth:2", "Show the staff who cover exactly two areas")}
+        ${kpi(SOLE_HOLDERS.length, "Sole holder of an area", `${pct(SOLE_HOLDERS.length)}% of the ${M.experts} staff — nobody else in GCDC holds it`, "var(--st-serious)", "soleholders", "Show the staff who are the only holder of an area")}
         ${kpi(BREADTH.one, "Cover one area only", `${pct(BREADTH.one)}% of the ${M.experts} staff`, "var(--c7)", "breadth:1", "Show the staff who cover a single area")}
       </div>
 
@@ -387,7 +389,10 @@
         return jumpTo("core", { dept: d, q: "" });
       }
       if (action.startsWith("breadth:")) {
-        return jumpTo("contacts", { breadth: action.slice(8), q: "", dept: "all", profile: "all" });
+        return jumpTo("contacts", { breadth: action.slice(8), q: "", dept: "all", profile: "all", sole: false });
+      }
+      if (action === "soleholders") {
+        return jumpTo("contacts", { sole: true, breadth: "", q: "", dept: "all", profile: "all" });
       }
       if (action.startsWith("comp:")) {
         return jumpTo("matrix", { comp: action.slice(5), domain: "all", q: "" });
@@ -492,7 +497,6 @@
           <td data-label="Name" class="name-cell">
             <button type="button" class="link-name" data-person="${esc(h.name)}"
               title="Open ${esc(h.name.trim())} in Contacts">${hl(h.name.trim(), q)}</button>
-            ${h.leader ? ' <span class="star" title="Manager / leader">★</span>' : ""}
           </td>
           <td data-label="Department">
             <button type="button" class="dept-tag dept-tag--btn" data-dept="${esc(h.department)}"
@@ -582,7 +586,7 @@
   }
 
   /* ---------------------------------------------------------------- Contacts */
-  const contactsState = { dept: "all", q: "", profile: "all", breadth: "" };
+  const contactsState = { dept: "all", q: "", profile: "all", breadth: "", sole: false };
   function initials(name) {
     const parts = clean(name).split(" ").filter(Boolean);
     const skip = /^(dr|mr|ms|mrs)\.?$/i;
@@ -620,6 +624,7 @@
         (contactsState.dept === "all" || h.department === contactsState.dept) &&
         (contactsState.profile === "all" || h.profile_level === contactsState.profile) &&
         matchesBreadth(h, contactsState.breadth) &&
+        (!contactsState.sole || String(h.rare_expertise || "").trim()) &&
         (!q || (h.name + " " + h.core_areas + " " + h.email).toLowerCase().includes(q))
       ).slice().sort((a, b) =>
         // most senior first, then alphabetically inside each level
@@ -636,6 +641,7 @@
         { label: "Department", value: contactsState.dept === "all" ? "" : contactsState.dept, clear: "dept" },
         { label: "Profile level", value: contactsState.profile === "all" ? "" : contactsState.profile, clear: "profile" },
         { label: "Areas covered", value: BREADTH_LABEL[contactsState.breadth] || "", clear: "breadth" },
+        { label: "Sole holder of an area", value: contactsState.sole ? "Yes" : "", clear: "sole" },
         { label: "Search", value: q, clear: "q" },
       ]);
 
@@ -645,7 +651,7 @@
           <div class="contact__hd">
             <span class="contact__avatar" style="background:${deptColor(h.department)}" aria-hidden="true">${esc(initials(h.name))}</span>
             <div class="contact__id">
-              <div class="contact__name">${hl(h.name.trim(), q)}${h.leader ? ' <span class="star" title="Manager / leader">★</span>' : ""}</div>
+              <div class="contact__name">${hl(h.name.trim(), q)}</div>
               <div class="contact__role">${esc(h.position)} ·
                 <button type="button" class="dept-tag dept-tag--btn" data-dept="${esc(h.department)}"
                   title="Filter by ${esc(h.department)}">${esc(h.department)}</button></div>
@@ -711,8 +717,12 @@
       const clear = e.target.closest("[data-clear]");
       if (clear) {
         const what = clear.getAttribute("data-clear");
-        if (what === "all") { contactsState.dept = "all"; contactsState.q = ""; contactsState.profile = "all"; contactsState.breadth = ""; }
+        if (what === "all") {
+          contactsState.dept = "all"; contactsState.q = ""; contactsState.profile = "all";
+          contactsState.breadth = ""; contactsState.sole = false;
+        }
         if (what === "breadth") contactsState.breadth = "";
+        if (what === "sole") contactsState.sole = false;
         if (what === "dept") contactsState.dept = "all";
         if (what === "profile") contactsState.profile = "all";
         if (what === "q") contactsState.q = "";

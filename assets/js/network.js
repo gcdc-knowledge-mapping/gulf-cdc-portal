@@ -375,7 +375,7 @@
       '<div class="grid grid--kpi">' +
         kpi(M.people, "Experts who took part", M.states + " Member States", "var(--net)", "view:directory", "Open the expert directory") +
         kpi(BREADTH.wide, "Cover three areas or more", pct(BREADTH.wide) + "% of the " + M.people + " experts", "var(--st-good)", "breadth:3", "Show the experts who cover three areas or more") +
-        kpi(BREADTH.two, "Cover two areas", pct(BREADTH.two) + "% of the " + M.people + " experts", "var(--c5)", "breadth:2", "Show the experts who cover exactly two areas") +
+        kpi(M.soleExperts, "Sole holder of an area", pct(M.soleExperts) + "% of the " + M.people + " experts — nobody else in the network holds it", "var(--st-serious)", "sole:1", "Show the experts who are the only holder of an area") +
         kpi(BREADTH.one, "Cover one area only", pct(BREADTH.one) + "% of the " + M.people + " experts", "var(--c7)", "breadth:1", "Show the experts who cover a single area") +
         kpi(M.external, "Externally consulted", "advise WHO, Member States or partners", "var(--net)", "view:directory", "Show externally consulted experts") +
       "</div>" +

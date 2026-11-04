@@ -80,6 +80,31 @@
   },
   {
     "rank": 4,
+    "name": "Manaf Alqahtani",
+    "department": "CEO Office",
+    "position": "C-Suite / Top Executive",
+    "years": "More than 10 years",
+    "profile_level": "Expert",
+    "career_stage": "Senior",
+    "depth": 5,
+    "scarcity": 5,
+    "impact": 5,
+    "risk_index": 125,
+    "core_count": 4,
+    "core_areas": "Infectious Disease Epidemiology; Infection Prevention & Control; Emergency Preparedness Planning; Public Health Microbiology & Genomics",
+    "competencies": [
+      "1.1 Detect and Investigate Health Hazards",
+      "1.3 Plan and Manage Emergency Preparedness"
+    ],
+    "rare_expertise": "Public Health Microbiology & Genomics",
+    "flag": "🔴 High continuity risk",
+    "leader": true,
+    "continuity": "",
+    "source": "GCC Network survey",
+    "email": "m.alqahtani@gulfcdc.org"
+  },
+  {
+    "rank": 5,
     "name": "Alaa AlQurashi",
     "department": "HI",
     "position": "Manager",
@@ -104,7 +129,7 @@
     "email": "A.AlQurashi@gulfcdc.org"
   },
   {
-    "rank": 5,
+    "rank": 6,
     "name": "Sami Almudarra",
     "department": "HI",
     "position": "Executive Director",
@@ -129,7 +154,7 @@
     "email": "s.almudarra@gulfcdc.org"
   },
   {
-    "rank": 6,
+    "rank": 7,
     "name": "Waleed Al Nadabi",
     "department": "CEO Office",
     "position": "Executive Director",
@@ -155,7 +180,7 @@
     "email": "w.alnadabi@gulfcdc.org"
   },
   {
-    "rank": 7,
+    "rank": 8,
     "name": "Hamad Alsaab",
     "department": "PHE",
     "position": "Senior Specialist",
@@ -180,7 +205,7 @@
     "email": "h.alsaab@gulfcdc.org"
   },
   {
-    "rank": 8,
+    "rank": 9,
     "name": "Haya Sulaiman Alothaimeen",
     "department": "PHE",
     "position": "Specialist",
@@ -205,7 +230,7 @@
     "email": "H.Alothaimeen@gulfcdc.org"
   },
   {
-    "rank": 9,
+    "rank": 10,
     "name": "Said Alghafri",
     "department": "TCB",
     "position": "Senior Specialist",
@@ -231,7 +256,7 @@
     "email": "s.alghafri@gulfcdc.org"
   },
   {
-    "rank": 10,
+    "rank": 11,
     "name": "Abdullah Alqahtani",
     "department": "PHPP",
     "position": "Specialist",
@@ -257,7 +282,7 @@
     "email": "a.alqahtani@gulfcdc.org"
   },
   {
-    "rank": 11,
+    "rank": 12,
     "name": "Abrar Alsurayhi",
     "department": "TCB",
     "position": "Manager",
@@ -283,7 +308,7 @@
     "email": "aalsurayhi@gulfcdc.org"
   },
   {
-    "rank": 12,
+    "rank": 13,
     "name": "Bushra Alghamdi",
     "department": "HI",
     "position": "Manager",
@@ -308,7 +333,7 @@
     "email": "b.alghamdi@gulfcdc.org"
   },
   {
-    "rank": 13,
+    "rank": 14,
     "name": "Faris Aldammas",
     "department": "TCB",
     "position": "Analyst",
@@ -334,7 +359,7 @@
     "email": "F.Aldammas@gulfcdc.org"
   },
   {
-    "rank": 14,
+    "rank": 15,
     "name": "Mazin Al Rahbi",
     "department": "HI",
     "position": "Specialist",
@@ -359,7 +384,7 @@
     "email": "M.Alrahbi@gulfcdc.org"
   },
   {
-    "rank": 15,
+    "rank": 16,
     "name": "Nada Alnaji",
     "department": "PHPP",
     "position": "Manager",
@@ -385,7 +410,7 @@
     "email": "n.alnaji@gulfcdc.org"
   },
   {
-    "rank": 16,
+    "rank": 17,
     "name": "Reema Althunayyan",
     "department": "TCB",
     "position": "Analyst",
@@ -409,7 +434,7 @@
     "email": "r.althunayyan@gulfcdc.org"
   },
   {
-    "rank": 17,
+    "rank": 18,
     "name": "Sarah Alsaleh",
     "department": "CEO Office",
     "position": "Senior Specialist",
@@ -435,7 +460,7 @@
     "email": "s.alsaleh@gulfcdc.org"
   },
   {
-    "rank": 18,
+    "rank": 19,
     "name": "Nouf Alzuhayri",
     "department": "HI",
     "position": "Specialist",
@@ -461,7 +486,7 @@
     "email": "n.alzuhayri@Gulfcdc.org"
   },
   {
-    "rank": 19,
+    "rank": 20,
     "name": "Reem Alotaibi",
     "department": "PHPP",
     "position": "Analyst",
@@ -486,7 +511,7 @@
     "email": "R.alotaibi@gulfcdc.org"
   },
   {
-    "rank": 20,
+    "rank": 21,
     "name": "Salman AlHajri",
     "department": "PHPP",
     "position": "Manager",
@@ -511,7 +536,7 @@
     "email": "s.alhajri@gulfcdc.org"
   },
   {
-    "rank": 21,
+    "rank": 22,
     "name": "Haya Alzeer",
     "department": "PHPP",
     "position": "Analyst",
@@ -536,7 +561,7 @@
     "email": "H.Alzeer@gulfcdc.org"
   },
   {
-    "rank": 22,
+    "rank": 23,
     "name": "Mohammed Alshehri",
     "department": "HI",
     "position": "Specialist",
@@ -562,7 +587,7 @@
     "email": "m.alshehri@gulfcdc.org"
   },
   {
-    "rank": 23,
+    "rank": 24,
     "name": "Raghad AlHumud",
     "department": "PHPP",
     "position": "Analyst",
@@ -588,7 +613,7 @@
     "email": "r.alhumud@gulfcdc.org"
   },
   {
-    "rank": 24,
+    "rank": 25,
     "name": "Abdullah Fahad Alnowaiser",
     "department": "PHE",
     "position": "Senior Specialist",
@@ -613,7 +638,7 @@
     "email": "a.alnowaiser@gulfcdc.org"
   },
   {
-    "rank": 25,
+    "rank": 26,
     "name": "Norah Albedah",
     "department": "HI",
     "position": "Analyst",
@@ -638,7 +663,7 @@
     "email": "n.albedah@gulfcdc.org"
   },
   {
-    "rank": 26,
+    "rank": 27,
     "name": "Rose Nazra",
     "department": "PHPP",
     "position": "Senior Specialist",
@@ -664,7 +689,7 @@
     "email": "r.nazra@gulfcdc.org"
   },
   {
-    "rank": 27,
+    "rank": 28,
     "name": "Zayed Al Zayed",
     "department": "TCB",
     "position": "Analyst",
@@ -689,7 +714,7 @@
     "email": "z.alzayid@gulfcdc.org"
   },
   {
-    "rank": 28,
+    "rank": 29,
     "name": "Heyam Almosabihi",
     "department": "PHPP",
     "position": "Analyst",
@@ -714,7 +739,7 @@
     "email": "H.Almosabihi@gulfcdc.org"
   },
   {
-    "rank": 29,
+    "rank": 30,
     "name": "Najla Alorayyidh",
     "department": "PHPP",
     "position": "Specialist",
@@ -740,7 +765,7 @@
     "email": "N.Alorayyidh@gulfcdc.org"
   },
   {
-    "rank": 30,
+    "rank": 31,
     "name": "Turki Almalki",
     "department": "HI",
     "position": "Analyst",

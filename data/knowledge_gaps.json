@@ -18,7 +18,7 @@
     "subdomain": "1.1 Detect and Investigate Health Hazards",
     "expertise": "Infectious Disease Epidemiology",
     "fit": "Direct",
-    "holders_n": 4,
+    "holders_n": 5,
     "status": "🟢 Adequate",
     "sole_holder": "",
     "recommendation": "Maintain via documentation and knowledge champions."
@@ -30,10 +30,10 @@
     "subdomain": "1.1 Detect and Investigate Health Hazards",
     "expertise": "Infection Prevention & Control",
     "fit": "Nearest fit — outside CF scope",
-    "holders_n": 2,
-    "status": "🟡 Thin Coverage",
+    "holders_n": 3,
+    "status": "🟢 Adequate",
     "sole_holder": "",
-    "recommendation": "Only two core holders — build redundancy and document SOPs."
+    "recommendation": "Maintain via documentation and knowledge champions."
   },
   {
     "domain": "D1 – Health Hazards and Emergency Preparedness",
@@ -78,10 +78,10 @@
     "subdomain": "1.1 Detect and Investigate Health Hazards",
     "expertise": "Public Health Microbiology & Genomics",
     "fit": "Nearest fit — outside CF scope",
-    "holders_n": 0,
-    "status": "🔴 No Core Expert",
-    "sole_holder": "",
-    "recommendation": "No staff member holds this area at core level — recruit or develop this capability."
+    "holders_n": 1,
+    "status": "🟠 Single Core Expert (SPOF)",
+    "sole_holder": "Manaf Alqahtani (CEO Office)",
+    "recommendation": "Single core expert — capture knowledge and identify a successor."
   },
   {
     "domain": "D1 – Health Hazards and Emergency Preparedness",
@@ -114,7 +114,7 @@
     "subdomain": "1.3 Plan and Manage Emergency Preparedness",
     "expertise": "Emergency Preparedness Planning",
     "fit": "Direct",
-    "holders_n": 3,
+    "holders_n": 4,
     "status": "🟢 Adequate",
     "sole_holder": "",
     "recommendation": "Maintain via documentation and knowledge champions."

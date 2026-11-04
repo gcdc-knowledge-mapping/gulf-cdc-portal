@@ -39,6 +39,13 @@ Two analysis workbooks are the single source of truth, one per scope:
 | Workbook | Scope |
 |---|---|
 | `data/GulfCDC_KnowledgeMapping_MasterAnalysis_Internal_HybridTaxonomy_v3.xlsx` | Internal GCDC — 30 staff, 5 departments |
+
+One further member of staff, Gulf CDC's CEO, answered the GCC Network survey
+rather than the internal one, so the internal workbook holds no record for him.
+He is listed in the internal mapping as well, bringing it to **31 staff**; his
+coding is read from the network workbook, so it has a single source. See
+`CROSS_LISTED` in `scripts/generate_data.py`. This is the only person who
+appears in both scopes, and `check_counts.py` asserts that it stays that way.
 | `data/GulfCDC_KnowledgeMapping_Network_MasterAnalysis_v8_HybridTaxonomy.xlsx` | GCC Network — 68 experts, 6 Member States |
 
 Both use the **hybrid taxonomy**: the **7 domains of the Gulf CDC Public Health

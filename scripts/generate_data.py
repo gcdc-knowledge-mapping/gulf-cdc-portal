@@ -35,6 +35,18 @@ SRC = os.path.join(
     ROOT, "data", "GulfCDC_KnowledgeMapping_MasterAnalysis_Internal_HybridTaxonomy_v3.xlsx"
 )
 SURVEY = os.path.join(ROOT, "data", "Knowledge_Mapping_survey.xlsx")
+NETWORK_SRC = os.path.join(
+    ROOT, "data", "GulfCDC_KnowledgeMapping_Network_MasterAnalysis_v8_HybridTaxonomy.xlsx"
+)
+
+# Gulf CDC staff who answered the GCC Network survey rather than the internal
+# one, so the internal workbook holds no record for them. They are Gulf CDC
+# employees with a @gulfcdc.org address, and the project owner asked on
+# 2026-11-04 for them to appear in the internal mapping as well as the network
+# one. Their coding is read from the network workbook, so it has a single
+# source rather than being retyped here. This is the only place the two
+# populations overlap, and it is by name, not by merging the datasets.
+CROSS_LISTED = {"Manaf Alqahtani": "CEO Office"}
 
 # Survey "Full Name" answers that differ from the workbook spelling. This is the
 # only correction layer left, and it exists solely for the e-mail join.
@@ -156,6 +168,64 @@ def emails_by_name():
     return out
 
 
+def cross_listed_rows():
+    """Master and Fact rows for CROSS_LISTED staff, in internal column names."""
+    if not CROSS_LISTED or not os.path.exists(NETWORK_SRC):
+        if CROSS_LISTED:
+            print(f"note: {os.path.basename(NETWORK_SRC)} not found — "
+                  f"{', '.join(CROSS_LISTED)} left out of the internal mapping")
+        return [], []
+    nwb = openpyxl.load_workbook(NETWORK_SRC, data_only=True)
+    # They answered the network survey, so their address is in the network
+    # e-mail map rather than the internal survey export.
+    net_mail = {}
+    net_mail_path = os.path.join(ROOT, "data", "network_emails.json")
+    if os.path.exists(net_mail_path):
+        with open(net_mail_path, encoding="utf-8") as fh:
+            net_mail = {s(r.get("name")): s(r.get("email")) for r in json.load(fh)}
+    master, facts = [], []
+    for r in table(nwb, "02_Master_Dataset", 4):
+        nm = s(r.get("Name"))
+        if nm not in CROSS_LISTED:
+            continue
+        row = {
+            "Name": nm,
+            "Department": CROSS_LISTED[nm],
+            "Position": s(r.get("Position Level")),
+            "Years (survey)": s(r.get("Years")),
+            "Leader (Mgr / Exec)": "\u2605" if s(r.get("Track")) == "Managerial" else "",
+            "Profile Level (CF)": s(r.get("Profile Level (CF)")),
+            "Impact (1-5)": num(r.get("Impact (1-5)")),
+            "Depth (1-5)": num(r.get("Depth (1-5)")),
+            # Scarcity and the Risk Index are recomputed against the internal
+            # population once its holder counts are known: an area can be
+            # common across the GCC and still rest on one person inside GCDC.
+            "Scarcity (1-5)": 0,
+            "Risk Index (1-125)": 0,
+            "L2 CF Competencies (rolled up)": s(r.get("L2 CF Competencies (rolled up)")),
+            "Coding Source": "GCC Network survey",
+            "_email": net_mail.get(nm, ""),
+        }
+        areas = [s(r.get(f"L3 Expertise Area {i}")) for i in range(1, 6)]
+        for i, a in enumerate(a for a in areas if a):
+            row[f"L3 Area {i + 1}"] = a
+        master.append(row)
+    for f in table(nwb, "Fact_CoreExpertise", 1):
+        nm = s(f.get("Name"))
+        if nm not in CROSS_LISTED:
+            continue
+        facts.append({
+            "Name": nm,
+            "Department": CROSS_LISTED[nm],
+            "L1 \u2013 CF Domain": s(f.get("L1 \u2013 CF Domain")),
+            "Code": s(f.get("Code")),
+            "L2 \u2013 CF Competency": s(f.get("L2 \u2013 CF Competency")),
+            "L3 \u2013 Expertise Area": s(f.get("L3 \u2013 Expertise Area")),
+            "Framework Fit": s(f.get("Framework Fit")),
+        })
+    return master, facts
+
+
 def main():
     wb = openpyxl.load_workbook(SRC, data_only=True)
 
@@ -201,8 +271,9 @@ def main():
 
     # ---- people ------------------------------------------------------------
     mails = emails_by_name()
+    extra_master, extra_fact = cross_listed_rows()
     staff = []
-    for r in table(wb, "02_Master_Dataset", 4):
+    for r in table(wb, "02_Master_Dataset", 4) + extra_master:
         name = s(r.get("Name"))
         if not name:
             continue
@@ -228,7 +299,7 @@ def main():
                              (x.strip() for x in s(r.get("L2 CF Competencies (rolled up)")).split(";"))
                              if c],
             "source": s(r.get("Coding Source")),
-            "email": mails.get(norm(name), ""),
+            "email": mails.get(norm(name)) or s(r.get("_email")),
         })
 
     by_name = {p["name"]: p for p in staff}
@@ -236,6 +307,7 @@ def main():
 
     # ---- long table: one row per person x area ----------------------------
     fact = [f for f in table(wb, "Fact_CoreExpertise", 1) if s(f.get("Name"))]
+    fact += extra_fact
 
     # career stage per person, from the profile rules
     stage_of_level = {p["level"]: p["stage"] for p in profile_levels}
@@ -249,6 +321,24 @@ def main():
         nm = s(f.get("Name"))
         if area and nm:
             holders_by_area.setdefault(area, []).append(f"{nm} ({dept_of.get(nm, '')})")
+
+    # The workbook's own holder counts predate the cross-listed staff, so they
+    # are recomputed from the long table, which now includes them.
+    for t in taxonomy:
+        t["holders_n"] = len(holders_by_area.get(t["expertise"], []))
+
+    # Scarcity is how rare a person's rarest area is inside GCDC, on the
+    # workbook's own scale (1 holder -> 5, 4 or more -> 2), and the Risk Index
+    # is depth x scarcity x impact. Both are recomputed here for cross-listed
+    # staff, whose workbook figures were scored against the GCC network.
+    for p in staff:
+        if p["name"] not in CROSS_LISTED:
+            continue
+        rarest = min((len(holders_by_area.get(a, [])) for a in p["areas"]), default=0)
+        p["sole_areas_n"] = sum(
+            1 for a in p["areas"] if len(holders_by_area.get(a, [])) == 1)
+        p["scarcity"] = max(1, min(5, 6 - rarest)) if rarest else 5
+        p["risk_index"] = p["depth"] * p["scarcity"] * p["impact"]
 
     matrix = []
     for t in taxonomy:
@@ -297,7 +387,9 @@ def main():
             "code": code,
             "competency": s(r.get("L2 – CF Competency")),
             "areasDefined": num(r.get("L3 Areas Defined")),
-            "areasHeld": num(r.get("L3 Areas Held")),
+            # recomputed rather than read, for the same reason as holders_n
+            "areasHeld": sum(1 for t in taxonomy
+                             if t["code"] == code and t["holders_n"] > 0),
             "people": people,
             "tags": tags_per_comp.get(code, 0),
             "departments": len([d for d in depts_per_comp.get(code, ()) if d]),
@@ -307,10 +399,13 @@ def main():
         })
 
     # ---- critical holders --------------------------------------------------
+    # Areas this person is the only holder of. Counted from the long table
+    # rather than the workbook's precomputed column, which predates both the
+    # cross-listed staff and any later edit to the coding.
     rare_by_name = {}
-    for f in fact:
-        if num(f.get("Area Holders (n)")) == 1:
-            rare_by_name.setdefault(s(f.get("Name")), []).append(s(f.get("L3 – Expertise Area")))
+    for area, hs in holders_by_area.items():
+        if len(hs) == 1:
+            rare_by_name.setdefault(hs[0].rsplit(" (", 1)[0], []).append(area)
 
     continuity = {}
     for r in table(wb, "05_Critical_Holders", 4):

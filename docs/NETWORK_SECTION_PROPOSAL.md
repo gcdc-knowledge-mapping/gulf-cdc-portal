@@ -30,7 +30,7 @@ and the area level, and is deliberately not bundled into either page.
 ## 2. The recommendation: a second *scope*, not a seventh tab
 
 Adding "Network" as one more tab next to Contacts would quietly merge two
-populations that must never be confused — 30 Gulf CDC employees you can email, and
+populations that must never be confused — 31 Gulf CDC employees you can email, and
 68 officials of six sovereign health authorities that Gulf CDC does not employ.
 
 Instead the portal gets a **scope switcher** above the navigation:
@@ -140,7 +140,7 @@ carries the `NETWORK_GROUP` correction layer, and a `Network Group` column in
 ## 6. Publication decision
 
 **Decided by the project owner, November 2026:** the names, work e-mail
-addresses, expertise and skills of both populations — the 30 Gulf CDC staff and
+addresses, expertise and skills of both populations — the 31 Gulf CDC staff and
 the 68 network members — are treated as **public information**.
 
 What follows from that:

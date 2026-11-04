@@ -108,24 +108,24 @@ listed in full on the page's Gaps tab.
 
 ### D1 – Health Hazards and Emergency Preparedness
 
-**1.1 Detect and Investigate Health Hazards** — 7 holder(s) · 5/7 areas held
+**1.1 Detect and Investigate Health Hazards** — 8 holder(s) · 6/7 areas held
 
 - Outbreak Investigation — 4 holders
-- Infectious Disease Epidemiology — 4 holders
-- Infection Prevention & Control — 2 holders *(Nearest fit — outside CF scope)*
+- Infectious Disease Epidemiology — 5 holders
+- Infection Prevention & Control — 3 holders *(Nearest fit — outside CF scope)*
 - Infection & Immunity — 1 holder (single core expert) *(Nearest fit — outside CF scope)*
 - Medical Laboratory — no core holder *(Nearest fit — outside CF scope)*
 - Vector-borne Diseases — 1 holder (single core expert)
-- Public Health Microbiology & Genomics — no core holder *(Nearest fit — outside CF scope)*
+- Public Health Microbiology & Genomics — 1 holder (single core expert) *(Nearest fit — outside CF scope)*
 
 **1.2 Conduct Public Health Risk Assessment** — 2 holder(s) · 2/2 areas held
 
 - Risk Assessment (Rapid Risk Assessment) — 1 holder (single core expert)
 - Toxicology — 1 holder (single core expert) *(Nearest fit — outside CF scope)*
 
-**1.3 Plan and Manage Emergency Preparedness** — 3 holder(s) · 2/3 areas held
+**1.3 Plan and Manage Emergency Preparedness** — 4 holder(s) · 2/3 areas held
 
-- Emergency Preparedness Planning — 3 holders
+- Emergency Preparedness Planning — 4 holders
 - Strategic Stockpile Management — no core holder
 - Simulation Exercises (SimEx) — 2 holders
 

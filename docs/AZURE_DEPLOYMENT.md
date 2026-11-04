@@ -3,7 +3,7 @@
 **What this is:** an internal, static web site (HTML/CSS/JS only — no server, no
 database, no API keys) presenting the GCDC Knowledge Mapping in two scopes:
 
-- **Internal GCDC** — core expertise for 30 staff, coverage by department, and a
+- **Internal GCDC** — core expertise for 31 staff, coverage by department, and a
   browsable expertise map.
 - **GCC Network** — core expertise for 68 Permanent Contact Network members,
   Country Liaison Officers and Working Group members nominated by the six GCC
@@ -14,7 +14,7 @@ Both scopes are coded against the Gulf CDC Public Health Competency Framework:
 
 **Why we are moving it:** it currently runs on public GitHub Pages, where anyone
 with the address can read it. It publishes the names, positions and work email
-addresses of **30 GCDC staff** and of **68 officials of six Member State health
+addresses of **31 GCDC staff** and of **68 officials of six Member State health
 ministries and national public health authorities**.
 
 A project-owner decision of November 2026 treats that information as public, so

@@ -629,7 +629,6 @@ mark.hl {
 }
 .more-btn:hover { border-color: var(--brand); background: var(--brand-soft); }
 :root[data-theme="dark"] .more-btn { color: var(--accent); }
-.star { color: var(--st-warn); }
 .holder-chip--btn { font-family: inherit; cursor: pointer; transition: background .14s, border-color .14s, color .14s; }
 .holder-chip--btn:hover { background: var(--brand-soft); border-color: var(--brand); color: var(--brand-ink); }
 :root[data-theme="dark"] .holder-chip--btn:hover { color: var(--brand); }

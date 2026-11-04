@@ -17,24 +17,31 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
 EXPECTED = {
+    # The internal figures are the brief's §7 table plus Manaf Alqahtani, Gulf
+    # CDC's CEO, whom the project owner asked on 2026-11-04 to show in the
+    # internal mapping as well as the network one (see CROSS_LISTED in
+    # generate_data.py). He answered the GCC Network survey, so the internal
+    # workbook has no record for him. §7 read 30 staff, 99 tags, 57/65 areas,
+    # 10·11·36·8 and 183 nodes; he adds four Level-3 tags, one of which
+    # — Public Health Microbiology & Genomics — had no internal holder at all.
     "internal": {
-        "people": 30,
+        "people": 31,
         "departments": 5,
-        "departmentCounts": {"CEO Office": 2, "PHE": 4, "HI": 9, "PHPP": 10, "TCB": 5},
+        "departmentCounts": {"CEO Office": 3, "PHE": 4, "HI": 9, "PHPP": 10, "TCB": 5},
         "domains": 7,
         "competencies": 23,
         "competenciesHeld": 19,
         "areas": 65,
-        "areasHeld": 57,
-        "tags": 99,
-        "areaStatus": {"adequate": 10, "thin": 11, "single": 36, "noCore": 8},
+        "areasHeld": 58,
+        "tags": 103,
+        "areaStatus": {"adequate": 11, "thin": 10, "single": 37, "noCore": 7},
         "competencyStatus": {"adequate": 12, "thin": 2, "single": 5,
                              "noCore": 2, "behavioural": 2},
-        "profileCounts": {"Expert": 8, "Proficient": 5, "Competent": 17},
-        "highRisk": 8,
+        "profileCounts": {"Expert": 9, "Proficient": 5, "Competent": 17},
+        "highRisk": 9,
         "moderateRisk": 12,
         "lowRisk": 10,
-        "treeNodes": 183,
+        "treeNodes": 188,
     },
     "network": {
         "people": 68,
@@ -106,10 +113,10 @@ def check_derived():
         else:
             print(f"  ok    internal taxonomy rows      {rows}")
         check("internal", "competency rows", 23, len(comps))
-        check("internal", "matrix rows (held)", 57, len(matrix))
+        check("internal", "matrix rows (held)", 58, len(matrix))
         # a person tagged twice under one competency is one holder, not two
         tagged = sum(len(m["holders"]) for m in matrix)
-        check("internal", "tags via matrix", 99, tagged)
+        check("internal", "tags via matrix", 103, tagged)
         behavioural = sorted(c["code"] for c in comps if c.get("behavioural"))
         check("internal", "behavioural codes", ["7.3", "7.5"], behavioural)
 
@@ -138,17 +145,24 @@ def check_derived():
                 else:
                     print(f"  ok    network  {c['code']} behavioural, neutral")
 
-    # the two scopes must stay separate: no shared person record
+    # The two scopes stay separate datasets. Exactly one person is listed in
+    # both, by the owner's decision, and the check names him rather than
+    # allowing any overlap to pass unnoticed.
+    CROSS_LISTED = {"Manaf Alqahtani"}
     if people and load("data/critical_holders.json") is not None:
         staff = {p["name"] for p in load("data/critical_holders.json")}
         overlap = staff & {p["name"] for p in people}
         checks += 1
-        if overlap:
-            msg = f"same name in both scopes: {sorted(overlap)}"
+        if overlap == CROSS_LISTED:
+            print(f"  ok    scopes    only the cross-listed staff appear in both: "
+                  f"{sorted(overlap)}")
+        else:
+            unexpected = overlap - CROSS_LISTED
+            missing = CROSS_LISTED - overlap
+            msg = (f"cross-listing is not as declared — unexpected: {sorted(unexpected)}, "
+                   f"missing: {sorted(missing)}")
             failures.append(msg)
             print(f"  FAIL  {msg}")
-        else:
-            print("  ok    scopes    no shared person record")
 
 
 def check_bundles():

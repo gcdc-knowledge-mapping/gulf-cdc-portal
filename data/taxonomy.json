@@ -18,7 +18,7 @@
     "expertise": "Infectious Disease Epidemiology",
     "fit": "Direct",
     "origin": "Communicable & Non-Communicable Diseases › Communicable Diseases",
-    "holders_n": 4,
+    "holders_n": 5,
     "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.1 Detect and Investigate Health Hazards > Infectious Disease Epidemiology"
   },
   {
@@ -29,7 +29,7 @@
     "expertise": "Infection Prevention & Control",
     "fit": "Nearest fit — outside CF scope",
     "origin": "Communicable & Non-Communicable Diseases › Communicable Diseases",
-    "holders_n": 2,
+    "holders_n": 3,
     "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.1 Detect and Investigate Health Hazards > Infection Prevention & Control"
   },
   {
@@ -73,7 +73,7 @@
     "expertise": "Public Health Microbiology & Genomics",
     "fit": "Nearest fit — outside CF scope",
     "origin": "Portal taxonomy review (Claude Code)",
-    "holders_n": 0,
+    "holders_n": 1,
     "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.1 Detect and Investigate Health Hazards > Public Health Microbiology & Genomics"
   },
   {
@@ -106,7 +106,7 @@
     "expertise": "Emergency Preparedness Planning",
     "fit": "Direct",
     "origin": "Public Health Emergency & Health Security › Preparedness & Planning",
-    "holders_n": 3,
+    "holders_n": 4,
     "path": "Gulf CDC > D1 – Health Hazards and Emergency Preparedness > 1.3 Plan and Manage Emergency Preparedness > Emergency Preparedness Planning"
   },
   {
