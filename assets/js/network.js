@@ -270,7 +270,10 @@
     "These experts were nominated by the six GCC Member States.";
 
   var SOLE_KEY =
-    "An area marked <b class=\"tag-chip--sole\" style=\"background:none;border:0;padding:0\">\u25B2</b> is one this person is the <b>only</b> holder of in the network.";
+    "An area marked <b class=\"tag-chip--sole\" style=\"background:none;border:0;padding:0\">\u25B2</b> " +
+    "is one this person is the <b>only</b> holder of in the network; " +
+    "<b class=\"tag-chip--pair\" style=\"background:none;border:0;padding:0\">\u25C6</b> " +
+    "marks one that exactly <b>two</b> people hold.";
 
   var state = {
     q: "", st: "", track: "", sole: false, profile: "", breadth: "", pair: false,  // Experts
@@ -297,21 +300,36 @@
     AREA_CF[t.area] = { code: t.code, competency: compParts(t.competency).name, fit: t.fit };
   });
 
+  // How many people hold each area, so a chip can show where this person is the
+  // only holder (▲) or one of exactly two (◆). The marker and the tooltip carry
+  // the meaning as well as the colour.
+  var AREA_HOLDERS = {};
+  PEOPLE.forEach(function (p) {
+    p.areas.forEach(function (a) { AREA_HOLDERS[a] = (AREA_HOLDERS[a] || 0) + 1; });
+  });
+  function chipMark(area) {
+    var n = AREA_HOLDERS[area] || 0;
+    if (n === 1) return { cls: " tag-chip--sole", mark: "\u25B2",
+                          note: " \u2014 only holder in the network" };
+    if (n === 2) return { cls: " tag-chip--pair", mark: "\u25C6",
+                          note: " \u2014 one of only two holders in the network" };
+    return { cls: "", mark: "", note: "" };
+  }
+
   function areaChips(person) {
-    var sole = person.soleList || [];
     if (!person.areas.length) return '<span class="muted">\u2014</span>';
     return person.areas.map(function (a) {
-      var only = sole.indexOf(a) !== -1;
-      var cf = AREA_CF[a] || {};
-      return '<button type="button" class="tag-chip is-clickable' + (only ? " tag-chip--sole" : "") +
+      var cf = AREA_CF[a] || {}, mk = chipMark(a);
+      return '<button type="button" class="tag-chip is-clickable' + mk.cls +
         '" data-area="' + esc(a) + '" title="' + esc(a) +
         (cf.code ? " \u2014 CF competency " + esc(cf.code) + " " + esc(cf.competency) : "") +
-        (only ? " \u2014 only holder in the network" : "") + '">' +
-        (only ? '<span class="tag-chip__mark" aria-hidden="true">\u25B2</span> ' : "") +
+        mk.note + '">' +
+        (mk.mark ? '<span class="tag-chip__mark" aria-hidden="true">' + mk.mark + "</span> " : "") +
         (cf.code ? '<span class="code-chip code-chip--sm">' + esc(cf.code) + "</span> " : "") +
         esc(a) + "</button>";
     }).join("");
   }
+
 
   /* -------------------------------------------------------------- views */
   var VIEWS = {};

@@ -431,6 +431,32 @@
   const coreState = { dept: "all", q: "", sort: "name", dir: 1, expanded: new Set() };
   const CHIP_LIMIT = 4; // areas shown before "+N more"
 
+  // How many people hold each area, so a chip can show where this person is the
+  // only holder (▲) or one of exactly two (◆). The marker and the tooltip carry
+  // the meaning as well as the colour.
+  const AREA_HOLDERS = {};
+  MATRIX.forEach((m) => { AREA_HOLDERS[m.expertise] = m.holders.length; });
+  function chipMark(area) {
+    const n = AREA_HOLDERS[area] || 0;
+    if (n === 1) {
+      return { cls: " tag-chip--sole", mark: "\u25B2",
+               note: " — only holder in GCDC" };
+    }
+    if (n === 2) {
+      return { cls: " tag-chip--pair", mark: "\u25C6",
+               note: " — one of only two holders in GCDC" };
+    }
+    return { cls: "", mark: "", note: "" };
+  }
+
+  // Explains the chip markers wherever marked chips appear, so the colour is
+  // never the only thing carrying the meaning.
+  const CHIP_KEY =
+    'An area marked <b class="tag-chip--sole" style="background:none;border:0;padding:0">\u25B2</b> ' +
+    'is one this person is the <b>only</b> holder of in GCDC; ' +
+    '<b class="tag-chip--pair" style="background:none;border:0;padding:0">\u25C6</b> ' +
+    'marks one that exactly <b>two</b> people hold.';
+
   // expertise area → its CF competency, so area chips can carry the code
   const AREA_CF = {};
   TX.forEach((t) => {
@@ -441,7 +467,7 @@
     const depts = ["all", ...Array.from(new Set(HOLDERS.map((h) => h.department)))];
     el.innerHTML = `
       <div class="view__head"><h1>Core Expertise</h1>
-        <p>Every staff member and the areas they hold at <em>core</em> expertise level, each tagged with its CF competency code. Filter by department, or search by name, expertise or code.</p></div>
+        <p>Every staff member and the areas they hold at <em>core</em> expertise level, each tagged with its CF competency code. Filter by department, or search by name, expertise or code. ${CHIP_KEY}</p></div>
       <div class="toolbar">
         <div class="field field--search">
           <span class="field__icon" aria-hidden="true">⌕</span>
@@ -521,9 +547,10 @@
           <td data-label="Core expertise areas">
             ${areas.length ? `<span class="chip-list">
               ${shown.map((a) => {
-                  const cf = AREA_CF[a] || {};
-                  return `<button type="button" class="tag-chip tag-chip--btn" data-area="${esc(a)}"
-                    title="${esc(a)}${cf.code ? ` — CF competency ${cf.code} ${cf.competency}` : ""}">${
+                  const cf = AREA_CF[a] || {}; const mk = chipMark(a);
+                  return `<button type="button" class="tag-chip tag-chip--btn${mk.cls}" data-area="${esc(a)}"
+                    title="${esc(a)}${cf.code ? ` — CF competency ${cf.code} ${cf.competency}` : ""}${mk.note}">${
+                    mk.mark ? `<span class="tag-chip__mark" aria-hidden="true">${mk.mark}</span> ` : ""}${
                     cf.code ? `<span class="code-chip code-chip--sm">${esc(cf.code)}</span> ` : ""}${hl(a, q)}</button>`;
                 }).join("")}
               ${rest > 0 ? `<button type="button" class="more-btn" data-more="${esc(h.name)}">+${rest} more</button>` : ""}
@@ -612,7 +639,7 @@
     const depts = ["all", ...Array.from(new Set(HOLDERS.map((h) => h.department)))];
     el.innerHTML = `
       <div class="view__head"><h1>Contacts</h1>
-        <p>Directory of all ${M.experts} staff — role, CF profile level, core expertise, and work email. Filter by department or profile level, or search by name or expertise.</p></div>
+        <p>Directory of all ${M.experts} staff — role, CF profile level, core expertise, and work email. Filter by department or profile level, or search by name or expertise. ${CHIP_KEY}</p></div>
       <div class="toolbar">
         <div class="field field--search">
           <span class="field__icon" aria-hidden="true">⌕</span>
@@ -679,9 +706,10 @@
             <div><dt>Core areas</dt><dd>${areas.length}</dd></div>
           </dl>
           <div class="contact__areas">${areas.map((a) => {
-              const cf = AREA_CF[a] || {};
-              return `<button type="button" class="tag-chip tag-chip--btn" data-area="${esc(a)}"
-                title="${esc(a)}${cf.code ? ` — CF competency ${cf.code} ${cf.competency}` : ""}">${
+              const cf = AREA_CF[a] || {}; const mk = chipMark(a);
+              return `<button type="button" class="tag-chip tag-chip--btn${mk.cls}" data-area="${esc(a)}"
+                title="${esc(a)}${cf.code ? ` — CF competency ${cf.code} ${cf.competency}` : ""}${mk.note}">${
+                mk.mark ? `<span class="tag-chip__mark" aria-hidden="true">${mk.mark}</span> ` : ""}${
                 cf.code ? `<span class="code-chip code-chip--sm">${esc(cf.code)}</span> ` : ""}${hl(a, q)}</button>`;
             }).join("")}</div>
           <div class="contact__actions">
